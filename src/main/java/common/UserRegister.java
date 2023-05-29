@@ -2,6 +2,9 @@ package common;
 
 import java.util.Date;
 
+/**
+ * 注册用户的信息，密码是加密后的密码
+ */
 public class UserRegister extends UserLogin {
   private static final long serialVersionUID = 1L;
 

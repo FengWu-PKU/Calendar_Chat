@@ -1,5 +1,8 @@
 package common;
 
+/**
+ * 登录用户的信息，密码是加密后的密码
+ */
 public class UserLogin implements java.io.Serializable {
   private static final long serialVersionUID = 1L;
 
