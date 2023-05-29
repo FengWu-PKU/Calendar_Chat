@@ -1,7 +1,12 @@
 package client.gui;
 
+import client.SocialApp;
+import client.utils.*;
+import common.*;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -91,7 +96,27 @@ public class LoginFrame extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == loginButton) {
-      
+      String username = usernameField.getText();
+      String password = new String(passwordField.getPassword());
+      if (Validators.isValidUsername(username) && Validators.isValidPassword(password)) {
+        String encryptedPassword = PasswordEncryption.encryptPassword(password);
+        UserLogin user = new UserLogin(username, encryptedPassword);
+        SocialApp.writeObject(user);
+        Message message = (Message)SocialApp.readObject();
+        if (message == null) {
+          JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
+        } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {
+          // TODO: 获取好友列表并进入主界面
+        } else if (message.getMessageType() == MessageType.LOGIN_FAILED) {
+          JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+        } else if (message.getMessageType() == MessageType.ALREADY_LOGIN) {
+          JOptionPane.showMessageDialog(this, "该用户已登录", "错误", JOptionPane.ERROR_MESSAGE);
+        }
+      } else {
+        JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+      }
+    } else if (e.getSource() == registerButton) {
+      // TODO: 进入注册界面
     }
   }
 }

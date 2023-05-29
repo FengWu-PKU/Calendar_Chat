@@ -24,7 +24,7 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
     setSize(300, 180);
     setResizable(false);
     setLocationRelativeTo(null);
-  
+
     // 窗口布局
     // 使用 EmptyBorder + GridBagLayout
     JPanel contentPane = new JPanel();
@@ -90,18 +90,18 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    try {
-      String serverAddress = serverAddressField.getText();
-      int serverPort = Integer.parseInt(serverPortField.getText());
-      SocialApp.connect(serverAddress, serverPort);
-      new LoginFrame();
-      dispose();
-    } catch (NumberFormatException ex) {
-      JOptionPane.showMessageDialog(this, "端口号必须为整数",
-          "错误", JOptionPane.ERROR_MESSAGE);
-    } catch (IOException ex) {
-      JOptionPane.showMessageDialog(this, "连接失败",
-          "错误", JOptionPane.ERROR_MESSAGE);
+    if (e.getSource() == connectButton) {
+      try {
+        String serverAddress = serverAddressField.getText();
+        int serverPort = Integer.parseInt(serverPortField.getText());
+        SocialApp.connect(serverAddress, serverPort);
+        new LoginFrame();
+        dispose();
+      } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "端口号必须为整数", "错误", JOptionPane.ERROR_MESSAGE);
+      } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "连接失败", "错误", JOptionPane.ERROR_MESSAGE);
+      }
     }
   }
 }
