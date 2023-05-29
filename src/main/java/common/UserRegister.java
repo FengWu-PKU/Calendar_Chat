@@ -3,6 +3,8 @@ package common;
 import java.util.Date;
 
 public class UserRegister extends UserLogin {
+  private static final long serialVersionUID = 1L;
+
   private String name;
   private String phone;
   private String email;
