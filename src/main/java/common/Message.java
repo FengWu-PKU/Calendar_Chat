@@ -11,6 +11,10 @@ public class Message implements java.io.Serializable {
   private MessageType messageType;
   private Object content;
 
+  public Message(MessageType messageType) {
+    this.messageType = messageType;
+  }
+
   public Message(MessageType messageType, Object content) {
     this.messageType = messageType;
     this.content = content;
