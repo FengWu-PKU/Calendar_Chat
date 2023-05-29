@@ -8,7 +8,18 @@ public class Account {
 
     static void signUp(String email, String pw) {
         try(Connection connection=DriverManager.getConnection(url,username,password)) {
-            // 执行sql语句
+            // 先查询账号是否已经存在
+            String check="SELECT 1 FROM account WHERE email=?";
+            PreparedStatement checkstmt=connection.prepareStatement(check);
+            checkstmt.setString(1, email);
+            ResultSet exists=checkstmt.executeQuery();
+            if(exists.next()) {  // 账号已经存在
+                System.out.println("账号已经存在，请登录");
+                return;
+            }
+            exists.close();
+            checkstmt.close();
+
             String sql = "INSERT INTO account(email, password) VALUES (?, ?)";
             PreparedStatement statement=connection.prepareStatement(sql);
             statement.setString(1,email);
@@ -29,6 +40,9 @@ public class Account {
             ResultSet res=statement.executeQuery();
             res.next();
             String password=res.getString("password");
+            res.close();
+            statement.close();
+
             if(password.equals(pw)) {
                 return res.getInt("id");
             }else {

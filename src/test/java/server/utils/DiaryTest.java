@@ -15,6 +15,35 @@ class DiaryTest {
         Timestamp date_t=new Timestamp(System.currentTimeMillis());
         String content="这是日记内容";
         System.out.println(date_t);
-        Diary.InsertDiary(account_id, name, date_t, content);
+        Diary diary=new Diary(account_id, name, date_t, content);
+        Diary.InsertDiary(diary);
+    }
+    @Test
+    void findDiaryTest() {
+        Timestamp dt=new Timestamp(System.currentTimeMillis());
+        Diary[] diaries=Diary.findDiary(1,dt);
+        for(int i=0;i<Diary.MAXDIARYNUM&&diaries[i]!=null; i++) {
+            System.out.print(diaries[i].writer_name);
+            System.out.print(", ");
+            System.out.println(diaries[i].content);
+        }
+    }
+
+    @Test
+    void searchDiaryTest() {
+        String s="日记";
+        Diary[] diaries=Diary.searchDiary(1, s);
+        for(int i=0;i<Diary.MAXDIARYNUM&&diaries[i]!=null; i++) {
+            System.out.print(diaries[i].writer_name);
+            System.out.print(", ");
+            System.out.println(diaries[i].content);
+        }
+    }
+
+    @Test
+    void countDiaryTest() {
+        String s="日记";
+        int cnt=Diary.countDiary(1,s);
+        System.out.println(cnt);
     }
 }

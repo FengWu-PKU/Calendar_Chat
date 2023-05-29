@@ -13,6 +13,13 @@ class AccountTest {
     }
 
     @Test
+    void accountExistsTest() {
+        String email="test@pku.edu.com";
+        String pw="123456";
+        Account.signUp(email, pw);
+    }
+
+    @Test
     void loginTest() {
         String email="test@pku.edu.com";
         String pw="123456";
