@@ -9,9 +9,9 @@ public class UserRegister extends UserLogin {
   private Date birth;
   private String intro;
 
-  public UserRegister(String userName, String encryptedPassword, String name, String phone, String email, Date birth,
+  public UserRegister(String username, String encryptedPassword, String name, String phone, String email, Date birth,
       String intro) {
-    super(userName, encryptedPassword);
+    super(username, encryptedPassword);
     this.name = name;
     this.phone = phone;
     this.email = email;
@@ -61,7 +61,7 @@ public class UserRegister extends UserLogin {
 
   @Override
   public String toString() {
-    return "UserRegister [userName=" + getUserName() + ", name=" + name + ", phone=" + phone + ", email=" + email
+    return "UserRegister [username=" + getUsername() + ", name=" + name + ", phone=" + phone + ", email=" + email
         + ", birth=" + birth + ", intro=" + intro + "]";
   }
 }

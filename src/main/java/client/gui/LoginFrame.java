@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
  * 登录界面
  */
 public class LoginFrame extends JFrame implements ActionListener {
-  private JTextField userNameField;
+  private JTextField usernameField;
   private JPasswordField passwordField;
   private JButton loginButton;
   private JButton registerButton;
@@ -35,8 +35,8 @@ public class LoginFrame extends JFrame implements ActionListener {
     constraints.fill = GridBagConstraints.HORIZONTAL;
     constraints.insets = new Insets(5, 5, 5, 5);
 
-    JLabel userNameLabel = new JLabel("用户名:", SwingConstants.RIGHT);
-    userNameField = new JTextField();
+    JLabel usernameLabel = new JLabel("用户名:", SwingConstants.RIGHT);
+    usernameField = new JTextField();
     JLabel passwordLabel = new JLabel("密码:", SwingConstants.RIGHT);
     passwordField = new JPasswordField();
 
@@ -44,13 +44,13 @@ public class LoginFrame extends JFrame implements ActionListener {
     constraints.gridy = 0;
     constraints.gridwidth = 1;
     constraints.weightx = 0;
-    layout.setConstraints(userNameLabel, constraints);
+    layout.setConstraints(usernameLabel, constraints);
 
     constraints.gridx = 1;
     constraints.gridy = 0;
     constraints.gridwidth = 2;
     constraints.weightx = 1;
-    layout.setConstraints(userNameField, constraints);
+    layout.setConstraints(usernameField, constraints);
 
     constraints.gridx = 0;
     constraints.gridy = 1;
@@ -75,8 +75,8 @@ public class LoginFrame extends JFrame implements ActionListener {
     constraints.gridwidth = 3;
     layout.setConstraints(buttonPanel, constraints);
 
-    contentPane.add(userNameLabel);
-    contentPane.add(userNameField);
+    contentPane.add(usernameLabel);
+    contentPane.add(usernameField);
     contentPane.add(passwordLabel);
     contentPane.add(passwordField);
     contentPane.add(buttonPanel, constraints);
