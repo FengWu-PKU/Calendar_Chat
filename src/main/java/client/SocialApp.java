@@ -50,7 +50,7 @@ public class SocialApp {
 
   public static void main(String[] args) {
     setDefaultFont();
-    // new client.view.ServerConnectionFrame();
-    new client.view.LoginFrame();
+    new client.gui.ServerConnectionFrame();
+    // new client.gui.LoginFrame();
   }
 }

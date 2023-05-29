@@ -1,4 +1,4 @@
-package client.view;
+package client.gui;
 
 import client.SocialApp;
 
