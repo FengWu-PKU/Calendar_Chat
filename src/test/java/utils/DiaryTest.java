@@ -28,4 +28,22 @@ class DiaryTest {
             System.out.println(diaries[i].content);
         }
     }
+
+    @Test
+    void searchDiaryTest() {
+        String s="日记";
+        Diary[] diaries=Diary.searchDiary(1, s);
+        for(int i=0;i<Diary.MAXDIARYNUM&&diaries[i]!=null; i++) {
+            System.out.print(diaries[i].writer_name);
+            System.out.print(", ");
+            System.out.println(diaries[i].content);
+        }
+    }
+
+    @Test
+    void countDiaryTest() {
+        String s="日记";
+        int cnt=Diary.countDiary(1,s);
+        System.out.println(cnt);
+    }
 }

@@ -71,5 +71,57 @@ public class Diary {
         }
     }
 
+    /** 指定用户，根绝内容的查找*/
+    static Diary[] searchDiary(int id, String target) {
+        Diary[] diaries=new Diary[MAXDIARYNUM];
+        try(Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="SELECT * FROM diary WHERE account_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet res=stmt.executeQuery();
+            int cnt=0;
+            while(res.next()) {
+                String ct=res.getString("content");
+                if(!ct.contains(target)) continue; // 不包含查询串
+                int acid=res.getInt("account_id");
+                String wn=res.getString("writer_name");
+                Timestamp dt=res.getTimestamp("date_t");
+                Diary cur=new Diary(acid, wn, dt, ct);
+                diaries[cnt++]=cur;
+                if(cnt>=MAXDIARYNUM) break;  // 最多返回MAXDIARYNUM条
+            }
+            res.close();
+            stmt.close();
+            return diaries;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    /** 指定用户，查询串出现的次数*/
+    static int countDiary(int id, String target) {
+        Diary[] diaries=new Diary[MAXDIARYNUM];
+        try(Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="SELECT * FROM diary WHERE account_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet res=stmt.executeQuery();
+            int cnt=0;
+            while(res.next()) {
+                String ct=res.getString("content");
+                if(!ct.contains(target)) continue; // 不包含查询串
+                cnt++;
+                if(cnt>=MAXDIARYNUM) break;  // 最多返回MAXDIARYNUM条
+            }
+            res.close();
+            stmt.close();
+            return cnt;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 }
