@@ -39,6 +39,7 @@ public class Diary {
             statement.setString(3,diary.content);
             statement.setInt(4,diary.account_id);
             statement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
