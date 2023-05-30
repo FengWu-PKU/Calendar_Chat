@@ -6,7 +6,7 @@ package common;
  * <p> content 为消息内容 </p>
  */
 public class Message implements java.io.Serializable {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   private MessageType messageType;
   private Object content;

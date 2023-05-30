@@ -1,17 +1,17 @@
 package common;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * 注册用户的信息，密码是加密后的密码
  */
 public class UserRegister extends UserLogin {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   private String name;
   private String phone;
   private String email;
-  private Date birth;
+  private LocalDate birth;
   private String intro;
 
   public UserRegister(String username, String encryptedPassword, String name, String phone, String email, Date birth,
