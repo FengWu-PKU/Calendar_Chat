@@ -65,6 +65,8 @@ public class LoginFrame extends JFrame implements ActionListener {
           JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.ALREADY_LOGIN) {
           JOptionPane.showMessageDialog(this, "该用户已登录", "错误", JOptionPane.ERROR_MESSAGE);
+        } else {
+          JOptionPane.showMessageDialog(this, "程序异常", "错误", JOptionPane.ERROR_MESSAGE);
         }
       } else {
         JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
