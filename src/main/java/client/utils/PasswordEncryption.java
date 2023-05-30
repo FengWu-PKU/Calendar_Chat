@@ -4,7 +4,18 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * 用于密码加密的方法
+ */
 public class PasswordEncryption {
+  // 私有方法，确保不被实例化
+  private PasswordEncryption() {}
+
+  /**
+   * 使用 SHA-256 加密密码
+   * @param password 密码
+   * @return 一个十六进制字符串，加密后的密码
+   */
   public static String encryptPassword(String password) {
     try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
