@@ -31,7 +31,7 @@ public class Account {
         }
     }
 
-    /** 返回account_id， 若失败返回-1*/
+    /** 返回account_id， 若密码不匹配返回-1，账号不存在返回-2*/
     static public int login(String email, String pw) {
         try(Connection connection=DriverManager.getConnection(url,username,password)) {
             // 执行sql语句
@@ -39,12 +39,15 @@ public class Account {
             PreparedStatement statement=connection.prepareStatement(sql);
             statement.setString(1,email);
             ResultSet res=statement.executeQuery();
-            res.next();
+            if(!res.next()) {
+                return -2;  // 账号不存在
+            }
+
             String password=res.getString("password");
             if(password.equals(pw)) {
                 return res.getInt("id");
             }else {
-                return -1;
+                return -1;  // 密码不匹配
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
