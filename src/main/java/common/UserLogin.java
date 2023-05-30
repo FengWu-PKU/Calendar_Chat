@@ -1,20 +1,25 @@
 package common;
 
+/**
+ * 登录用户的信息，密码是加密后的密码
+ */
 public class UserLogin implements java.io.Serializable {
-  private String userName;
+  private static final long serialVersionUID = 1L;
+
+  private String username;
   private String encryptedPassword;
 
-  public UserLogin(String userName, String encryptedPassword) {
-    this.userName = userName;
+  public UserLogin(String username, String encryptedPassword) {
+    this.username = username;
     this.encryptedPassword = encryptedPassword;
   }
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getEncryptedPassword() {
@@ -27,6 +32,6 @@ public class UserLogin implements java.io.Serializable {
 
   @Override
   public String toString() {
-    return "UserLogin [userName=" + userName + "]";
+    return "UserLogin [username=" + username + "]";
   }
 }
