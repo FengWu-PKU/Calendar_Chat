@@ -5,18 +5,16 @@ import client.utils.*;
 import common.*;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 /**
  * 登录界面
  */
 public class LoginFrame extends JFrame implements ActionListener {
-  private JTextField usernameField;
-  private JPasswordField passwordField;
+  private JTextField usernameField = new JTextField();
+  private JPasswordField passwordField = new JPasswordField();
   private JButton loginButton;
   private JButton registerButton;
 
@@ -29,65 +27,21 @@ public class LoginFrame extends JFrame implements ActionListener {
     setLocationRelativeTo(null);
   
     // 窗口布局
-    // 使用 EmptyBorder + GridBagLayout
-    JPanel contentPane = new JPanel();
-    contentPane.setBorder(new EmptyBorder(20, 20, 20, 20));
+    InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
-    GridBagLayout layout = new GridBagLayout();
-    contentPane.setLayout(layout);
-
-    GridBagConstraints constraints = new GridBagConstraints();
-    constraints.fill = GridBagConstraints.HORIZONTAL;
-    constraints.insets = new Insets(5, 5, 5, 5);
-
-    JLabel usernameLabel = new JLabel("用户名:", SwingConstants.RIGHT);
-    usernameField = new JTextField();
-    JLabel passwordLabel = new JLabel("密码:", SwingConstants.RIGHT);
-    passwordField = new JPasswordField();
-
-    constraints.gridx = 0;
-    constraints.gridy = 0;
-    constraints.gridwidth = 1;
-    constraints.weightx = 0;
-    layout.setConstraints(usernameLabel, constraints);
-
-    constraints.gridx = 1;
-    constraints.gridy = 0;
-    constraints.gridwidth = 2;
-    constraints.weightx = 1;
-    layout.setConstraints(usernameField, constraints);
-
-    constraints.gridx = 0;
-    constraints.gridy = 1;
-    constraints.gridwidth = 1;
-    constraints.weightx = 0;
-    layout.setConstraints(passwordLabel, constraints);
-
-    constraints.gridx = 1;
-    constraints.gridy = 1;
-    constraints.gridwidth = 2;
-    constraints.weightx = 1;
-    layout.setConstraints(passwordField, constraints);
-
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
     loginButton = new JButton("登录");
-    registerButton = new JButton("注册");
+    registerButton = new JButton("我要注册");
     buttonPanel.add(loginButton);
     buttonPanel.add(registerButton);
 
-    constraints.gridx = 0;
-    constraints.gridy = 2;
-    constraints.gridwidth = 3;
-    layout.setConstraints(buttonPanel, constraints);
-
-    contentPane.add(usernameLabel);
-    contentPane.add(usernameField);
-    contentPane.add(passwordLabel);
-    contentPane.add(passwordField);
-    contentPane.add(buttonPanel, constraints);
+    contentPane.addComponent("用户名:", usernameField);
+    contentPane.addComponent("密码:", passwordField);
+    contentPane.addComponent(buttonPanel);
 
     // 设置监听器
     loginButton.addActionListener(this);
+    registerButton.addActionListener(this);
 
     // 显示界面
     setVisible(true);
@@ -116,7 +70,8 @@ public class LoginFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
       }
     } else if (e.getSource() == registerButton) {
-      // TODO: 进入注册界面
+      new RegisterFrame();
+      dispose();
     }
   }
 }
