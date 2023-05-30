@@ -21,4 +21,12 @@ public class ValidatorsTest {
     assertFalse(Validators.isValidUsername("你好，世界！"));
     assertFalse(Validators.isValidUsername("aaaaaaaaaaaaaaaaa"));
   }
+
+  @Test
+  void testIsValidPhoneNumber() {
+    assertFalse(Validators.isValidPhoneNumber("666"));
+    assertTrue(Validators.isValidPhoneNumber("12345678901"));
+    assertTrue(Validators.isValidPhoneNumber("+8612345678901"));
+    assertFalse(Validators.isValidPhoneNumber("a2333333333"));
+  }
 }
