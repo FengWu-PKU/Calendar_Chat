@@ -12,7 +12,7 @@ public class Converters {
    * @param dateTime 时间
    * @return 简短的表示
    */
-  public static String DateTimeToShortText(LocalDateTime dateTime) {
+  public static String dateTimeToShortText(LocalDateTime dateTime) {
     LocalDateTime now = LocalDateTime.now();
 
     if (dateTime.toLocalDate().isEqual(now.toLocalDate())) {

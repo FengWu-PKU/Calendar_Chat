@@ -3,8 +3,9 @@ package client.model;
 import client.SocialApp;
 import common.*;
 
-public class ReceiveMessageThread {
-  void run() {
+public class ReceiveMessageThread extends Thread {
+  @Override
+  public void run() {
     while (true) {
       Message message = (Message) SocialApp.readObject();
       if (message.getMessageType() == MessageType.RET_FRIENDS) {

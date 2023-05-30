@@ -26,8 +26,9 @@ public class FriendListPanel extends JPanel {
       setPreferredSize(new Dimension(300, 50));
       setMinimumSize(new Dimension(300, 50));
 
+      // TODO: Converter.textToShortText
       nameLabel = new JLabel(friend.getRemark() + " (" + friend.getUsername() + ")");
-      lastMessageTimeLabel = new JLabel(Converters.DateTimeToShortText(friend.getLastMessageTime()), SwingConstants.RIGHT);
+      lastMessageTimeLabel = new JLabel(Converters.dateTimeToShortText(friend.getLastMessageTime()), SwingConstants.RIGHT);
       lastMessageLabel = new JLabel(friend.getLastMessage());
       unreadMessagesLabel = new JLabel(String.valueOf(friend.getUnreadMessages()), SwingConstants.RIGHT);
 
