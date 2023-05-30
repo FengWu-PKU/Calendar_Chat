@@ -20,19 +20,23 @@ public class SocialApp {
   }
 
   public static Object readObject() {
-    try {
-      return input.readObject();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
+    synchronized (input) {
+      try {
+        return input.readObject();
+      } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+      }
     }
   }
 
   public static void writeObject(Object o) {
-    try {
-      output.writeObject(o);
-    } catch (Exception e) {
-      e.printStackTrace();
+    synchronized (output) {
+      try {
+        output.writeObject(o);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 
