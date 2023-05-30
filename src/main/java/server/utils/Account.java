@@ -14,8 +14,8 @@ public class Account {
             checkstmt.setString(1, email);
             ResultSet exists=checkstmt.executeQuery();
             if(exists.next()) {  // 账号已经存在
-                System.out.println("账号已经存在，请登录");
-                return 0;
+//                System.out.println("账号已经存在，请登录");
+                return -1;
             }
             exists.close();
             checkstmt.close();
@@ -25,7 +25,7 @@ public class Account {
             statement.setString(1,email);
             statement.setString(2,pw);
             statement.executeUpdate();
-            return 1;
+            return 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

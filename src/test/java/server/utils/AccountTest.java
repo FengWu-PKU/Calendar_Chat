@@ -9,21 +9,16 @@ class AccountTest {
     void signUpTest() {
         String email="test@pku.edu.com";
         String pw="123456";
-        Account.signUp(email, pw);
+        assert(Account.signUp(email, pw)==0);
+        assert(Account.signUp(email,pw)==-1);
     }
 
-    @Test
-    void accountExistsTest() {
-        String email="test@pku.edu.com";
-        String pw="123456";
-        Account.signUp(email, pw);
-    }
 
     @Test
     void loginTest() {
         String email="test@pku.edu.com";
         String pw="123456";
         int id=Account.login(email, pw);
-        System.out.println(id);
+        assert(id==1);
     }
 }
