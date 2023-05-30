@@ -14,7 +14,7 @@ public class UserRegister extends UserLogin {
   private LocalDate birth;
   private String intro;
 
-  public UserRegister(String username, String encryptedPassword, String name, String phone, String email, Date birth,
+  public UserRegister(String username, String encryptedPassword, String name, String phone, String email, LocalDate birth,
       String intro) {
     super(username, encryptedPassword);
     this.name = name;
@@ -48,11 +48,11 @@ public class UserRegister extends UserLogin {
     this.email = email;
   }
 
-  public Date getBirth() {
+  public LocalDate getBirth() {
     return birth;
   }
 
-  public void setBirth(Date birth) {
+  public void setBirth(LocalDate birth) {
     this.birth = birth;
   }
 
