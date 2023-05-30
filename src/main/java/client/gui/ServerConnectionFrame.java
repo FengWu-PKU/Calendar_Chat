@@ -13,8 +13,8 @@ import java.io.IOException;
  * 连接服务器界面
  */
 public class ServerConnectionFrame extends JFrame implements ActionListener {
-  private JTextField serverAddressField = new JTextField();
-  private JTextField serverPortField = new JTextField();
+  private JTextField serverAddressField = new JTextField("127.0.0.1");
+  private JTextField serverPortField = new JTextField("9999");
   private JButton connectButton;
 
   public ServerConnectionFrame() {
