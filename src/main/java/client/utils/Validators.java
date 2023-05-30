@@ -96,6 +96,11 @@ public class Validators {
   }
 
   /**
+   * 确认密码失败时显示的信息
+   */
+  public static final String confirmPasswordFailedMessage = "确认密码失败。";
+
+  /**
    * 生日不合法时显示的信息
    */
   public static final String invalidBirthMessage = "生日日期应存在且格式为 YYYY-MM-DD。";

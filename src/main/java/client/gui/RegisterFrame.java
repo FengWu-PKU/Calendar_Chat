@@ -17,6 +17,7 @@ import java.time.format.DateTimeParseException;
 public class RegisterFrame extends JFrame implements ActionListener {
   private JTextField usernameField = new JTextField();
   private JPasswordField passwordField = new JPasswordField();
+  private JPasswordField confirmPasswordField = new JPasswordField();
   private JTextField nameField = new JTextField();
   private JTextField phoneField = new JTextField();
   private JTextField emailField = new JTextField();
@@ -28,7 +29,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
     // 窗口设置
     setTitle("注册");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(400, 350);
+    setSize(400, 380);
     setResizable(false);
     setLocationRelativeTo(null);
   
@@ -41,6 +42,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
     contentPane.addComponent("用户名:", usernameField);
     contentPane.addComponent("密码:", passwordField);
+    contentPane.addComponent("确认密码:", confirmPasswordField);
     contentPane.addComponent("姓名:", nameField, "选填，不超过20字符");
     contentPane.addComponent("电话:", phoneField, "选填");
     contentPane.addComponent("邮箱:", emailField, "选填");
@@ -67,6 +69,10 @@ public class RegisterFrame extends JFrame implements ActionListener {
       String password = new String(passwordField.getPassword());
       if (!Validators.isValidPassword(password)) {
         JOptionPane.showMessageDialog(this, Validators.invalidPasswordMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
+      if (!password.equals(new String(confirmPasswordField.getPassword()))) {
+        JOptionPane.showMessageDialog(this, Validators.confirmPasswordFailedMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
 
