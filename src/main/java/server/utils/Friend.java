@@ -3,9 +3,9 @@ package server.utils;
 import java.sql.*;
 
 public class Friend {
-    static String url="jdbc:mysql://"+ServerInfo.ip+":"+ServerInfo.port+"/"+ServerInfo.database;
-    static String username = "public_user";
-    static String password = "123456";
+    static String url=ServerInfo.url;
+    static String username = ServerInfo.username;
+    static String password = ServerInfo.password;
 
     static final int MAXFRIENDNUM=100;
 

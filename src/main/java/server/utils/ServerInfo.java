@@ -4,15 +4,16 @@ package server.utils;
 import java.sql.*;
 
 public class ServerInfo {
-    static final String ip="192.168.56.1";
-    static final String port="3306";
-    static final String database="javaproj";
+    static final String ip="162.105.146.37";
+    static final String port="43306";
+    static final String database="stu2000013727";
+    static final String url="jdbc:mysql://"+ip+":"+port+"/"+database;
+    static final String username="stu2000013727";
+    static final String password="stu2000013727";
+
 
     /*展示各个表的信息*/
     public static void main(String[] args) {
-        String url="jdbc:mysql://"+ip+":"+port+"/"+database;
-        String username="admin";
-        String password="1q3w5e7r9t";
         try (Connection conn = DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
