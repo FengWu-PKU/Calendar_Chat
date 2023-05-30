@@ -27,7 +27,7 @@ public class QQUser {
      * account_id存在返回-1，
      * account_numer存在返回-2，account_number不允许重复
      * 成功插入返回0*/
-    static int insertUser(QQUser user) {
+    static public int insertUser(QQUser user) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT * FROM qq_user WHERE account_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
