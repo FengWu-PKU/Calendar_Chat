@@ -10,8 +10,8 @@ public class Friend {
     static final int MAXFRIENDNUM=100;
 
     int account_id;
-    int friend_id;
-    String friend_nickname;
+    public int friend_id;
+    public String friend_nickname;
 
     public Friend(int account_id, int friend_id, String friend_nickname) {
         this.account_id = account_id;
@@ -71,7 +71,7 @@ public class Friend {
     }
 
     /*返回所有好友*/
-    static Friend[] findAllFriends(int account_id) {
+    static public Friend[] findAllFriends(int account_id) {
         Friend[] ans=new Friend[MAXFRIENDNUM];
         try (Connection connection=DriverManager.getConnection(url, username,password)){
             String sql="SELECT * FROM friend WHERE account_id=?";

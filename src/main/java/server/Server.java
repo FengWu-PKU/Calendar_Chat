@@ -41,7 +41,7 @@ public class Server {
                             //注册成功
                             System.out.println("注册成功");
                             oos.writeObject(new Message(MessageType.REGISTER_SUCCEED));
-                            ServerConClientThread scct = new ServerConClientThread(s);
+                            ServerConClientThread scct = new ServerConClientThread(s, havedb ? Account.login(ur.getUsername(), ur.getEncryptedPassword()) : ret);
                             if (havedb == true) {
                                 int account_id = Account.login(ur.getUsername(), ur.getEncryptedPassword());
                                 java.sql.Date bir = null;
@@ -75,7 +75,7 @@ public class Server {
                             // 登录成功
                             System.out.println("登录成功");
                             oos.writeObject(new Message(MessageType.LOGIN_SUCCEED));
-                            ServerConClientThread scct = new ServerConClientThread(s);
+                            ServerConClientThread scct = new ServerConClientThread(s, account_id);
                             ManageClientThread.addClientThread(account_id, scct);
                             scct.start();
                             break;
