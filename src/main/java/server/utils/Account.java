@@ -41,14 +41,24 @@ public class Account {
             ResultSet res=statement.executeQuery();
             res.next();
             String password=res.getString("password");
-            res.close();
-            statement.close();
-
             if(password.equals(pw)) {
                 return res.getInt("id");
             }else {
                 return -1;
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void deleteAccount(int id) {
+        try(Connection connection=DriverManager.getConnection(url,username,password)) {
+            // 执行sql语句
+            String sql = "DELETE FROM account WHERE id=?";
+            PreparedStatement statement=connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            statement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

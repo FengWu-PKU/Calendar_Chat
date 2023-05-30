@@ -133,4 +133,24 @@ public class QQUser {
         }
     }
 
+    /*根据account_id返回一个QQUser对象，可用于获取信息*/
+    static QQUser getUserByAccountID(int account_id) {
+        try(Connection connection=DriverManager.getConnection(url, username,password)) {
+            String sql="SELECT * FROM qq_user WHERE account_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1,account_id);
+            ResultSet res=stmt.executeQuery();
+            if(!res.next()) return null;
+            int acid=res.getInt("account_id");
+            String usr_name=res.getString("usr_name");
+            String phonenum=res.getString("phone_num");
+            String email=res.getString("email");
+            String account_number=res.getString("account_number");
+            Date bir=res.getDate("birthday");
+            return new QQUser(acid, usr_name, phonenum, email, account_number, bir);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
