@@ -81,7 +81,7 @@ public class FriendListPanel extends JPanel {
     @Override
     public void mouseClicked(MouseEvent e) {
       if (e.getClickCount() == 2) {
-        FrameManager.createChatFrame(uid);
+        FrameManager.createChatFrame(uid, nameLabel.getText());
       } else if (e.getClickCount() == 1) {
         if (mainFriendItemPanel != null) {
           mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));

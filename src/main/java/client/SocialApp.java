@@ -1,9 +1,9 @@
 package client;
 
-import javax.swing.*;
-
+import client.gui.ServerConnectionFrame;
 import client.model.FrameManager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.net.Socket;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class SocialApp {
+  public static final boolean DEBUG = false;
   private static Socket client;
   private static ObjectOutputStream output;
   private static ObjectInputStream input;
@@ -68,8 +69,11 @@ public class SocialApp {
   public static void main(String[] args) {
     setDefaultFont();
     setDefaultColor();
-    new client.gui.ServerConnectionFrame();
-    // FrameManager.createMainFrame(0);
-    // FrameManager.getMainFrame().test();
+    if (!DEBUG) {
+      new client.gui.ServerConnectionFrame();
+    } else {
+      FrameManager.createMainFrame(0);
+      FrameManager.getMainFrame().test();
+    }
   }
 }
