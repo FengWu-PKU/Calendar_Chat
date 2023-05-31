@@ -28,6 +28,14 @@ public class MainFrame extends JFrame {
   }
 
   /**
+   * 用户 UID
+   * @return 用户 uid
+   */
+  public int getUid() {
+    return uid;
+  }
+
+  /**
    * 更新好友列表
    * @param friendList 好友列表
    */

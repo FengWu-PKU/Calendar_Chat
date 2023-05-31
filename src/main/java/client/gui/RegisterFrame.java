@@ -116,9 +116,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
       if (message == null) {
         JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
-        Integer uid = (Integer) message.getContent();
-        FrameManager.setMainFrame(new MainFrame(uid));
-        new ReceiveMessageThread().start();
+        FrameManager.createMainFrame((Integer) message.getContent());
         dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
         JOptionPane.showMessageDialog(this, "用户名已存在", "错误", JOptionPane.ERROR_MESSAGE);
