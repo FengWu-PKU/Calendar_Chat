@@ -10,7 +10,7 @@ import java.awt.event.*;
 
 public class ChatFrame extends JFrame implements ActionListener, KeyListener {
   private int uid;
-  private JTextArea recordArea = new JTextArea();
+  private HistoryMessagesPane recordPane = new HistoryMessagesPane();
   private JTextArea messageArea = new JTextArea();
   private ProfilePane profilePane;
   private JButton sendButton = new JButton("发送");
@@ -24,7 +24,6 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     setLocationRelativeTo(null);
 
     // 组件设置
-    recordArea.setEditable(false);
     messageArea.setLineWrap(true);
 
     // 窗口布局
@@ -37,7 +36,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     messagePanel.add(new JScrollPane(messageArea), BorderLayout.CENTER);
     messagePanel.add(buttonPanel, BorderLayout.SOUTH);
 
-    JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordArea), messagePanel);
+    JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
     chatPane.setDividerLocation(400);
     add(chatPane, BorderLayout.CENTER);
     profilePane = new ProfilePane(name);
@@ -96,5 +95,6 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 
   public void update(ChatWindowInfo info) {
     profilePane.updateProfile(info);
+    recordPane.updateHistoryMessages(info.getHistoryMessages());
   }
 }
