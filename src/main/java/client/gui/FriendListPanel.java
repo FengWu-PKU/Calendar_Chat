@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class FriendListPanel extends JPanel {
 
   private class FriendItemPanel extends JPanel {
+    private int uid;
     private JLabel nameLabel;
     private JLabel lastMessageLabel;
     private JLabel lastMessageTimeLabel;
@@ -32,6 +33,7 @@ public class FriendListPanel extends JPanel {
       lastMessageLabel = new JLabel(friend.getLastMessage());
       unreadMessagesLabel = new JLabel(String.valueOf(friend.getUnreadMessages()), SwingConstants.RIGHT);
 
+      uid = friend.getUid();
       add(nameLabel);
       add(lastMessageTimeLabel);
       add(lastMessageLabel);
@@ -44,6 +46,10 @@ public class FriendListPanel extends JPanel {
     setBorder(new EmptyBorder(0, 10, 0, 10));
   }
 
+  /**
+   * 根据传入的 FriendItem 列表，按日期排序后更新界面
+   * @param friendList 好友列表
+   */
   public void updateFriendList(ArrayList<FriendItem> friendList) {
     removeAll();
     friendList.sort(null);

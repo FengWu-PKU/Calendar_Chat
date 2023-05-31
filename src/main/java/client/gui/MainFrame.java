@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
   }
 
   /**
-   * 根据传入的参数，按日期排序后更新好友列表
+   * 更新好友列表
    * @param friendList 好友列表
    */
   public void updateFriendList(ArrayList<FriendItem> friendList) {
