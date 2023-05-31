@@ -42,9 +42,12 @@ public class ServerConClientThread extends Thread {
                     int A = account_id, B = (Integer)m.getContent();
                     System.out.println(A+" 请求打开和 "+B+" 的聊天窗口需要的信息。");
                     QQUser tmp = QQUser.getUserByAccountID(B);
-                    Date bir = new Date(tmp.birthday.getTime());
-                    LocalDate localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    System.out.println(bir);
+                    LocalDate localbir = null;
+                    if (tmp.birthday != null) {
+                        Date bir = new Date(tmp.birthday.getTime());
+                        localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        System.out.println(bir);
+                    }
                     server.utils.Message[] BtoA = server.utils.Message.receiveMsg(A, B);
                     server.utils.Message[] AtoB = server.utils.Message.receiveMsg(B, A);
                     ArrayList<UserMessage> msglist = new ArrayList<>();
