@@ -50,8 +50,8 @@ public class Server {
         int Register(UserRegister ur, ObjectInputStream ois, ObjectOutputStream oos) throws IOException {
             int ret = 0;
             if (havedb == true) ret = Account.signUp(ur.getUsername(), ur.getEncryptedPassword());
-            else ret = db.signUp(ur.getUsername(), ur.getEncryptedPassword());
-            System.out.println("新注册的 account_id 为 "+ret);
+                else ret = db.signUp(ur.getUsername(), ur.getEncryptedPassword());
+            System.out.println("注册返回信息为 "+ret);
             if (ret == -1) {
                 // 注册失败
                 System.out.println("注册失败");
@@ -67,7 +67,8 @@ public class Server {
                 java.sql.Date bir = null;
                 if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
                 if (havedb == true) {
-                    QQUser.insertUser(new QQUser(account_id, ur.getUsername(), ur.getIntro(), ur.getPhone(), ur.getEmail(), "", bir));
+                    int tmp = QQUser.insertUser(new QQUser(account_id, ur.getUsername(), ur.getIntro(), ur.getPhone(), ur.getEmail(), ur.getUsername(), bir));
+                    System.out.println("注册结果为 "+tmp);
                 } else {
                     db.insert(account_id, ur.getUsername(), ur.getPhone(), ur.getEmail(), bir);
                 }
@@ -108,7 +109,7 @@ public class Server {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Server();
     }
 }
