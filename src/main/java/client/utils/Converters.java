@@ -33,7 +33,7 @@ public class Converters {
       return "";
     } else if (dateTime.toLocalDate().isEqual(now.toLocalDate())) {
       // 今天
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:m");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
       return dateTime.format(formatter);
     } else if (dateTime.toLocalDate().isEqual(now.minusDays(1).toLocalDate())) {
       // 昨天

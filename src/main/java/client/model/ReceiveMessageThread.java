@@ -1,6 +1,7 @@
 package client.model;
 
 import client.SocialApp;
+import client.gui.*;
 import common.*;
 
 import java.util.ArrayList;
@@ -21,7 +22,14 @@ public class ReceiveMessageThread extends Thread {
           FrameManager.getMainFrame().updateFriendList((ArrayList<FriendItem>) message.getContent());
         });
       } else if (message.getMessageType() == MessageType.CHAT_WINDOW_INFO) {
-        // TODO: 更新聊天框
+        ChatWindowInfo info = (ChatWindowInfo) message.getContent();
+        int uid = info.getUid();
+        SwingUtilities.invokeLater(() -> {
+          ChatFrame chatFrame = FrameManager.getChatFrame(uid);
+          if (chatFrame != null) {
+            chatFrame.update(info);
+          }
+        });
       }
     }
   }

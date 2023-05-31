@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * 好友列表
  */
 public class FriendListPanel extends JPanel {
-
+  // 单个好友条目
   private class FriendItemPanel extends JPanel implements MouseListener {
     private int uid;
     private JLabel nameLabel;
@@ -38,16 +38,23 @@ public class FriendListPanel extends JPanel {
 
       nameLabel = new JLabel(Converters.combineRemarkAndUsername(friend.getRemark(), friend.getUsername()));
       lastMessageTimeLabel = new JLabel(Converters.timeToShortText(friend.getLastMessageTime()), SwingConstants.RIGHT);
+      lastMessageTimeLabel.setForeground(Color.gray);
       lastMessageLabel = new JLabel(friend.getLastMessage());
+      lastMessageLabel.setForeground(Color.gray);
+      if (friend.getLastMessage().equals("")) {
+        if (uid == FrameManager.getMainFrame().getUid()) {
+          lastMessageLabel.setText("(无最近消息)");
+        } else {
+          lastMessageLabel.setText("[新朋友]");
+          lastMessageLabel.setForeground(new Color(255, 144, 0));
+        }
+      }
       unreadMessagesLabel = new JLabel(Converters.unreadToShortText(friend.getUnreadMessages()), SwingConstants.RIGHT);
+      unreadMessagesLabel.setForeground(Color.red);
 
       int width = lastMessageTimeLabel.getFontMetrics(getFont()).stringWidth("2023-12");
-      lastMessageTimeLabel.setMinimumSize(new Dimension(width, lastMessageTimeLabel.getPreferredSize().height));
-      unreadMessagesLabel.setMinimumSize(new Dimension(width, unreadMessagesLabel.getPreferredSize().height));
-
-      lastMessageLabel.setForeground(Color.gray);
-      lastMessageTimeLabel.setForeground(Color.gray);
-      unreadMessagesLabel.setForeground(Color.red);
+      lastMessageTimeLabel.setMinimumSize(new Dimension(width, lastMessageTimeLabel.getMinimumSize().height));
+      unreadMessagesLabel.setMinimumSize(new Dimension(width, unreadMessagesLabel.getMinimumSize().height));
 
       constraints.gridx = 0;
       constraints.gridy = 0;
@@ -87,6 +94,7 @@ public class FriendListPanel extends JPanel {
       mainFriendItemPanel = this;
       if (e.getClickCount() == 2) {
         FrameManager.createChatFrame(uid, nameLabel.getText());
+        unreadMessagesLabel.setText("");
       } else if (e.getClickCount() == 1) {
         // TODO: 显示日历
       }
