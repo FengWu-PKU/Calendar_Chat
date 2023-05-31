@@ -2,14 +2,14 @@ package common;
 
 import java.time.LocalDateTime;
 
-public class Text implements java.io.Serializable {
+public class UserMessage implements java.io.Serializable {
   private static final long serialVersionUID = 1L;
 
   private int senderUid, receiverUid;
   private LocalDateTime sendTime;
   private String text;
 
-  public Text(int senderUid, int receiverUid, LocalDateTime sendTime, String text) {
+  public UserMessage(int senderUid, int receiverUid, LocalDateTime sendTime, String text) {
     this.senderUid = senderUid;
     this.receiverUid = receiverUid;
     this.sendTime = sendTime;

@@ -11,10 +11,10 @@ public class ChatWindowInfo implements java.io.Serializable {
   private String email;
   private LocalDate birth;
   private String intro;
-  private ArrayList<Text> historyTexts;
+  private ArrayList<UserMessage> historyTexts;
 
   public ChatWindowInfo(String name, String phone, String email, LocalDate birth, String intro,
-      ArrayList<Text> historyTexts) {
+      ArrayList<UserMessage> historyTexts) {
     this.name = name;
     this.phone = phone;
     this.email = email;
@@ -63,11 +63,11 @@ public class ChatWindowInfo implements java.io.Serializable {
     this.intro = intro;
   }
 
-  public ArrayList<Text> getHistoryTexts() {
+  public ArrayList<UserMessage> getHistoryTexts() {
     return historyTexts;
   }
 
-  public void setHistoryTexts(ArrayList<Text> historyTexts) {
+  public void setHistoryTexts(ArrayList<UserMessage> historyTexts) {
     this.historyTexts = historyTexts;
   }
 }
