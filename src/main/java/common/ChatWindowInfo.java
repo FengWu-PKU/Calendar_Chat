@@ -3,7 +3,9 @@ package common;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ChatWindowInfo {
+public class ChatWindowInfo implements java.io.Serializable {
+  private static final long serialVersionUID = 1L;
+
   private String name;
   private String phone;
   private String email;
