@@ -12,17 +12,16 @@ public class ReceiveMessageThread extends Thread {
   @SuppressWarnings("unchecked")
   public void run() {
     while (true) {
-      System.out.println("准备输入");
       Message message = (Message) SocialApp.readObject();
       if (message == null) {
         return;
       }
-      System.out.println("2333");
       if (message.getMessageType() == MessageType.RET_FRIENDS) {
-        System.out.println("2333");
         SwingUtilities.invokeLater(() -> {
           FrameManager.getMainFrame().updateFriendList((ArrayList<FriendItem>) message.getContent());
         });
+      } else if (message.getMessageType() == MessageType.CHAT_WINDOW_INFO) {
+        // TODO: 更新聊天框
       }
     }
   }

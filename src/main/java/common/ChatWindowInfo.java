@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ChatWindowInfo implements java.io.Serializable {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
+  private int uid;
   private String name;
   private String phone;
   private String email;
@@ -13,14 +14,23 @@ public class ChatWindowInfo implements java.io.Serializable {
   private String intro;
   private ArrayList<UserMessage> historyTexts;
 
-  public ChatWindowInfo(String name, String phone, String email, LocalDate birth, String intro,
+  public ChatWindowInfo(int uid, String name, String phone, String email, LocalDate birth, String intro,
       ArrayList<UserMessage> historyTexts) {
+    this.uid = uid;
     this.name = name;
     this.phone = phone;
     this.email = email;
     this.birth = birth;
     this.intro = intro;
     this.historyTexts = historyTexts;
+  }
+
+  public int getUid() {
+    return uid;
+  }
+
+  public void setUid(int uid) {
+    this.uid = uid;
   }
 
   public String getName() {

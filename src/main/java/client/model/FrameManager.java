@@ -1,6 +1,8 @@
 package client.model;
 
+import client.SocialApp;
 import client.gui.*;
+import common.*;
 
 import java.awt.Frame;
 import java.util.HashMap;
@@ -29,14 +31,12 @@ public class FrameManager {
     final ChatFrame chatFrame = chatFrames.get(uid);
     if (chatFrame != null) {
       SwingUtilities.invokeLater(() -> {
-        if (!chatFrame.getTitle().equals(name)) {
-          chatFrame.setTitle(name);
-        }
         chatFrame.setState(Frame.NORMAL);
         chatFrame.toFront();
       });
     } else {
       chatFrames.put(uid, new ChatFrame(uid, name));
+      SocialApp.writeObject(new Message(MessageType.OPEN_CHAT_WINDOW, uid));
     }
   }
 
