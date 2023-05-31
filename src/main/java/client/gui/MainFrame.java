@@ -46,8 +46,8 @@ public class MainFrame extends JFrame {
       } else {
         assert friend.getLastMessageTime() != null;
       }
-      if (friend.getLastMessage() == null) {
-        friend.setLastMessage("");
+      if (friend.getLastMessage() == null || friend.getLastMessage() == "") {
+        friend.setLastMessage("(无最近消息)");
       }
     }
     friendListPanel.updateFriendList(friendList);

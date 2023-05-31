@@ -29,6 +29,7 @@ public class ServerConClientThread extends Thread {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
             oos.writeObject(new Message(MessageType.RET_FRIENDS, list));
+            System.out.println("输出成功");
         } catch (Exception e){
             e.printStackTrace();
         }

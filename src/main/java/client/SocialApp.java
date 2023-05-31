@@ -5,47 +5,39 @@ import client.model.FrameManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.Socket;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.net.*;
+import java.io.*;
 
 public class SocialApp {
   public static final boolean DEBUG = false;
   private static Socket client;
-  private static ObjectOutputStream output;
-  private static ObjectInputStream input;
 
   public static void connect(String serverAddress, int serverPort) throws IOException {
     client = new Socket(serverAddress, serverPort);
-    output = new ObjectOutputStream(client.getOutputStream());
-    input = new ObjectInputStream(client.getInputStream());
   }
 
   public static Object readObject() {
-    if (input == null) {
+    if (client == null) {
       return null;
     }
-    synchronized (input) {
-      try {
-        return input.readObject();
-      } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-      }
+    try {
+      return new ObjectInputStream(client.getInputStream()).readObject();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
     }
   }
 
   public static void writeObject(Object o) {
-    if (output == null) {
+    if (client == null) {
       return;
     }
-    synchronized (output) {
-      try {
-        output.writeObject(o);
-      } catch (Exception e) {
-        e.printStackTrace();
+    try {
+      synchronized (client.getOutputStream()) {
+        new ObjectOutputStream(client.getOutputStream()).writeObject(o);
       }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
@@ -70,7 +62,7 @@ public class SocialApp {
     setDefaultFont();
     setDefaultColor();
     if (!DEBUG) {
-      new client.gui.ServerConnectionFrame();
+      new ServerConnectionFrame();
     } else {
       FrameManager.createMainFrame(0);
       FrameManager.getMainFrame().test();
