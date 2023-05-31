@@ -39,10 +39,5 @@ public enum MessageType {
 
   // 以下为客户端到服务端的消息
 
-  /**
-   * 获取好友列表 content = null
-   */
-  GET_FRIENDS,
-
   // TODO: more operations...
 }

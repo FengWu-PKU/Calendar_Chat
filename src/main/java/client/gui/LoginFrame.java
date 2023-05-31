@@ -2,6 +2,7 @@ package client.gui;
 
 import client.SocialApp;
 import client.utils.*;
+import client.model.*;
 import common.*;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     setSize(300, 180);
     setResizable(false);
     setLocationRelativeTo(null);
-  
+
     // 窗口布局
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
@@ -56,12 +57,11 @@ public class LoginFrame extends JFrame implements ActionListener {
         String encryptedPassword = PasswordEncryption.encryptPassword(password);
         UserLogin user = new UserLogin(username, encryptedPassword);
         SocialApp.writeObject(user);
-        Message message = (Message)SocialApp.readObject();
+        Message message = (Message) SocialApp.readObject();
         if (message == null) {
           JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {
-          new MainFrame();
-          SocialApp.writeObject(new Message(MessageType.GET_FRIENDS));
+          new ReceiveMessageThread(new MainFrame()).start();
           dispose();
         } else if (message.getMessageType() == MessageType.LOGIN_FAILED) {
           JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);

@@ -5,7 +5,6 @@ import common.*;
 import javax.swing.*;
 
 import java.util.ArrayList;
-// import java.time.LocalDateTime;
 
 public class MainFrame extends JFrame {
   private FriendListPanel friendListPanel = new FriendListPanel();
@@ -32,11 +31,4 @@ public class MainFrame extends JFrame {
     friendListPanel.updateFriendList(friendList);
     validate();
   }
-
-  // public void test() {
-  //   ArrayList<FriendItem> friendList = new ArrayList<>();
-  //   friendList.add(new FriendItem("Alice", "A", "Hi!", LocalDateTime.of(2022, 5, 29, 12, 20), 0));
-  //   friendList.add(new FriendItem("Bob", "B", "Hello!", LocalDateTime.of(2023, 5, 30, 12, 30), 2));
-  //   updateFriendList(friendList);
-  // }
 }

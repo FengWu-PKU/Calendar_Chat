@@ -2,6 +2,7 @@ package client.gui;
 
 import client.SocialApp;
 import client.utils.*;
+import client.model.*;
 import common.*;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
     setSize(400, 380);
     setResizable(false);
     setLocationRelativeTo(null);
-  
+
     // 窗口布局
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
@@ -111,12 +112,11 @@ public class RegisterFrame extends JFrame implements ActionListener {
       String encryptedPassword = PasswordEncryption.encryptPassword(password);
       UserRegister user = new UserRegister(username, encryptedPassword, name, phone, email, birth, intro);
       SocialApp.writeObject(user);
-      Message message = (Message)SocialApp.readObject();
+      Message message = (Message) SocialApp.readObject();
       if (message == null) {
         JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
-        new MainFrame();
-        SocialApp.writeObject(new Message(MessageType.GET_FRIENDS));
+        new ReceiveMessageThread(new MainFrame()).start();
         dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
         JOptionPane.showMessageDialog(this, "用户名已存在", "错误", JOptionPane.ERROR_MESSAGE);
