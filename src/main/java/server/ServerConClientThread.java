@@ -39,12 +39,12 @@ public class ServerConClientThread extends Thread {
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                 Message m = (Message) ois.readObject();
                 if (m.getMessageType() == MessageType.OPEN_CHAT_WINDOW) {
-                    int A = account_id, B = (Integer)ois.readObject();
+                    int A = account_id, B = (Integer)m.getContent();
                     System.out.println(A+" 请求打开和 "+B+" 的聊天窗口需要的信息。");
-                    ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                     QQUser tmp = QQUser.getUserByAccountID(B);
-                    Date bir = tmp.birthday;
+                    Date bir = new Date(tmp.birthday.getTime());
                     LocalDate localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    System.out.println(bir);
                     server.utils.Message[] BtoA = server.utils.Message.receiveMsg(A, B);
                     server.utils.Message[] AtoB = server.utils.Message.receiveMsg(B, A);
                     ArrayList<UserMessage> msglist = new ArrayList<>();
@@ -63,6 +63,7 @@ public class ServerConClientThread extends Thread {
                     });
                     ChatWindowInfo cwi = new ChatWindowInfo(B, tmp.usr_name, tmp.phonenum, tmp.email, localbir, tmp.descriptor, msglist);
                     server.utils.Message.receiveMsg(A, B);
+                    ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                     oos.writeObject(new Message(MessageType.CHAT_WINDOW_INFO, cwi));
                 }
             } catch (Exception e){
