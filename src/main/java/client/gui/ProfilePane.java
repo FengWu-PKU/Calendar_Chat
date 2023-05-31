@@ -3,14 +3,12 @@ package client.gui;
 import common.*;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ProfilePane extends JTextArea {
   public ProfilePane(String name) {
     super(0, 16);
     setLineWrap(true);
     setEditable(false);
-    setForeground(Color.black);
     setText(name + " 的个人资料：");
   }
 

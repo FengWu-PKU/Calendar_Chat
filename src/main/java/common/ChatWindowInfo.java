@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ChatWindowInfo implements java.io.Serializable {
-  private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 3L;
 
   private int uid;
   private String name;
@@ -12,17 +12,17 @@ public class ChatWindowInfo implements java.io.Serializable {
   private String email;
   private LocalDate birth;
   private String intro;
-  private ArrayList<UserMessage> historyTexts;
+  private ArrayList<UserMessage> historyMessages;
 
   public ChatWindowInfo(int uid, String name, String phone, String email, LocalDate birth, String intro,
-      ArrayList<UserMessage> historyTexts) {
+      ArrayList<UserMessage> historyMessages) {
     this.uid = uid;
     this.name = name;
     this.phone = phone;
     this.email = email;
     this.birth = birth;
     this.intro = intro;
-    this.historyTexts = historyTexts;
+    this.historyMessages = historyMessages;
   }
 
   public int getUid() {
@@ -73,11 +73,11 @@ public class ChatWindowInfo implements java.io.Serializable {
     this.intro = intro;
   }
 
-  public ArrayList<UserMessage> getHistoryTexts() {
-    return historyTexts;
+  public ArrayList<UserMessage> getHistoryMessages() {
+    return historyMessages;
   }
 
-  public void setHistoryTexts(ArrayList<UserMessage> historyTexts) {
-    this.historyTexts = historyTexts;
+  public void setHistoryMessages(ArrayList<UserMessage> historyMessages) {
+    this.historyMessages = historyMessages;
   }
 }
