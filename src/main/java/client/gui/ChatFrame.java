@@ -14,11 +14,11 @@ public class ChatFrame extends JFrame implements ActionListener {
   private JPanel profilePanel = new JPanel();
   private JButton sendButton = new JButton("发送");
 
-  public ChatFrame(int uid) {
+  public ChatFrame(int uid, String name) {
     this.uid = uid;
 
     // 窗口设置
-    setTitle("聊天");
+    setTitle(name);
     setSize(800, 600);
     setLocationRelativeTo(null);
 

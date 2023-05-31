@@ -25,15 +25,18 @@ public class FrameManager {
     return mainFrame;
   }
 
-  public static void createChatFrame(int uid) {
+  public static void createChatFrame(int uid, String name) {
     final ChatFrame chatFrame = chatFrames.get(uid);
     if (chatFrame != null) {
       SwingUtilities.invokeLater(() -> {
+        if (!chatFrame.getTitle().equals(name)) {
+          chatFrame.setTitle(name);
+        }
         chatFrame.setState(Frame.NORMAL);
         chatFrame.toFront();
       });
     } else {
-      chatFrames.put(uid, new ChatFrame(uid));
+      chatFrames.put(uid, new ChatFrame(uid, name));
     }
   }
 
