@@ -9,17 +9,10 @@ import java.awt.event.*;
  * 多行信息输入面板，继承自 JPanel，采用 GridBagLayout 布局
  */
 public class InfoInputPanel extends JPanel {
-  GridBagLayout layout = new GridBagLayout();
-  GridBagConstraints constraints = new GridBagConstraints();
-  int labelWidth, componentWidth;
+  private GridBagLayout layout = new GridBagLayout();
+  private GridBagConstraints constraints = new GridBagConstraints();
 
   public InfoInputPanel() {
-    this(1, 2);
-  }
-
-  public InfoInputPanel(int labelWidth, int componentWidth) {
-    this.labelWidth = labelWidth;
-    this.componentWidth = componentWidth;
     setBorder(new EmptyBorder(20, 20, 20, 20));
     setLayout(layout);
     constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -33,7 +26,7 @@ public class InfoInputPanel extends JPanel {
    * @param textField 输入框
    * @param hint 注释
    */
-  public void addComponent(String labelText, JTextField textField, String hint) {
+  public void addTextField(String labelText, JTextField textField, String hint) {
     textField.setText(hint);
     textField.setForeground(Color.gray);
     textField.addFocusListener(new FocusListener() {
@@ -51,27 +44,27 @@ public class InfoInputPanel extends JPanel {
         }
       }
     });
-    addComponent(labelText, textField);
+    addTextField(labelText, textField);
   }
 
   /**
    * 加入一栏，有标签和输入框
    * @param labelText 标签
-   * @param component 输入框
+   * @param textField 输入框
    */
-  public void addComponent(String labelText, Component component) {
+  public void addTextField(String labelText, JTextField textField) {
     constraints.gridx = 0;
-    constraints.gridwidth = labelWidth;
+    constraints.gridwidth = 1;
     constraints.weightx = 0;
     JLabel label = new JLabel(labelText, SwingConstants.RIGHT);
     layout.setConstraints(label, constraints);
-    constraints.gridx = labelWidth;
-    constraints.gridwidth = componentWidth;
+    constraints.gridx = 1;
+    constraints.gridwidth = 1;
     constraints.weightx = 1;
-    layout.setConstraints(component, constraints);
+    layout.setConstraints(textField, constraints);
 
     add(label);
-    add(component);
+    add(textField);
     ++constraints.gridy;
   }
 
@@ -81,7 +74,7 @@ public class InfoInputPanel extends JPanel {
    */
   public void addComponent(Component component) {
     constraints.gridx = 0;
-    constraints.gridwidth = labelWidth + componentWidth;
+    constraints.gridwidth = 2;
     constraints.weightx = 1;
     layout.setConstraints(component, constraints);
 

@@ -36,8 +36,8 @@ public class LoginFrame extends JFrame implements ActionListener {
     buttonPanel.add(loginButton);
     buttonPanel.add(registerButton);
 
-    contentPane.addComponent("用户名:", usernameField);
-    contentPane.addComponent("密码:", passwordField);
+    contentPane.addTextField("用户名:", usernameField);
+    contentPane.addTextField("密码:", passwordField);
     contentPane.addComponent(buttonPanel);
 
     // 设置监听器
@@ -54,14 +54,16 @@ public class LoginFrame extends JFrame implements ActionListener {
       String username = usernameField.getText();
       String password = new String(passwordField.getPassword());
       if (Validators.isValidUsername(username) && Validators.isValidPassword(password)) {
-        String encryptedPassword = PasswordEncryption.encryptPassword(password);
+        String encryptedPassword = PasswordEncryptor.encryptPassword(password);
         UserLogin user = new UserLogin(username, encryptedPassword);
         SocialApp.writeObject(user);
         Message message = (Message) SocialApp.readObject();
         if (message == null) {
           JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {
-          new ReceiveMessageThread(new MainFrame()).start();
+          Integer uid = (Integer) message.getContent();
+          FrameManager.setMainFrame(new MainFrame(uid));
+          new ReceiveMessageThread().start();
           dispose();
         } else if (message.getMessageType() == MessageType.LOGIN_FAILED) {
           JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);

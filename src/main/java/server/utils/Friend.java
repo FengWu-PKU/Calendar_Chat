@@ -20,7 +20,7 @@ public class Friend {
     }
 
     /*添加好友,已经存在好友关系返回-1，成功插入返回0*/
-    static int insertFriend(int account_id, int friend_id, String nickname) {
+    static public int insertFriend(int account_id, int friend_id, String nickname) {
         try (Connection connection=DriverManager.getConnection(url, username,password)){
             String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
