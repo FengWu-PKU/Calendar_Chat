@@ -40,20 +40,17 @@ public class Server {
                         } else {
                             //注册成功
                             System.out.println("注册成功");
-                            oos.writeObject(new Message(MessageType.REGISTER_SUCCEED));
-                            ServerConClientThread scct = new ServerConClientThread(s, havedb ? Account.login(ur.getUsername(), ur.getEncryptedPassword()) : ret);
+                            int account_id = havedb ? Account.login(ur.getUsername(), ur.getEncryptedPassword()) : ret;
+                            oos.writeObject(new Message(MessageType.REGISTER_SUCCEED, account_id));
+                            ServerConClientThread scct = new ServerConClientThread(s, account_id);
+                            java.sql.Date bir = null;
+                            if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
                             if (havedb == true) {
-                                int account_id = Account.login(ur.getUsername(), ur.getEncryptedPassword());
-                                java.sql.Date bir = null;
-                                if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
                                 QQUser.insertUser(new QQUser(account_id, ur.getUsername(), ur.getPhone(), ur.getEmail(), "", bir));
-                                ManageClientThread.addClientThread(account_id, scct);
                             } else {
-                                java.sql.Date bir = null;
-                                if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
-                                db.insert(ret, ur.getUsername(), ur.getPhone(), ur.getEmail(), bir);
-                                ManageClientThread.addClientThread(ret, scct);
+                                db.insert(account_id, ur.getUsername(), ur.getPhone(), ur.getEmail(), bir);
                             }
+                            ManageClientThread.addClientThread(account_id, scct);
                             scct.start();
                             break;
                         }
@@ -74,7 +71,7 @@ public class Server {
                         } else if (ManageClientThread.getClientThread(account_id) == null) {
                             // 登录成功
                             System.out.println("登录成功");
-                            oos.writeObject(new Message(MessageType.LOGIN_SUCCEED));
+                            oos.writeObject(new Message(MessageType.LOGIN_SUCCEED, account_id));
                             ServerConClientThread scct = new ServerConClientThread(s, account_id);
                             ManageClientThread.addClientThread(account_id, scct);
                             scct.start();
