@@ -41,14 +41,14 @@ public class RegisterFrame extends JFrame implements ActionListener {
     registerAndLoginButton = new JButton("注册并登录");
     buttonPanel.add(registerAndLoginButton);
 
-    contentPane.addComponent("用户名:", usernameField);
-    contentPane.addComponent("密码:", passwordField);
-    contentPane.addComponent("确认密码:", confirmPasswordField);
-    contentPane.addComponent("姓名:", nameField, "选填，不超过20字符");
-    contentPane.addComponent("电话:", phoneField, "选填");
-    contentPane.addComponent("邮箱:", emailField, "选填");
-    contentPane.addComponent("生日:", birthField, "选填，格式为YYYY-MM-DD");
-    contentPane.addComponent("个人简介:", introField, "选填，不超过50字符");
+    contentPane.addTextField("用户名:", usernameField);
+    contentPane.addTextField("密码:", passwordField);
+    contentPane.addTextField("确认密码:", confirmPasswordField);
+    contentPane.addTextField("姓名:", nameField, "选填，不超过20字符");
+    contentPane.addTextField("电话:", phoneField, "选填");
+    contentPane.addTextField("邮箱:", emailField, "选填");
+    contentPane.addTextField("生日:", birthField, "选填，格式为YYYY-MM-DD");
+    contentPane.addTextField("个人简介:", introField, "选填，不超过50字符");
     contentPane.addComponent(buttonPanel);
 
     // 设置监听器

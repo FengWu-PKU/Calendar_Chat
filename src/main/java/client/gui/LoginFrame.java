@@ -36,8 +36,8 @@ public class LoginFrame extends JFrame implements ActionListener {
     buttonPanel.add(loginButton);
     buttonPanel.add(registerButton);
 
-    contentPane.addComponent("用户名:", usernameField);
-    contentPane.addComponent("密码:", passwordField);
+    contentPane.addTextField("用户名:", usernameField);
+    contentPane.addTextField("密码:", passwordField);
     contentPane.addComponent(buttonPanel);
 
     // 设置监听器
