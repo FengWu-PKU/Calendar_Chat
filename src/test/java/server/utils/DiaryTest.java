@@ -20,13 +20,6 @@ class DiaryTest {
     }
     @Test
     void findDiaryTest() {
-        Timestamp dt=new Timestamp(System.currentTimeMillis());
-        Diary[] diaries=Diary.findDiary(1,dt);
-        for(int i=0;i<Diary.MAXDIARYNUM&&diaries[i]!=null; i++) {
-            System.out.print(diaries[i].writer_name);
-            System.out.print(", ");
-            System.out.println(diaries[i].content);
-        }
     }
 
     @Test

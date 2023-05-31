@@ -11,6 +11,7 @@ class AccountTest {
         String pw="123456";
         assert(Account.signUp(email, pw)==0);
         assert(Account.signUp(email,pw)==-1);
+        Account.deleteAccount(Account.login(email, pw));
     }
 
 

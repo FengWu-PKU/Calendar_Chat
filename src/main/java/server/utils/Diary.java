@@ -46,13 +46,13 @@ public class Diary {
     }
 
     /* 返回指定用户，指定日期的日记 */
-    static Diary[] findDiary(int id, Timestamp queryDate) {
+    static Diary[] findDiary(int id, Date queryDate) {
         Diary[] diaries=new Diary[MAXDIARYNUM];
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT * FROM diary WHERE account_id=? AND DATE(date_t)=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
             stmt.setInt(1, id);
-            stmt.setDate(2, new java.sql.Date(queryDate.getTime()));
+            stmt.setDate(2, queryDate);
             ResultSet res=stmt.executeQuery();
             int cnt=0;
             while(res.next()) {
