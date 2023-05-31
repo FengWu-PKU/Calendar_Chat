@@ -13,7 +13,7 @@ public class Converters {
    * @param username 用户名
    * @return 合并后的结果
    */
-  public static String CombineRemarkAndUsername(String remark, String username) {
+  public static String combineRemarkAndUsername(String remark, String username) {
     if (remark == null || remark.equals("")) {
       return username;
     } else {

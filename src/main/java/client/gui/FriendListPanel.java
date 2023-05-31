@@ -36,7 +36,7 @@ public class FriendListPanel extends JPanel {
       constraints.fill = GridBagConstraints.HORIZONTAL;
       constraints.insets = new Insets(3, 3, 3, 3);
 
-      nameLabel = new JLabel(Converters.CombineRemarkAndUsername(friend.getRemark(), friend.getUsername()));
+      nameLabel = new JLabel(Converters.combineRemarkAndUsername(friend.getRemark(), friend.getUsername()));
       lastMessageTimeLabel = new JLabel(Converters.timeToShortText(friend.getLastMessageTime()), SwingConstants.RIGHT);
       lastMessageLabel = new JLabel(friend.getLastMessage());
       unreadMessagesLabel = new JLabel(Converters.unreadToShortText(friend.getUnreadMessages()), SwingConstants.RIGHT);
@@ -80,14 +80,14 @@ public class FriendListPanel extends JPanel {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+      if (mainFriendItemPanel != null) {
+        mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
+      }
+      this.setBackground(new Color(224, 224, 224));
+      mainFriendItemPanel = this;
       if (e.getClickCount() == 2) {
         FrameManager.createChatFrame(uid, nameLabel.getText());
       } else if (e.getClickCount() == 1) {
-        if (mainFriendItemPanel != null) {
-          mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
-        }
-        this.setBackground(new Color(224, 224, 224));
-        mainFriendItemPanel = this;
         // TODO: 显示日历
       }
     }
