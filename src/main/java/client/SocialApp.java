@@ -11,7 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class SocialApp {
-  public static final boolean DEBUG = true;
+  public static final boolean DEBUG = false;
   private static Socket client;
   private static ObjectOutputStream output;
   private static ObjectInputStream input;
