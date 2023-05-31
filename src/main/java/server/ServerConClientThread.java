@@ -24,6 +24,7 @@ public class ServerConClientThread extends Thread {
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                 Message m = (Message) ois.readObject();
                 if (m.getMessageType() == MessageType.RET_FRIENDS) {
+                    //返回好友列表
                     Friend[] fri = Friend.findAllFriends(account_id);
                     ArrayList<common.FriendItem> list = new ArrayList<>();
                     for (Friend i : fri) {
@@ -31,12 +32,12 @@ public class ServerConClientThread extends Thread {
                         list.add(new common.FriendItem(i.friend_id, tmp.usr_name, i.friend_nickname, "", null, 0));
                     }
                     ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-                    synchronized (oos) {
-                        oos.writeObject(list);
-                    }
+                    oos.writeObject(list);
                 }
             } catch (Exception e){
                 e.printStackTrace();
+                ManageClientThread.removeClientThread(account_id);
+                return;
             }
         }
     }
