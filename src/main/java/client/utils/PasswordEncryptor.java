@@ -7,9 +7,9 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 用于密码加密的方法
  */
-public class PasswordEncryption {
+public class PasswordEncryptor {
   // 私有方法，确保不被实例化
-  private PasswordEncryption() {}
+  private PasswordEncryptor() {}
 
   /**
    * 使用 SHA-256 加密密码

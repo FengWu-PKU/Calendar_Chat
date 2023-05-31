@@ -9,8 +9,8 @@ import java.awt.event.*;
  * 多行信息输入面板，继承自 JPanel，采用 GridBagLayout 布局
  */
 public class InfoInputPanel extends JPanel {
-  GridBagLayout layout = new GridBagLayout();
-  GridBagConstraints constraints = new GridBagConstraints();
+  private GridBagLayout layout = new GridBagLayout();
+  private GridBagConstraints constraints = new GridBagConstraints();
 
   public InfoInputPanel() {
     setBorder(new EmptyBorder(20, 20, 20, 20));

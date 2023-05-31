@@ -1,12 +1,11 @@
 package client;
 
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.net.Socket;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import javax.swing.UIManager;
 
 public class SocialApp {
   private static Socket client;
@@ -52,10 +51,16 @@ public class SocialApp {
     UIManager.put("PasswordField.font", new Font("微软雅黑", 0, 14));
   }
 
+  public static void setDefaultColor() {
+    UIManager.put("Panel.background", Color.white);
+    UIManager.put("OptionPane.background", Color.white);
+  }
+
   public static void main(String[] args) {
     setDefaultFont();
+    setDefaultColor();
     new client.gui.ServerConnectionFrame();
     // new client.gui.LoginFrame();
-    // new client.gui.MainFrame().test();
+    // new client.gui.MainFrame(0).test();
   }
 }

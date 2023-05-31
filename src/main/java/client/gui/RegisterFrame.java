@@ -109,7 +109,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
         return;
       }
 
-      String encryptedPassword = PasswordEncryption.encryptPassword(password);
+      String encryptedPassword = PasswordEncryptor.encryptPassword(password);
       UserRegister user = new UserRegister(username, encryptedPassword, name, phone, email, birth, intro);
       SocialApp.writeObject(user);
       Message message = (Message) SocialApp.readObject();
@@ -117,7 +117,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
         Integer uid = (Integer) message.getContent();
-        new ReceiveMessageThread(new MainFrame(uid)).start();
+        FrameManager.setMainFrame(new MainFrame(uid));
+        new ReceiveMessageThread().start();
         dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
         JOptionPane.showMessageDialog(this, "用户名已存在", "错误", JOptionPane.ERROR_MESSAGE);
