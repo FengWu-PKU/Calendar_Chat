@@ -12,6 +12,10 @@ public class ProfilePane extends JTextArea {
     setText(name + " 的个人资料：");
   }
 
+  /**
+   * 更新资料
+   * @param info 聊天框中需要的信息
+   */
   void updateProfile(ChatWindowInfo info) {
     if (info.getName() != null) {
       append("\n姓名：" + info.getName());

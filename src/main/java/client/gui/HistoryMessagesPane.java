@@ -11,7 +11,15 @@ public class HistoryMessagesPane extends JTextArea {
     setEditable(false);
   }
 
+  /**
+   * 更新消息记录
+   * @param messages 消息列表
+   */
   void updateHistoryMessages(ArrayList<UserMessage> messages) {
-    append("update");
+    append("Messages:\n");
+    messages.sort(null);
+    for (UserMessage message : messages) {
+      append(message.getText() + "\n");
+    }
   }
 }

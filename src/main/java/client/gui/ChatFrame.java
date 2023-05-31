@@ -93,6 +93,10 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
   public void keyTyped(KeyEvent e) {
   }
 
+  /**
+   * 更新好友资料和消息记录
+   * @param info 聊天框中需要的信息
+   */
   public void update(ChatWindowInfo info) {
     profilePane.updateProfile(info);
     recordPane.updateHistoryMessages(info.getHistoryMessages());

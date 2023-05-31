@@ -85,6 +85,10 @@ public class FriendListPanel extends JPanel {
       this.addMouseListener(this);
     }
 
+    public int getUid() {
+      return uid;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
       if (mainFriendItemPanel != null) {
@@ -139,7 +143,8 @@ public class FriendListPanel extends JPanel {
     for (FriendItem friend : friendList) {
       FriendItemPanel friendItemPanel = new FriendItemPanel(friend);
       add(friendItemPanel);
-      if (friend.getUid() == FrameManager.getMainFrame().getUid()) {
+      if ((mainFriendItemPanel == null && friend.getUid() == FrameManager.getMainFrame().getUid()) ||
+          (mainFriendItemPanel != null && friend.getUid() == mainFriendItemPanel.getUid())) {
         friendItemPanel.setBackground(new Color(224, 224, 224));
         mainFriendItemPanel = friendItemPanel;
       }
