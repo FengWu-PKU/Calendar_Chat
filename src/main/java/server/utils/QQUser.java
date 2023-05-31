@@ -9,6 +9,7 @@ public class QQUser {
 
     int account_id;
     public String usr_name;
+    public String descriptor;
     public String phonenum;
     public String email;
     public String account_number;
@@ -17,6 +18,17 @@ public class QQUser {
     public QQUser(int account_id, String usr_name, String phonenum, String email, String account_number, Date birthday) {
         this.account_id = account_id;
         this.usr_name = usr_name;
+        this.descriptor=null;
+        this.phonenum = phonenum;
+        this.email = email;
+        this.account_number = account_number;
+        this.birthday = birthday;
+    }
+
+    public QQUser(int account_id, String usr_name, String descriptor, String phonenum, String email, String account_number, Date birthday) {
+        this.account_id = account_id;
+        this.usr_name = usr_name;
+        this.descriptor = descriptor;
         this.phonenum = phonenum;
         this.email = email;
         this.account_number = account_number;
@@ -49,7 +61,7 @@ public class QQUser {
             res2.close();
             stmt2.close();
 
-            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id) VALUES (?, ?, ?, ?, ?, ?)";
+            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor) VALUES (?, ?, ?, ?, ?, ?,?)";
             PreparedStatement insertStmt=connection.prepareStatement(insert);
             insertStmt.setString(1, user.usr_name);
             insertStmt.setString(2, user.phonenum);
@@ -57,6 +69,7 @@ public class QQUser {
             insertStmt.setString(4, user.account_number);
             insertStmt.setDate(5, user.birthday);
             insertStmt.setInt(6,user.account_id);
+            insertStmt.setString(7, user.descriptor);
             insertStmt.executeUpdate();
             insertStmt.close();
             return 0;
@@ -143,11 +156,12 @@ public class QQUser {
             if(!res.next()) return null;
             int acid=res.getInt("account_id");
             String usr_name=res.getString("usr_name");
+            String desc=res.getString("descriptor");
             String phonenum=res.getString("phone_num");
             String email=res.getString("email");
             String account_number=res.getString("account_number");
             Date bir=res.getDate("birthday");
-            return new QQUser(acid, usr_name, phonenum, email, account_number, bir);
+            return new QQUser(acid, usr_name,desc, phonenum, email, account_number, bir);
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
