@@ -22,7 +22,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
   private JTextField nameField = new JTextField();
   private JTextField phoneField = new JTextField();
   private JTextField emailField = new JTextField();
-  private JTextField birthField = new JTextField("YYYY-MM-DD");
+  private JTextField birthField = new JTextField();
   private JTextField introField = new JTextField();
   private JButton registerAndLoginButton;
 
@@ -116,7 +116,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
       if (message == null) {
         JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
-        new ReceiveMessageThread(new MainFrame()).start();
+        Integer uid = (Integer) message.getContent();
+        new ReceiveMessageThread(new MainFrame(uid)).start();
         dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
         JOptionPane.showMessageDialog(this, "用户名已存在", "错误", JOptionPane.ERROR_MESSAGE);

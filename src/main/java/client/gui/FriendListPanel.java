@@ -58,5 +58,6 @@ public class FriendListPanel extends JPanel {
       // TODO: 添加一些 Listener
       add(friendItemPanel);
     }
+    revalidate();
   }
 }
