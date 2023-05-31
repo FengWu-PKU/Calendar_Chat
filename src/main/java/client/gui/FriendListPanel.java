@@ -1,6 +1,7 @@
 package client.gui;
 
 import common.*;
+import client.model.*;
 import client.utils.*;
 
 import javax.swing.*;
@@ -80,20 +81,29 @@ public class FriendListPanel extends JPanel {
     @Override
     public void mouseClicked(MouseEvent e) {
       if (e.getClickCount() == 2) {
-        // TODO: 打开聊天框
+        FrameManager.createChatFrame(uid);
       } else if (e.getClickCount() == 1) {
+        if (mainFriendItemPanel != null) {
+          mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
+        }
+        this.setBackground(new Color(224, 224, 224));
+        mainFriendItemPanel = this;
         // TODO: 显示日历
       }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-      this.setBackground(new Color(240, 240, 240));
+      if (this != mainFriendItemPanel) {
+        this.setBackground(new Color(240, 240, 240));
+      }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-      this.setBackground(UIManager.getColor("Panel.background"));
+      if (this != mainFriendItemPanel) {
+        this.setBackground(UIManager.getColor("Panel.background"));
+      }
     }
 
     @Override
@@ -104,6 +114,8 @@ public class FriendListPanel extends JPanel {
     public void mouseReleased(MouseEvent e) {
     }
   }
+
+  FriendItemPanel mainFriendItemPanel;
 
   public FriendListPanel() {
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -117,7 +129,12 @@ public class FriendListPanel extends JPanel {
     removeAll();
     friendList.sort(null);
     for (FriendItem friend : friendList) {
-      add(new FriendItemPanel(friend));
+      FriendItemPanel friendItemPanel = new FriendItemPanel(friend);
+      add(friendItemPanel);
+      if (friend.getUid() == FrameManager.getMainFrame().getUid()) {
+        friendItemPanel.setBackground(new Color(224, 224, 224));
+        mainFriendItemPanel = friendItemPanel;
+      }
     }
     revalidate();
   }

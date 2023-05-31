@@ -13,6 +13,9 @@ public class ReceiveMessageThread extends Thread {
   public void run() {
     while (true) {
       Message message = (Message) SocialApp.readObject();
+      if (message == null) {
+        return;
+      }
       if (message.getMessageType() == MessageType.RET_FRIENDS) {
         SwingUtilities.invokeLater(() -> {
           FrameManager.getMainFrame().updateFriendList((ArrayList<FriendItem>) message.getContent());

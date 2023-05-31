@@ -1,6 +1,9 @@
 package client;
 
 import javax.swing.*;
+
+import client.model.FrameManager;
+
 import java.awt.*;
 import java.net.Socket;
 import java.io.IOException;
@@ -19,6 +22,9 @@ public class SocialApp {
   }
 
   public static Object readObject() {
+    if (input == null) {
+      return null;
+    }
     synchronized (input) {
       try {
         return input.readObject();
@@ -30,6 +36,9 @@ public class SocialApp {
   }
 
   public static void writeObject(Object o) {
+    if (output == null) {
+      return;
+    }
     synchronized (output) {
       try {
         output.writeObject(o);
@@ -60,7 +69,7 @@ public class SocialApp {
     setDefaultFont();
     setDefaultColor();
     new client.gui.ServerConnectionFrame();
-    // new client.gui.LoginFrame();
-    // new client.gui.MainFrame(0).test();
+    // FrameManager.createMainFrame(0);
+    // FrameManager.getMainFrame().test();
   }
 }
