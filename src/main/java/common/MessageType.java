@@ -37,7 +37,27 @@ public enum MessageType {
    */
   RET_FRIENDS,
 
+  /**
+   * 返回聊天框需要的信息 content: ChatWindowInfo = historyMessage + personalInfo
+   */
+  CHAT_WINDOW_INFO,
+
+  /**
+   * 发信息 content: Text = message
+   */
+  SERVER_SEND_MESSAGE,
+
   // 以下为客户端到服务端的消息
+
+  /**
+   * 打开聊天框 content: Integer = friendUid
+   */
+  OPEN_CHAT_WINDOW,
+
+  /**
+   * 发信息 content: Text = message
+   */
+  CLIENT_SEND_MESSAGE,
 
   // TODO: more operations...
 }
