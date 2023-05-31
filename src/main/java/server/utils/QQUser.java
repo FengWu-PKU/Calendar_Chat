@@ -8,11 +8,11 @@ public class QQUser {
     static String password = ServerInfo.password;
 
     int account_id;
-    String usr_name;
-    String phonenum;
-    String email;
-    String account_number;
-    Date birthday;
+    public String usr_name;
+    public String phonenum;
+    public String email;
+    public String account_number;
+    public Date birthday;
 
     public QQUser(int account_id, String usr_name, String phonenum, String email, String account_number, Date birthday) {
         this.account_id = account_id;
@@ -134,7 +134,7 @@ public class QQUser {
     }
 
     /*根据account_id返回一个QQUser对象，可用于获取信息*/
-    static QQUser getUserByAccountID(int account_id) {
+    static public QQUser getUserByAccountID(int account_id) {
         try(Connection connection=DriverManager.getConnection(url, username,password)) {
             String sql="SELECT * FROM qq_user WHERE account_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

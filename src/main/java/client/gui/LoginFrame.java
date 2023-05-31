@@ -60,7 +60,9 @@ public class LoginFrame extends JFrame implements ActionListener {
         if (message == null) {
           JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {
-          // TODO: 获取好友列表并进入主界面
+          new MainFrame();
+          SocialApp.writeObject(new Message(MessageType.GET_FRIENDS));
+          dispose();
         } else if (message.getMessageType() == MessageType.LOGIN_FAILED) {
           JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.ALREADY_LOGIN) {

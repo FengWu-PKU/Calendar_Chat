@@ -56,5 +56,6 @@ public class SocialApp {
     setDefaultFont();
     new client.gui.ServerConnectionFrame();
     // new client.gui.LoginFrame();
+    // new client.gui.MainFrame().test();
   }
 }

@@ -13,6 +13,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
+    boolean havedb = true;
+    database db = new database();
     class work extends Thread {
         Socket s;
         public work(Socket _s) {
@@ -27,51 +29,56 @@ public class Server {
                     System.out.println("读入成功");
                     if (u instanceof UserRegister) { // 注册用户
                         UserRegister ur = (UserRegister) u;
-                        int ret = Account.signUp(ur.getUsername(), ur.getEncryptedPassword());
+                        int ret = 0;
+                        if (havedb == true) ret = Account.signUp(ur.getUsername(), ur.getEncryptedPassword());
+                            else ret = db.signUp(ur.getUsername(), ur.getEncryptedPassword());
+                        System.out.println("新注册的 account_id 为 "+ret);
                         if (ret == -1) {
                             // 注册失败
                             System.out.println("注册失败");
                             oos.writeObject(new Message(MessageType.REGISTER_FAILED));
-                            //s.close();
                         } else {
                             //注册成功
                             System.out.println("注册成功");
                             oos.writeObject(new Message(MessageType.REGISTER_SUCCEED));
-                            ServerConClientThread scct = new ServerConClientThread(s);
-                            int account_id = Account.login(ur.getUsername(), ur.getEncryptedPassword());
-                            QQUser.insertUser(new QQUser(account_id,
-                                    ur.getUsername(),
-                                    ur.getPhone(),
-                                    ur.getEmail(),
-                                    "",
-                                    java.sql.Date.valueOf(ur.getBirth()))
-                            );
-                            ManageClientThread.addClientThread(account_id, scct);
+                            ServerConClientThread scct = new ServerConClientThread(s, havedb ? Account.login(ur.getUsername(), ur.getEncryptedPassword()) : ret);
+                            if (havedb == true) {
+                                int account_id = Account.login(ur.getUsername(), ur.getEncryptedPassword());
+                                java.sql.Date bir = null;
+                                if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
+                                QQUser.insertUser(new QQUser(account_id, ur.getUsername(), ur.getPhone(), ur.getEmail(), "", bir));
+                                ManageClientThread.addClientThread(account_id, scct);
+                            } else {
+                                java.sql.Date bir = null;
+                                if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
+                                db.insert(ret, ur.getUsername(), ur.getPhone(), ur.getEmail(), bir);
+                                ManageClientThread.addClientThread(ret, scct);
+                            }
                             scct.start();
                             break;
                         }
                     } else if (u instanceof UserLogin) { // 登录用户
                         UserLogin ul = (UserLogin) u;
-                        int account_id = Account.login(ul.getUsername(), ul.getEncryptedPassword());
-                        //int account_id = -1;
-                        if (account_id != -1 && ManageClientThread.getClientThread(account_id) != null) {
+                        int account_id = 0;
+                        if (havedb == true) account_id = Account.login(ul.getUsername(), ul.getEncryptedPassword());
+                            else account_id = db.find(ul.getUsername(), ul.getEncryptedPassword());
+                        System.out.println("登录的 account_id 为 "+account_id);
+                        if (account_id == -1 || account_id == -2) {
+                            // 密码错了或者用户不存在
+                            System.out.println("登录失败");
+                            oos.writeObject(new Message(MessageType.LOGIN_FAILED));
+                        } else if (ManageClientThread.getClientThread(account_id) != null) {
                             // 已经登录
                             System.out.println("登录失败");
                             oos.writeObject(new Message(MessageType.ALREADY_LOGIN));
-                            //s.close();
-                        } else if (account_id != -1 && ManageClientThread.getClientThread(account_id) == null) {
+                        } else if (ManageClientThread.getClientThread(account_id) == null) {
                             // 登录成功
                             System.out.println("登录成功");
                             oos.writeObject(new Message(MessageType.LOGIN_SUCCEED));
-                            ServerConClientThread scct = new ServerConClientThread(s);
+                            ServerConClientThread scct = new ServerConClientThread(s, account_id);
                             ManageClientThread.addClientThread(account_id, scct);
                             scct.start();
                             break;
-                        } else {
-                            // 登录失败
-                            System.out.println("登录失败");
-                            oos.writeObject(new Message(MessageType.LOGIN_FAILED));
-                            //s.close();
                         }
                     }
                 }

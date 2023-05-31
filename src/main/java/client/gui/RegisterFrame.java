@@ -115,7 +115,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
       if (message == null) {
         JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
-        // TODO: 获取好友列表并进入主界面
+        new MainFrame();
+        SocialApp.writeObject(new Message(MessageType.GET_FRIENDS));
+        dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
         JOptionPane.showMessageDialog(this, "用户名已存在", "错误", JOptionPane.ERROR_MESSAGE);
       } else {
