@@ -2,8 +2,8 @@ package common;
 
 import java.time.LocalDateTime;
 
-public class UserMessage implements java.io.Serializable {
-  private static final long serialVersionUID = 1L;
+public class UserMessage implements java.io.Serializable, Comparable<UserMessage> {
+  private static final long serialVersionUID = 2L;
 
   private int senderUid, receiverUid;
   private LocalDateTime sendTime;
@@ -46,5 +46,10 @@ public class UserMessage implements java.io.Serializable {
 
   public void setText(String text) {
     this.text = text;
+  }
+
+  @Override
+  public int compareTo(UserMessage o) {
+    return sendTime.compareTo(o.sendTime);
   }
 }
