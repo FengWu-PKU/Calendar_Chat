@@ -9,10 +9,10 @@ public class Message {
 
     static final int MAXMESSAGENUM=50;
 
-    int sender_id;
-    int receiver_id;
-    Timestamp date_t;
-    String content;
+    public int sender_id;
+    public int receiver_id;
+    public Timestamp date_t;
+    public String content;
     Boolean read_t;
     int account_id;
 
@@ -74,7 +74,7 @@ public class Message {
     }
 
     /*user_id(a)打开和friend_id(b)的聊天窗口，将b发给a的所有消息已读*/
-    static void readMsg(int user_id, int friend_id) {
+    static public void readMsg(int user_id, int friend_id) {
         try(Connection connection=DriverManager.getConnection(url, username,password)) {
             String sql="UPDATE message SET read_t=TRUE WHERE account_id=? AND sender_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
@@ -88,7 +88,7 @@ public class Message {
     }
 
     /*user_id查看friend_id发送给自己的所有消息*/
-    static Message[] receiveMsg(int user_id, int friend_id) {
+    static public Message[] receiveMsg(int user_id, int friend_id) {
         try(Connection connection=DriverManager.getConnection(url, username,password)) {
             if(QQUser.getUserByAccountID(user_id)==null||QQUser.getUserByAccountID(friend_id)==null) {
                 return null;  // 发送方或接收方不存在
