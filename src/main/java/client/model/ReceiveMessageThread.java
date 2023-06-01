@@ -5,6 +5,9 @@ import client.gui.*;
 import common.*;
 
 import javax.swing.*;
+
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+
 import java.util.ArrayList;
 
 public class ReceiveMessageThread extends Thread {
@@ -36,11 +39,10 @@ public class ReceiveMessageThread extends Thread {
           ChatFrame chatFrame = FrameManager.getChatFrame(uid);
           if (chatFrame != null) {
             chatFrame.addMessage(userMessage);
-            chatFrame.setState(JFrame.NORMAL);
-            chatFrame.toFront();
-            // TODO: 发送
+            FrameManager.getMainFrame().addMessage(userMessage, true);
+            // TODO: 发送消息已读给服务器
           } else {
-            // TODO: 更新
+            FrameManager.getMainFrame().addMessage(userMessage, false);
           }
         });
       }
