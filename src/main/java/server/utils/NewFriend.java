@@ -76,7 +76,7 @@ public class NewFriend {
 
     /*成功删除返回0
     * 条目不存在返回-1*/
-    static int deleteEntry(NewFriend f) {
+    static public int deleteEntry(NewFriend f) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT * FROM new_friend WHERE sender_id=? AND receiver_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

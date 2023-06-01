@@ -127,13 +127,13 @@ public class ServerConClientThread {
         return true;
     }
 
-    void SendToB(String Busrname) throws IOException {
+    void SendToB(String Busrname) throws IOException { //account_id 发送好友申请给 B
         int B = Account.getIDByUsername(Busrname);
         System.out.println("发送好友申请给 "+B);
         ServerConClientThread sB = ManageClientThread.getClientThread(B);
         if (sB != null) {
             ObjectOutputStream oos = new ObjectOutputStream(sB.s.getOutputStream());
-            //to do...
+            //TO DO...
             System.out.println("好友申请发送成功");
         } else {
             System.out.println(B+" 不在线");
@@ -152,6 +152,27 @@ public class ServerConClientThread {
         oos.writeObject(new Message(MessageType.REQUEST_LIST, FRIlist));
     }
 
+    void CreateFriend(UserMessage m) throws IOException { // B 接受了 A 的好友申请
+        int B = m.getSenderUid(), A = m.getReceiverUid();
+        System.out.println(B+" 接受了 "+A+" 的好友申请");
+        assert(NewFriend.deleteEntry(new NewFriend(A, B)) == 0);
+        Friend.insertFriend(new Friend(B, A, ""));
+        Friend.insertFriend(new Friend(A, B, ""));
+        ServerConClientThread sA = ManageClientThread.getClientThread(A);
+        if (sA != null) {
+            ObjectOutputStream oos = new ObjectOutputStream(sA.s.getOutputStream());
+            //TO DO...
+            System.out.println(A+" 将收到 "+B+" 通过他好友申请的消息！");
+        } else {
+            System.out.println(A+" 不在线");
+        }
+    }
+
+    void NotCreateFriend(int A, int B) throws IOException { // B 拒绝了 A 的好友申请
+        System.out.println(B+" 拒绝了 "+A+" 的好友申请");
+        assert(NewFriend.deleteEntry(new NewFriend(A, B)) == 0);
+    }
+
     public void run() {
         try {
             GetMainWindowInfo();
@@ -168,14 +189,17 @@ public class ServerConClientThread {
                     int A = account_id, B = (Integer)m.getContent();
                     GetChatWindowInfo(A, B);
                 } else if (m.getMessageType() == MessageType.CLIENT_SEND_MESSAGE) {
-                    UserMessage m2 = (UserMessage)m.getContent();
-                    SendMessage(m2);
+                    UserMessage tmp = (UserMessage)m.getContent();
+                    if (tmp.getText() == null) CreateFriend(tmp);
+                        else SendMessage(tmp);
                 } else if (m.getMessageType() == MessageType.ALREADY_READ) {
                     AlreadyRead((Integer)m.getContent());
                 } else if (m.getMessageType() == MessageType.ADD_FRIEND_REQUEST) {
                     if (AddFriend(account_id, (String)m.getContent())) SendToB((String)m.getContent());
                 } else if (m.getMessageType() == MessageType.OPEN_REQUESTS_WINDOW) {
                     GetRequestsWindowInfo();
+                } else if (m.getMessageType() == MessageType.REJECT_REQUEST) {
+                    NotCreateFriend((Integer)m.getContent(), account_id);
                 }
             } catch (Exception e){
                 e.printStackTrace();
