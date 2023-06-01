@@ -75,7 +75,7 @@ public class QQUser {
             res2.close();
             stmt2.close();
 
-            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor, date_t) VALUES (?, ?, ?, ?, ?, ?,?,?)";
+            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor, create_time) VALUES (?, ?, ?, ?, ?, ?,?,?)";
             PreparedStatement insertStmt=connection.prepareStatement(insert);
             insertStmt.setString(1, user.usr_name);
             insertStmt.setString(2, user.phonenum);
@@ -170,13 +170,14 @@ public class QQUser {
             ResultSet res=stmt.executeQuery();
             if(!res.next()) return null;
             int acid=res.getInt("account_id");
+            Timestamp dt=res.getTimestamp("create_time");
             String usr_name=res.getString("usr_name");
             String desc=res.getString("descriptor");
             String phonenum=res.getString("phone_num");
             String email=res.getString("email");
             String account_number=res.getString("account_number");
             Date bir=res.getDate("birthday");
-            return new QQUser(acid, usr_name,desc, phonenum, email, account_number, bir);
+            return new QQUser(acid, dt, usr_name,desc, phonenum, email, account_number, bir);
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
