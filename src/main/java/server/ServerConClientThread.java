@@ -35,9 +35,7 @@ public class ServerConClientThread {
                 msglist.add(new UserMessage(i.sender_id, i.receiver_id, i.date_t.toLocalDateTime(), i.content));
             }
         }
-        msglist.sort( (o1,o2) -> {
-            return -o1.getSendTime().compareTo(o2.getSendTime());
-        });
+        msglist.sort( (o1,o2) -> -o1.getSendTime().compareTo(o2.getSendTime()));
         while (msglist.size() > 50) {
             msglist.remove(msglist.size() - 1);
         }
@@ -49,7 +47,6 @@ public class ServerConClientThread {
         Friend[] fri = Friend.findAllFriends(account_id);
         ArrayList<common.FriendItem> list = new ArrayList<>();
         for (Friend i : fri) if (i != null) {
-            QQUser tmp = QQUser.getUserByAccountID(i.friend_id);
             ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(account_id, i.friend_id);
             if (msglist.isEmpty()) {
                 list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id), i.friend_nickname,
@@ -100,7 +97,7 @@ public class ServerConClientThread {
         server.utils.Message.readMsg(id, account_id);
     }
 
-    boolean AddFriend(int A,String Busrname) throws IOException { // A 申请加 B 的好友
+    boolean AddFriend(int A, String Busrname) throws IOException { // A 申请加 B 的好友
         System.out.println("用户 "+A+" 申请添加 "+Busrname+" 的好友");
         int B = Account.getIDByUsername(Busrname);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
@@ -130,11 +127,20 @@ public class ServerConClientThread {
         return true;
     }
 
-    void SendToB() {
-
+    void SendToB(String Busrname) throws IOException {
+        int B = Account.getIDByUsername(Busrname);
+        System.out.println("发送好友申请给 "+B);
+        ServerConClientThread sB = ManageClientThread.getClientThread(B);
+        if (sB != null) {
+            ObjectOutputStream oos = new ObjectOutputStream(sB.s.getOutputStream());
+            //to do...
+            System.out.println("好友申请发送成功");
+        } else {
+            System.out.println(B+" 不在线");
+        }
     }
 
-    void GetRequestsWindowInfo() throws IOException{
+    void GetRequestsWindowInfo() throws IOException {
         System.out.println(account_id+" 请求好友申请页面信息");
         ArrayList<FriendRequestItem> FRIlist = new ArrayList<>();
         NewFriend[] nf = NewFriend.receivedNewFriend(account_id);
@@ -167,7 +173,7 @@ public class ServerConClientThread {
                 } else if (m.getMessageType() == MessageType.ALREADY_READ) {
                     AlreadyRead((Integer)m.getContent());
                 } else if (m.getMessageType() == MessageType.ADD_FRIEND_REQUEST) {
-                    if (AddFriend(account_id, (String)m.getContent())) SendToB();
+                    if (AddFriend(account_id, (String)m.getContent())) SendToB((String)m.getContent());
                 } else if (m.getMessageType() == MessageType.OPEN_REQUESTS_WINDOW) {
                     GetRequestsWindowInfo();
                 }
