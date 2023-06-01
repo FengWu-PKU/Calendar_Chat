@@ -8,6 +8,7 @@ public class QQUser {
     static String password = ServerInfo.password;
 
     int account_id;
+    Timestamp date_t;
     public String usr_name;
     public String descriptor;
     public String phonenum;
@@ -17,6 +18,7 @@ public class QQUser {
 
     public QQUser(int account_id, String usr_name, String phonenum, String email, String account_number, Date birthday) {
         this.account_id = account_id;
+        this.date_t=null;
         this.usr_name = usr_name;
         this.descriptor=null;
         this.phonenum = phonenum;
@@ -27,6 +29,18 @@ public class QQUser {
 
     public QQUser(int account_id, String usr_name, String descriptor, String phonenum, String email, String account_number, Date birthday) {
         this.account_id = account_id;
+        this.date_t=null;
+        this.usr_name = usr_name;
+        this.descriptor = descriptor;
+        this.phonenum = phonenum;
+        this.email = email;
+        this.account_number = account_number;
+        this.birthday = birthday;
+    }
+
+    public QQUser(int account_id, Timestamp date_t, String usr_name, String descriptor, String phonenum, String email, String account_number, Date birthday) {
+        this.account_id = account_id;
+        this.date_t = date_t;
         this.usr_name = usr_name;
         this.descriptor = descriptor;
         this.phonenum = phonenum;
@@ -61,7 +75,7 @@ public class QQUser {
             res2.close();
             stmt2.close();
 
-            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor) VALUES (?, ?, ?, ?, ?, ?,?)";
+            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor, date_t) VALUES (?, ?, ?, ?, ?, ?,?)";
             PreparedStatement insertStmt=connection.prepareStatement(insert);
             insertStmt.setString(1, user.usr_name);
             insertStmt.setString(2, user.phonenum);

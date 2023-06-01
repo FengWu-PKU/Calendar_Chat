@@ -20,4 +20,11 @@ class QQUserTest {
         assert(QQUser.deleteUser(1)==0);
         assert(QQUser.deleteUser(1)==-1);
     }
+
+    @Test
+    void getUserByAccountID() {
+        QQUser u=QQUser.getUserByAccountID(14);
+        assert u!=null;
+        //System.out.println(u.usr_name);
+    }
 }
