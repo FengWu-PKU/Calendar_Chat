@@ -32,6 +32,9 @@ public class ButtonsPanel extends JPanel {
     addFriendButton.addActionListener((e) -> {
       FrameManager.createAddFriendFrame();
     });
+    friendRequestsButton.addActionListener((e) -> {
+      FrameManager.createFriendRequestsFrame();
+    });
   }
 
   /**

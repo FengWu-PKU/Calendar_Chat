@@ -21,9 +21,9 @@ public class AddFriendFrame extends JFrame implements ActionListener {
     setTitle("添加好友");
     setSize(300, 140);
     setResizable(false);
+    setLocationRelativeTo(FrameManager.getMainFrame());
 
     // 窗口布局
-    setLocationRelativeTo(FrameManager.getMainFrame());
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout());

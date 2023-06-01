@@ -6,8 +6,11 @@ import common.*;
 
 import javax.swing.*;
 
+import java.util.ArrayList;
+
 public class ReceiveMessageThread extends Thread {
   @Override
+  @SuppressWarnings("unchecked")
   public void run() {
     while (true) {
       Message message = (Message) SocialApp.readObject();
@@ -27,7 +30,7 @@ public class ReceiveMessageThread extends Thread {
         SwingUtilities.invokeLater(() -> {
           ChatFrame chatFrame = FrameManager.getChatFrame(uid);
           if (chatFrame != null) {
-            chatFrame.update(info);
+            chatFrame.updateInfo(info);
           }
         });
       } else if (message.getMessageType() == MessageType.SERVER_SEND_MESSAGE) { // 收到新消息
@@ -58,6 +61,14 @@ public class ReceiveMessageThread extends Thread {
             JOptionPane.showMessageDialog(addFriendFrame, "该用户已经是你的好友", "错误", JOptionPane.ERROR_MESSAGE);
           } else if (result == 3) {
             JOptionPane.showMessageDialog(addFriendFrame, "该用户已经申请你为好友", "错误", JOptionPane.ERROR_MESSAGE);
+          }
+        });
+      } else if (message.getMessageType() == MessageType.REQUEST_LIST) {
+        ArrayList<FriendRequestItem> requestList = (ArrayList<FriendRequestItem>) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          FriendRequestsFrame friendRequestsFrame = FrameManager.getFriendRequestsFrame();
+          if (friendRequestsFrame != null) {
+            friendRequestsFrame.updateRequestList(requestList);
           }
         });
       }

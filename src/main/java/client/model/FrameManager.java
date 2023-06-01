@@ -69,4 +69,27 @@ public class FrameManager {
   public static AddFriendFrame getAddFriendFrame() {
     return addFriendFrame;
   }
+
+  // 好友申请窗口
+  private static FriendRequestsFrame friendRequestsFrame;
+
+  public static void createFriendRequestsFrame() {
+    if (friendRequestsFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        friendRequestsFrame.setState(JFrame.NORMAL);
+        friendRequestsFrame.toFront();
+      });
+    } else {
+      friendRequestsFrame = new FriendRequestsFrame();
+      SocialApp.writeObject(new Message(MessageType.OPEN_REQUESTS_WINDOW));
+    }
+  }
+
+  public static void removeFriendRequestsFrame() {
+    friendRequestsFrame = null;
+  }
+
+  public static FriendRequestsFrame getFriendRequestsFrame() {
+    return friendRequestsFrame;
+  }
 }
