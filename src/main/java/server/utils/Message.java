@@ -117,6 +117,38 @@ public class Message {
         }
     }
 
+    /*user_id查看自己发送给friend_id的所有消息*/
+    static public Message[] selfSendMsg(int user_id, int friend_id) {
+        try(Connection connection=DriverManager.getConnection(url, username,password)) {
+            if(QQUser.getUserByAccountID(user_id)==null||QQUser.getUserByAccountID(friend_id)==null) {
+                return null;  // 发送方或接收方不存在
+            }
+            String sql="SELECT * FROM message WHERE account_id=? AND receiver_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1, user_id);
+            stmt.setInt(2,friend_id);
+            ResultSet res=stmt.executeQuery();
+            Message[] ans=new Message[MAXMESSAGENUM];
+            int cnt=0;
+            while(res.next()) {
+                int si=res.getInt("sender_id");
+                int ri=res.getInt("receiver_id");
+                Timestamp dt=res.getTimestamp("date_t");
+                String content=res.getString("content");
+                Boolean read_t=res.getBoolean("read_t");
+                int acid=res.getInt("account_id");
+                Message cur=new Message(si, ri, dt, content, read_t, acid);
+                ans[cnt++]=cur;
+                if(cnt>=MAXMESSAGENUM) break;
+            }
+            return ans;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     /*获得未读消息数*/
     static int unreadMsgNum(int user_id, int friend_id) {
         Message[] msgs=receiveMsg(user_id, friend_id);
