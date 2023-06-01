@@ -100,6 +100,30 @@ public class ServerConClientThread {
         server.utils.Message.readMsg(id, account_id);
     }
 
+    void AddFriend(int A,String Busrname) throws IOException { // A 申请加 B 的好友
+        System.out.println("用户 "+A+" 申请添加 "+Busrname+" 的好友");
+        int B = Account.getIDByUsername(Busrname);
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        if (B == -1) {
+            System.out.println("该用户名不存在");
+            oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, -1));
+            return;
+        }
+        if (Friend.CheckAlreadyFriend(A, B)) {
+            System.out.println("已经是好友");
+            oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 2));
+            return;
+        }
+        if (NewFriend.CheckFriendRequest(A, B)) {
+            System.out.println("好友申请已经发过了");
+            oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 0));
+            return;
+        }
+        System.out.println("好友申请可以发！");
+        oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 1));
+        NewFriend.insertEntry(new NewFriend(A, B));
+    }
+
     public void run() {
         try {
             GetMainWindowInfo();
@@ -120,6 +144,8 @@ public class ServerConClientThread {
                     SendMessage(m2);
                 } else if (m.getMessageType() == MessageType.ALREADY_READ) {
                     AlreadyRead((Integer)m.getContent());
+                } else if (m.getMessageType() == MessageType.ADD_FRIEND_REQUEST) {
+                    AddFriend(account_id, (String)m.getContent());
                 }
             } catch (Exception e){
                 e.printStackTrace();

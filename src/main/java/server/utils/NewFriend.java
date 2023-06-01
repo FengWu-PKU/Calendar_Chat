@@ -29,7 +29,7 @@ public class NewFriend {
     /*插入新的条目
     * 如果已经有了，返回-1
     * 成功插入返回0*/
-    static int insertEntry(NewFriend f) {
+    static public int insertEntry(NewFriend f) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String check="SELECT * FROM new_friend WHERE sender_id=? AND receiver_id=?";
             PreparedStatement checkstmt=connection.prepareStatement(check);
@@ -56,6 +56,24 @@ public class NewFriend {
             throw new RuntimeException(e);
         }
     }
+
+    /* 查询 A 申请加 B 的好友这条申请是否存在*/
+    static public boolean CheckFriendRequest(int A, int B) {
+        try(Connection connection=DriverManager.getConnection(url, username, password)) {
+            String check="SELECT * FROM new_friend WHERE sender_id=? AND receiver_id=?";
+            PreparedStatement checkstmt=connection.prepareStatement(check);
+            checkstmt.setInt(1,A);
+            checkstmt.setInt(2,B);
+            ResultSet res=checkstmt.executeQuery();
+            boolean ret = res.next();
+            res.close();
+            checkstmt.close();
+            return ret;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /*成功删除返回0
     * 条目不存在返回-1*/
     static int deleteEntry(NewFriend f) {

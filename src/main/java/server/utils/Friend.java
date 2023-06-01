@@ -37,6 +37,8 @@ public class Friend {
             stmt.setInt(2, friend.friend_id);
             ResultSet res=stmt.executeQuery();
             if(res.next()) {  // 已经存在好友关系
+                res.close();
+                stmt.close();
                 return -1;
             }
             res.close();
@@ -50,6 +52,23 @@ public class Friend {
             insertStmt.executeUpdate();
             insertStmt.close();
             return 0;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*A 和 B 是否已经是好友*/
+    static public boolean CheckAlreadyFriend(int A, int B) {
+        try (Connection connection=DriverManager.getConnection(url, username,password)){
+            String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1, A);
+            stmt.setInt(2, B);
+            ResultSet res=stmt.executeQuery();
+            boolean ret = res.next();
+            res.close();
+            stmt.close();
+            return ret;
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
