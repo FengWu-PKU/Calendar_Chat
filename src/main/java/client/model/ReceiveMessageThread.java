@@ -38,7 +38,7 @@ public class ReceiveMessageThread extends Thread {
           if (chatFrame != null) { // 如果窗口已打开，则更新窗口并标记为已读
             chatFrame.addMessage(userMessage);
             FrameManager.getMainFrame().addMessage(userMessage, true);
-            SocialApp.writeObject(new Message(MessageType.ALREADY_READ, null));
+            SocialApp.writeObject(new Message(MessageType.ALREADY_READ, uid));
           } else { // 否则只更新主界面
             FrameManager.getMainFrame().addMessage(userMessage, false);
           }
