@@ -93,10 +93,11 @@ public class Message {
             if(QQUser.getUserByAccountID(user_id)==null||QQUser.getUserByAccountID(friend_id)==null) {
                 return null;  // 发送方或接收方不存在
             }
-            String sql="SELECT * FROM message WHERE account_id=? AND sender_id=?";
+            String sql="SELECT * FROM message WHERE account_id=? AND sender_id=? ORDER BY date_t DESC LIMIT ?";
             PreparedStatement stmt=connection.prepareStatement(sql);
             stmt.setInt(1, user_id);
             stmt.setInt(2,friend_id);
+            stmt.setInt(3, MAXMESSAGENUM);
             ResultSet res=stmt.executeQuery();
             Message[] ans=new Message[MAXMESSAGENUM];
             int cnt=0;
@@ -123,10 +124,11 @@ public class Message {
             if(QQUser.getUserByAccountID(user_id)==null||QQUser.getUserByAccountID(friend_id)==null) {
                 return null;  // 发送方或接收方不存在
             }
-            String sql="SELECT * FROM message WHERE account_id=? AND receiver_id=?";
+            String sql="SELECT * FROM message WHERE account_id=? AND receiver_id=? ORDER BY date_t DESC LIMIT ?";
             PreparedStatement stmt=connection.prepareStatement(sql);
             stmt.setInt(1, user_id);
             stmt.setInt(2,friend_id);
+            stmt.setInt(3,MAXMESSAGENUM);
             ResultSet res=stmt.executeQuery();
             Message[] ans=new Message[MAXMESSAGENUM];
             int cnt=0;
