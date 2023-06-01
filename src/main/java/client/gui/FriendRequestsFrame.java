@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class FriendRequestsFrame extends JFrame {
   private ArrayList<FriendRequestItem> requestList = new ArrayList<>();
   private FriendRequestsPanel friendRequestsPanel = new FriendRequestsPanel();
-  
+
   public FriendRequestsFrame() {
     // 窗口设置
     setTitle("好友申请");
@@ -43,5 +43,23 @@ public class FriendRequestsFrame extends JFrame {
   public void updateRequestList(ArrayList<FriendRequestItem> requestList) {
     friendRequestsPanel.updateRequestList(requestList);
     this.requestList = requestList;
+  }
+
+  /**
+   * 删除一个好友申请
+   * @param request 要删除的好友申请
+   */
+  public void removeRequest(FriendRequestItem request) {
+    requestList.remove(request);
+    friendRequestsPanel.updateRequestList(requestList);
+  }
+
+  /**
+   * 增加一个好友申请
+   * @param request 要增加的好友申请
+   */
+  public void addRequest(FriendRequestItem request) {
+    requestList.remove(request);
+    friendRequestsPanel.updateRequestList(requestList);
   }
 }

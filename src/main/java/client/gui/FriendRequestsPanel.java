@@ -1,11 +1,14 @@
 package client.gui;
 
+import client.SocialApp;
+import client.model.FrameManager;
 import common.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -14,13 +17,13 @@ import java.util.ArrayList;
 public class FriendRequestsPanel extends JPanel {
   // 单个好友申请条目
   private class RequestItemPanel extends JPanel implements ActionListener {
-    private int uid;
+    private FriendRequestItem request;
     private JLabel nameLabel;
     private JButton acceptButton = new JButton("同意");
     private JButton rejectButton = new JButton("拒绝");
 
     public RequestItemPanel(FriendRequestItem request) {
-      uid = request.getUid();
+      this.request = request;
 
       // 设置组件大小和布局
       setMaximumSize(new Dimension(this.getMaximumSize().width, 60));
@@ -55,13 +58,17 @@ public class FriendRequestsPanel extends JPanel {
       rejectButton.addActionListener(this);
     }
 
-    public int getUid() {
-      return uid;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-      // TODO Auto-generated method stub
+      int uid = request.getUid();
+      if (e.getSource() == acceptButton) {
+        UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), null);
+        SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
+        FrameManager.getMainFrame().addMessage(message, true);
+      } else {
+        SocialApp.writeObject(new Message(MessageType.REJECT_REQUEST, uid));
+      }
+      FrameManager.getFriendRequestsFrame().removeRequest(request);
     }
   }
 
