@@ -86,11 +86,6 @@ public enum MessageType {
   OPEN_REQUESTS_WINDOW,
 
   /**
-   * 同意好友申请 content: Integer = uid
-   */
-  ACCEPT_REQUEST,
-
-  /**
    * 拒绝好友申请 content: Integer = uid
    */
   REJECT_REQUEST,
