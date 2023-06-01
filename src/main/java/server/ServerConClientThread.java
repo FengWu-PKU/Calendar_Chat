@@ -119,6 +119,11 @@ public class ServerConClientThread {
             oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 0));
             return;
         }
+        if (NewFriend.CheckFriendRequest(B, A)) {
+            System.out.println(A+" 还没处理 "+" B "+" 的好友申请");
+            oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 3));
+            return;
+        }
         System.out.println("好友申请可以发！");
         oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 1));
         NewFriend.insertEntry(new NewFriend(A, B));
