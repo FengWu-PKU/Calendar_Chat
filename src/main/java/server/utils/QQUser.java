@@ -75,7 +75,7 @@ public class QQUser {
             res2.close();
             stmt2.close();
 
-            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor, date_t) VALUES (?, ?, ?, ?, ?, ?,?)";
+            String insert="INSERT INTO qq_user(usr_name, phone_num, email, account_number, birthday, account_id, descriptor, date_t) VALUES (?, ?, ?, ?, ?, ?,?,?)";
             PreparedStatement insertStmt=connection.prepareStatement(insert);
             insertStmt.setString(1, user.usr_name);
             insertStmt.setString(2, user.phonenum);
@@ -84,6 +84,7 @@ public class QQUser {
             insertStmt.setDate(5, user.birthday);
             insertStmt.setInt(6,user.account_id);
             insertStmt.setString(7, user.descriptor);
+            insertStmt.setTimestamp(8,user.date_t);
             insertStmt.executeUpdate();
             insertStmt.close();
             return 0;
