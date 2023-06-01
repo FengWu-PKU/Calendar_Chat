@@ -43,7 +43,7 @@ public class Server {
                 oos.writeObject(new Message(MessageType.LOGIN_SUCCEED, account_id));
                 ServerConClientThread scct = new ServerConClientThread(s, account_id);
                 ManageClientThread.addClientThread(account_id, scct);
-                scct.start();
+                scct.run();
                 return 1;
             }
         }
@@ -67,13 +67,14 @@ public class Server {
                 java.sql.Date bir = null;
                 if (ur.getBirth() != null) bir = java.sql.Date.valueOf(ur.getBirth());
                 if (havedb == true) {
-                    int tmp = QQUser.insertUser(new QQUser(account_id, ur.getName(), ur.getIntro(), ur.getPhone(), ur.getEmail(), ur.getUsername(), bir));
+                    int tmp = QQUser.insertUser(new QQUser(account_id, ur.getName(), ur.getIntro(), ur.getPhone(),
+                            ur.getEmail(), ur.getUsername(), bir));
                     System.out.println("注册结果为 "+tmp);
                 } else {
                     db.insert(account_id, ur.getUsername(), ur.getPhone(), ur.getEmail(), bir);
                 }
                 ManageClientThread.addClientThread(account_id, scct);
-                scct.start();
+                scct.run();
                 return 1;
             }
         }

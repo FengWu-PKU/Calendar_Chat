@@ -71,12 +71,12 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), text);
     SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
     addMessage(message);
+    FrameManager.getMainFrame().addMessage(message, true);
     messageArea.setText("");
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    // TODO: 更新好友列表
     sendMessage();
   }
 

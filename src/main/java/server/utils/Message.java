@@ -152,7 +152,7 @@ public class Message {
 
 
     /*获得未读消息数*/
-    static int unreadMsgNum(int user_id, int friend_id) {
+    static public int unreadMsgNum(int user_id, int friend_id) {
         Message[] msgs=receiveMsg(user_id, friend_id);
         int cnt=0;
         for(Message msg:msgs) {
