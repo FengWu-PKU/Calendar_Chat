@@ -6,20 +6,19 @@ import common.*;
 
 import javax.swing.*;
 
-import java.util.ArrayList;
-
 public class ReceiveMessageThread extends Thread {
   @Override
-  @SuppressWarnings("unchecked")
   public void run() {
     while (true) {
       Message message = (Message) SocialApp.readObject();
       if (message == null) {
         return;
       }
-      if (message.getMessageType() == MessageType.RET_FRIENDS) { // 收到好友列表
+      if (message.getMessageType() == MessageType.MAIN_WINDOW_INFO) { // 收到主窗口信息
+        MainWindowInfo info = (MainWindowInfo) message.getContent();
         SwingUtilities.invokeLater(() -> {
-          FrameManager.getMainFrame().updateFriendList((ArrayList<FriendItem>) message.getContent());
+          FrameManager.getMainFrame().updateFriendList(info.getFriendList());
+          // TODO: 更新好友申请数量
         });
       } else if (message.getMessageType() == MessageType.CHAT_WINDOW_INFO) { // 收到聊天框信息
         ChatWindowInfo info = (ChatWindowInfo) message.getContent();

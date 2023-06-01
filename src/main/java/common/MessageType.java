@@ -33,9 +33,9 @@ public enum MessageType {
   REGISTER_FAILED,
 
   /**
-   * 返回好友列表 content: ArrayList<FriendItem> = friendList
+   * 返回好友列表 content: MainWindowInfo = friendList + numFriendRequests + calenderContents
    */
-  RET_FRIENDS,
+  MAIN_WINDOW_INFO,
 
   /**
    * 返回聊天框需要的信息 content: ChatWindowInfo = historyMessages + personalInfo

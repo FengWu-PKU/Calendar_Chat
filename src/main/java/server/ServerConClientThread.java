@@ -63,7 +63,7 @@ public class ServerConClientThread{
             }
         }
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-        oos.writeObject(new Message(MessageType.RET_FRIENDS, list));
+        oos.writeObject(new Message(MessageType.MAIN_WINDOW_INFO, list));
     }
 
     void GetChatWindowInfo(int A,int B) throws IOException {
