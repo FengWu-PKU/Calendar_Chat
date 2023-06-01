@@ -39,7 +39,7 @@ public class Message {
     * 发送方不存在返回-1
     * 接收方不存在返回-2
     * 正常发送返回0*/
-    static int sendMsg(Message msg) {
+    static public int sendMsg(Message msg) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             if(QQUser.getUserByAccountID(msg.sender_id)==null) {
                 return -1;
