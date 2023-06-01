@@ -5,8 +5,10 @@ import client.model.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class HistoryMessagesPane extends JTextArea {
+  private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private String name;
 
   public HistoryMessagesPane(String name) {
@@ -18,9 +20,9 @@ public class HistoryMessagesPane extends JTextArea {
   private void addMessageWithoutRevalidate(UserMessage message) {
     append("\n");
     if (message.getSenderUid() == FrameManager.getMainFrame().getUid()) {
-      append("你 " + message.getSendTime().toString() + "\n");
+      append("你 " + message.getSendTime().format(formatter) + "\n");
     } else {
-      append(name + " " + message.getSendTime().toString() + "\n");
+      append(name + " " + message.getSendTime().format(formatter) + "\n");
     }
     append(message.getText() + "\n");
   }
