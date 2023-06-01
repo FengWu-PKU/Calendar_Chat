@@ -49,7 +49,7 @@ public enum MessageType {
 
   /**
    * 申请添加好友结果 content: Integer = addFriendResult
-   * -1 未找到用户，0 已经申请过，1 申请成功，2 已经是好友
+   * -1 未找到用户，0 已经申请过，1 申请成功，2 已经是好友，3 对方已经申请你
    */
   ADD_FRIEND_RESULT,
 
