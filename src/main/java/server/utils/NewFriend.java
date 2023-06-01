@@ -14,6 +14,12 @@ public class NewFriend {
 
     static final int MAXNEWFRIEND=20;
 
+    public NewFriend(int sender_id, int receiver_id) {
+        this.date_t=null;
+        this.sender_id = sender_id;
+        this.receiver_id = receiver_id;
+    }
+
     public NewFriend(Timestamp date_t, int sender_id, int receiver_id) {
         this.date_t = date_t;
         this.sender_id = sender_id;
@@ -45,6 +51,34 @@ public class NewFriend {
             insertstmt.setInt(3,f.receiver_id);
             insertstmt.executeUpdate();
             insertstmt.close();
+            return 0;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    /*成功删除返回0
+    * 条目不存在返回-1*/
+    static int deleteEntry(NewFriend f) {
+        try(Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="SELECT * FROM new_friend WHERE sender_id=? AND receiver_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1,f.sender_id);
+            stmt.setInt(2, f.receiver_id);
+            ResultSet res=stmt.executeQuery();
+            if(!res.next()) {
+                res.close();
+                stmt.close();
+                return -1;
+            }
+            res.close();
+            stmt.close();
+
+            String del="DELETE FROM new_friend WHERE sender_id=? AND receiver_id=?";
+            PreparedStatement delstmt=connection.prepareStatement(del);
+            delstmt.setInt(1,f.sender_id);
+            delstmt.setInt(2, f.receiver_id);
+            delstmt.executeUpdate();
+            delstmt.close();
             return 0;
         }catch (SQLException e) {
             throw new RuntimeException(e);
@@ -96,5 +130,6 @@ public class NewFriend {
             throw new RuntimeException(e);
         }
     }
+
 
 }
