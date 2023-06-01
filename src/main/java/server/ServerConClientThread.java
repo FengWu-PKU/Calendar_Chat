@@ -14,7 +14,7 @@ import java.io.*;
 import java.time.*;
 import java.sql.Timestamp;
 
-public class ServerConClientThread{
+public class ServerConClientThread {
     Socket s;
     int account_id;
 
@@ -47,7 +47,7 @@ public class ServerConClientThread{
         return msglist;
     }
 
-    void GetFriendList() throws IOException{
+    void GetFriendList() throws IOException {
         Friend[] fri = Friend.findAllFriends(account_id);
         ArrayList<common.FriendItem> list = new ArrayList<>();
         for (Friend i : fri) if (i != null) {
@@ -95,6 +95,10 @@ public class ServerConClientThread{
         }
     }
 
+    void AlreadyRead(int id) { // id 已读了 account_id 发的所有消息
+        server.utils.Message.readMsg(id, account_id);
+    }
+
     public void run() {
         try {
             GetFriendList();
@@ -113,6 +117,8 @@ public class ServerConClientThread{
                 } else if (m.getMessageType() == MessageType.CLIENT_SEND_MESSAGE) {
                     UserMessage m2 = (UserMessage)m.getContent();
                     SendMessage(m2);
+                } else if (m.getMessageType() == MessageType.ALREADY_READ) {
+                    AlreadyRead((Integer)m.getContent());
                 }
             } catch (Exception e){
                 e.printStackTrace();
