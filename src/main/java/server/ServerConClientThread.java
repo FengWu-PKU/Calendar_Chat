@@ -14,7 +14,7 @@ import java.io.*;
 import java.time.*;
 import java.sql.Timestamp;
 
-public class ServerConClientThread extends Thread {
+public class ServerConClientThread{
     Socket s;
     int account_id;
 
@@ -23,12 +23,44 @@ public class ServerConClientThread extends Thread {
         this.account_id = id;
     }
 
+    ArrayList<UserMessage> GetMessageBetweenAAndB(int A, int B) { // 按照时间排序 只保留时间最近的50条
+        server.utils.Message[] BtoA = server.utils.Message.receiveMsg(A, B);
+        server.utils.Message[] AtoB = server.utils.Message.receiveMsg(B, A);
+        ArrayList<UserMessage> msglist = new ArrayList<>();
+        if (BtoA != null) {
+            for (server.utils.Message i : BtoA) if (i != null) {
+                msglist.add(new UserMessage(i.sender_id, i.receiver_id, i.date_t.toLocalDateTime(), i.content));
+            }
+        }
+        if ((AtoB != null) && (A != B)) {
+            for (server.utils.Message i : AtoB) if (i != null) {
+                msglist.add(new UserMessage(i.sender_id, i.receiver_id, i.date_t.toLocalDateTime(), i.content));
+            }
+        }
+        msglist.sort( (o1,o2) -> {
+            return -o1.getSendTime().compareTo(o2.getSendTime());
+        });
+        while (msglist.size() > 50) {
+            msglist.remove(msglist.size() - 1);
+        }
+        Collections.reverse(msglist);
+        return msglist;
+    }
+
     void GetFriendList() throws IOException{
         Friend[] fri = Friend.findAllFriends(account_id);
         ArrayList<common.FriendItem> list = new ArrayList<>();
-        for (Friend i : fri) if (i != null){
+        for (Friend i : fri) if (i != null) {
             QQUser tmp = QQUser.getUserByAccountID(i.friend_id);
-            list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id)/*i.friend_id的username*/, i.friend_nickname, "", null, 0));
+            ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(account_id, i.friend_id);
+            if (msglist.isEmpty()) {
+                list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id), i.friend_nickname,
+                        "", null, 0));
+            } else {
+                UserMessage las = msglist.get(msglist.size() - 1);
+                list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id), i.friend_nickname,
+                        las.getText(), las.getSendTime(), server.utils.Message.unreadMsgNum(account_id, i.friend_id)));
+            }
         }
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
         oos.writeObject(new Message(MessageType.RET_FRIENDS, list));
@@ -43,24 +75,9 @@ public class ServerConClientThread extends Thread {
             localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             System.out.println(bir);
         }
-        server.utils.Message[] BtoA = server.utils.Message.receiveMsg(A, B);
-        server.utils.Message[] AtoB = server.utils.Message.receiveMsg(B, A);
-        ArrayList<UserMessage> msglist = new ArrayList<>();
-        if (BtoA != null) {
-            for (server.utils.Message i : BtoA) if (i != null) {
-                msglist.add(new UserMessage(i.sender_id, i.receiver_id, i.date_t.toLocalDateTime(), i.content));
-            }
-        }
-        if (AtoB != null) {
-            for (server.utils.Message i : AtoB) if (i != null) {
-                msglist.add(new UserMessage(i.sender_id, i.receiver_id, i.date_t.toLocalDateTime(), i.content));
-            }
-        }
-        msglist.sort( (o1,o2) -> {
-            return o1.getSendTime().compareTo(o2.getSendTime());
-        });
+        ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(A, B);
         ChatWindowInfo cwi = new ChatWindowInfo(B, tmp.usr_name, tmp.phonenum, tmp.email, localbir, tmp.descriptor, msglist);
-        server.utils.Message.receiveMsg(A, B);
+        server.utils.Message.readMsg(A, B);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
         oos.writeObject(new Message(MessageType.CHAT_WINDOW_INFO, cwi));
     }

@@ -43,7 +43,7 @@ public class Server {
                 oos.writeObject(new Message(MessageType.LOGIN_SUCCEED, account_id));
                 ServerConClientThread scct = new ServerConClientThread(s, account_id);
                 ManageClientThread.addClientThread(account_id, scct);
-                scct.start();
+                scct.run();
                 return 1;
             }
         }
@@ -73,7 +73,7 @@ public class Server {
                     db.insert(account_id, ur.getUsername(), ur.getPhone(), ur.getEmail(), bir);
                 }
                 ManageClientThread.addClientThread(account_id, scct);
-                scct.start();
+                scct.run();
                 return 1;
             }
         }
