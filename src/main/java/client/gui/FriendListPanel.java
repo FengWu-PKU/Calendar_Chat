@@ -26,9 +26,9 @@ public class FriendListPanel extends JPanel {
       uid = friend.getUid();
 
       // 设置组件大小和布局
-      setMaximumSize(new Dimension(1000, 60));
-      setPreferredSize(new Dimension(300, 60));
-      setMinimumSize(new Dimension(300, 60));
+      setMaximumSize(new Dimension(this.getMaximumSize().width, 60));
+      setPreferredSize(new Dimension(this.getPreferredSize().width, 60));
+      setMinimumSize(new Dimension(this.getMinimumSize().width, 60));
       setBorder(new EmptyBorder(5, 10, 5, 10));
       GridBagLayout layout = new GridBagLayout();
       GridBagConstraints constraints = new GridBagConstraints();
