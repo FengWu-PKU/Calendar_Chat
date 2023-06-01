@@ -61,7 +61,7 @@ public class Server {
                 //注册成功
                 System.out.println("注册成功");
                 int account_id = havedb ? Account.login(ur.getUsername(), ur.getEncryptedPassword()) : ret;
-                Friend.insertFriend(account_id, account_id, "");
+                Friend.insertFriend(new Friend(account_id, null, account_id, ""));
                 oos.writeObject(new Message(MessageType.REGISTER_SUCCEED, account_id));
                 ServerConClientThread scct = new ServerConClientThread(s, account_id);
                 java.sql.Date bir = null;
