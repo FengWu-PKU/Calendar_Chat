@@ -49,9 +49,14 @@ public enum MessageType {
 
   /**
    * 申请添加好友结果 content: Integer = addFriendResult
-   * -1 未找到用户，0 已经申请过，1 申请成功，2 已经是好友，3 对方已经申请你
+   * <p> -1 未找到用户，0 已经申请过，1 申请成功，2 已经是好友，3 对方已经申请你 </p>
    */
   ADD_FRIEND_RESULT,
+
+  /**
+   * 返回好友申请列表 content: ArrayList<FriendRequestItem> = requestList
+   */
+  REQUEST_LIST,
 
   // 以下为客户端到服务端的消息
 
@@ -73,7 +78,12 @@ public enum MessageType {
   /**
    * 申请添加好友 content: String = username
    */
-  ADD_FRIEND_REQUEST
+  ADD_FRIEND_REQUEST,
+
+  /**
+   * 打开好友申请窗口 content: null
+   */
+  OPEN_REQUESTS_WINDOW,
 
   // TODO: more operations...
 }

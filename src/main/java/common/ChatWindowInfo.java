@@ -3,6 +3,9 @@ package common;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 聊天框所需信息
+ */
 public class ChatWindowInfo implements java.io.Serializable {
   private static final long serialVersionUID = 3L;
 

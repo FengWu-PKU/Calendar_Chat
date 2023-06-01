@@ -2,6 +2,9 @@ package common;
 
 import java.time.LocalDateTime;
 
+/**
+ * 用户之间发送的消息
+ */
 public class UserMessage implements java.io.Serializable, Comparable<UserMessage> {
   private static final long serialVersionUID = 2L;
 

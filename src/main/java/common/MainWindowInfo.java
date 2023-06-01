@@ -2,6 +2,11 @@ package common;
 
 import java.util.ArrayList;
 
+// TODO: 加入日历等信息
+
+/**
+ * 主窗口所需信息
+ */
 public class MainWindowInfo implements java.io.Serializable {
   private static final long serialVersionUID = 1L;
 
