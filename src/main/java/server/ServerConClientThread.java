@@ -100,33 +100,50 @@ public class ServerConClientThread {
         server.utils.Message.readMsg(id, account_id);
     }
 
-    void AddFriend(int A,String Busrname) throws IOException { // A 申请加 B 的好友
+    boolean AddFriend(int A,String Busrname) throws IOException { // A 申请加 B 的好友
         System.out.println("用户 "+A+" 申请添加 "+Busrname+" 的好友");
         int B = Account.getIDByUsername(Busrname);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
         if (B == -1) {
             System.out.println("该用户名不存在");
             oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, -1));
-            return;
+            return false;
         }
         if (Friend.CheckAlreadyFriend(A, B)) {
             System.out.println("已经是好友");
             oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 2));
-            return;
+            return false;
         }
         if (NewFriend.CheckFriendRequest(A, B)) {
             System.out.println("好友申请已经发过了");
             oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 0));
-            return;
+            return false;
         }
         if (NewFriend.CheckFriendRequest(B, A)) {
             System.out.println(A+" 还没处理 "+" B "+" 的好友申请");
             oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 3));
-            return;
+            return false;
         }
         System.out.println("好友申请可以发！");
         oos.writeObject(new Message(MessageType.ADD_FRIEND_RESULT, 1));
         NewFriend.insertEntry(new NewFriend(A, B));
+        return true;
+    }
+
+    void SendToB() {
+
+    }
+
+    void GetRequestsWindowInfo() throws IOException{
+        System.out.println(account_id+" 请求好友申请页面信息");
+        ArrayList<FriendRequestItem> FRIlist = new ArrayList<>();
+        NewFriend[] nf = NewFriend.receivedNewFriend(account_id);
+        for (NewFriend i : nf) if (i != null) {
+            int sender = i.sender_id;
+            FRIlist.add(new FriendRequestItem(sender, Account.getUsernameByID(sender)));
+        }
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        oos.writeObject(new Message(MessageType.REQUEST_LIST, FRIlist));
     }
 
     public void run() {
@@ -150,7 +167,9 @@ public class ServerConClientThread {
                 } else if (m.getMessageType() == MessageType.ALREADY_READ) {
                     AlreadyRead((Integer)m.getContent());
                 } else if (m.getMessageType() == MessageType.ADD_FRIEND_REQUEST) {
-                    AddFriend(account_id, (String)m.getContent());
+                    if (AddFriend(account_id, (String)m.getContent())) SendToB();
+                } else if (m.getMessageType() == MessageType.OPEN_REQUESTS_WINDOW) {
+                    GetRequestsWindowInfo();
                 }
             } catch (Exception e){
                 e.printStackTrace();

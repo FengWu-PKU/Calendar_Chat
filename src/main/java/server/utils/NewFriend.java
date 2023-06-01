@@ -9,8 +9,8 @@ public class NewFriend {
     static String password = ServerInfo.password;
 
     Timestamp date_t;
-    int sender_id;
-    int receiver_id;
+    public int sender_id;
+    public int receiver_id;
 
     static final int MAXNEWFRIEND=20;
 
