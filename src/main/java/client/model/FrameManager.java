@@ -11,9 +11,8 @@ public class FrameManager {
   // 私有方法，确保不被实例化
   private FrameManager() {}
 
+  // 主窗口
   private static MainFrame mainFrame;
-
-  private static HashMap<Integer, ChatFrame> chatFrames = new HashMap<>();
 
   public static void createMainFrame(int uid) {
     assert mainFrame == null;
@@ -24,6 +23,9 @@ public class FrameManager {
   public static MainFrame getMainFrame() {
     return mainFrame;
   }
+
+  // 聊天窗口
+  private static HashMap<Integer, ChatFrame> chatFrames = new HashMap<>();
 
   public static void createChatFrame(int uid, String name) {
     final ChatFrame chatFrame = chatFrames.get(uid);
@@ -38,11 +40,33 @@ public class FrameManager {
     }
   }
 
-  public static ChatFrame removeChatFrame(int uid) {
-    return chatFrames.remove(uid);
+  public static void removeChatFrame(int uid) {
+    chatFrames.remove(uid);
   }
 
   public static ChatFrame getChatFrame(int uid) {
     return chatFrames.get(uid);
+  }
+
+  // 添加好友窗口
+  private static AddFriendFrame addFriendFrame;
+
+  public static void createAddFriendFrame() {
+    if (addFriendFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        addFriendFrame.setState(JFrame.NORMAL);
+        addFriendFrame.toFront();
+      });
+    } else {
+      addFriendFrame = new AddFriendFrame();
+    }
+  }
+
+  public static void removeAddFriendFrame() {
+    addFriendFrame = null;
+  }
+
+  public static AddFriendFrame getAddFriendFrame() {
+    return addFriendFrame;
   }
 }

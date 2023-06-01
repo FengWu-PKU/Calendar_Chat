@@ -1,5 +1,6 @@
 package client.gui;
 
+import client.model.FrameManager;
 import client.utils.*;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class ButtonsPanel extends JPanel {
 
     // 设置监听器
     addFriendButton.addActionListener((e) -> {
-      new AddFriendFrame();
+      FrameManager.createAddFriendFrame();
     });
   }
 

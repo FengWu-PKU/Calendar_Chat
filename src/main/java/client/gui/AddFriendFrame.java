@@ -3,8 +3,7 @@ package client.gui;
 import client.SocialApp;
 import client.model.*;
 import client.utils.*;
-import common.Message;
-import common.MessageType;
+import common.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +19,6 @@ public class AddFriendFrame extends JFrame implements ActionListener {
   public AddFriendFrame() {
     // 窗口设置
     setTitle("添加好友");
-    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setSize(300, 140);
     setResizable(false);
 
@@ -37,6 +35,14 @@ public class AddFriendFrame extends JFrame implements ActionListener {
     // 设置监听器
     addButton.addActionListener(this);
 
+    addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        super.windowClosing(e);
+        FrameManager.removeAddFriendFrame();
+      }
+    });
+
     // 显示界面
     setVisible(true);
   }
@@ -45,11 +51,10 @@ public class AddFriendFrame extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == addButton) {
       String username = usernameField.getText();
-      dispose();
       if (Validators.isValidUsername(username)) {
         SocialApp.writeObject(new Message(MessageType.ADD_FRIEND_REQUEST, username));
       } else {
-        JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "用户名不存在", "错误", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "用户名不存在", "错误", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
