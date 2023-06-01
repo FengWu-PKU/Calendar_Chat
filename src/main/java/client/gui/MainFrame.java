@@ -3,6 +3,7 @@ package client.gui;
 import common.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ public class MainFrame extends JFrame {
   private int uid;
   private ArrayList<FriendItem> friendList = new ArrayList<>();
   private FriendListPanel friendListPanel = new FriendListPanel();
+  private ButtonsPanel buttonsPanel = new ButtonsPanel();
 
   public MainFrame(int uid) {
     this.uid = uid;
@@ -18,11 +20,15 @@ public class MainFrame extends JFrame {
     // 窗口设置
     setTitle("社交日历");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(350, 800);
+    setSize(300, 700);
     setLocationRelativeTo(null);
 
     // 窗口布局
-    add(new JScrollPane(friendListPanel));
+    JPanel sidebar = new JPanel(new BorderLayout());
+    sidebar.add(new JScrollPane(friendListPanel), BorderLayout.CENTER);
+    sidebar.add(buttonsPanel, BorderLayout.SOUTH);
+    
+    add(sidebar);
 
     // 显示界面
     setVisible(true);

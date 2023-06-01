@@ -47,6 +47,12 @@ public enum MessageType {
    */
   SERVER_SEND_MESSAGE,
 
+  /**
+   * 申请添加好友结果 content: Integer = addFriendResult
+   * -1 未找到用户，0 已经申请过，1 申请成功
+   */
+  ADD_FRIEND_RESULT,
+
   // 以下为客户端到服务端的消息
 
   /**
@@ -63,6 +69,11 @@ public enum MessageType {
    * 消息已读 content: Integer = friendUid
    */
   ALREADY_READ,
+
+  /**
+   * 申请添加好友 content: String = username
+   */
+  ADD_FRIEND_REQUEST
 
   // TODO: more operations...
 }
