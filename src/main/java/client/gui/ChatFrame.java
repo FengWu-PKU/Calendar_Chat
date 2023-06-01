@@ -1,16 +1,17 @@
 package client.gui;
 
-import javax.swing.*;
-
+import client.SocialApp;
 import client.model.*;
-import common.ChatWindowInfo;
+import common.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDateTime;
 
 public class ChatFrame extends JFrame implements ActionListener, KeyListener {
   private int uid;
-  private HistoryMessagesPane recordPane = new HistoryMessagesPane();
+  private HistoryMessagesPane recordPane;
   private JTextArea messageArea = new JTextArea();
   private ProfilePane profilePane;
   private JButton sendButton = new JButton("发送");
@@ -29,6 +30,8 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     // 窗口布局
     setLayout(new BorderLayout());
 
+    recordPane = new HistoryMessagesPane(name);
+
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 5));
     buttonPanel.add(new JLabel("按回车发送消息，请使用 Ctrl+Enter 换行。"));
     buttonPanel.add(sendButton);
@@ -39,6 +42,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
     chatPane.setDividerLocation(400);
     add(chatPane, BorderLayout.CENTER);
+
     profilePane = new ProfilePane(name);
     add(new JScrollPane(profilePane), BorderLayout.EAST);
 
@@ -64,12 +68,15 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
       JOptionPane.showMessageDialog(this, "消息不能为空", "错误", JOptionPane.ERROR_MESSAGE);
       return;
     }
-    System.out.println("Send to " + uid + ": " + text);
+    UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), text);
+    SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
+    addMessage(message);
     messageArea.setText("");
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    // TODO: 更新好友列表
     sendMessage();
   }
 
@@ -91,6 +98,14 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
+  }
+
+  /**
+   * 新消息
+   * @param message 新消息
+   */
+  public void addMessage(UserMessage message) {
+    recordPane.addMessage(message);
   }
 
   /**

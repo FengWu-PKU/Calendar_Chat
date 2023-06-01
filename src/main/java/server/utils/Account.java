@@ -68,7 +68,7 @@ public class Account {
     }
 
 
-    static String getUsernameByID(int id) {
+    static public String getUsernameByID(int id) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT email FROM account WHERE id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

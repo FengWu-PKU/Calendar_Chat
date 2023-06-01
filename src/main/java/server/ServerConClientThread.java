@@ -28,7 +28,7 @@ public class ServerConClientThread extends Thread {
         ArrayList<common.FriendItem> list = new ArrayList<>();
         for (Friend i : fri) if (i != null){
             QQUser tmp = QQUser.getUserByAccountID(i.friend_id);
-            list.add(new common.FriendItem(i.friend_id, tmp.usr_name/*i.friend_id的username*/, i.friend_nickname, "", null, 0));
+            list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id)/*i.friend_id的username*/, i.friend_nickname, "", null, 0));
         }
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
         oos.writeObject(new Message(MessageType.RET_FRIENDS, list));
