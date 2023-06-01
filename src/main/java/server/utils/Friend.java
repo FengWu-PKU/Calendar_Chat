@@ -10,6 +10,7 @@ public class Friend {
     static final int MAXFRIENDNUM=100;
 
     int account_id;
+    Timestamp date_t;
     public int friend_id;
     public String friend_nickname;
 
@@ -17,26 +18,35 @@ public class Friend {
         this.account_id = account_id;
         this.friend_id = friend_id;
         this.friend_nickname = friend_nickname;
+        this.date_t=null;
+    }
+
+    public Friend(int account_id, Timestamp date_t, int friend_id, String friend_nickname) {
+        this.account_id = account_id;
+        this.date_t = date_t;
+        this.friend_id = friend_id;
+        this.friend_nickname = friend_nickname;
     }
 
     /*添加好友,已经存在好友关系返回-1，成功插入返回0*/
-    static public int insertFriend(int account_id, int friend_id, String nickname) {
+    static public int insertFriend(Friend friend) {
         try (Connection connection=DriverManager.getConnection(url, username,password)){
             String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
-            stmt.setInt(1, account_id);
-            stmt.setInt(2, friend_id);
+            stmt.setInt(1, friend.account_id);
+            stmt.setInt(2, friend.friend_id);
             ResultSet res=stmt.executeQuery();
             if(res.next()) {  // 已经存在好友关系
                 return -1;
             }
             res.close();
             stmt.close();
-            String insert="INSERT INTO friend(account_id, friend_id, friend_nickname) VALUES (?, ?, ?)";
+            String insert="INSERT INTO friend(account_id, friend_id, friend_nickname, date_t) VALUES (?, ?, ?,?)";
             PreparedStatement insertStmt=connection.prepareStatement(insert);
-            insertStmt.setInt(1, account_id);
-            insertStmt.setInt(2, friend_id);
-            insertStmt.setString(3,nickname);
+            insertStmt.setInt(1, friend.account_id);
+            insertStmt.setInt(2, friend.friend_id);
+            insertStmt.setString(3,friend.friend_nickname);
+            insertStmt.setTimestamp(4, friend.date_t);
             insertStmt.executeUpdate();
             insertStmt.close();
             return 0;
