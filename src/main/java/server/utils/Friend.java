@@ -93,7 +93,8 @@ public class Friend {
                 int acid=res.getInt("account_id");
                 int fid=res.getInt("friend_id");
                 String nn=res.getString("friend_nickname");
-                Friend cur=new Friend(acid, fid, nn);
+                Timestamp t=res.getTimestamp("date_t");
+                Friend cur=new Friend(acid,t, fid, nn);
                 ans[cnt++]=cur;
             }
             return ans;
