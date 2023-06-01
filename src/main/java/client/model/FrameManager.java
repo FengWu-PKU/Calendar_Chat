@@ -4,10 +4,8 @@ import client.SocialApp;
 import client.gui.*;
 import common.*;
 
-import java.awt.Frame;
+import javax.swing.*;
 import java.util.HashMap;
-
-import javax.swing.SwingUtilities;
 
 public class FrameManager {
   // 私有方法，确保不被实例化
@@ -31,7 +29,7 @@ public class FrameManager {
     final ChatFrame chatFrame = chatFrames.get(uid);
     if (chatFrame != null) {
       SwingUtilities.invokeLater(() -> {
-        chatFrame.setState(Frame.NORMAL);
+        chatFrame.setState(JFrame.NORMAL);
         chatFrame.toFront();
       });
     } else {

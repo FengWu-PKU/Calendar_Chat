@@ -4,9 +4,8 @@ import client.SocialApp;
 import client.gui.*;
 import common.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
-
-import javax.swing.SwingUtilities;
 
 public class ReceiveMessageThread extends Thread {
   @Override
@@ -28,6 +27,20 @@ public class ReceiveMessageThread extends Thread {
           ChatFrame chatFrame = FrameManager.getChatFrame(uid);
           if (chatFrame != null) {
             chatFrame.update(info);
+          }
+        });
+      } else if (message.getMessageType() == MessageType.SERVER_SEND_MESSAGE) {
+        UserMessage userMessage = (UserMessage) message.getContent();
+        int uid = userMessage.getSenderUid();
+        SwingUtilities.invokeLater(() -> {
+          ChatFrame chatFrame = FrameManager.getChatFrame(uid);
+          if (chatFrame != null) {
+            chatFrame.addMessage(userMessage);
+            chatFrame.setState(JFrame.NORMAL);
+            chatFrame.toFront();
+            // TODO: 发送
+          } else {
+            // TODO: 更新
           }
         });
       }
