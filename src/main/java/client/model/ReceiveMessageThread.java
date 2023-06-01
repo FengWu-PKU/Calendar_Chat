@@ -16,11 +16,11 @@ public class ReceiveMessageThread extends Thread {
       if (message == null) {
         return;
       }
-      if (message.getMessageType() == MessageType.RET_FRIENDS) {
+      if (message.getMessageType() == MessageType.RET_FRIENDS) { // 收到好友列表
         SwingUtilities.invokeLater(() -> {
           FrameManager.getMainFrame().updateFriendList((ArrayList<FriendItem>) message.getContent());
         });
-      } else if (message.getMessageType() == MessageType.CHAT_WINDOW_INFO) {
+      } else if (message.getMessageType() == MessageType.CHAT_WINDOW_INFO) { // 收到聊天框信息
         ChatWindowInfo info = (ChatWindowInfo) message.getContent();
         int uid = info.getUid();
         SwingUtilities.invokeLater(() -> {
@@ -29,7 +29,7 @@ public class ReceiveMessageThread extends Thread {
             chatFrame.update(info);
           }
         });
-      } else if (message.getMessageType() == MessageType.SERVER_SEND_MESSAGE) {
+      } else if (message.getMessageType() == MessageType.SERVER_SEND_MESSAGE) { // 收到新消息
         UserMessage userMessage = (UserMessage) message.getContent();
         int uid = userMessage.getSenderUid();
         SwingUtilities.invokeLater(() -> {

@@ -96,11 +96,10 @@ public class FriendListPanel extends JPanel {
       }
       this.setBackground(new Color(224, 224, 224));
       mainFriendItemPanel = this;
-      if (e.getClickCount() == 2) {
+      // TODO: 显示日历
+      if (e.getClickCount() == 2) { // 双击打开聊天框
         FrameManager.createChatFrame(uid, nameLabel.getText());
         unreadMessagesLabel.setText("");
-      } else if (e.getClickCount() == 1) {
-        // TODO: 显示日历
       }
     }
 

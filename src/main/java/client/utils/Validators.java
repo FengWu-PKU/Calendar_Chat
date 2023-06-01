@@ -10,7 +10,7 @@ public class Validators {
   /**
    * 用户名不合法时显示的消息
    */
-  public static final String invalidUsernameMessage = "用户名应由 4~16 个英文字母、数字、下划线或减号组成。";
+  public static final String invalidUsernameMessage = "用户名应由 4~16 个英文字母、数字、下划线或减号组成";
 
   /**
    * 判断用户名是否合法
@@ -25,7 +25,7 @@ public class Validators {
   /**
    * 密码不合法时显示的消息
    */
-  public static final String invalidPasswordMessage = "密码应由 8~24 个英文字母、数字或特殊符号组成。";
+  public static final String invalidPasswordMessage = "密码应由 8~24 个英文字母、数字或特殊符号组成";
 
   /**
    * 判断密码是否合法
@@ -40,7 +40,7 @@ public class Validators {
   /**
    * 姓名不合法时显示的消息
    */
-  public static final String invalidNameMessage = "姓名应不超过 20 字符。";
+  public static final String invalidNameMessage = "姓名应不超过 20 字符";
 
   /**
    * 判断姓名是否合法
@@ -54,7 +54,7 @@ public class Validators {
   /**
    * 手机号不合法时显示的消息
    */
-  public static final String invalidPhoneNumberMessage = "手机号格式不合法。";
+  public static final String invalidPhoneNumberMessage = "手机号格式不合法";
 
   /**
    * 判断手机号是否合法
@@ -69,7 +69,7 @@ public class Validators {
   /**
    * 邮箱不合法时显示的消息
    */
-  public static final String invalidEmailMessage = "邮箱格式不合法。";
+  public static final String invalidEmailMessage = "邮箱格式不合法或长度过长";
 
   /**
    * 判断邮箱是否合法
@@ -78,13 +78,13 @@ public class Validators {
    */
   public static boolean isValidEmail(String email) {
     String regex = "^[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+$";
-    return email.matches(regex);
+    return email.length() <= 50 && email.matches(regex);
   }
 
   /**
    * 个人介绍不合法时显示的消息
    */
-  public static final String invalidIntroMessage = "个人介绍应不超过 50 字符。";
+  public static final String invalidIntroMessage = "个人介绍应不超过 50 字符";
 
   /**
    * 判断个人介绍是否合法
@@ -98,10 +98,24 @@ public class Validators {
   /**
    * 确认密码失败时显示的信息
    */
-  public static final String confirmPasswordFailedMessage = "确认密码失败。";
+  public static final String confirmPasswordFailedMessage = "确认密码失败";
 
   /**
    * 生日不合法时显示的信息
    */
-  public static final String invalidBirthMessage = "生日日期应存在且格式为 YYYY-MM-DD。";
+  public static final String invalidBirthMessage = "生日日期应存在且格式为 YYYY-MM-DD";
+
+  /**
+   * 发送消息不合法时显示的消息
+   */
+  public static final String invalidMessageMessage = "消息长度过长";
+
+  /**
+   * 判断发送消息是否合法
+   * @param message 要发送的消息
+   * @return 合法返回 true，否则返回 false
+   */
+  public static boolean isValidMessage(String message) {
+    return 1 <= message.length() && message.length() <= 256;
+  }
 }
