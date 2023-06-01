@@ -1,5 +1,7 @@
 package client.gui;
 
+import client.utils.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,16 +16,29 @@ public class ButtonsPanel extends JPanel {
 
   public ButtonsPanel() {
     // 设置面板布局
-    setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
+    setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
+    changeInfoButton.setPreferredSize(new Dimension(140, changeInfoButton.getPreferredSize().height));
+    addFriendButton.setPreferredSize(new Dimension(140, addFriendButton.getPreferredSize().height));
+    friendRequestsButton.setPreferredSize(new Dimension(140, friendRequestsButton.getPreferredSize().height));
+    createMeetingButton.setPreferredSize(new Dimension(140, createMeetingButton.getPreferredSize().height));
     add(changeInfoButton);
     add(addFriendButton);
     add(friendRequestsButton);
     add(createMeetingButton);
-    setPreferredSize(new Dimension(300, 90));
+    setPreferredSize(new Dimension(350, 90));
 
     // 设置监听器
     addFriendButton.addActionListener((e) -> {
       new AddFriendFrame();
     });
+  }
+
+  /**
+   * 更新好友申请数量
+   * @param num 好友申请数量
+   */
+  public void updateNumFriendRequests(int num) {
+    friendRequestsButton.setText("好友申请" + Converters.requestsToShortText(num));
+    revalidate();
   }
 }

@@ -8,8 +8,7 @@ import common.MessageType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * 添加好友窗口
@@ -21,6 +20,7 @@ public class AddFriendFrame extends JFrame implements ActionListener {
   public AddFriendFrame() {
     // 窗口设置
     setTitle("添加好友");
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setSize(300, 140);
     setResizable(false);
 

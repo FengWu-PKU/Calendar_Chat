@@ -63,4 +63,19 @@ public class Converters {
       return "(99+)";
     }
   }
+
+  /**
+   * 将好友申请数量转换成简短的表示
+   * @param friendRequests 好友申请数量
+   * @return 简短的表示
+   */
+  public static String requestsToShortText(int friendRequests) {
+    if (friendRequests <= 0) {
+      return "";
+    } else if (friendRequests <= 9) {
+      return " (" + String.valueOf(friendRequests) + ")";
+    } else {
+      return " (9+)";
+    }
+  }
 }

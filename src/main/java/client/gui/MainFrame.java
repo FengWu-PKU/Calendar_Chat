@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
     // 窗口设置
     setTitle("社交日历");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(300, 700);
+    setSize(350, 800);
     setLocationRelativeTo(null);
 
     // 窗口布局
@@ -106,10 +106,19 @@ public class MainFrame extends JFrame {
     updateSingleFriend(newFriend);
   }
 
+  /**
+   * 更新好友申请数量
+   * @param num 好友申请数量
+   */
+  public void updateNumFriendRequests(int num) {
+    buttonsPanel.updateNumFriendRequests(num);
+  }
+
   public void test() {
     friendList.add(new FriendItem(1, "Alice", "AAAAAAAAAAAA", "你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa！", LocalDateTime.of(2022, 12, 29, 12, 20), 0));
     friendList.add(new FriendItem(2, "Bob", "B", "Hello!", LocalDateTime.of(2023, 5, 31, 2, 30), 100));
     friendList.add(new FriendItem(3, "John", null, null, LocalDateTime.of(2023, 5, 20, 13, 14), 0));
     updateFriendList(friendList);
+    updateNumFriendRequests(6);
   }
 }
