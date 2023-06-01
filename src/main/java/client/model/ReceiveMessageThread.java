@@ -6,8 +6,6 @@ import common.*;
 
 import javax.swing.*;
 
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
-
 import java.util.ArrayList;
 
 public class ReceiveMessageThread extends Thread {
@@ -37,11 +35,11 @@ public class ReceiveMessageThread extends Thread {
         int uid = userMessage.getSenderUid();
         SwingUtilities.invokeLater(() -> {
           ChatFrame chatFrame = FrameManager.getChatFrame(uid);
-          if (chatFrame != null) {
+          if (chatFrame != null) { // 如果窗口已打开，则更新窗口并标记为已读
             chatFrame.addMessage(userMessage);
             FrameManager.getMainFrame().addMessage(userMessage, true);
-            // TODO: 发送消息已读给服务器
-          } else {
+            SocialApp.writeObject(new Message(MessageType.ALREADY_READ, null));
+          } else { // 否则只更新主界面
             FrameManager.getMainFrame().addMessage(userMessage, false);
           }
         });

@@ -59,5 +59,10 @@ public enum MessageType {
    */
   CLIENT_SEND_MESSAGE,
 
+  /**
+   * 消息已读 content: Integer = friendUid
+   */
+  ALREADY_READ,
+
   // TODO: more operations...
 }
