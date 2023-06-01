@@ -52,7 +52,7 @@ public class NewFriend {
     }
 
     /*查询用户接收到的所有好友申请*/
-    static NewFriend[] receivedNewFriend(int id) {
+    static public NewFriend[] receivedNewFriend(int id) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT * FROM new_friend WHERE receiver_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

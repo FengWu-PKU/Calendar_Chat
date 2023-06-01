@@ -1,11 +1,9 @@
 package server;
 
-import common.Message;
-import common.MessageType;
-import common.ChatWindowInfo;
-import common.UserMessage;
+import common.*;
 import server.utils.Account;
 import server.utils.Friend;
+import server.utils.NewFriend;
 import server.utils.QQUser;
 
 import java.net.*;
@@ -47,7 +45,7 @@ public class ServerConClientThread {
         return msglist;
     }
 
-    void GetFriendList() throws IOException {
+    void GetMainWindowInfo() throws IOException {
         Friend[] fri = Friend.findAllFriends(account_id);
         ArrayList<common.FriendItem> list = new ArrayList<>();
         for (Friend i : fri) if (i != null) {
@@ -62,8 +60,11 @@ public class ServerConClientThread {
                         las.getText(), las.getSendTime(), server.utils.Message.unreadMsgNum(account_id, i.friend_id)));
             }
         }
+        NewFriend[] nf = NewFriend.receivedNewFriend(account_id);
+        int cnt = 0;
+        for (NewFriend i : nf) if (i != null) ++cnt;
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-        oos.writeObject(new Message(MessageType.MAIN_WINDOW_INFO, list));
+        oos.writeObject(new Message(MessageType.MAIN_WINDOW_INFO, new MainWindowInfo(list, cnt)));
     }
 
     void GetChatWindowInfo(int A,int B) throws IOException {
@@ -101,7 +102,7 @@ public class ServerConClientThread {
 
     public void run() {
         try {
-            GetFriendList();
+            GetMainWindowInfo();
         } catch (Exception e){
             e.printStackTrace();
             ManageClientThread.removeClientThread(account_id);
