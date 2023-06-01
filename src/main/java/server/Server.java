@@ -79,9 +79,9 @@ public class Server {
         }
         public void run() {
             try {
-                ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 while (true) {
+                    ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
+                    ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                     Object u = ois.readObject();
                     System.out.println("读入成功");
                     if (u instanceof UserRegister) { // 注册用户
