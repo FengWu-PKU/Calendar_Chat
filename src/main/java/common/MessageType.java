@@ -69,6 +69,11 @@ public enum MessageType {
    */
   ACCEPT_MESSAGE,
 
+  /**
+   * 删除好友 content: Integer = friendUid
+   */
+  SERVER_DELETE_FRIEND,
+
   // 以下为客户端到服务端的消息
 
   /**
@@ -105,6 +110,11 @@ public enum MessageType {
    * 修改好友备注 content: FriendRemark = (uid, remark)
    */
   MODIFY_REMARK,
+
+  /**
+   * 删除好友 content: Integer = friendUid
+   */
+  CLIENT_DELETE_FRIEND,
 
   // TODO: more operations...
 }
