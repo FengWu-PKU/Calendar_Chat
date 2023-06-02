@@ -178,7 +178,22 @@ public class ServerConClientThread {
     }
 
     void ChangeNickName(FriendRemark t) {
+        System.out.println(account_id+" 修改对好友 "+t.getUid()+" 的昵称为 "+t.getRemark());
         Friend.changeNickname(account_id, t.getUid(), t.getRemark());
+    }
+
+    void DeleteFriend(int B) throws IOException {
+        System.out.println(account_id+" 删除了 "+B+" 的好友");
+        Friend.deleteFriend(account_id, B);
+        Friend.deleteFriend(B, account_id);
+        ServerConClientThread sB = ManageClientThread.getClientThread(B);
+        if (sB != null) {
+            System.out.println(B+" 将收到 "+account_id+" 删除他好友的消息！");
+            ObjectOutputStream oos = new ObjectOutputStream(sB.s.getOutputStream());
+            oos.writeObject(new Message(MessageType.SERVER_DELETE_FRIEND, account_id));
+        } else {
+            System.out.println(account_id+" 曾经的好友 "+B+" 不在线");
+        }
     }
 
     public void run() {
@@ -210,6 +225,8 @@ public class ServerConClientThread {
                     NotCreateFriend((Integer)m.getContent(), account_id);
                 } else if (m.getMessageType() == MessageType.MODIFY_REMARK) {
                     ChangeNickName((FriendRemark)m.getContent());
+                } else if (m.getMessageType() == MessageType.CLIENT_DELETE_FRIEND) {
+                    DeleteFriend((Integer)m.getContent());
                 }
             } catch (Exception e){
                 e.printStackTrace();

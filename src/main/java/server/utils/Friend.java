@@ -75,7 +75,7 @@ public class Friend {
     }
 
     /*删除好友关系，不存在返回-1，成功删除返回0*/
-    static int deleteFriend(int account_id, int friend_id) {
+    static public int deleteFriend(int account_id, int friend_id) {
         try (Connection connection=DriverManager.getConnection(url, username,password)){
             String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
