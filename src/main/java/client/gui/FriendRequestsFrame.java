@@ -22,7 +22,8 @@ public class FriendRequestsFrame extends JFrame {
     setSize(300, 600);
     setLocationRelativeTo(FrameManager.getMainFrame());
 
-    add(new JScrollPane(friendRequestsPanel));
+    // 窗口布局
+    setContentPane(new JScrollPane(friendRequestsPanel));
 
     // 设置监听器
     addWindowListener(new WindowAdapter() {

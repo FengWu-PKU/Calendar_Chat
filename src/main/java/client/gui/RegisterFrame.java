@@ -50,6 +50,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
     contentPane.addTextField("生日:", birthField, "选填，格式为YYYY-MM-DD");
     contentPane.addTextField("个人简介:", introField, "选填，不超过50字符");
     contentPane.addComponent(buttonPanel);
+    getRootPane().setDefaultButton(registerAndLoginButton);
 
     // 设置监听器
     registerAndLoginButton.addActionListener(this);

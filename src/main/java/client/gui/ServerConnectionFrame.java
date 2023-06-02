@@ -34,6 +34,7 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
     contentPane.addTextField("服务器地址:", serverAddressField);
     contentPane.addTextField("端口号:", serverPortField);
     contentPane.addComponent(buttonPanel);
+    getRootPane().setDefaultButton(connectButton);
 
     // 设置监听器
     connectButton.addActionListener(this);

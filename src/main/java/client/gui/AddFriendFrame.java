@@ -28,6 +28,7 @@ public class AddFriendFrame extends JFrame implements ActionListener {
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout());
     buttonPanel.add(addButton);
+    getRootPane().setDefaultButton(addButton);
 
     contentPane.addTextField("好友用户名:", usernameField);
     contentPane.addComponent(buttonPanel);

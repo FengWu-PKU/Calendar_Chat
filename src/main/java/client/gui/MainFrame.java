@@ -27,8 +27,7 @@ public class MainFrame extends JFrame {
     JPanel sidebar = new JPanel(new BorderLayout());
     sidebar.add(new JScrollPane(friendListPanel), BorderLayout.CENTER);
     sidebar.add(buttonsPanel, BorderLayout.SOUTH);
-    
-    add(sidebar);
+    getContentPane().add(sidebar);
 
     // 显示界面
     setVisible(true);

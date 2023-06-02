@@ -38,6 +38,7 @@ public class ModifyRemarkFrame extends JFrame implements ActionListener {
 
     contentPane.addTextField("好友备注:", remarkField);
     contentPane.addComponent(buttonPanel);
+    getRootPane().setDefaultButton(modifyButton);
 
     // 设置监听器
     modifyButton.addActionListener(this);

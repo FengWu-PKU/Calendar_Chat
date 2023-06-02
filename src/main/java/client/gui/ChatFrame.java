@@ -42,10 +42,10 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 
     JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
     chatPane.setDividerLocation(400);
-    add(chatPane, BorderLayout.CENTER);
+    getContentPane().add(chatPane, BorderLayout.CENTER);
 
     profilePane = new ProfilePane(name);
-    add(new JScrollPane(profilePane), BorderLayout.EAST);
+    getContentPane().add(new JScrollPane(profilePane), BorderLayout.EAST);
 
     // 设置监听器
     sendButton.addActionListener(this);
