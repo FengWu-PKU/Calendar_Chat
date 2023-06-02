@@ -74,6 +74,11 @@ public enum MessageType {
    */
   SERVER_DELETE_FRIEND,
 
+  /**
+   * 个人资料 content: UserInfo = userInfo
+   */
+  USER_INFO,
+
   // 以下为客户端到服务端的消息
 
   /**
@@ -97,7 +102,7 @@ public enum MessageType {
   ADD_FRIEND_REQUEST,
 
   /**
-   * 打开好友申请窗口 content: null
+   * 打开好友申请窗口 content = null
    */
   OPEN_REQUESTS_WINDOW,
 
@@ -115,6 +120,16 @@ public enum MessageType {
    * 删除好友 content: Integer = friendUid
    */
   CLIENT_DELETE_FRIEND,
+
+  /**
+   * 打开修改资料窗口 content = null
+   */
+  OPEN_MODIFY_WINDOW,
+
+  /**
+   * 修改后的资料 content: UserInfo = newUserInfo
+   */
+  MODIFY_INFO,
 
   // TODO: more operations...
 }
