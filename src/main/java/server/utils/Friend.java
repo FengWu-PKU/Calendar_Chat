@@ -10,7 +10,7 @@ public class Friend {
     static final int MAXFRIENDNUM=100;
 
     int account_id;
-    Timestamp date_t;
+    public Timestamp date_t;
     public int friend_id;
     public String friend_nickname;
 

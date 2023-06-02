@@ -169,7 +169,7 @@ public class Message {
     /*
      * 删除 A 和 B 之间的所有消息
      */
-    static void DeleteMessageAtoB(int A, int B, Connection connection) throws SQLException{
+    static void DeleteMessageAtoB(int A, int B, Connection connection) throws SQLException {
         String sql = "SELECT * FROM message WHERE sender_id=? AND receiver_id=?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, A);

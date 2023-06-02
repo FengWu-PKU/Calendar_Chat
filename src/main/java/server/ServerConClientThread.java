@@ -49,8 +49,10 @@ public class ServerConClientThread {
         for (Friend i : fri) if (i != null) {
             ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(account_id, i.friend_id);
             if (msglist.isEmpty()) {
+                Timestamp tmp = i.date_t;
+                LocalDateTime lastmessagetime = tmp.toLocalDateTime();;
                 list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id), i.friend_nickname,
-                        "", null, 0));
+                        "", lastmessagetime, 0));
             } else {
                 UserMessage las = msglist.get(msglist.size() - 1);
                 list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id), i.friend_nickname,
@@ -158,8 +160,11 @@ public class ServerConClientThread {
         int B = m.getSenderUid(), A = m.getReceiverUid();
         System.out.println(B+" 接受了 "+A+" 的好友申请");
         NewFriend.deleteEntry(new NewFriend(A, B));
-        Friend.insertFriend(new Friend(B, A, ""));
-        Friend.insertFriend(new Friend(A, B, ""));
+        LocalDateTime sendtime = m.getSendTime();
+        Timestamp timestamp = null;
+        if (sendtime != null) timestamp = Timestamp.valueOf(sendtime);
+        Friend.insertFriend(new Friend(B, timestamp, A, ""));
+        Friend.insertFriend(new Friend(A, timestamp, B, ""));
         ServerConClientThread sA = ManageClientThread.getClientThread(A);
         if (sA != null) {
             System.out.println(A+" 将收到 "+B+" 通过他好友申请的消息！");
