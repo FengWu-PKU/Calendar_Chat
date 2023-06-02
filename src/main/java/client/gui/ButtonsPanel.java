@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class ButtonsPanel extends JPanel {
   private int numFriendRequests;
-  private JButton changeInfoButton = new JButton("修改资料");
+  private JButton modifyInfoButton = new JButton("修改资料");
   private JButton addFriendButton = new JButton("添加好友");
   private JButton friendRequestsButton = new JButton("好友申请");
   private JButton createMeetingButton = new JButton("创建会议");
@@ -21,17 +21,20 @@ public class ButtonsPanel extends JPanel {
 
     // 设置面板布局
     setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
-    changeInfoButton.setPreferredSize(new Dimension(140, changeInfoButton.getPreferredSize().height));
+    modifyInfoButton.setPreferredSize(new Dimension(140, modifyInfoButton.getPreferredSize().height));
     addFriendButton.setPreferredSize(new Dimension(140, addFriendButton.getPreferredSize().height));
     friendRequestsButton.setPreferredSize(new Dimension(140, friendRequestsButton.getPreferredSize().height));
     createMeetingButton.setPreferredSize(new Dimension(140, createMeetingButton.getPreferredSize().height));
-    add(changeInfoButton);
+    add(modifyInfoButton);
     add(addFriendButton);
     add(friendRequestsButton);
     add(createMeetingButton);
     setPreferredSize(new Dimension(350, 90));
 
     // 设置监听器
+    modifyInfoButton.addActionListener((e) -> {
+      FrameManager.createModifyInfoFrame();
+    });
     addFriendButton.addActionListener((e) -> {
       FrameManager.createAddFriendFrame();
     });

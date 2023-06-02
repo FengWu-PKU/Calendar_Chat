@@ -54,7 +54,7 @@ public class Validators {
   /**
    * 手机号不合法时显示的消息
    */
-  public static final String invalidPhoneNumberMessage = "手机号格式不合法";
+  public static final String invalidPhoneNumberMessage = "手机号格式不合法或长度过长";
 
   /**
    * 判断手机号是否合法
@@ -63,7 +63,7 @@ public class Validators {
    */
   public static boolean isValidPhoneNumber(String phoneNumber) {
     String regex = "^(\\+\\d{1,3})?\\d{6,}$";
-    return phoneNumber.matches(regex);
+    return phoneNumber.length() <= 20 && phoneNumber.matches(regex);
   }
 
   /**

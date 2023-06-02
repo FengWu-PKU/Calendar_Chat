@@ -44,11 +44,11 @@ public class RegisterFrame extends JFrame implements ActionListener {
     contentPane.addTextField("用户名:", usernameField);
     contentPane.addTextField("密码:", passwordField);
     contentPane.addTextField("确认密码:", confirmPasswordField);
-    contentPane.addTextField("姓名:", nameField, "选填，不超过20字符");
-    contentPane.addTextField("电话:", phoneField, "选填");
-    contentPane.addTextField("邮箱:", emailField, "选填");
-    contentPane.addTextField("生日:", birthField, "选填，格式为YYYY-MM-DD");
-    contentPane.addTextField("个人简介:", introField, "选填，不超过50字符");
+    contentPane.addTextField("姓名:", nameField, "选填，长度不超过 20");
+    contentPane.addTextField("电话:", phoneField, "选填，长度不超过 20");
+    contentPane.addTextField("邮箱:", emailField, "选填，长度不超过 50");
+    contentPane.addTextField("生日:", birthField, "选填，格式为 YYYY-MM-DD");
+    contentPane.addTextField("个人简介:", introField, "选填，长度不超过 50");
     contentPane.addComponent(buttonPanel);
     getRootPane().setDefaultButton(registerAndLoginButton);
 

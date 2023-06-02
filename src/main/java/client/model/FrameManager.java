@@ -47,6 +47,28 @@ public class FrameManager {
     return chatFrames.get(uid);
   }
 
+  // 修改资料窗口
+  private static ModifyInfoFrame modifyInfoFrame;
+
+  public static void createModifyInfoFrame() {
+    if (modifyInfoFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        modifyInfoFrame.setState(JFrame.NORMAL);
+        modifyInfoFrame.toFront();
+      });
+    } else {
+      modifyInfoFrame = new ModifyInfoFrame();
+    }
+  }
+
+  public static void removeModifyInfoFrame() {
+    modifyInfoFrame = null;
+  }
+
+  public static ModifyInfoFrame getModifyInfoFrame() {
+    return modifyInfoFrame;
+  }
+
   // 添加好友窗口
   private static AddFriendFrame addFriendFrame;
 
