@@ -58,6 +58,12 @@ public enum MessageType {
    */
   REQUEST_LIST,
 
+  /**
+   * 同意申请消息 content: UserMessage = acceptMessage
+   * <p> acceptMessage.text = senderUsername </p>
+   */
+  ACCEPT_MESSAGE,
+
   // 以下为客户端到服务端的消息
 
   /**
