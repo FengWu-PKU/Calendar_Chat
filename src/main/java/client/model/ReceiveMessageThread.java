@@ -52,15 +52,19 @@ public class ReceiveMessageThread extends Thread {
           AddFriendFrame addFriendFrame = FrameManager.getAddFriendFrame();
           if (result == -1) {
             JOptionPane.showMessageDialog(addFriendFrame, "用户名不存在", "错误", JOptionPane.ERROR_MESSAGE);
-          } else if (result == 0) {
-            JOptionPane.showMessageDialog(addFriendFrame, "你已申请过该用户", "错误", JOptionPane.ERROR_MESSAGE);
-          } else if (result == 1) {
-            JOptionPane.showMessageDialog(addFriendFrame, "申请成功，请等待对方同意", "成功",
-                JOptionPane.INFORMATION_MESSAGE);
-          } else if (result == 2) {
-            JOptionPane.showMessageDialog(addFriendFrame, "该用户已经是你的好友", "错误", JOptionPane.ERROR_MESSAGE);
-          } else if (result == 3) {
-            JOptionPane.showMessageDialog(addFriendFrame, "该用户已经申请你为好友", "错误", JOptionPane.ERROR_MESSAGE);
+          } else {
+            if (result == 0) {
+              JOptionPane.showMessageDialog(addFriendFrame, "你已申请过该用户", "错误", JOptionPane.ERROR_MESSAGE);
+            } else if (result == 1) {
+              JOptionPane.showMessageDialog(addFriendFrame, "申请成功，请等待对方同意", "成功",
+                  JOptionPane.INFORMATION_MESSAGE);
+            } else if (result == 2) {
+              JOptionPane.showMessageDialog(addFriendFrame, "该用户已经是你的好友", "错误", JOptionPane.ERROR_MESSAGE);
+            } else if (result == 3) {
+              JOptionPane.showMessageDialog(addFriendFrame, "该用户已经申请你为好友", "错误", JOptionPane.ERROR_MESSAGE);
+            }
+            addFriendFrame.dispose();
+            FrameManager.removeAddFriendFrame();
           }
         });
       } else if (message.getMessageType() == MessageType.REQUEST_LIST) { // 好友申请列表
