@@ -90,6 +90,17 @@ public class ReceiveMessageThread extends Thread {
         SwingUtilities.invokeLater(() -> {
           FrameManager.getMainFrame().addMessage(userMessage, true);
         });
+      } else if (message.getMessageType() == MessageType.SERVER_DELETE_FRIEND) { // 被删除好友
+        int uid = (Integer) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          FrameManager.getMainFrame().deleteFriend(uid);
+          ChatFrame chatFrame = FrameManager.getChatFrame(uid);
+          if (chatFrame != null) { // 如果聊天窗口开着则关闭
+            chatFrame.dispose();
+            FrameManager.removeChatFrame(uid);
+            JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "你被删了，小丑");
+          }
+        });
       }
     }
   }

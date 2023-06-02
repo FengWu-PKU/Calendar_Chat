@@ -113,8 +113,18 @@ public class MainFrame extends JFrame {
     return findFriendItemByUid(friendUid).getRemark();
   }
 
+  /**
+   * 修改好友备注
+   * @param friendUid 好友 uid
+   * @param remark 新备注
+   */
   public void modifyRemark(int friendUid, String remark) {
     findFriendItemByUid(friendUid).setRemark(remark);
+    friendListPanel.updateFriendList(friendList);
+  }
+
+  public void deleteFriend(int friendUid) {
+    friendList.remove(findFriendItemByUid(friendUid));
     friendListPanel.updateFriendList(friendList);
   }
 

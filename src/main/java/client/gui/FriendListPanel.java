@@ -1,6 +1,7 @@
 package client.gui;
 
 import common.*;
+import client.SocialApp;
 import client.model.*;
 import client.utils.*;
 
@@ -82,17 +83,26 @@ public class FriendListPanel extends JPanel {
       add(lastMessageLabel);
       add(unreadMessagesLabel);
 
-      JMenuItem menuItem1 = new JMenuItem("修改备注");
-      JMenuItem menuItem2 = new JMenuItem("删除好友");
+      JMenuItem modifyRemarkItem = new JMenuItem("修改备注");
+      JMenuItem deleteFriendItem = new JMenuItem("删除好友");
       // TODO: 右键菜单样式
-      popupMenu.add(menuItem1);
-      popupMenu.add(menuItem2);
-      menuItem1.addActionListener((e) -> {
-        new ModifyRemarkFrame(uid);
-      });
+      popupMenu.add(modifyRemarkItem);
+      popupMenu.add(deleteFriendItem);
+      modifyRemarkItem.addActionListener((e) -> new ModifyRemarkFrame(uid));
+      deleteFriendItem.addActionListener((e) -> confirmDeleteFriend());
 
       // 设置监听器
       this.addMouseListener(this);
+    }
+
+    private void confirmDeleteFriend() {
+      String message = "确定要删除 " + nameLabel.getText() + " 吗？";
+      int option = JOptionPane.showConfirmDialog(FrameManager.getMainFrame(), message, "警告",
+          JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (option == JOptionPane.OK_OPTION) {
+        SocialApp.writeObject(new Message(MessageType.CLIENT_DELETE_FRIEND, uid));
+        FrameManager.getMainFrame().deleteFriend(uid);
+      }
     }
 
     public int getUid() {
@@ -159,13 +169,21 @@ public class FriendListPanel extends JPanel {
   public void updateFriendList(ArrayList<FriendItem> friendList) {
     removeAll();
     friendList.sort(null);
+    boolean exist = false;
+    FriendItemPanel selfItemPanel = null;
     for (FriendItem friend : friendList) {
       FriendItemPanel friendItemPanel = new FriendItemPanel(friend);
       add(friendItemPanel);
-      if ((mainFriendItemPanel == null && friend.getUid() == FrameManager.getMainFrame().getUid()) ||
-          (mainFriendItemPanel != null && friend.getUid() == mainFriendItemPanel.getUid())) {
-        changeMainItem(friendItemPanel, false);
+      if (friend.getUid() == FrameManager.getMainFrame().getUid()) {
+        selfItemPanel = friendItemPanel;
       }
+      if (mainFriendItemPanel != null && friend.getUid() == mainFriendItemPanel.getUid()) {
+        changeMainItem(friendItemPanel, false);
+        exist = true;
+      }
+    }
+    if (!exist) {
+      changeMainItem(selfItemPanel, mainFriendItemPanel != null);
     }
     repaint();
     revalidate();

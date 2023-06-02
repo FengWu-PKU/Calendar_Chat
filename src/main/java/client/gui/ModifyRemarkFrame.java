@@ -8,7 +8,6 @@ import common.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.rmi.server.UID;
 
 /**
  * 修改备注窗口
