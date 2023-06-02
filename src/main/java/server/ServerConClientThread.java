@@ -186,6 +186,7 @@ public class ServerConClientThread {
         System.out.println(account_id+" 删除了 "+B+" 的好友");
         Friend.deleteFriend(account_id, B);
         Friend.deleteFriend(B, account_id);
+        server.utils.Message.DeleteMessage(account_id, B);
         ServerConClientThread sB = ManageClientThread.getClientThread(B);
         if (sB != null) {
             System.out.println(B+" 将收到 "+account_id+" 删除他好友的消息！");

@@ -166,4 +166,33 @@ public class Message {
 
     /*TODO:本地删除记录功能，函数还没写，感觉参数不好确定，若有必要再写*/
 
+    /*
+     * 删除 A 和 B 之间的所有消息
+     */
+    static void DeleteMessageAtoB(int A, int B, Connection connection) throws SQLException{
+        String sql = "SELECT * FROM message WHERE sender_id=? AND receiver_id=?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, A);
+        stmt.setInt(2, B);
+        ResultSet res = stmt.executeQuery();
+        boolean flag = res.next();
+        res.close();
+        stmt.close();
+        if (flag) {
+            String del = "DELETE FROM message WHERE sender_id=? AND receiver_id=?";
+            PreparedStatement delstmt = connection.prepareStatement(del);
+            delstmt.setInt(1, A);
+            delstmt.setInt(2, B);
+            delstmt.executeUpdate();
+            delstmt.close();
+        }
+    }
+    static public void DeleteMessage(int A, int B) {
+        try (Connection connection=DriverManager.getConnection(url, username, password)) {
+            DeleteMessageAtoB(A, B, connection);
+            DeleteMessageAtoB(B, A, connection);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
