@@ -134,7 +134,8 @@ public class ServerConClientThread {
         ServerConClientThread sB = ManageClientThread.getClientThread(B);
         if (sB != null) {
             ObjectOutputStream oos = new ObjectOutputStream(sB.s.getOutputStream());
-            //TO DO...
+            FriendRequestItem tmp = new FriendRequestItem(account_id, Account.getUsernameByID(account_id));
+            oos.writeObject(new Message(MessageType.NEW_REQUEST, tmp));
             System.out.println("好友申请发送成功");
         } else {
             System.out.println(B+" 不在线");
