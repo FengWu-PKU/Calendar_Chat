@@ -50,7 +50,8 @@ public class ServerConClientThread {
             ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(account_id, i.friend_id);
             if (msglist.isEmpty()) {
                 Timestamp tmp = i.date_t;
-                LocalDateTime lastmessagetime = tmp.toLocalDateTime();;
+                LocalDateTime lastmessagetime = null;
+                if (tmp!=null) lastmessagetime = tmp.toLocalDateTime();
                 list.add(new common.FriendItem(i.friend_id, Account.getUsernameByID(i.friend_id), i.friend_nickname,
                         "", lastmessagetime, 0));
             } else {
