@@ -125,7 +125,7 @@ public class Friend {
     /**更改昵称
      * 好友关系不存在返回-1
      * 成功更改返回0*/
-    static int changeNickname(int account_id, int friend_id, String name) {
+    static public int changeNickname(int account_id, int friend_id, String name) {
         try (Connection connection=DriverManager.getConnection(url, username, password)){
             String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

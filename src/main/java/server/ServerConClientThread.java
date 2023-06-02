@@ -177,6 +177,10 @@ public class ServerConClientThread {
         NewFriend.deleteEntry(new NewFriend(A, B));
     }
 
+    void ChangeNickName(FriendRemark t) {
+        Friend.changeNickname(account_id, t.getUid(), t.getRemark());
+    }
+
     public void run() {
         try {
             GetMainWindowInfo();
@@ -204,6 +208,8 @@ public class ServerConClientThread {
                     GetRequestsWindowInfo();
                 } else if (m.getMessageType() == MessageType.REJECT_REQUEST) {
                     NotCreateFriend((Integer)m.getContent(), account_id);
+                } else if (m.getMessageType() == MessageType.MODIFY_REMARK) {
+                    ChangeNickName((FriendRemark)m.getContent());
                 }
             } catch (Exception e){
                 e.printStackTrace();
