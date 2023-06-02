@@ -45,8 +45,6 @@ public class MainFrame extends JFrame {
   private void preprocessFriendItem(FriendItem friend) {
     if (friend.getUid() == uid) {
       friend.setLastMessageTime(LocalDateTime.of(9999, 12, 31, 23, 59, 59));
-    } else {
-      assert friend.getLastMessageTime() != null;
     }
     if (friend.getLastMessage() == null) {
       friend.setLastMessage("");
@@ -75,21 +73,6 @@ public class MainFrame extends JFrame {
   }
 
   /**
-   * 更新单个好友条目
-   * @param newFriend 新的好友条目
-   */
-  public void updateSingleFriend(FriendItem newFriend) {
-    preprocessFriendItem(newFriend);
-    FriendItem friend = findFriendItemByUid(newFriend.getUid());
-    if (friend == null) {
-      friendList.add(newFriend);
-    } else {
-      friendList.set(friendList.indexOf(friend), newFriend);
-    }
-    friendListPanel.updateFriendList(friendList);
-  }
-
-  /**
    * 新消息
    * @param message 新消息
    * @param isRead 是否已读
@@ -100,10 +83,17 @@ public class MainFrame extends JFrame {
       friendUid = message.getReceiverUid();
     }
     FriendItem friend = findFriendItemByUid(friendUid);
-    int unreadMessages = isRead ? 0 : friend.getUnreadMessages() + 1;
-    FriendItem newFriend = new FriendItem(friendUid, friend.getUsername(), friend.getRemark(), message.getText(),
-        message.getSendTime(), unreadMessages);
-    updateSingleFriend(newFriend);
+    if (friend == null) {
+      friend = new FriendItem(friendUid, message.getText(), null, null, message.getSendTime(), 0);
+      preprocessFriendItem(friend);
+      friendList.add(friend);
+    } else {
+      int unreadMessages = isRead ? 0 : friend.getUnreadMessages() + 1;
+      friend.setLastMessage(message.getText());
+      friend.setLastMessageTime(message.getSendTime());
+      friend.setUnreadMessages(unreadMessages);
+    }
+    friendListPanel.updateFriendList(friendList);
   }
 
   /**

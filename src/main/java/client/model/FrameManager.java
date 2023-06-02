@@ -15,7 +15,6 @@ public class FrameManager {
   private static MainFrame mainFrame;
 
   public static void createMainFrame(int uid) {
-    assert mainFrame == null;
     mainFrame = new MainFrame(uid);
     new ReceiveMessageThread().start();
   }

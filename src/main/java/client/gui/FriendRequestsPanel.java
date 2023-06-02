@@ -64,7 +64,10 @@ public class FriendRequestsPanel extends JPanel {
       if (e.getSource() == acceptButton) {
         UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), null);
         SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
-        FrameManager.getMainFrame().addMessage(message, true);
+        message.setText(nameLabel.getText());
+        SwingUtilities.invokeLater(() -> {
+          FrameManager.getMainFrame().addMessage(message, true);
+        });
       } else {
         SocialApp.writeObject(new Message(MessageType.REJECT_REQUEST, uid));
       }

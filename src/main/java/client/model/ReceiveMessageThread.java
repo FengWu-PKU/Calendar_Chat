@@ -63,13 +63,18 @@ public class ReceiveMessageThread extends Thread {
             JOptionPane.showMessageDialog(addFriendFrame, "该用户已经申请你为好友", "错误", JOptionPane.ERROR_MESSAGE);
           }
         });
-      } else if (message.getMessageType() == MessageType.REQUEST_LIST) {
+      } else if (message.getMessageType() == MessageType.REQUEST_LIST) { // 好友申请列表
         ArrayList<FriendRequestItem> requestList = (ArrayList<FriendRequestItem>) message.getContent();
         SwingUtilities.invokeLater(() -> {
           FriendRequestsFrame friendRequestsFrame = FrameManager.getFriendRequestsFrame();
           if (friendRequestsFrame != null) {
             friendRequestsFrame.updateRequestList(requestList);
           }
+        });
+      } else if (message.getMessageType() == MessageType.ACCEPT_MESSAGE) { // 好友申请同意
+        UserMessage userMessage = (UserMessage) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          FrameManager.getMainFrame().addMessage(userMessage, true);
         });
       }
     }

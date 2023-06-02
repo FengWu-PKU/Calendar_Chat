@@ -4,6 +4,9 @@ import client.model.*;
 import common.*;
 
 import javax.swing.*;
+
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+
 import java.awt.event.*;
 
 import java.util.ArrayList;
@@ -42,6 +45,7 @@ public class FriendRequestsFrame extends JFrame {
    */
   public void updateRequestList(ArrayList<FriendRequestItem> requestList) {
     friendRequestsPanel.updateRequestList(requestList);
+    FrameManager.getMainFrame().updateNumFriendRequests(requestList.size());
     this.requestList = requestList;
   }
 
