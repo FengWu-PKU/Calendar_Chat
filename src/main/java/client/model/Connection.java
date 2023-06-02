@@ -18,7 +18,9 @@ public class Connection {
       return null;
     }
     try {
-      return new ObjectInputStream(client.getInputStream()).readObject();
+      Object obj = new ObjectInputStream(client.getInputStream()).readObject();
+      System.out.println("READ " + obj);
+      return obj;
     } catch (Exception e) {
       e.printStackTrace();
       return null;
@@ -26,6 +28,7 @@ public class Connection {
   }
 
   public static void writeObject(Object o) {
+    System.out.println("WRITE " + o);
     if (client == null) {
       return;
     }
