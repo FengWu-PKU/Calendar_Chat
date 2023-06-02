@@ -210,13 +210,12 @@ public class ServerConClientThread {
     }
 
     void ModifyUserInfo(UserInfo newinfo) {
-        System.out.println("用户 "+account_id+" 修改了个人资料");
         java.sql.Date bir = null;
         if (newinfo.getBirth() != null) bir = java.sql.Date.valueOf(newinfo.getBirth());
         QQUser tmp = new QQUser(account_id, newinfo.getName(), newinfo.getIntro(), newinfo.getPhone(), newinfo.getEmail(),
                 Account.getUsernameByID(account_id), bir);
-        QQUser.deleteUser(account_id);
-        QQUser.insertUser(tmp);
+        QQUser.ModifyUserInfo(tmp);
+        System.out.println("用户 "+account_id+" 修改了个人资料");
     }
 
     public void run() {
