@@ -123,6 +123,10 @@ public class MainFrame extends JFrame {
     friendListPanel.updateFriendList(friendList);
   }
 
+  /**
+   * 删除好友
+   * @param friendUid 好友 uid
+   */
   public void deleteFriend(int friendUid) {
     friendList.remove(findFriendItemByUid(friendUid));
     friendListPanel.updateFriendList(friendList);
@@ -141,14 +145,5 @@ public class MainFrame extends JFrame {
    */
   public void increaseNumFriendRequests() {
     buttonsPanel.increaseNumFriendRequests();
-  }
-
-  public void test() {
-    friendList.add(new FriendItem(0, "self", null, null, null, 0));
-    friendList.add(new FriendItem(1, "Alice", "AAAAAAAAAAAA", "你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa！", LocalDateTime.of(2022, 12, 29, 12, 20), 0));
-    friendList.add(new FriendItem(2, "Bob", "B", "Hello!", LocalDateTime.of(2023, 5, 31, 2, 30), 100));
-    friendList.add(new FriendItem(3, "John", null, null, LocalDateTime.of(2023, 5, 20, 13, 14), 0));
-    updateFriendList(friendList);
-    updateNumFriendRequests(6);
   }
 }

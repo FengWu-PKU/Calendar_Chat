@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.model.*;
 import client.utils.*;
 import common.*;
@@ -53,7 +52,7 @@ public class AddFriendFrame extends JFrame implements ActionListener {
     if (e.getSource() == addButton) {
       String username = usernameField.getText();
       if (Validators.isValidUsername(username)) {
-        SocialApp.writeObject(new Message(MessageType.ADD_FRIEND_REQUEST, username));
+        Connection.writeObject(new Message(MessageType.ADD_FRIEND_REQUEST, username));
       } else {
         JOptionPane.showMessageDialog(this, "用户名不存在", "错误", JOptionPane.ERROR_MESSAGE);
       }

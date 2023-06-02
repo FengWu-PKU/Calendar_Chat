@@ -1,6 +1,5 @@
 package client.model;
 
-import client.SocialApp;
 import client.gui.*;
 import common.*;
 
@@ -13,11 +12,9 @@ public class ReceiveMessageThread extends Thread {
   @SuppressWarnings("unchecked")
   public void run() {
     while (true) {
-      Message message = (Message) SocialApp.readObject();
+      Message message = (Message) Connection.readObject();
       if (message == null) {
-        if (!SocialApp.DEBUG) {
-          JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
-        }
+        JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
       if (message.getMessageType() == MessageType.MAIN_WINDOW_INFO) { // 收到主窗口信息
@@ -43,7 +40,7 @@ public class ReceiveMessageThread extends Thread {
           if (chatFrame != null) { // 如果窗口已打开，则更新窗口并标记为已读
             chatFrame.addMessage(userMessage);
             FrameManager.getMainFrame().addMessage(userMessage, true);
-            SocialApp.writeObject(new Message(MessageType.ALREADY_READ, uid));
+            Connection.writeObject(new Message(MessageType.ALREADY_READ, uid));
           } else { // 否则只更新主界面
             FrameManager.getMainFrame().addMessage(userMessage, false);
           }

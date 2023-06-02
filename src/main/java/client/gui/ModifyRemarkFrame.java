@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.model.*;
 import client.utils.*;
 import common.*;
@@ -54,7 +53,7 @@ public class ModifyRemarkFrame extends JFrame implements ActionListener {
         if (remark.equals("")) {
           remark = null;
         }
-        SocialApp.writeObject(new Message(MessageType.MODIFY_REMARK, new FriendRemark(uid, remark)));
+        Connection.writeObject(new Message(MessageType.MODIFY_REMARK, new FriendRemark(uid, remark)));
         FrameManager.getMainFrame().modifyRemark(uid, remark);
         dispose();
       } else {

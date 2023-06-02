@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.model.*;
 import client.utils.*;
 import common.*;
@@ -30,7 +29,7 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
     setLocationRelativeTo(FrameManager.getMainFrame());
 
     // 初始窗口布局
-    getContentPane().add(SocialApp.loadingLabel());
+    getContentPane().add(new LoadingLabel());
 
     // 设置监听器
     modifyButton.addActionListener(this);
@@ -128,7 +127,7 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
       }
 
       UserInfo info = new UserInfo(name, phone, email, birth, intro);
-      SocialApp.writeObject(new Message(MessageType.MODIFY_INFO, info));
+      Connection.writeObject(new Message(MessageType.MODIFY_INFO, info));
       dispose();
       FrameManager.removeModifyInfoFrame();
     }

@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.utils.*;
 import client.model.*;
 import common.*;
@@ -57,8 +56,8 @@ public class LoginFrame extends JFrame implements ActionListener {
       if (Validators.isValidUsername(username) && Validators.isValidPassword(password)) {
         String encryptedPassword = PasswordEncryptor.encryptPassword(password);
         UserLogin user = new UserLogin(username, encryptedPassword);
-        SocialApp.writeObject(user);
-        Message message = (Message) SocialApp.readObject();
+        Connection.writeObject(user);
+        Message message = (Message) Connection.readObject();
         if (message == null) {
           JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {

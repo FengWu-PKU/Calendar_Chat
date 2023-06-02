@@ -1,7 +1,6 @@
 package client.gui;
 
 import common.*;
-import client.SocialApp;
 import client.model.*;
 import client.utils.*;
 
@@ -100,7 +99,7 @@ public class FriendListPanel extends JPanel {
       int option = JOptionPane.showConfirmDialog(FrameManager.getMainFrame(), message, "警告",
           JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
       if (option == JOptionPane.OK_OPTION) {
-        SocialApp.writeObject(new Message(MessageType.CLIENT_DELETE_FRIEND, uid));
+        Connection.writeObject(new Message(MessageType.CLIENT_DELETE_FRIEND, uid));
         FrameManager.getMainFrame().deleteFriend(uid);
       }
     }
@@ -149,7 +148,7 @@ public class FriendListPanel extends JPanel {
 
   public FriendListPanel() {
     setLayout(new GridLayout());
-    add(SocialApp.loadingLabel());
+    add(new LoadingLabel());
   }
 
   private void changeMainItem(FriendItemPanel newItem, boolean needUpdate) {

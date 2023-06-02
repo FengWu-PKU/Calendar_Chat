@@ -1,6 +1,5 @@
 package client.model;
 
-import client.SocialApp;
 import client.gui.*;
 import common.*;
 
@@ -35,7 +34,7 @@ public class FrameManager {
       });
     } else {
       chatFrames.put(uid, new ChatFrame(uid, name));
-      SocialApp.writeObject(new Message(MessageType.OPEN_CHAT_WINDOW, uid));
+      Connection.writeObject(new Message(MessageType.OPEN_CHAT_WINDOW, uid));
     }
   }
 
@@ -58,7 +57,7 @@ public class FrameManager {
       });
     } else {
       modifyInfoFrame = new ModifyInfoFrame();
-      SocialApp.writeObject(new Message(MessageType.OPEN_MODIFY_WINDOW));
+      Connection.writeObject(new Message(MessageType.OPEN_MODIFY_WINDOW));
     }
   }
 
@@ -103,7 +102,7 @@ public class FrameManager {
       });
     } else {
       friendRequestsFrame = new FriendRequestsFrame();
-      SocialApp.writeObject(new Message(MessageType.OPEN_REQUESTS_WINDOW));
+      Connection.writeObject(new Message(MessageType.OPEN_REQUESTS_WINDOW));
     }
   }
 

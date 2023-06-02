@@ -1,6 +1,6 @@
 package client.gui;
 
-import client.SocialApp;
+import client.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +49,7 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
       try {
         String serverAddress = serverAddressField.getText();
         int serverPort = Integer.parseInt(serverPortField.getText());
-        SocialApp.connect(serverAddress, serverPort);
+        Connection.connect(serverAddress, serverPort);
         new LoginFrame();
         dispose();
       } catch (NumberFormatException ex) {

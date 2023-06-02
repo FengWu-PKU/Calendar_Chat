@@ -1,46 +1,12 @@
 package client;
 
 import client.gui.ServerConnectionFrame;
-import client.model.FrameManager;
 
-import javax.swing.*;
-import java.awt.*;
-import java.net.*;
-import java.io.*;
+import javax.swing.UIManager;
+import java.awt.Font;
+import java.awt.Color;
 
 public class SocialApp {
-  public static final boolean DEBUG = false;
-  private static Socket client;
-
-  public static void connect(String serverAddress, int serverPort) throws IOException {
-    client = new Socket(serverAddress, serverPort);
-  }
-
-  public static Object readObject() {
-    if (client == null) {
-      return null;
-    }
-    try {
-      return new ObjectInputStream(client.getInputStream()).readObject();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  public static void writeObject(Object o) {
-    if (client == null) {
-      return;
-    }
-    try {
-      synchronized (client.getOutputStream()) {
-        new ObjectOutputStream(client.getOutputStream()).writeObject(o);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
   public static void setDefaultFont() {
     UIManager.put("Button.font", new Font("微软雅黑", 0, 14));
     UIManager.put("Label.font", new Font("微软雅黑", 0, 14));
@@ -62,18 +28,9 @@ public class SocialApp {
     UIManager.put("PopupMenu.background", Color.white);
   }
 
-  public static JLabel loadingLabel() {
-    return new JLabel("正在加载...", SwingConstants.CENTER);
-  }
-
   public static void main(String[] args) {
     setDefaultFont();
     setDefaultColor();
-    if (!DEBUG) {
-      new ServerConnectionFrame();
-    } else {
-      FrameManager.createMainFrame(0);
-      FrameManager.getMainFrame().test();
-    }
+    new ServerConnectionFrame();
   }
 }

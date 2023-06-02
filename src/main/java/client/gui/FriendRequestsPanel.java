@@ -1,7 +1,6 @@
 package client.gui;
 
-import client.SocialApp;
-import client.model.FrameManager;
+import client.model.*;
 import common.*;
 
 import javax.swing.*;
@@ -63,13 +62,13 @@ public class FriendRequestsPanel extends JPanel {
       int uid = request.getUid();
       if (e.getSource() == acceptButton) {
         UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), null);
-        SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
+        Connection.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
         message.setText(nameLabel.getText());
         SwingUtilities.invokeLater(() -> {
           FrameManager.getMainFrame().addMessage(message, true);
         });
       } else {
-        SocialApp.writeObject(new Message(MessageType.REJECT_REQUEST, uid));
+        Connection.writeObject(new Message(MessageType.REJECT_REQUEST, uid));
       }
       FrameManager.getFriendRequestsFrame().removeRequest(request);
     }
@@ -77,7 +76,7 @@ public class FriendRequestsPanel extends JPanel {
 
   public FriendRequestsPanel() {
     setLayout(new GridLayout());
-    add(SocialApp.loadingLabel());
+    add(new LoadingLabel());
   }
 
   /**

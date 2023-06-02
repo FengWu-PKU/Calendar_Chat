@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.model.*;
 import client.utils.*;
 import common.*;
@@ -31,7 +30,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     messageArea.setLineWrap(true);
 
     // 初始窗口布局
-    getContentPane().add(SocialApp.loadingLabel());
+    getContentPane().add(new LoadingLabel());
 
     // 设置监听器
     sendButton.addActionListener(this);
@@ -60,7 +59,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
       return;
     }
     UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), text);
-    SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
+    Connection.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
     addMessage(message);
     FrameManager.getMainFrame().addMessage(message, true);
     messageArea.setText("");
