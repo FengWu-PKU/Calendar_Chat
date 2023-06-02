@@ -23,7 +23,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
   private JTextField emailField = new JTextField();
   private JTextField birthField = new JTextField();
   private JTextField introField = new JTextField();
-  private JButton registerAndLoginButton;
+  private JButton registerAndLoginButton = new JButton("注册并登录");
+  private JButton backButton = new JButton("返回");
 
   public RegisterFrame() {
     // 窗口设置
@@ -37,8 +38,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
-    registerAndLoginButton = new JButton("注册并登录");
     buttonPanel.add(registerAndLoginButton);
+    buttonPanel.add(backButton);
 
     contentPane.addTextField("用户名:", usernameField);
     contentPane.addTextField("密码:", passwordField);
@@ -53,6 +54,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
     // 设置监听器
     registerAndLoginButton.addActionListener(this);
+    backButton.addActionListener(this);
 
     // 显示界面
     setVisible(true);
@@ -77,19 +79,19 @@ public class RegisterFrame extends JFrame implements ActionListener {
         return;
       }
 
-      String name = nameField.getForeground() == Color.gray ? null : nameField.getText();
+      String name = InfoInputPanel.isEmptyTextField(nameField) ? null : nameField.getText();
       if (name != null && !Validators.isValidName(name)) {
         JOptionPane.showMessageDialog(this, Validators.invalidNameMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
 
-      String phone = phoneField.getForeground() == Color.gray ? null : phoneField.getText();
+      String phone = InfoInputPanel.isEmptyTextField(phoneField) ? null : phoneField.getText();
       if (phone != null && !Validators.isValidPhoneNumber(phone)) {
         JOptionPane.showMessageDialog(this, Validators.invalidPhoneNumberMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
 
-      String email = emailField.getForeground() == Color.gray ? null : emailField.getText();
+      String email = InfoInputPanel.isEmptyTextField(emailField) ? null : emailField.getText();
       if (email != null && !Validators.isValidEmail(email)) {
         JOptionPane.showMessageDialog(this, Validators.invalidEmailMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
@@ -97,13 +99,17 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
       LocalDate birth;
       try {
-        birth = birthField.getForeground() == Color.gray ? null : LocalDate.parse(birthField.getText());
+        birth = InfoInputPanel.isEmptyTextField(birthField) ? null : LocalDate.parse(birthField.getText());
       } catch (DateTimeParseException ex) {
         JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
+      if (birth != null && !Validators.isValidBirth(birth)) {
+        JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
 
-      String intro = introField.getForeground() == Color.gray ? null : introField.getText();
+      String intro = InfoInputPanel.isEmptyTextField(introField) ? null : introField.getText();
       if (intro != null && !Validators.isValidIntro(intro)) {
         JOptionPane.showMessageDialog(this, Validators.invalidIntroMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
@@ -123,6 +129,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
       } else {
         JOptionPane.showMessageDialog(this, "程序异常", "错误", JOptionPane.ERROR_MESSAGE);
       }
+    } else if (e.getSource() == backButton) {
+      new LoginFrame();
+      dispose();
     }
   }
 }

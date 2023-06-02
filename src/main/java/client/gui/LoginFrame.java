@@ -15,8 +15,8 @@ import java.awt.event.*;
 public class LoginFrame extends JFrame implements ActionListener {
   private JTextField usernameField = new JTextField();
   private JPasswordField passwordField = new JPasswordField();
-  private JButton loginButton;
-  private JButton registerButton;
+  private JButton loginButton = new JButton("登录");
+  private JButton registerButton = new JButton("我要注册");
 
   public LoginFrame() {
     // 窗口设置
@@ -30,8 +30,6 @@ public class LoginFrame extends JFrame implements ActionListener {
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
-    loginButton = new JButton("登录");
-    registerButton = new JButton("我要注册");
     buttonPanel.add(loginButton);
     buttonPanel.add(registerButton);
 

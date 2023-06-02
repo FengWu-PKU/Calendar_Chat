@@ -1,5 +1,7 @@
 package client.utils;
 
+import java.time.LocalDate;
+
 /**
  * 一些用于验证字段是否合法的方法
  */
@@ -103,7 +105,16 @@ public class Validators {
   /**
    * 生日不合法时显示的信息
    */
-  public static final String invalidBirthMessage = "生日日期应存在且格式为 YYYY-MM-DD";
+  public static final String invalidBirthMessage = "生日日期应合法且格式为 YYYY-MM-DD";
+
+  /**
+   * 判断生日是否合法
+   * @param birth 生日日期
+   * @return 合法返回 true，否则返回 false
+   */
+  public static boolean isValidBirth(LocalDate birth) {
+    return birth.getYear() >= 1800 && birth.compareTo(LocalDate.now()) <= 0;
+  }
 
   /**
    * 发送消息不合法时显示的消息

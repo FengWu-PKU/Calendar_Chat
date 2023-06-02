@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ServerConnectionFrame extends JFrame implements ActionListener {
   private JTextField serverAddressField = new JTextField("127.0.0.1");
   private JTextField serverPortField = new JTextField("9999");
-  private JButton connectButton;
+  private JButton connectButton = new JButton("连接");
 
   public ServerConnectionFrame() {
     // 窗口设置
@@ -28,7 +28,6 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout());
-    connectButton = new JButton("连接");
     buttonPanel.add(connectButton);
 
     contentPane.addTextField("服务器地址:", serverAddressField);

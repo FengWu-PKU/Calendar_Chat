@@ -95,6 +95,8 @@ public class MainFrame extends JFrame {
       friend = new FriendItem(friendUid, message.getText(), null, null, message.getSendTime(), 0);
       preprocessFriendItem(friend);
       friendList.add(friend);
+    } else if (friendUid == getUid()) {
+      friend.setLastMessage(message.getText());
     } else {
       int unreadMessages = isRead ? 0 : friend.getUnreadMessages() + 1;
       friend.setLastMessage(message.getText());

@@ -94,19 +94,19 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == modifyButton) {
-      String name = nameField.getForeground() == Color.gray ? null : nameField.getText();
+      String name = InfoInputPanel.isEmptyTextField(nameField) ? null : nameField.getText();
       if (name != null && !Validators.isValidName(name)) {
         JOptionPane.showMessageDialog(this, Validators.invalidNameMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
 
-      String phone = phoneField.getForeground() == Color.gray ? null : phoneField.getText();
+      String phone = InfoInputPanel.isEmptyTextField(phoneField) ? null : phoneField.getText();
       if (phone != null && !Validators.isValidPhoneNumber(phone)) {
         JOptionPane.showMessageDialog(this, Validators.invalidPhoneNumberMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
 
-      String email = emailField.getForeground() == Color.gray ? null : emailField.getText();
+      String email = InfoInputPanel.isEmptyTextField(emailField) ? null : emailField.getText();
       if (email != null && !Validators.isValidEmail(email)) {
         JOptionPane.showMessageDialog(this, Validators.invalidEmailMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
@@ -114,13 +114,17 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
 
       LocalDate birth;
       try {
-        birth = birthField.getForeground() == Color.gray ? null : LocalDate.parse(birthField.getText());
+        birth = InfoInputPanel.isEmptyTextField(birthField) ? null : LocalDate.parse(birthField.getText());
       } catch (DateTimeParseException ex) {
         JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
       }
+      if (birth != null && !Validators.isValidBirth(birth)) {
+        JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        return;
+      }
 
-      String intro = introField.getForeground() == Color.gray ? null : introField.getText();
+      String intro = InfoInputPanel.isEmptyTextField(introField) ? null : introField.getText();
       if (intro != null && !Validators.isValidIntro(intro)) {
         JOptionPane.showMessageDialog(this, Validators.invalidIntroMessage, "错误", JOptionPane.ERROR_MESSAGE);
         return;
