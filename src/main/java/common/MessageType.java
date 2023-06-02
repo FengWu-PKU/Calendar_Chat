@@ -59,6 +59,11 @@ public enum MessageType {
   REQUEST_LIST,
 
   /**
+   * 实时好友申请 content: FriendRequestItem
+   */
+  NEW_REQUEST,
+
+  /**
    * 同意申请消息 content: UserMessage = acceptMessage
    * <p> acceptMessage.text = senderUsername </p>
    */
