@@ -155,22 +155,23 @@ public class ServerConClientThread {
     void CreateFriend(UserMessage m) throws IOException { // B 接受了 A 的好友申请
         int B = m.getSenderUid(), A = m.getReceiverUid();
         System.out.println(B+" 接受了 "+A+" 的好友申请");
-        assert(NewFriend.deleteEntry(new NewFriend(A, B)) == 0);
+        NewFriend.deleteEntry(new NewFriend(A, B));
         Friend.insertFriend(new Friend(B, A, ""));
         Friend.insertFriend(new Friend(A, B, ""));
         ServerConClientThread sA = ManageClientThread.getClientThread(A);
         if (sA != null) {
-            ObjectOutputStream oos = new ObjectOutputStream(sA.s.getOutputStream());
-            //TO DO...
             System.out.println(A+" 将收到 "+B+" 通过他好友申请的消息！");
+            ObjectOutputStream oos = new ObjectOutputStream(sA.s.getOutputStream());
+            UserMessage tmp = new UserMessage(B, A, m.getSendTime(), Account.getUsernameByID(B));
+            oos.writeObject(new Message(MessageType.ACCEPT_MESSAGE, tmp));
         } else {
             System.out.println(A+" 不在线");
         }
     }
 
-    void NotCreateFriend(int A, int B) throws IOException { // B 拒绝了 A 的好友申请
+    void NotCreateFriend(int A, int B){ // B 拒绝了 A 的好友申请
         System.out.println(B+" 拒绝了 "+A+" 的好友申请");
-        assert(NewFriend.deleteEntry(new NewFriend(A, B)) == 0);
+        NewFriend.deleteEntry(new NewFriend(A, B));
     }
 
     public void run() {
