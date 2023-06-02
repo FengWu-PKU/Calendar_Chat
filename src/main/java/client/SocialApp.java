@@ -62,6 +62,10 @@ public class SocialApp {
     UIManager.put("PopupMenu.background", Color.white);
   }
 
+  public static JLabel loadingLabel() {
+    return new JLabel("正在加载...", SwingConstants.CENTER);
+  }
+
   public static void main(String[] args) {
     setDefaultFont();
     setDefaultColor();

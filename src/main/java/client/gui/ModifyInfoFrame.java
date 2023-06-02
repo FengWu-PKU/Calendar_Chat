@@ -30,7 +30,7 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
     setLocationRelativeTo(FrameManager.getMainFrame());
 
     // 初始窗口布局
-    getContentPane().add(new JLabel("正在加载...", SwingConstants.CENTER));
+    getContentPane().add(SocialApp.loadingLabel());
 
     // 设置监听器
     modifyButton.addActionListener(this);

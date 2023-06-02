@@ -76,7 +76,8 @@ public class FriendRequestsPanel extends JPanel {
   }
 
   public FriendRequestsPanel() {
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    setLayout(new GridLayout());
+    add(SocialApp.loadingLabel());
   }
 
   /**
@@ -85,9 +86,15 @@ public class FriendRequestsPanel extends JPanel {
    */
   public void updateRequestList(ArrayList<FriendRequestItem> requestList) {
     removeAll();
-    for (int i = requestList.size() - 1; i >= 0; i--) {
-      RequestItemPanel friendItemPanel = new RequestItemPanel(requestList.get(i));
-      add(friendItemPanel);
+    if (requestList.size() > 0) {
+      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+      for (int i = requestList.size() - 1; i >= 0; i--) {
+        RequestItemPanel friendItemPanel = new RequestItemPanel(requestList.get(i));
+        add(friendItemPanel);
+      }
+    } else {
+      setLayout(new GridLayout());
+      add(new JLabel("无好友申请", SwingConstants.CENTER));
     }
     revalidate();
     repaint();

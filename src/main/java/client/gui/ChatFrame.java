@@ -19,6 +19,8 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 
   public ChatFrame(int uid, String name) {
     this.uid = uid;
+    recordPane = new HistoryMessagesPane(name);
+    profilePane = new ProfilePane(name);
 
     // 窗口设置
     setTitle("聊天：" + name);
@@ -28,24 +30,8 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     // 组件设置
     messageArea.setLineWrap(true);
 
-    // 窗口布局
-    setLayout(new BorderLayout());
-
-    recordPane = new HistoryMessagesPane(name);
-
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 5));
-    buttonPanel.add(new JLabel("按回车发送消息，请使用 Ctrl+Enter 换行。"));
-    buttonPanel.add(sendButton);
-    JPanel messagePanel = new JPanel(new BorderLayout());
-    messagePanel.add(new JScrollPane(messageArea), BorderLayout.CENTER);
-    messagePanel.add(buttonPanel, BorderLayout.SOUTH);
-
-    JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
-    chatPane.setDividerLocation(400);
-    getContentPane().add(chatPane, BorderLayout.CENTER);
-
-    profilePane = new ProfilePane(name);
-    getContentPane().add(new JScrollPane(profilePane), BorderLayout.EAST);
+    // 初始窗口布局
+    getContentPane().add(SocialApp.loadingLabel());
 
     // 设置监听器
     sendButton.addActionListener(this);
@@ -118,7 +104,24 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
    * @param info 聊天框中需要的信息
    */
   public void updateInfo(ChatWindowInfo info) {
+    // 更新后的窗口布局
+    getContentPane().removeAll();
+    setLayout(new BorderLayout());
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 5));
+    buttonPanel.add(new JLabel("按回车发送消息，请使用 Ctrl+Enter 换行。"));
+    buttonPanel.add(sendButton);
+    JPanel messagePanel = new JPanel(new BorderLayout());
+    messagePanel.add(new JScrollPane(messageArea), BorderLayout.CENTER);
+    messagePanel.add(buttonPanel, BorderLayout.SOUTH);
+    JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
+    chatPane.setDividerLocation(400);
+    getContentPane().add(chatPane, BorderLayout.CENTER);
+    getContentPane().add(new JScrollPane(profilePane), BorderLayout.EAST);
+
     profilePane.updateProfile(info);
     recordPane.updateHistoryMessages(info.getHistoryMessages());
+    
+    revalidate();
+    repaint();
   }
 }

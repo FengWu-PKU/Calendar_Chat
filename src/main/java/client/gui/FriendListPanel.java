@@ -117,7 +117,7 @@ public class FriendListPanel extends JPanel {
           FrameManager.createChatFrame(uid, nameLabel.getText());
           FrameManager.getMainFrame().alreadyRead(uid);
         }
-      } else if (e.getButton() == MouseEvent.BUTTON3) {
+      } else if (e.getButton() == MouseEvent.BUTTON3 && uid != FrameManager.getMainFrame().getUid()) {
         popupMenu.show(e.getComponent(), e.getX(), e.getY());
       }
     }
@@ -148,7 +148,8 @@ public class FriendListPanel extends JPanel {
   FriendItemPanel mainFriendItemPanel;
 
   public FriendListPanel() {
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    setLayout(new GridLayout());
+    add(SocialApp.loadingLabel());
   }
 
   private void changeMainItem(FriendItemPanel newItem, boolean needUpdate) {
@@ -168,6 +169,7 @@ public class FriendListPanel extends JPanel {
    */
   public void updateFriendList(ArrayList<FriendItem> friendList) {
     removeAll();
+    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     friendList.sort(null);
     boolean exist = false;
     FriendItemPanel selfItemPanel = null;
