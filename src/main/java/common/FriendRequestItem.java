@@ -4,7 +4,7 @@ package common;
  * 好友申请列表中单个条目所需的信息
  */
 public class FriendRequestItem implements java.io.Serializable {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   private int uid;
   private String username;
@@ -28,5 +28,10 @@ public class FriendRequestItem implements java.io.Serializable {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  @Override
+  public String toString() {
+    return "FriendRequestItem [uid=" + uid + ", username=" + username + "]";
   }
 }

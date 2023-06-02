@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * 个人资料
  */
 public class UserInfo implements java.io.Serializable {
-  private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 3L;
 
   private String name;
   private String phone;
@@ -60,5 +60,11 @@ public class UserInfo implements java.io.Serializable {
 
   public void setIntro(String intro) {
     this.intro = intro;
+  }
+
+  @Override
+  public String toString() {
+    return "UserInfo [name=" + name + ", phone=" + phone + ", email=" + email + ", birth=" + birth + ", intro=" + intro
+        + "]";
   }
 }

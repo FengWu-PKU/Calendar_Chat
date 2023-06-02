@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * 好友列表中单个好友条目所需的信息
  */
 public class FriendItem implements java.io.Serializable, Comparable<FriendItem> {
-  private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 3L;
 
   private int uid;
   private String username;
@@ -76,5 +76,11 @@ public class FriendItem implements java.io.Serializable, Comparable<FriendItem> 
   @Override
   public int compareTo(FriendItem o) {
     return -lastMessageTime.compareTo(o.lastMessageTime);
+  }
+
+  @Override
+  public String toString() {
+    return "FriendItem [uid=" + uid + ", username=" + username + ", remark=" + remark + ", lastMessage=" + lastMessage
+        + ", lastMessageTime=" + lastMessageTime + ", unreadMessages=" + unreadMessages + "]";
   }
 }

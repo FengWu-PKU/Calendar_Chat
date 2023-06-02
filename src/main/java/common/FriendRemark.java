@@ -4,7 +4,7 @@ package common;
  * 好友备注
  */
 public class FriendRemark implements java.io.Serializable {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   private int uid;
   private String remark;
@@ -28,5 +28,10 @@ public class FriendRemark implements java.io.Serializable {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  @Override
+  public String toString() {
+    return "FriendRemark [uid=" + uid + ", remark=" + remark + "]";
   }
 }

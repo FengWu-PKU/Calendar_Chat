@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * 主窗口所需信息
  */
 public class MainWindowInfo implements java.io.Serializable {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   private ArrayList<FriendItem> friendList;
   private int numFriendRequests;
@@ -32,5 +32,10 @@ public class MainWindowInfo implements java.io.Serializable {
 
   public void setNumFriendRequests(int numFriendRequests) {
     this.numFriendRequests = numFriendRequests;
+  }
+
+  @Override
+  public String toString() {
+    return "MainWindowInfo [friendList=" + friendList + ", numFriendRequests=" + numFriendRequests + "]";
   }
 }

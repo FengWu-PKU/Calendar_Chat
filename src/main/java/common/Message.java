@@ -6,7 +6,7 @@ package common;
  * <p> content 为消息内容 </p>
  */
 public class Message implements java.io.Serializable {
-  private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 3L;
 
   private MessageType messageType;
   private Object content;
@@ -34,5 +34,10 @@ public class Message implements java.io.Serializable {
 
   public void setContent(Object content) {
     this.content = content;
+  }
+
+  @Override
+  public String toString() {
+    return "Message [messageType=" + messageType + ", content=" + content + "]";
   }
 }
