@@ -118,4 +118,18 @@ public class Validators {
   public static boolean isValidMessage(String message) {
     return 1 <= message.length() && message.length() <= 256;
   }
+
+  /**
+   * 备注不合法时显示的消息
+   */
+  public static final String invalidRemarkMessage = "备注应不超过 15 字符";
+
+  /**
+   * 判断备注是否合法
+   * @param remark 备注
+   * @return 合法返回 true，否则返回 false
+   */
+  public static boolean isValidRemark(String remark) {
+    return remark.length() <= 15;
+  }
 }

@@ -21,6 +21,7 @@ public class FriendListPanel extends JPanel {
     private JLabel lastMessageLabel;
     private JLabel lastMessageTimeLabel;
     private JLabel unreadMessagesLabel;
+    private JPopupMenu popupMenu = new JPopupMenu();
 
     public FriendItemPanel(FriendItem friend) {
       uid = friend.getUid();
@@ -81,6 +82,15 @@ public class FriendListPanel extends JPanel {
       add(lastMessageLabel);
       add(unreadMessagesLabel);
 
+      JMenuItem menuItem1 = new JMenuItem("修改备注");
+      JMenuItem menuItem2 = new JMenuItem("删除好友");
+      // TODO: 右键菜单样式
+      popupMenu.add(menuItem1);
+      popupMenu.add(menuItem2);
+      menuItem1.addActionListener((e) -> {
+        new ModifyRemarkFrame(uid);
+      });
+
       // 设置监听器
       this.addMouseListener(this);
     }
@@ -91,16 +101,14 @@ public class FriendListPanel extends JPanel {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-      if (mainFriendItemPanel != null) {
-        mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
-      }
-      this.setBackground(new Color(224, 224, 224));
-      mainFriendItemPanel = this;
-      // TODO: 显示日历
-      if (e.getClickCount() == 2) { // 双击打开聊天框
-        FrameManager.createChatFrame(uid, nameLabel.getText());
-        FrameManager.getMainFrame().alreadyRead(uid);
-        unreadMessagesLabel.setText("");
+      if (e.getButton() == MouseEvent.BUTTON1) {
+        changeMainItem(this, true);
+        if (e.getClickCount() == 2) { // 双击打开聊天框
+          FrameManager.createChatFrame(uid, nameLabel.getText());
+          FrameManager.getMainFrame().alreadyRead(uid);
+        }
+      } else if (e.getButton() == MouseEvent.BUTTON3) {
+        popupMenu.show(e.getComponent(), e.getX(), e.getY());
       }
     }
 
@@ -133,6 +141,17 @@ public class FriendListPanel extends JPanel {
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
   }
 
+  private void changeMainItem(FriendItemPanel newItem, boolean needUpdate) {
+    if (mainFriendItemPanel != null) {
+      mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
+    }
+    newItem.setBackground(new Color(224, 224, 224));
+    mainFriendItemPanel = newItem;
+    if (needUpdate) {
+      // TODO: 更新日历
+    }
+  }
+
   /**
    * 根据传入的 FriendItem 列表，按日期排序后更新界面
    * @param friendList 好友列表
@@ -145,8 +164,7 @@ public class FriendListPanel extends JPanel {
       add(friendItemPanel);
       if ((mainFriendItemPanel == null && friend.getUid() == FrameManager.getMainFrame().getUid()) ||
           (mainFriendItemPanel != null && friend.getUid() == mainFriendItemPanel.getUid())) {
-        friendItemPanel.setBackground(new Color(224, 224, 224));
-        mainFriendItemPanel = friendItemPanel;
+        changeMainItem(friendItemPanel, false);
       }
     }
     repaint();

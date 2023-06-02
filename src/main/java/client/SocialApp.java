@@ -51,11 +51,15 @@ public class SocialApp {
     UIManager.put("TextArea.font", new Font("微软雅黑", 0, 14));
     UIManager.put("TextField.font", new Font("微软雅黑", 0, 14));
     UIManager.put("PasswordField.font", new Font("微软雅黑", 0, 14));
+    UIManager.put("MenuItem.font", new Font("微软雅黑", 0, 14));
+    UIManager.put("PopupMenu.font", new Font("微软雅黑", 0, 14));
   }
 
   public static void setDefaultColor() {
     UIManager.put("Panel.background", Color.white);
     UIManager.put("OptionPane.background", Color.white);
+    UIManager.put("MenuItem.background", Color.white);
+    UIManager.put("PopupMenu.background", Color.white);
   }
 
   public static void main(String[] args) {

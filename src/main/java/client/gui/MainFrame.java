@@ -72,8 +72,13 @@ public class MainFrame extends JFrame {
     return null;
   }
 
+  /**
+   * 消息已读
+   * @param friendUid 好友 uid
+   */
   public void alreadyRead(int friendUid) {
     findFriendItemByUid(friendUid).setUnreadMessages(0);
+    friendListPanel.updateFriendList(friendList);
   }
 
   /**
@@ -97,6 +102,20 @@ public class MainFrame extends JFrame {
       friend.setLastMessageTime(message.getSendTime());
       friend.setUnreadMessages(unreadMessages);
     }
+    friendListPanel.updateFriendList(friendList);
+  }
+
+  /**
+   * 好友备注
+   * @param friendUid 好友 uid
+   * @return 备注
+   */
+  public String getRemark(int friendUid) {
+    return findFriendItemByUid(friendUid).getRemark();
+  }
+
+  public void modifyRemark(int friendUid, String remark) {
+    findFriendItemByUid(friendUid).setRemark(remark);
     friendListPanel.updateFriendList(friendList);
   }
 

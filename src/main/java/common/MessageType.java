@@ -101,5 +101,10 @@ public enum MessageType {
    */
   REJECT_REQUEST,
 
+  /**
+   * 修改好友备注 content: FriendRemark = (uid, remark)
+   */
+  MODIFY_REMARK,
+
   // TODO: more operations...
 }
