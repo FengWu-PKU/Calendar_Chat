@@ -91,5 +91,6 @@ public class FriendRequestsPanel extends JPanel {
     }
     repaint();
     revalidate();
+    FrameManager.getMainFrame().updateNumFriendRequests(requestList.size());
   }
 }
