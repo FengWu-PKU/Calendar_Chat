@@ -86,6 +86,7 @@ public class FriendRequestsPanel extends JPanel {
       RequestItemPanel friendItemPanel = new RequestItemPanel(request);
       add(friendItemPanel);
     }
+    repaint();
     revalidate();
   }
 }

@@ -148,6 +148,7 @@ public class FriendListPanel extends JPanel {
         mainFriendItemPanel = friendItemPanel;
       }
     }
+    repaint();
     revalidate();
   }
 }
