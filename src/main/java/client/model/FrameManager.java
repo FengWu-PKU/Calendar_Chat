@@ -58,6 +58,7 @@ public class FrameManager {
       });
     } else {
       modifyInfoFrame = new ModifyInfoFrame();
+      SocialApp.writeObject(new Message(MessageType.OPEN_MODIFY_WINDOW));
     }
   }
 

@@ -15,7 +15,9 @@ public class ReceiveMessageThread extends Thread {
     while (true) {
       Message message = (Message) SocialApp.readObject();
       if (message == null) {
-        JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
+        if (!SocialApp.DEBUG) {
+          JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
+        }
         return;
       }
       if (message.getMessageType() == MessageType.MAIN_WINDOW_INFO) { // 收到主窗口信息
@@ -99,6 +101,14 @@ public class ReceiveMessageThread extends Thread {
             chatFrame.dispose();
             FrameManager.removeChatFrame(uid);
             JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "你被删了，小丑");
+          }
+        });
+      } else if (message.getMessageType() == MessageType.USER_INFO) { // 收到个人信息
+        UserInfo info = (UserInfo) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          ModifyInfoFrame modifyInfoFrame = FrameManager.getModifyInfoFrame();
+          if (modifyInfoFrame != null) {
+            modifyInfoFrame.updateInfo(info);
           }
         });
       }

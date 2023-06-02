@@ -185,7 +185,7 @@ public class FriendListPanel extends JPanel {
     if (!exist) {
       changeMainItem(selfItemPanel, mainFriendItemPanel != null);
     }
-    repaint();
     revalidate();
+    repaint();
   }
 }

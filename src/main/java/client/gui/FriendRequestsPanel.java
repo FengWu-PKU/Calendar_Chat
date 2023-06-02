@@ -89,8 +89,8 @@ public class FriendRequestsPanel extends JPanel {
       RequestItemPanel friendItemPanel = new RequestItemPanel(requestList.get(i));
       add(friendItemPanel);
     }
-    repaint();
     revalidate();
+    repaint();
     FrameManager.getMainFrame().updateNumFriendRequests(requestList.size());
   }
 }
