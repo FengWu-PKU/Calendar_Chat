@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.utils.*;
 import client.model.*;
 import common.*;
@@ -16,8 +15,8 @@ import java.awt.event.*;
 public class LoginFrame extends JFrame implements ActionListener {
   private JTextField usernameField = new JTextField();
   private JPasswordField passwordField = new JPasswordField();
-  private JButton loginButton;
-  private JButton registerButton;
+  private JButton loginButton = new JButton("登录");
+  private JButton registerButton = new JButton("我要注册");
 
   public LoginFrame() {
     // 窗口设置
@@ -31,14 +30,13 @@ public class LoginFrame extends JFrame implements ActionListener {
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
-    loginButton = new JButton("登录");
-    registerButton = new JButton("我要注册");
     buttonPanel.add(loginButton);
     buttonPanel.add(registerButton);
 
     contentPane.addTextField("用户名:", usernameField);
     contentPane.addTextField("密码:", passwordField);
     contentPane.addComponent(buttonPanel);
+    getRootPane().setDefaultButton(loginButton);
 
     // 设置监听器
     loginButton.addActionListener(this);
@@ -56,8 +54,8 @@ public class LoginFrame extends JFrame implements ActionListener {
       if (Validators.isValidUsername(username) && Validators.isValidPassword(password)) {
         String encryptedPassword = PasswordEncryptor.encryptPassword(password);
         UserLogin user = new UserLogin(username, encryptedPassword);
-        SocialApp.writeObject(user);
-        Message message = (Message) SocialApp.readObject();
+        Connection.writeObject(user);
+        Message message = (Message) Connection.readObject();
         if (message == null) {
           JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {

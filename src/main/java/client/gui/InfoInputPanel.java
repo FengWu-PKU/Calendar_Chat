@@ -20,6 +20,10 @@ public class InfoInputPanel extends JPanel {
     constraints.gridy = 0;
   }
 
+  public static boolean isEmptyTextField(JTextField textField) {
+    return textField.getForeground() == Color.gray || textField.getText().equals("");
+  }
+
   /**
    * 加入一栏，有标签和输入框，输入框有注释
    * @param labelText 标签文字

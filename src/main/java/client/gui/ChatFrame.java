@@ -1,7 +1,7 @@
 package client.gui;
 
-import client.SocialApp;
 import client.model.*;
+import client.utils.*;
 import common.*;
 
 import javax.swing.*;
@@ -18,33 +18,19 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 
   public ChatFrame(int uid, String name) {
     this.uid = uid;
+    recordPane = new HistoryMessagesPane(name);
+    profilePane = new ProfilePane(name);
 
     // 窗口设置
     setTitle("聊天：" + name);
-    setSize(800, 600);
+    setSize(750, 600);
     setLocationRelativeTo(null);
 
     // 组件设置
     messageArea.setLineWrap(true);
 
-    // 窗口布局
-    setLayout(new BorderLayout());
-
-    recordPane = new HistoryMessagesPane(name);
-
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 5));
-    buttonPanel.add(new JLabel("按回车发送消息，请使用 Ctrl+Enter 换行。"));
-    buttonPanel.add(sendButton);
-    JPanel messagePanel = new JPanel(new BorderLayout());
-    messagePanel.add(new JScrollPane(messageArea), BorderLayout.CENTER);
-    messagePanel.add(buttonPanel, BorderLayout.SOUTH);
-
-    JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
-    chatPane.setDividerLocation(400);
-    add(chatPane, BorderLayout.CENTER);
-
-    profilePane = new ProfilePane(name);
-    add(new JScrollPane(profilePane), BorderLayout.EAST);
+    // 初始窗口布局
+    getContentPane().add(new LoadingLabel());
 
     // 设置监听器
     sendButton.addActionListener(this);
@@ -68,8 +54,12 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
       JOptionPane.showMessageDialog(this, "消息不能为空", "错误", JOptionPane.ERROR_MESSAGE);
       return;
     }
+    if (!Validators.isValidMessage(text)) {
+      JOptionPane.showMessageDialog(this, Validators.invalidMessageMessage, "错误", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
     UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), text);
-    SocialApp.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
+    Connection.writeObject(new Message(MessageType.CLIENT_SEND_MESSAGE, message));
     addMessage(message);
     FrameManager.getMainFrame().addMessage(message, true);
     messageArea.setText("");
@@ -112,8 +102,25 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
    * 更新好友资料和消息记录
    * @param info 聊天框中需要的信息
    */
-  public void update(ChatWindowInfo info) {
+  public void updateInfo(ChatWindowInfo info) {
+    // 更新后的窗口布局
+    getContentPane().removeAll();
+    setLayout(new BorderLayout());
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 5));
+    buttonPanel.add(new JLabel("按回车发送消息，请使用 Ctrl+Enter 换行。"));
+    buttonPanel.add(sendButton);
+    JPanel messagePanel = new JPanel(new BorderLayout());
+    messagePanel.add(new JScrollPane(messageArea), BorderLayout.CENTER);
+    messagePanel.add(buttonPanel, BorderLayout.SOUTH);
+    JSplitPane chatPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(recordPane), messagePanel);
+    chatPane.setDividerLocation(400);
+    getContentPane().add(chatPane, BorderLayout.CENTER);
+    getContentPane().add(new JScrollPane(profilePane), BorderLayout.EAST);
+
     profilePane.updateProfile(info);
     recordPane.updateHistoryMessages(info.getHistoryMessages());
+    
+    revalidate();
+    repaint();
   }
 }

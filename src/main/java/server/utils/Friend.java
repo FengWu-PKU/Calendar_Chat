@@ -10,7 +10,7 @@ public class Friend {
     static final int MAXFRIENDNUM=100;
 
     int account_id;
-    Timestamp date_t;
+    public Timestamp date_t;
     public int friend_id;
     public String friend_nickname;
 
@@ -37,6 +37,8 @@ public class Friend {
             stmt.setInt(2, friend.friend_id);
             ResultSet res=stmt.executeQuery();
             if(res.next()) {  // 已经存在好友关系
+                res.close();
+                stmt.close();
                 return -1;
             }
             res.close();
@@ -55,8 +57,25 @@ public class Friend {
         }
     }
 
+    /*A 和 B 是否已经是好友*/
+    static public boolean CheckAlreadyFriend(int A, int B) {
+        try (Connection connection=DriverManager.getConnection(url, username,password)){
+            String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1, A);
+            stmt.setInt(2, B);
+            ResultSet res=stmt.executeQuery();
+            boolean ret = res.next();
+            res.close();
+            stmt.close();
+            return ret;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /*删除好友关系，不存在返回-1，成功删除返回0*/
-    static int deleteFriend(int account_id, int friend_id) {
+    static public int deleteFriend(int account_id, int friend_id) {
         try (Connection connection=DriverManager.getConnection(url, username,password)){
             String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
@@ -106,7 +125,7 @@ public class Friend {
     /**更改昵称
      * 好友关系不存在返回-1
      * 成功更改返回0*/
-    static int changeNickname(int account_id, int friend_id, String name) {
+    static public int changeNickname(int account_id, int friend_id, String name) {
         try (Connection connection=DriverManager.getConnection(url, username, password)){
             String sql="SELECT * FROM friend WHERE account_id=? AND friend_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

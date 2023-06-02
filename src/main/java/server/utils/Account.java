@@ -86,5 +86,21 @@ public class Account {
         }
     }
 
-
+    static public int getIDByUsername(String email) {
+        try(Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="SELECT id FROM account WHERE email=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setString(1,email);
+            ResultSet res=stmt.executeQuery();
+            if(!res.next()) {
+                return -1;
+            }
+            int id=res.getInt("id");
+            res.close();
+            stmt.close();
+            return id;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

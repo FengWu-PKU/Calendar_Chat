@@ -1,6 +1,5 @@
 package client.model;
 
-import client.SocialApp;
 import client.gui.*;
 import common.*;
 
@@ -11,12 +10,10 @@ public class FrameManager {
   // 私有方法，确保不被实例化
   private FrameManager() {}
 
+  // 主窗口
   private static MainFrame mainFrame;
 
-  private static HashMap<Integer, ChatFrame> chatFrames = new HashMap<>();
-
   public static void createMainFrame(int uid) {
-    assert mainFrame == null;
     mainFrame = new MainFrame(uid);
     new ReceiveMessageThread().start();
   }
@@ -24,6 +21,9 @@ public class FrameManager {
   public static MainFrame getMainFrame() {
     return mainFrame;
   }
+
+  // 聊天窗口
+  private static HashMap<Integer, ChatFrame> chatFrames = new HashMap<>();
 
   public static void createChatFrame(int uid, String name) {
     final ChatFrame chatFrame = chatFrames.get(uid);
@@ -34,15 +34,83 @@ public class FrameManager {
       });
     } else {
       chatFrames.put(uid, new ChatFrame(uid, name));
-      SocialApp.writeObject(new Message(MessageType.OPEN_CHAT_WINDOW, uid));
+      Connection.writeObject(new Message(MessageType.OPEN_CHAT_WINDOW, uid));
     }
   }
 
-  public static ChatFrame removeChatFrame(int uid) {
-    return chatFrames.remove(uid);
+  public static void removeChatFrame(int uid) {
+    chatFrames.remove(uid);
   }
 
   public static ChatFrame getChatFrame(int uid) {
     return chatFrames.get(uid);
+  }
+
+  // 修改资料窗口
+  private static ModifyInfoFrame modifyInfoFrame;
+
+  public static void createModifyInfoFrame() {
+    if (modifyInfoFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        modifyInfoFrame.setState(JFrame.NORMAL);
+        modifyInfoFrame.toFront();
+      });
+    } else {
+      modifyInfoFrame = new ModifyInfoFrame();
+      Connection.writeObject(new Message(MessageType.OPEN_MODIFY_WINDOW));
+    }
+  }
+
+  public static void removeModifyInfoFrame() {
+    modifyInfoFrame = null;
+  }
+
+  public static ModifyInfoFrame getModifyInfoFrame() {
+    return modifyInfoFrame;
+  }
+
+  // 添加好友窗口
+  private static AddFriendFrame addFriendFrame;
+
+  public static void createAddFriendFrame() {
+    if (addFriendFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        addFriendFrame.setState(JFrame.NORMAL);
+        addFriendFrame.toFront();
+      });
+    } else {
+      addFriendFrame = new AddFriendFrame();
+    }
+  }
+
+  public static void removeAddFriendFrame() {
+    addFriendFrame = null;
+  }
+
+  public static AddFriendFrame getAddFriendFrame() {
+    return addFriendFrame;
+  }
+
+  // 好友申请窗口
+  private static FriendRequestsFrame friendRequestsFrame;
+
+  public static void createFriendRequestsFrame() {
+    if (friendRequestsFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        friendRequestsFrame.setState(JFrame.NORMAL);
+        friendRequestsFrame.toFront();
+      });
+    } else {
+      friendRequestsFrame = new FriendRequestsFrame();
+      Connection.writeObject(new Message(MessageType.OPEN_REQUESTS_WINDOW));
+    }
+  }
+
+  public static void removeFriendRequestsFrame() {
+    friendRequestsFrame = null;
+  }
+
+  public static FriendRequestsFrame getFriendRequestsFrame() {
+    return friendRequestsFrame;
   }
 }

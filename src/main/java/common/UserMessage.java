@@ -2,8 +2,11 @@ package common;
 
 import java.time.LocalDateTime;
 
+/**
+ * 用户之间发送的消息
+ */
 public class UserMessage implements java.io.Serializable, Comparable<UserMessage> {
-  private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 3L;
 
   private int senderUid, receiverUid;
   private LocalDateTime sendTime;
@@ -51,5 +54,11 @@ public class UserMessage implements java.io.Serializable, Comparable<UserMessage
   @Override
   public int compareTo(UserMessage o) {
     return sendTime.compareTo(o.sendTime);
+  }
+
+  @Override
+  public String toString() {
+    return "UserMessage [senderUid=" + senderUid + ", receiverUid=" + receiverUid + ", sendTime=" + sendTime + ", text="
+        + text + "]";
   }
 }

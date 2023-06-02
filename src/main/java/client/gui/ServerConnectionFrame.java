@@ -1,6 +1,6 @@
 package client.gui;
 
-import client.SocialApp;
+import client.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ServerConnectionFrame extends JFrame implements ActionListener {
   private JTextField serverAddressField = new JTextField("127.0.0.1");
   private JTextField serverPortField = new JTextField("9999");
-  private JButton connectButton;
+  private JButton connectButton = new JButton("连接");
 
   public ServerConnectionFrame() {
     // 窗口设置
@@ -28,12 +28,12 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
     InfoInputPanel contentPane = new InfoInputPanel();
     setContentPane(contentPane);
     JPanel buttonPanel = new JPanel(new FlowLayout());
-    connectButton = new JButton("连接");
     buttonPanel.add(connectButton);
 
     contentPane.addTextField("服务器地址:", serverAddressField);
     contentPane.addTextField("端口号:", serverPortField);
     contentPane.addComponent(buttonPanel);
+    getRootPane().setDefaultButton(connectButton);
 
     // 设置监听器
     connectButton.addActionListener(this);
@@ -48,7 +48,7 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
       try {
         String serverAddress = serverAddressField.getText();
         int serverPort = Integer.parseInt(serverPortField.getText());
-        SocialApp.connect(serverAddress, serverPort);
+        Connection.connect(serverAddress, serverPort);
         new LoginFrame();
         dispose();
       } catch (NumberFormatException ex) {

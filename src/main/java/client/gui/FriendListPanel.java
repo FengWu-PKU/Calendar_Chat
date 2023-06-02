@@ -21,6 +21,7 @@ public class FriendListPanel extends JPanel {
     private JLabel lastMessageLabel;
     private JLabel lastMessageTimeLabel;
     private JLabel unreadMessagesLabel;
+    private JPopupMenu popupMenu = new JPopupMenu();
 
     public FriendItemPanel(FriendItem friend) {
       uid = friend.getUid();
@@ -81,8 +82,31 @@ public class FriendListPanel extends JPanel {
       add(lastMessageLabel);
       add(unreadMessagesLabel);
 
+      JMenuItem modifyRemarkItem = new JMenuItem("修改备注");
+      JMenuItem deleteFriendItem = new JMenuItem("删除好友");
+      // TODO: 右键菜单样式
+      popupMenu.add(modifyRemarkItem);
+      popupMenu.add(deleteFriendItem);
+      modifyRemarkItem.addActionListener((e) -> new ModifyRemarkFrame(uid));
+      deleteFriendItem.addActionListener((e) -> confirmDeleteFriend());
+
       // 设置监听器
       this.addMouseListener(this);
+    }
+
+    private void confirmDeleteFriend() {
+      String message = "确定要删除 " + nameLabel.getText() + " 吗？";
+      int option = JOptionPane.showConfirmDialog(FrameManager.getMainFrame(), message, "警告",
+          JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (option == JOptionPane.OK_OPTION) {
+        Connection.writeObject(new Message(MessageType.CLIENT_DELETE_FRIEND, uid));
+        FrameManager.getMainFrame().deleteFriend(uid);
+        ChatFrame chatFrame = FrameManager.getChatFrame(uid);
+        if (chatFrame != null) { // 如果聊天窗口开着则关闭
+          chatFrame.dispose();
+          FrameManager.removeChatFrame(uid);
+        }
+      }
     }
 
     public int getUid() {
@@ -91,15 +115,14 @@ public class FriendListPanel extends JPanel {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-      if (mainFriendItemPanel != null) {
-        mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
-      }
-      this.setBackground(new Color(224, 224, 224));
-      mainFriendItemPanel = this;
-      // TODO: 显示日历
-      if (e.getClickCount() == 2) { // 双击打开聊天框
-        FrameManager.createChatFrame(uid, nameLabel.getText());
-        unreadMessagesLabel.setText("");
+      if (e.getButton() == MouseEvent.BUTTON1) {
+        changeMainItem(this, true);
+        if (e.getClickCount() == 2) { // 双击打开聊天框
+          FrameManager.createChatFrame(uid, nameLabel.getText());
+          FrameManager.getMainFrame().alreadyRead(uid);
+        }
+      } else if (e.getButton() == MouseEvent.BUTTON3 && uid != FrameManager.getMainFrame().getUid()) {
+        popupMenu.show(e.getComponent(), e.getX(), e.getY());
       }
     }
 
@@ -129,7 +152,19 @@ public class FriendListPanel extends JPanel {
   FriendItemPanel mainFriendItemPanel;
 
   public FriendListPanel() {
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    setLayout(new GridLayout());
+    add(new LoadingLabel());
+  }
+
+  private void changeMainItem(FriendItemPanel newItem, boolean needUpdate) {
+    if (mainFriendItemPanel != null) {
+      mainFriendItemPanel.setBackground(UIManager.getColor("Panel.background"));
+    }
+    newItem.setBackground(new Color(224, 224, 224));
+    mainFriendItemPanel = newItem;
+    if (needUpdate) {
+      // TODO: 更新日历
+    }
   }
 
   /**
@@ -138,16 +173,25 @@ public class FriendListPanel extends JPanel {
    */
   public void updateFriendList(ArrayList<FriendItem> friendList) {
     removeAll();
+    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     friendList.sort(null);
+    boolean exist = false;
+    FriendItemPanel selfItemPanel = null;
     for (FriendItem friend : friendList) {
       FriendItemPanel friendItemPanel = new FriendItemPanel(friend);
       add(friendItemPanel);
-      if ((mainFriendItemPanel == null && friend.getUid() == FrameManager.getMainFrame().getUid()) ||
-          (mainFriendItemPanel != null && friend.getUid() == mainFriendItemPanel.getUid())) {
-        friendItemPanel.setBackground(new Color(224, 224, 224));
-        mainFriendItemPanel = friendItemPanel;
+      if (friend.getUid() == FrameManager.getMainFrame().getUid()) {
+        selfItemPanel = friendItemPanel;
+      }
+      if (mainFriendItemPanel != null && friend.getUid() == mainFriendItemPanel.getUid()) {
+        changeMainItem(friendItemPanel, false);
+        exist = true;
       }
     }
+    if (!exist) {
+      changeMainItem(selfItemPanel, mainFriendItemPanel != null);
+    }
     revalidate();
+    repaint();
   }
 }

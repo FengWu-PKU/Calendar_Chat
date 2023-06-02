@@ -3,8 +3,12 @@ package common;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 聊天框所需信息
+ * TODO: use UserInfo
+ */
 public class ChatWindowInfo implements java.io.Serializable {
-  private static final long serialVersionUID = 3L;
+  private static final long serialVersionUID = 4L;
 
   private int uid;
   private String name;
@@ -79,5 +83,11 @@ public class ChatWindowInfo implements java.io.Serializable {
 
   public void setHistoryMessages(ArrayList<UserMessage> historyMessages) {
     this.historyMessages = historyMessages;
+  }
+
+  @Override
+  public String toString() {
+    return "ChatWindowInfo [uid=" + uid + ", name=" + name + ", phone=" + phone + ", email=" + email + ", birth="
+        + birth + ", intro=" + intro + ", historyMessages=" + historyMessages + "]";
   }
 }

@@ -94,7 +94,7 @@ public class QQUser {
     }
 
     /*删除账号，账号不存在返回-1，成功删除返回0*/
-    static int deleteUser(int account_id) {
+    static public int deleteUser(int account_id) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT * FROM qq_user WHERE account_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);
@@ -112,6 +112,26 @@ public class QQUser {
             delstmt.close();
             return 0;
         }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static public void ModifyUserInfo(QQUser newinfo) {
+        try (Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="UPDATE qq_user SET usr_name = ?, phone_num = ?, email = ?, account_number = ?, birthday = ?, account_id = ?, descriptor = ?, create_time = ? WHERE account_id=?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, newinfo.usr_name);
+            stmt.setString(2, newinfo.phonenum);
+            stmt.setString(3, newinfo.email);
+            stmt.setString(4, newinfo.account_number);
+            stmt.setDate(5, newinfo.birthday);
+            stmt.setInt(6,newinfo.account_id);
+            stmt.setString(7, newinfo.descriptor);
+            stmt.setTimestamp(8,newinfo.date_t);
+            stmt.setInt(9 ,newinfo.account_id);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

@@ -20,15 +20,21 @@ public class MainFrame extends JFrame {
     // 窗口设置
     setTitle("社交日历");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(300, 700);
+    setSize(350, 800);
     setLocationRelativeTo(null);
 
     // 窗口布局
+    JScrollPane scrollPane = new JScrollPane(friendListPanel);
+    scrollPane.addMouseWheelListener((e) -> {
+      int scrollAmount = e.getWheelRotation() * 20;
+      JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+      int newValue = verticalScrollBar.getValue() + scrollAmount;
+      verticalScrollBar.setValue(newValue);
+    });
     JPanel sidebar = new JPanel(new BorderLayout());
-    sidebar.add(new JScrollPane(friendListPanel), BorderLayout.CENTER);
+    sidebar.add(scrollPane, BorderLayout.CENTER);
     sidebar.add(buttonsPanel, BorderLayout.SOUTH);
-    
-    add(sidebar);
+    getContentPane().add(sidebar);
 
     // 显示界面
     setVisible(true);
@@ -45,8 +51,6 @@ public class MainFrame extends JFrame {
   private void preprocessFriendItem(FriendItem friend) {
     if (friend.getUid() == uid) {
       friend.setLastMessageTime(LocalDateTime.of(9999, 12, 31, 23, 59, 59));
-    } else {
-      assert friend.getLastMessageTime() != null;
     }
     if (friend.getLastMessage() == null) {
       friend.setLastMessage("");
@@ -75,17 +79,11 @@ public class MainFrame extends JFrame {
   }
 
   /**
-   * 更新单个好友条目
-   * @param newFriend 新的好友条目
+   * 消息已读
+   * @param friendUid 好友 uid
    */
-  public void updateSingleFriend(FriendItem newFriend) {
-    preprocessFriendItem(newFriend);
-    FriendItem friend = findFriendItemByUid(newFriend.getUid());
-    if (friend == null) {
-      friendList.add(newFriend);
-    } else {
-      friendList.set(friendList.indexOf(friend), newFriend);
-    }
+  public void alreadyRead(int friendUid) {
+    findFriendItemByUid(friendUid).setUnreadMessages(0);
     friendListPanel.updateFriendList(friendList);
   }
 
@@ -100,16 +98,61 @@ public class MainFrame extends JFrame {
       friendUid = message.getReceiverUid();
     }
     FriendItem friend = findFriendItemByUid(friendUid);
-    int unreadMessages = isRead ? 0 : friend.getUnreadMessages() + 1;
-    FriendItem newFriend = new FriendItem(friendUid, friend.getUsername(), friend.getRemark(), message.getText(),
-        message.getSendTime(), unreadMessages);
-    updateSingleFriend(newFriend);
+    if (friend == null) {
+      friend = new FriendItem(friendUid, message.getText(), null, null, message.getSendTime(), 0);
+      preprocessFriendItem(friend);
+      friendList.add(friend);
+    } else if (friendUid == getUid()) {
+      friend.setLastMessage(message.getText());
+    } else {
+      int unreadMessages = isRead ? 0 : friend.getUnreadMessages() + 1;
+      friend.setLastMessage(message.getText());
+      friend.setLastMessageTime(message.getSendTime());
+      friend.setUnreadMessages(unreadMessages);
+    }
+    friendListPanel.updateFriendList(friendList);
   }
 
-  public void test() {
-    friendList.add(new FriendItem(1, "Alice", "AAAAAAAAAAAA", "你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa！", LocalDateTime.of(2022, 12, 29, 12, 20), 0));
-    friendList.add(new FriendItem(2, "Bob", "B", "Hello!", LocalDateTime.of(2023, 5, 31, 2, 30), 100));
-    friendList.add(new FriendItem(3, "John", null, null, LocalDateTime.of(2023, 5, 20, 13, 14), 0));
-    updateFriendList(friendList);
+  /**
+   * 好友备注
+   * @param friendUid 好友 uid
+   * @return 备注
+   */
+  public String getRemark(int friendUid) {
+    return findFriendItemByUid(friendUid).getRemark();
+  }
+
+  /**
+   * 修改好友备注
+   * @param friendUid 好友 uid
+   * @param remark 新备注
+   */
+  public void modifyRemark(int friendUid, String remark) {
+    findFriendItemByUid(friendUid).setRemark(remark);
+    friendListPanel.updateFriendList(friendList);
+  }
+
+  /**
+   * 删除好友
+   * @param friendUid 好友 uid
+   */
+  public void deleteFriend(int friendUid) {
+    friendList.remove(findFriendItemByUid(friendUid));
+    friendListPanel.updateFriendList(friendList);
+  }
+
+  /**
+   * 更新好友申请数量
+   * @param num 好友申请数量
+   */
+  public void updateNumFriendRequests(int num) {
+    buttonsPanel.updateNumFriendRequests(num);
+  }
+
+  /**
+   * 好友申请数量加 1
+   */
+  public void increaseNumFriendRequests() {
+    buttonsPanel.increaseNumFriendRequests();
   }
 }
