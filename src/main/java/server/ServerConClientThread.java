@@ -95,6 +95,7 @@ public class ServerConClientThread {
     }
 
     void AlreadyRead(int id) { // id 已读了 account_id 发的所有消息
+        System.out.println(id+" 已读了 "+account_id+" 发的所有消息");
         server.utils.Message.readMsg(id, account_id);
     }
 
