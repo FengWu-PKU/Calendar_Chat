@@ -94,7 +94,7 @@ public class QQUser {
     }
 
     /*删除账号，账号不存在返回-1，成功删除返回0*/
-    static int deleteUser(int account_id) {
+    static public int deleteUser(int account_id) {
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
             String sql="SELECT * FROM qq_user WHERE account_id=?";
             PreparedStatement stmt=connection.prepareStatement(sql);

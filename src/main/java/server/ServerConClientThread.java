@@ -71,7 +71,6 @@ public class ServerConClientThread {
         if (tmp.birthday != null) {
             Date bir = new Date(tmp.birthday.getTime());
             localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            System.out.println(bir);
         }
         ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(A, B);
         ChatWindowInfo cwi = new ChatWindowInfo(B, tmp.usr_name, tmp.phonenum, tmp.email, localbir, tmp.descriptor, msglist);
@@ -197,6 +196,29 @@ public class ServerConClientThread {
         }
     }
 
+    void GetUserInfo() throws IOException {
+        System.out.println("用户 "+account_id+" 想要修改个人资料");
+        QQUser tmp = QQUser.getUserByAccountID(account_id);
+        LocalDate localbir = null;
+        if (tmp.birthday != null) {
+            Date bir = new Date(tmp.birthday.getTime());
+            localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+        UserInfo ret = new UserInfo(tmp.usr_name, tmp.phonenum, tmp.email, localbir, tmp.descriptor);
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        oos.writeObject(new Message(MessageType.USER_INFO, ret));
+    }
+
+    void ModifyUserInfo(UserInfo newinfo) {
+        System.out.println("用户 "+account_id+" 修改了个人资料");
+        java.sql.Date bir = null;
+        if (newinfo.getBirth() != null) bir = java.sql.Date.valueOf(newinfo.getBirth());
+        QQUser tmp = new QQUser(account_id, newinfo.getName(), newinfo.getIntro(), newinfo.getPhone(), newinfo.getEmail(),
+                Account.getUsernameByID(account_id), bir);
+        QQUser.deleteUser(account_id);
+        QQUser.insertUser(tmp);
+    }
+
     public void run() {
         try {
             GetMainWindowInfo();
@@ -228,6 +250,10 @@ public class ServerConClientThread {
                     ChangeNickName((FriendRemark)m.getContent());
                 } else if (m.getMessageType() == MessageType.CLIENT_DELETE_FRIEND) {
                     DeleteFriend((Integer)m.getContent());
+                } else if (m.getMessageType() == MessageType.OPEN_MODIFY_WINDOW) {
+                    GetUserInfo();
+                } else if (m.getMessageType() == MessageType.MODIFY_INFO) {
+                    ModifyUserInfo((UserInfo)m.getContent());
                 }
             } catch (Exception e){
                 e.printStackTrace();
