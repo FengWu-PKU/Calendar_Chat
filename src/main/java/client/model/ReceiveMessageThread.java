@@ -71,6 +71,16 @@ public class ReceiveMessageThread extends Thread {
             friendRequestsFrame.updateRequestList(requestList);
           }
         });
+      } else if (message.getMessageType() == MessageType.NEW_REQUEST) { // 实时好友申请
+        FriendRequestItem request = (FriendRequestItem) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          FriendRequestsFrame friendRequestsFrame = FrameManager.getFriendRequestsFrame();
+          if (friendRequestsFrame != null) {
+            friendRequestsFrame.addRequest(request);
+          } else {
+            FrameManager.getMainFrame().increaseNumFriendRequests();
+          }
+        });
       } else if (message.getMessageType() == MessageType.ACCEPT_MESSAGE) { // 好友申请同意
         UserMessage userMessage = (UserMessage) message.getContent();
         SwingUtilities.invokeLater(() -> {

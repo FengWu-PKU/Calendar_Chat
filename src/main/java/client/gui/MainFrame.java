@@ -108,6 +108,13 @@ public class MainFrame extends JFrame {
     buttonsPanel.updateNumFriendRequests(num);
   }
 
+  /**
+   * 好友申请数量加 1
+   */
+  public void increaseNumFriendRequests() {
+    buttonsPanel.increaseNumFriendRequests();
+  }
+
   public void test() {
     friendList.add(new FriendItem(1, "Alice", "AAAAAAAAAAAA", "你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa！", LocalDateTime.of(2022, 12, 29, 12, 20), 0));
     friendList.add(new FriendItem(2, "Bob", "B", "Hello!", LocalDateTime.of(2023, 5, 31, 2, 30), 100));

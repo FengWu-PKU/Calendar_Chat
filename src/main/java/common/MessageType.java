@@ -59,7 +59,7 @@ public enum MessageType {
   REQUEST_LIST,
 
   /**
-   * 实时好友申请 content: FriendRequestItem
+   * 实时好友申请 content: FriendRequestItem = request
    */
   NEW_REQUEST,
 
