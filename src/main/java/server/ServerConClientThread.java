@@ -94,9 +94,9 @@ public class ServerConClientThread {
         }
     }
 
-    void AlreadyRead(int id) { // id 已读了 account_id 发的所有消息
-        System.out.println(id+" 已读了 "+account_id+" 发的所有消息");
-        server.utils.Message.readMsg(id, account_id);
+    void AlreadyRead(int id) { // account_id 已读了 id 发的所有消息
+        System.out.println(account_id+" 已读了 "+id+" 发的所有消息");
+        server.utils.Message.readMsg(account_id, id);
     }
 
     boolean AddFriend(int A, String Busrname) throws IOException { // A 申请加 B 的好友
