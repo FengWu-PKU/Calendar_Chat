@@ -72,6 +72,10 @@ public class MainFrame extends JFrame {
     return null;
   }
 
+  public void alreadyRead(int friendUid) {
+    findFriendItemByUid(friendUid).setUnreadMessages(0);
+  }
+
   /**
    * 新消息
    * @param message 新消息

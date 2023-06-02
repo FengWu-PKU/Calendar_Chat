@@ -99,6 +99,7 @@ public class FriendListPanel extends JPanel {
       // TODO: 显示日历
       if (e.getClickCount() == 2) { // 双击打开聊天框
         FrameManager.createChatFrame(uid, nameLabel.getText());
+        FrameManager.getMainFrame().alreadyRead(uid);
         unreadMessagesLabel.setText("");
       }
     }

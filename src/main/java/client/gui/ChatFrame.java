@@ -2,6 +2,7 @@ package client.gui;
 
 import client.SocialApp;
 import client.model.*;
+import client.utils.*;
 import common.*;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 
     // 窗口设置
     setTitle("聊天：" + name);
-    setSize(800, 600);
+    setSize(750, 600);
     setLocationRelativeTo(null);
 
     // 组件设置
@@ -66,6 +67,10 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     String text = messageArea.getText();
     if (text.equals("")) {
       JOptionPane.showMessageDialog(this, "消息不能为空", "错误", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    if (!Validators.isValidMessage(text)) {
+      JOptionPane.showMessageDialog(this, Validators.invalidMessageMessage, "错误", JOptionPane.ERROR_MESSAGE);
       return;
     }
     UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), text);
