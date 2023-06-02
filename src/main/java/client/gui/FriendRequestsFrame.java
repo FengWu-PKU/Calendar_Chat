@@ -60,7 +60,7 @@ public class FriendRequestsFrame extends JFrame {
    * @param request 要增加的好友申请
    */
   public void addRequest(FriendRequestItem request) {
-    requestList.remove(request);
+    requestList.add(request);
     friendRequestsPanel.updateRequestList(requestList);
   }
 }

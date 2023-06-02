@@ -85,8 +85,8 @@ public class FriendRequestsPanel extends JPanel {
    */
   public void updateRequestList(ArrayList<FriendRequestItem> requestList) {
     removeAll();
-    for (FriendRequestItem request : requestList) {
-      RequestItemPanel friendItemPanel = new RequestItemPanel(request);
+    for (int i = requestList.size() - 1; i >= 0; i--) {
+      RequestItemPanel friendItemPanel = new RequestItemPanel(requestList.get(i));
       add(friendItemPanel);
     }
     repaint();
