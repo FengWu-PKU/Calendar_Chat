@@ -23,7 +23,14 @@ public class FriendRequestsFrame extends JFrame {
     setLocationRelativeTo(FrameManager.getMainFrame());
 
     // 窗口布局
-    setContentPane(new JScrollPane(friendRequestsPanel));
+    JScrollPane scrollPane = new JScrollPane(friendRequestsPanel);
+    scrollPane.addMouseWheelListener((e) -> {
+      int scrollAmount = e.getWheelRotation() * 20;
+      JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+      int newValue = verticalScrollBar.getValue() + scrollAmount;
+      verticalScrollBar.setValue(newValue);
+    });
+    setContentPane(scrollPane);
 
     // 设置监听器
     addWindowListener(new WindowAdapter() {

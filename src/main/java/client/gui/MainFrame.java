@@ -24,8 +24,15 @@ public class MainFrame extends JFrame {
     setLocationRelativeTo(null);
 
     // 窗口布局
+    JScrollPane scrollPane = new JScrollPane(friendListPanel);
+    scrollPane.addMouseWheelListener((e) -> {
+      int scrollAmount = e.getWheelRotation() * 20;
+      JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+      int newValue = verticalScrollBar.getValue() + scrollAmount;
+      verticalScrollBar.setValue(newValue);
+    });
     JPanel sidebar = new JPanel(new BorderLayout());
-    sidebar.add(new JScrollPane(friendListPanel), BorderLayout.CENTER);
+    sidebar.add(scrollPane, BorderLayout.CENTER);
     sidebar.add(buttonsPanel, BorderLayout.SOUTH);
     getContentPane().add(sidebar);
 

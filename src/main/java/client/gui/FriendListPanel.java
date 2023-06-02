@@ -101,6 +101,11 @@ public class FriendListPanel extends JPanel {
       if (option == JOptionPane.OK_OPTION) {
         Connection.writeObject(new Message(MessageType.CLIENT_DELETE_FRIEND, uid));
         FrameManager.getMainFrame().deleteFriend(uid);
+        ChatFrame chatFrame = FrameManager.getChatFrame(uid);
+        if (chatFrame != null) { // 如果聊天窗口开着则关闭
+          chatFrame.dispose();
+          FrameManager.removeChatFrame(uid);
+        }
       }
     }
 
