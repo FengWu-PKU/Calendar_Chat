@@ -117,7 +117,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
     getContentPane().add(chatPane, BorderLayout.CENTER);
     getContentPane().add(new JScrollPane(profilePane), BorderLayout.EAST);
 
-    profilePane.updateProfile(info);
+    profilePane.updateProfile(info.getUserInfo());
     recordPane.updateHistoryMessages(info.getHistoryMessages());
     
     revalidate();

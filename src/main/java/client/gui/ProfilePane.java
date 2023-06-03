@@ -17,24 +17,24 @@ public class ProfilePane extends JTextArea {
 
   /**
    * 更新资料
-   * @param info 聊天框中需要的信息
+   * @param userInfo 个人资料
    */
-  public void updateProfile(ChatWindowInfo info) {
+  public void updateProfile(UserInfo userInfo) {
     setText(name + " 的个人资料：");
-    if (info.getName() != null) {
-      append("\n姓名：" + info.getName());
+    if (userInfo.getName() != null) {
+      append("\n姓名：" + userInfo.getName());
     }
-    if (info.getPhone() != null) {
-      append("\n电话：" + info.getPhone());
+    if (userInfo.getPhone() != null) {
+      append("\n电话：" + userInfo.getPhone());
     }
-    if (info.getEmail() != null) {
-      append("\n邮箱：" + info.getEmail());
+    if (userInfo.getEmail() != null) {
+      append("\n邮箱：" + userInfo.getEmail());
     }
-    if (info.getBirth() != null) {
-      append("\n生日：" + info.getBirth().toString());
+    if (userInfo.getBirth() != null) {
+      append("\n生日：" + userInfo.getBirth().toString());
     }
-    if (info.getIntro() != null) {
-      append("\n简介：" + info.getIntro());
+    if (userInfo.getIntro() != null) {
+      append("\n简介：" + userInfo.getIntro());
     }
     revalidate();
   }

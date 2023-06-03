@@ -76,7 +76,7 @@ public class ServerConClientThread {
             localbir = bir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
         ArrayList<UserMessage> msglist = GetMessageBetweenAAndB(A, B);
-        ChatWindowInfo cwi = new ChatWindowInfo(B, tmp.usr_name, tmp.phonenum, tmp.email, localbir, tmp.descriptor, msglist);
+        ChatWindowInfo cwi = new ChatWindowInfo(B, new UserInfo(tmp.usr_name, tmp.phonenum, tmp.email, localbir, tmp.descriptor), msglist);
         System.out.println(B+" 发给 "+A+" 的未读消息标记为已读");
         server.utils.Message.readMsg(A, B);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
