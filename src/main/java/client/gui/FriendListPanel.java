@@ -84,7 +84,6 @@ public class FriendListPanel extends JPanel {
 
       JMenuItem modifyRemarkItem = new JMenuItem("修改备注");
       JMenuItem deleteFriendItem = new JMenuItem("删除好友");
-      // TODO: 右键菜单样式
       popupMenu.add(modifyRemarkItem);
       popupMenu.add(deleteFriendItem);
       modifyRemarkItem.addActionListener((e) -> new ModifyRemarkFrame(uid));
