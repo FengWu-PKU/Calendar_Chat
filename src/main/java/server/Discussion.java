@@ -32,7 +32,7 @@ public class Discussion {
 
     public void EraseUser(int id) throws IOException {
         lock.lock();
-        users.remove(id);
+        users.remove((Integer) id);
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
