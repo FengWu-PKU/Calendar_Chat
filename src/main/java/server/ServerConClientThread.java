@@ -1,11 +1,14 @@
 package server;
 
+import client.gui.DiscussionFrame;
 import common.*;
 import server.utils.Account;
 import server.utils.Friend;
 import server.utils.NewFriend;
 import server.utils.QQUser;
+import server.Discussion;
 
+import javax.naming.ldap.SortKey;
 import java.net.*;
 import java.util.*;
 import java.io.*;
@@ -19,6 +22,10 @@ public class ServerConClientThread {
     public ServerConClientThread(Socket s, int id) {
         this.s = s;
         this.account_id = id;
+    }
+
+    public Socket GetSocket() {
+        return s;
     }
 
     ArrayList<UserMessage> GetMessageBetweenAAndB(int A, int B) { // 按照时间排序 只保留时间最近的50条
@@ -224,6 +231,69 @@ public class ServerConClientThread {
         System.out.println("用户 "+account_id+" 修改了个人资料");
     }
 
+    Discussion discussion;
+    void CreateDiscussion() {
+        System.out.println("用户 "+account_id+" 新创建了一个会议");
+        discussion = new Discussion(account_id);
+    }
+
+    void ExitDiscussion() throws IOException {
+        System.out.println("用户 "+account_id+" 退出了会议");
+        discussion.EraseUser(account_id);
+        discussion = null;
+    }
+
+    void JoinDiscussion(int id) throws IOException {
+        System.out.println("用户 "+account_id+" 加入了用户 "+id+" 所在的会议");
+        ServerConClientThread sid = ManageClientThread.getClientThread(id);
+        discussion = sid.discussion;
+        discussion.InsertUser(id);
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        oos.writeObject(new Message(MessageType.DISCUSSION_INFO, discussion.GetDiscussionInfo()));
+    }
+
+    void SendDiscussionMessage(UserMessage um) throws IOException {
+        System.out.println("用户 "+account_id+" 在会议里发了一条消息");
+        discussion.AddMessage(um);
+    }
+
+    void DiscussionDraw(Draw draw) throws IOException {
+        System.out.println("用户 "+account_id+" 在画图板上加了一笔");
+        discussion.AddDraw(draw);
+    }
+
+    void DiscussionClearPaint() throws IOException {
+        System.out.println("用户 "+account_id+" 清空了会议的画图板");
+        discussion.ClearPaint();
+    }
+
+    void DiscussionCLearMessage() throws IOException {
+        System.out.println("用户 "+account_id+" 清空了会议的消息记录");
+        discussion.ClearMessage();
+    }
+
+    void DiscussionInviteFriend(int id) throws IOException {
+        System.out.println("用户 "+account_id+" 邀请用户 "+id+" 加入会议");
+        ServerConClientThread sid = ManageClientThread.getClientThread(id);
+        if (sid == null) {
+            System.out.println("用户 "+id+" 不在线");
+            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+            oos.writeObject(new Message(MessageType.INVITE_RESULT, -1));
+            return;
+        }
+        if (sid.discussion != null) {
+            System.out.println("用户 "+id+" 已经在会议中");
+            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+            oos.writeObject(new Message(MessageType.INVITE_RESULT, 0));
+            return;
+        }
+        System.out.println("邀请成功");
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        oos.writeObject(new Message(MessageType.INVITE_RESULT, 1));
+        oos = new ObjectOutputStream((sid.GetSocket()).getOutputStream());
+        oos.writeObject(new Message(MessageType.SERVER_INVITE_FRIEND, account_id));
+    }
+
     public void run() {
         try {
             GetMainWindowInfo();
@@ -241,8 +311,9 @@ public class ServerConClientThread {
                     GetChatWindowInfo(A, B);
                 } else if (m.getMessageType() == MessageType.CLIENT_SEND_MESSAGE) {
                     UserMessage tmp = (UserMessage)m.getContent();
-                    if (tmp.getText() == null) CreateFriend(tmp);
-                        else SendMessage(tmp);
+                    if (tmp.getReceiverUid() == 0) SendDiscussionMessage((UserMessage)m.getContent());
+                    else if (tmp.getText() == null) CreateFriend(tmp);
+                    else SendMessage(tmp);
                 } else if (m.getMessageType() == MessageType.ALREADY_READ) {
                     AlreadyRead((Integer)m.getContent());
                 } else if (m.getMessageType() == MessageType.ADD_FRIEND_REQUEST) {
@@ -259,6 +330,20 @@ public class ServerConClientThread {
                     GetUserInfo();
                 } else if (m.getMessageType() == MessageType.MODIFY_INFO) {
                     ModifyUserInfo((UserInfo)m.getContent());
+                } else if (m.getMessageType() == MessageType.CREATE_DISCUSSION) {
+                    CreateDiscussion();
+                } else if (m.getMessageType() == MessageType.CLIENT_EXIT_DISCUSSION) {
+                    ExitDiscussion();
+                } else if (m.getMessageType() == MessageType.CLIENT_JOIN_DISCUSSION) {
+                    JoinDiscussion((Integer)m.getContent());
+                } else if (m.getMessageType() == MessageType.CLIENT_DRAW) {
+                    DiscussionDraw((Draw)m.getContent());
+                } else if (m.getMessageType() == MessageType.CLIENT_CLEAR_PAINT) {
+                    DiscussionClearPaint();
+                } else if (m.getMessageType() == MessageType.CLIENT_CLEAR_MESSAGE) {
+                    DiscussionCLearMessage();
+                } else if (m.getMessageType() == MessageType.CLIENT_INVITE_FRIEND) {
+                    DiscussionInviteFriend((Integer)m.getContent());
                 }
             } catch (Exception e){
                 e.printStackTrace();
