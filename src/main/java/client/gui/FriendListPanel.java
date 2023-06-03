@@ -82,6 +82,7 @@ public class FriendListPanel extends JPanel {
       add(lastMessageLabel);
       add(unreadMessagesLabel);
 
+      // TODO: 右键菜单样式
       JMenuItem modifyRemarkItem = new JMenuItem("修改备注");
       JMenuItem deleteFriendItem = new JMenuItem("删除好友");
       popupMenu.add(modifyRemarkItem);

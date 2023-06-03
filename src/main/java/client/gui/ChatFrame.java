@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * 聊天窗口
+ */
 public class ChatFrame extends JFrame {
   private ChatPane chatPane;
   private ProfilePane profilePane;

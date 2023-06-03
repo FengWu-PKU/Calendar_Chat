@@ -4,6 +4,9 @@ import common.*;
 
 import javax.swing.*;
 
+/**
+ * 个人资料面板
+ */
 public class ProfilePane extends JTextArea {
   private String name;
 

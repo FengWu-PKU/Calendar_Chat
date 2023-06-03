@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * 在线讨论窗口
+ */
 public class DiscussionFrame extends JFrame {
   private PaintPanel paintPanel = new PaintPanel();
   private JButton showButton = new JButton("用户列表");

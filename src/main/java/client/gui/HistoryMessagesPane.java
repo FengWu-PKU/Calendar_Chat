@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 消息记录面板
+ */
 public class HistoryMessagesPane extends JTextArea {
   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private HashMap<Integer, String> nameMap = new HashMap<>();

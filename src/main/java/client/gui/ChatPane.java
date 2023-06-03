@@ -10,6 +10,9 @@ import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * 聊天区
+ */
 public class ChatPane extends JSplitPane implements ActionListener, KeyListener {
   private int uid;
   private HistoryMessagesPane recordPane = new HistoryMessagesPane();
