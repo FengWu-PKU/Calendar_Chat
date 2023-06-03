@@ -25,6 +25,14 @@ public class HistoryMessagesPane extends JTextArea {
     nameMap.put(uid, name);
   }
 
+  public void removeUid(int uid) {
+    nameMap.remove(uid);
+  }
+
+  public HashMap<Integer, String> getNameMap() {
+    return nameMap;
+  }
+
   private void addMessageWithoutRevalidate(UserMessage message) {
     append("\n");
     append(nameMap.get(message.getSenderUid()) + " " + message.getSendTime().format(formatter) + "\n");

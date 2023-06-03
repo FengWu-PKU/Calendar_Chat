@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class FriendRequestsPanel extends JPanel {
   // 单个好友申请条目
-  private class RequestItemPanel extends AbstractFriendItem {
+  private class RequestItemPanel extends AbstractUserItem {
     private FriendRequestItem request;
     private JButton acceptButton = new JButton("同意");
     private JButton rejectButton = new JButton("拒绝");

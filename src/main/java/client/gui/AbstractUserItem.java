@@ -5,11 +5,11 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public abstract class AbstractFriendItem extends JPanel implements ActionListener {
+public abstract class AbstractUserItem extends JPanel implements ActionListener {
   private JLabel usernameLabel = new JLabel();
   private JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-  public AbstractFriendItem() {
+  public AbstractUserItem() {
     setMaximumSize(new Dimension(this.getMaximumSize().width, 60));
     setPreferredSize(new Dimension(this.getPreferredSize().width, 60));
     setMinimumSize(new Dimension(this.getMinimumSize().width, 60));

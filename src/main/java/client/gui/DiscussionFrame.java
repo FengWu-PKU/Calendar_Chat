@@ -13,12 +13,14 @@ import java.util.ArrayList;
  */
 public class DiscussionFrame extends JFrame {
   private ArrayList<UserDiscussion> userList = new ArrayList<>();
-
   private PaintPanel paintPanel = new PaintPanel();
   private JButton showButton = new JButton("用户列表");
   private JButton inviteButton = new JButton("邀请好友");
   private JButton clearButton = new JButton("清空消息");
   private ChatPane chatPane = new ChatPane(this);
+
+  private JFrame userListFrame;
+  private JFrame inviteFriendsFrame;
 
   public DiscussionFrame() {
     // 窗口设置
@@ -32,10 +34,44 @@ public class DiscussionFrame extends JFrame {
 
     // 设置监听器
     showButton.addActionListener((e) -> {
-      // TODO: 用户列表
+      if (userListFrame == null) {
+        userListFrame = new JFrame("用户列表");
+        userListFrame.setSize(300, 600);
+        userListFrame.setLocationRelativeTo(DiscussionFrame.this);
+        userListFrame.setContentPane(new FasterScrollPane(new DiscussionUsersPanel(userList)));
+        userListFrame.setVisible(true);
+        userListFrame.addWindowListener(new WindowAdapter() {
+          @Override
+          public void windowClosing(WindowEvent e) {
+            userListFrame = null;
+          }
+        });
+      } else {
+        userListFrame.setState(JFrame.NORMAL);
+        userListFrame.toFront();
+      }
     });
     inviteButton.addActionListener((e) -> {
-      // TODO: 邀请好友
+      if (inviteFriendsFrame == null) {
+        ArrayList<UserDiscussion> inviteList = FrameManager.getMainFrame().getSimpleFriendList();
+        inviteList.removeIf((o) -> {
+          return chatPane.getNameMap().containsKey(o.getUid());
+        });
+        inviteFriendsFrame = new JFrame("邀请好友");
+        inviteFriendsFrame.setSize(300, 600);
+        inviteFriendsFrame.setLocationRelativeTo(DiscussionFrame.this);
+        inviteFriendsFrame.setContentPane(new FasterScrollPane(new InviteFriendsPanel(inviteList)));
+        inviteFriendsFrame.setVisible(true);
+        inviteFriendsFrame.addWindowListener(new WindowAdapter() {
+          @Override
+          public void windowClosing(WindowEvent e) {
+            inviteFriendsFrame = null;
+          }
+        });
+      } else {
+        inviteFriendsFrame.setState(JFrame.NORMAL);
+        inviteFriendsFrame.toFront();
+      }
     });
     clearButton.addActionListener((e) -> {
       int option = JOptionPane.showConfirmDialog(DiscussionFrame.this, "确定要清空消息吗？", "警告",
@@ -50,6 +86,14 @@ public class DiscussionFrame extends JFrame {
         int option = JOptionPane.showConfirmDialog(DiscussionFrame.this, "确定要退出讨论吗？", "警告",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
+          if (userListFrame != null) {
+            userListFrame.dispose();
+            userListFrame = null;
+          }
+          if (inviteFriendsFrame != null) {
+            inviteFriendsFrame.dispose();
+            inviteFriendsFrame = null;
+          }
           Connection.writeObject(new Message(MessageType.CLIENT_EXIT_DISCUSSION));
           FrameManager.removeDiscussionFrame();
           dispose();

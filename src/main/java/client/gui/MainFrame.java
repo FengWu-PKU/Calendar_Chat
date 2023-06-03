@@ -25,15 +25,8 @@ public class MainFrame extends JFrame {
     setLocationRelativeTo(null);
 
     // 窗口布局
-    JScrollPane scrollPane = new JScrollPane(friendListPanel);
-    scrollPane.addMouseWheelListener((e) -> {
-      int scrollAmount = e.getWheelRotation() * 20;
-      JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
-      int newValue = verticalScrollBar.getValue() + scrollAmount;
-      verticalScrollBar.setValue(newValue);
-    });
     JPanel sidebar = new JPanel(new BorderLayout());
-    sidebar.add(scrollPane, BorderLayout.CENTER);
+    sidebar.add(new FasterScrollPane(friendListPanel), BorderLayout.CENTER);
     sidebar.add(buttonsPanel, BorderLayout.SOUTH);
     getContentPane().add(sidebar);
 
@@ -70,6 +63,14 @@ public class MainFrame extends JFrame {
     this.friendList = friendList;
   }
 
+  public ArrayList<UserDiscussion> getSimpleFriendList() {
+    ArrayList<UserDiscussion> list = new ArrayList<>();
+    for (FriendItem friend : friendList) {
+      list.add(new UserDiscussion(friend.getUid(), friend.getUsername()));
+    }
+    return list;
+  }
+
   private FriendItem findFriendItemByUid(int uid) {
     for (FriendItem friend : friendList) {
       if (friend.getUid() == uid) {
@@ -77,6 +78,15 @@ public class MainFrame extends JFrame {
       }
     }
     return null;
+  }
+
+  /**
+   * 判断是否是好友
+   * @param uid 用户 UID
+   * @return 是好友返回 true，否则返回 false
+   */
+  public boolean isFriend(int uid) {
+    return findFriendItemByUid(uid) != null;
   }
 
   /**
