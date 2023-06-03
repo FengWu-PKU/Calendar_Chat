@@ -18,7 +18,7 @@ public class PaintPanel extends JPanel implements ActionListener {
   private ArrayList<Draw> drawList = new ArrayList<>();
   private PaintColorPanel colorPanel = new PaintColorPanel();
   private PaintWidthPanel widthPanel = new PaintWidthPanel();
-  private JButton clearButton = new JButton("清空");
+  private JButton clearButton = new JButton("清空画板");
   private DrawPanel drawPanel = new DrawPanel();
   private JLabel statusLabel = new JLabel();
 
@@ -44,20 +44,16 @@ public class PaintPanel extends JPanel implements ActionListener {
 
     public void add(int x, int y) {
       Draw d = new Draw(colorPanel.getPaintColor(), widthPanel.getPaintWidth(), prevX, prevY, x, y);
-      drawList.add(d);
       prevX = x;
       prevY = y;
-      d.draw((Graphics2D) getGraphics());
-      // TODO: 改为网络形式
+      Connection.writeObject(new Message(MessageType.CLIENT_DRAW, d));
     }
 
     public void clear() {
       int option = JOptionPane.showConfirmDialog(FrameManager.getDiscussionFrame(), "确定要清空吗？", "警告",
           JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
       if (option == JOptionPane.OK_OPTION) {
-        drawList.clear();
-        repaint();
-        // TODO: 改为网络形式
+        Connection.writeObject(new Message(MessageType.CLIENT_CLEAR_PAINT));
       }
     }
 
@@ -134,6 +130,16 @@ public class PaintPanel extends JPanel implements ActionListener {
     add(statusPanel, BorderLayout.SOUTH);
 
     clearButton.addActionListener(this);
+  }
+
+  public void receiveAdd(Draw d) {
+    drawList.add(d);
+    d.draw((Graphics2D) drawPanel.getGraphics());
+  }
+
+  public void receiveClear() {
+    drawList.clear();
+    drawPanel.repaint();
   }
 
   @Override

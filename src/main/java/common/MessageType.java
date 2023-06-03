@@ -104,6 +104,7 @@ public enum MessageType {
 
   /**
    * 发信息 content: UserMessage = message
+   * <p> text = null 表示该消息为同意好友申请消息 </p>
    * <p> recieverUid = 0 表示该消息为在线讨论的消息 </p>
    */
   CLIENT_SEND_MESSAGE,

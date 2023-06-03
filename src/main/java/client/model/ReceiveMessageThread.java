@@ -34,17 +34,26 @@ public class ReceiveMessageThread extends Thread {
         });
       } else if (message.getMessageType() == MessageType.SERVER_SEND_MESSAGE) { // 收到新消息
         UserMessage userMessage = (UserMessage) message.getContent();
-        int uid = userMessage.getSenderUid();
-        SwingUtilities.invokeLater(() -> {
-          ChatFrame chatFrame = FrameManager.getChatFrame(uid);
-          if (chatFrame != null) { // 如果窗口已打开，则更新窗口并标记为已读
-            chatFrame.addMessage(userMessage);
-            FrameManager.getMainFrame().addMessage(userMessage, true);
-            Connection.writeObject(new Message(MessageType.ALREADY_READ, uid));
-          } else { // 否则只更新主界面
-            FrameManager.getMainFrame().addMessage(userMessage, false);
-          }
-        });
+        if (userMessage.getReceiverUid() == 0) { // 在线讨论消息
+          SwingUtilities.invokeLater(() -> {
+            DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+            if (discussionFrame != null) {
+              discussionFrame.getChatPane().addMessage(userMessage);
+            }
+          });
+        } else { // 好友间消息
+          int uid = userMessage.getSenderUid();
+          SwingUtilities.invokeLater(() -> {
+            ChatFrame chatFrame = FrameManager.getChatFrame(uid);
+            if (chatFrame != null) { // 如果窗口已打开，则更新窗口并标记为已读
+              chatFrame.addMessage(userMessage);
+              FrameManager.getMainFrame().addMessage(userMessage, true);
+              Connection.writeObject(new Message(MessageType.ALREADY_READ, uid));
+            } else { // 否则只更新主界面
+              FrameManager.getMainFrame().addMessage(userMessage, false);
+            }
+          });
+        }
       } else if (message.getMessageType() == MessageType.ADD_FRIEND_RESULT) { // 申请添加好友的结果
         int result = (Integer) message.getContent();
         SwingUtilities.invokeLater(() -> {
@@ -106,6 +115,28 @@ public class ReceiveMessageThread extends Thread {
           ModifyInfoFrame modifyInfoFrame = FrameManager.getModifyInfoFrame();
           if (modifyInfoFrame != null) {
             modifyInfoFrame.updateInfo(info);
+          }
+        });
+      } else if (message.getMessageType() == MessageType.SERVER_DRAW) { // 画图
+        Draw d = (Draw) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.getPaintPanel().receiveAdd(d);
+          }
+        });
+      } else if (message.getMessageType() == MessageType.SERVER_CLEAR_PAINT) { // 清空画图板
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.getPaintPanel().receiveClear();
+          }
+        });
+      } else if (message.getMessageType() == MessageType.SERVER_CLEAR_MESSAGE) { // 清空消息
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.getChatPane().updateHistoryMessages(new ArrayList<>());
           }
         });
       }
