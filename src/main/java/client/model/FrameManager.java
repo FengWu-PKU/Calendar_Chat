@@ -129,6 +129,17 @@ public class FrameManager {
     }
   }
 
+  public static void joinDiscussion(int uid) {
+    if (discussionFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        JOptionPane.showMessageDialog(mainFrame, "你正在参与在线讨论，无法加入其他在线讨论", "错误", JOptionPane.ERROR_MESSAGE);
+      });
+    } else {
+      discussionFrame = new DiscussionFrame();
+      Connection.writeObject(new Message(MessageType.CLIENT_JOIN_DISCUSSION, uid));
+    }
+  }
+
   public static void removeDiscussionFrame() {
     discussionFrame = null;
   }

@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * 聊天区
@@ -52,8 +51,8 @@ public class ChatPane extends JSplitPane implements ActionListener, KeyListener 
     }
   }
 
-  public HashMap<Integer, String> getNameMap() {
-    return recordPane.getNameMap();
+  public HistoryMessagesPane getRecordPane() {
+    return recordPane;
   }
 
   /**

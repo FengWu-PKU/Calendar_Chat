@@ -1,6 +1,7 @@
 package client.gui;
 
 import common.*;
+import client.utils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,6 +88,20 @@ public class MainFrame extends JFrame {
    */
   public boolean isFriend(int uid) {
     return findFriendItemByUid(uid) != null;
+  }
+
+  /**
+   * 获得好友的表示
+   * @param uid 好友 UID
+   * @return 表示
+   */
+  public String getFriendName(int uid) {
+    FriendItem friend = findFriendItemByUid(uid);
+    if (friend == null) {
+      return null;
+    } else {
+      return Converters.combineRemarkAndUsername(friend.getRemark(), friend.getUsername());
+    }
   }
 
   /**

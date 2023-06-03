@@ -54,9 +54,7 @@ public class DiscussionFrame extends JFrame {
     inviteButton.addActionListener((e) -> {
       if (inviteFriendsFrame == null) {
         ArrayList<UserDiscussion> inviteList = FrameManager.getMainFrame().getSimpleFriendList();
-        inviteList.removeIf((o) -> {
-          return chatPane.getNameMap().containsKey(o.getUid());
-        });
+        inviteList.removeIf(o -> chatPane.getRecordPane().getNameMap().containsKey(o.getUid()));
         inviteFriendsFrame = new JFrame("邀请好友");
         inviteFriendsFrame.setSize(300, 600);
         inviteFriendsFrame.setLocationRelativeTo(DiscussionFrame.this);
@@ -141,5 +139,31 @@ public class DiscussionFrame extends JFrame {
 
   public ChatPane getChatPane() {
     return chatPane;
+  }
+
+  public void addUser(UserDiscussion user) {
+    userList.add(user);
+    chatPane.getRecordPane().addName(user.getUid(), user.getUsername());
+    // TODO: 更新聊天框
+  }
+
+  public void removeUser(int uid) {
+    userList.removeIf(o -> o.getUid() == uid);
+    chatPane.getRecordPane().removeUid(uid);
+    // TODO: 更新聊天框
+  }
+
+  public void showInviteResult(int result) {
+    Component father = inviteFriendsFrame;
+    if (father == null) {
+      father = this;
+    }
+    if (result == -1) {
+      JOptionPane.showMessageDialog(father, "该用户处于离线状态", "错误", JOptionPane.ERROR_MESSAGE);
+    } else if (result == 0) {
+      JOptionPane.showMessageDialog(father, "该用户正在进行在线讨论", "错误", JOptionPane.ERROR_MESSAGE);
+    } else if (result == 1) {
+      JOptionPane.showMessageDialog(father, "邀请成功，请等待对方加入", "成功", JOptionPane.INFORMATION_MESSAGE);
+    }
   }
 }

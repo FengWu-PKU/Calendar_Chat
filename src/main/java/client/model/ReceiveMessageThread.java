@@ -141,6 +141,46 @@ public class ReceiveMessageThread extends Thread {
             discussionFrame.getChatPane().updateHistoryMessages(new ArrayList<>());
           }
         });
+      } else if (message.getMessageType() == MessageType.SERVER_EXIT_DISCUSSION) { // 有用户退出
+        int uid = (Integer) message.getContent();
+        DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+        if (discussionFrame != null) {
+          discussionFrame.removeUser(uid);
+        }
+      } else if (message.getMessageType() == MessageType.SERVER_JOIN_DISCUSSION) { // 有用户加入
+        UserDiscussion user = (UserDiscussion) message.getContent();
+        DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+        if (discussionFrame != null) {
+          discussionFrame.addUser(user);
+        }
+      } else if (message.getMessageType() == MessageType.INVITE_RESULT) { // 邀请结果
+        int result = (Integer) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.showInviteResult(result);
+          }
+        });
+      } else if (message.getMessageType() == MessageType.SERVER_INVITE_FRIEND) { // 收到邀请
+        int uid = (Integer) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          String name = FrameManager.getMainFrame().getFriendName(uid);
+          if (name != null) {
+            int option = JOptionPane.showConfirmDialog(null, name + " 邀请你加入在线讨论，是否加入？", "邀请",
+                JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+              FrameManager.joinDiscussion(uid);
+            }
+          }
+        });
+      } else if (message.getMessageType() == MessageType.DISCUSSION_INFO) { // 收到在线讨论信息
+        DiscussionInfo info = (DiscussionInfo) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.updateDiscussion(info);
+          }
+        });
       }
     }
   }
