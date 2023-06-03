@@ -71,8 +71,10 @@ public class ReceiveMessageThread extends Thread {
             } else if (result == 3) {
               JOptionPane.showMessageDialog(addFriendFrame, "该用户已经申请你为好友", "错误", JOptionPane.ERROR_MESSAGE);
             }
-            addFriendFrame.dispose();
-            FrameManager.removeAddFriendFrame();
+            if (addFriendFrame != null) {
+              addFriendFrame.dispose();
+              FrameManager.removeAddFriendFrame();
+            }
           }
         });
       } else if (message.getMessageType() == MessageType.REQUEST_LIST) { // 好友申请列表
