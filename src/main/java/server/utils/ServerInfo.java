@@ -13,7 +13,7 @@ public class ServerInfo {
 
 
     /*展示各个表的信息*/
-    public static void main(String[] args) {
+    static void showCreateTables(String[] args) {
         try (Connection conn = DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SHOW TABLES")) {
@@ -40,4 +40,30 @@ public class ServerInfo {
             e.printStackTrace();
         }
     }
+
+    /*清空所有表*/
+    static void clearAll() {
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            Statement statement = conn.createStatement();
+            // 设置foreign_key_checks为0
+            statement.executeUpdate("SET foreign_key_checks = 0");
+
+            // 清空各个表格
+            statement.executeUpdate("TRUNCATE TABLE account");
+            statement.executeUpdate("TRUNCATE TABLE bill");
+            statement.executeUpdate("TRUNCATE TABLE diary");
+            statement.executeUpdate("TRUNCATE TABLE friend");
+            statement.executeUpdate("TRUNCATE TABLE message");
+            statement.executeUpdate("TRUNCATE TABLE new_friend");
+            statement.executeUpdate("TRUNCATE TABLE qq_user");
+            statement.executeUpdate("TRUNCATE TABLE todolist");
+
+            // 设置foreign_key_checks为1
+            statement.executeUpdate("SET foreign_key_checks = 1");
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
