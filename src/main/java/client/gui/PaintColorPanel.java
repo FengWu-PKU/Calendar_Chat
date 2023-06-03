@@ -1,5 +1,7 @@
 package client.gui;
 
+import client.model.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
@@ -24,8 +26,7 @@ public class PaintColorPanel extends JPanel implements ActionListener {
   private JButton chosenColorButton;
 
   public PaintColorPanel() {
-    setLayout(new FlowLayout());
-    setBackground(new Color(224, 224, 224));
+    setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
 
     BevelBorder border = new BevelBorder(0, Color.gray, Color.white);
 
@@ -58,7 +59,7 @@ public class PaintColorPanel extends JPanel implements ActionListener {
     }
 
     JPanel panel = new JPanel();
-    panel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+    panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
     panel.add(left);
     panel.add(right);
 
@@ -75,8 +76,7 @@ public class PaintColorPanel extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    // TODO: 设置父组件
-    Color color = JColorChooser.showDialog(null, "请选择颜色", getPaintColor());
+    Color color = JColorChooser.showDialog(FrameManager.getDiscussionFrame(), "请选择颜色", getPaintColor());
     if (color != null) {
       chosenColorButton.setBackground(color);
     }

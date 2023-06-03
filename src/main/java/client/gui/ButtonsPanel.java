@@ -14,7 +14,7 @@ public class ButtonsPanel extends JPanel {
   private JButton modifyInfoButton = new JButton("修改资料");
   private JButton addFriendButton = new JButton("添加好友");
   private JButton friendRequestsButton = new JButton("好友申请");
-  private JButton createMeetingButton = new JButton("创建会议");
+  private JButton createDiscussionButton = new JButton("在线讨论");
 
   public ButtonsPanel() {
     numFriendRequests = 0;
@@ -24,23 +24,18 @@ public class ButtonsPanel extends JPanel {
     modifyInfoButton.setPreferredSize(new Dimension(140, modifyInfoButton.getPreferredSize().height));
     addFriendButton.setPreferredSize(new Dimension(140, addFriendButton.getPreferredSize().height));
     friendRequestsButton.setPreferredSize(new Dimension(140, friendRequestsButton.getPreferredSize().height));
-    createMeetingButton.setPreferredSize(new Dimension(140, createMeetingButton.getPreferredSize().height));
+    createDiscussionButton.setPreferredSize(new Dimension(140, createDiscussionButton.getPreferredSize().height));
     add(modifyInfoButton);
     add(addFriendButton);
     add(friendRequestsButton);
-    add(createMeetingButton);
+    add(createDiscussionButton);
     setPreferredSize(new Dimension(350, 90));
 
     // 设置监听器
-    modifyInfoButton.addActionListener((e) -> {
-      FrameManager.createModifyInfoFrame();
-    });
-    addFriendButton.addActionListener((e) -> {
-      FrameManager.createAddFriendFrame();
-    });
-    friendRequestsButton.addActionListener((e) -> {
-      FrameManager.createFriendRequestsFrame();
-    });
+    modifyInfoButton.addActionListener(e -> FrameManager.createModifyInfoFrame());
+    addFriendButton.addActionListener(e -> FrameManager.createAddFriendFrame());
+    friendRequestsButton.addActionListener(e -> FrameManager.createFriendRequestsFrame());
+    createDiscussionButton.addActionListener(e -> FrameManager.createDiscussionFrame());
   }
 
   /**

@@ -113,4 +113,27 @@ public class FrameManager {
   public static FriendRequestsFrame getFriendRequestsFrame() {
     return friendRequestsFrame;
   }
+
+  // 在线讨论窗口
+  private static DiscussionFrame discussionFrame;
+
+  public static void createDiscussionFrame() {
+    if (discussionFrame != null) {
+      SwingUtilities.invokeLater(() -> {
+        JOptionPane.showMessageDialog(mainFrame, "你正在参与在线讨论，无法创建新的在线讨论", "错误", JOptionPane.ERROR_MESSAGE);
+      });
+    } else {
+      discussionFrame = new DiscussionFrame();
+      discussionFrame.updateDiscussion();
+      Connection.writeObject(new Message(MessageType.CREATE_DISCUSSION));
+    }
+  }
+
+  public static void removeDiscussionFrame() {
+    discussionFrame = null;
+  }
+
+  public static DiscussionFrame getDiscussionFrame() {
+    return discussionFrame;
+  }
 }

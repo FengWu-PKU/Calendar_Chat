@@ -33,8 +33,6 @@ public class SocialApp {
   public static void main(String[] args) {
     setDefaultFont();
     setDefaultColor();
-    Color color = javax.swing.JColorChooser.showDialog(null, "选择颜色", Color.black);
-    System.out.println(color);
     new ServerConnectionFrame();
   }
 }

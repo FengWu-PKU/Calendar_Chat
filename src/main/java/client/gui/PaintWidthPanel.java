@@ -14,8 +14,7 @@ public class PaintWidthPanel extends JPanel {
   private JComboBox<Integer> comboBox = new JComboBox<>(options);
 
   public PaintWidthPanel() {
-    setLayout(new FlowLayout());
-    setBackground(new Color(224, 224, 224));
+    setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
     add(new JLabel("粗细: "));
     add(comboBox);
   }

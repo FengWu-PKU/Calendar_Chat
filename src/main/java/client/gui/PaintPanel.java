@@ -1,6 +1,7 @@
 package client.gui;
 
 import client.SocialApp;
+import client.model.*;
 import common.*;
 
 import javax.swing.*;
@@ -26,10 +27,11 @@ public class PaintPanel extends JPanel implements ActionListener {
     private int prevX, prevY;
 
     public DrawPanel() {
-      this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-      this.setBackground(Color.white);
-      this.addMouseListener(this);
-      this.addMouseMotionListener(this);
+      setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+      setBackground(Color.white);
+      setBorder(BorderFactory.createLineBorder(new Color(224, 224, 224)));
+      addMouseListener(this);
+      addMouseMotionListener(this);
     }
 
     @Override
@@ -51,8 +53,7 @@ public class PaintPanel extends JPanel implements ActionListener {
     }
 
     public void clear() {
-      // TODO: 设置父组件
-      int option = JOptionPane.showConfirmDialog(null, "确定要清空吗？", "警告",
+      int option = JOptionPane.showConfirmDialog(FrameManager.getDiscussionFrame(), "确定要清空吗？", "警告",
           JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
       if (option == JOptionPane.OK_OPTION) {
         drawList.clear();
@@ -106,11 +107,10 @@ public class PaintPanel extends JPanel implements ActionListener {
 
     add(drawPanel, BorderLayout.CENTER);
 
-    JPanel settingsPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
-    settingsPanel.setBackground(new Color(224, 224, 224));
+    JPanel settingsPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 0));
     settingsPanel.add(colorPanel);
     settingsPanel.add(widthPanel);
-    
+
     GridBagLayout layout = new GridBagLayout();
     GridBagConstraints constraints = new GridBagConstraints();
     constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -119,19 +119,17 @@ public class PaintPanel extends JPanel implements ActionListener {
     constraints.gridy = 0;
     constraints.weightx = 1;
     layout.setConstraints(settingsPanel, constraints);
-    constraints.gridx = 1;
+    constraints.gridx = 2;
     constraints.gridy = 0;
     constraints.weightx = 0;
     layout.setConstraints(clearButton, constraints);
     JPanel headerPanel = new JPanel(layout);
     headerPanel.setBorder(new EmptyBorder(0, 0, 0, 10));
-    headerPanel.setBackground(new Color(224, 224, 224));
     headerPanel.add(settingsPanel);
     headerPanel.add(clearButton);
     add(headerPanel, BorderLayout.NORTH);
 
     JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 1, 1));
-    statusPanel.setBackground(new Color(224, 224, 224));
     statusLabel.setText(" ");
     statusPanel.add(statusLabel);
     add(statusPanel, BorderLayout.SOUTH);
@@ -144,16 +142,5 @@ public class PaintPanel extends JPanel implements ActionListener {
     if (e.getSource() == clearButton) {
       drawPanel.clear();
     }
-  }
-
-  public static void main(String[] args) {
-    SocialApp.setDefaultFont();
-    SocialApp.setDefaultColor();
-    JFrame paintFrame = new JFrame("画图");
-    paintFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    paintFrame.setSize(900, 650);
-    paintFrame.setLocationRelativeTo(null);
-    paintFrame.setContentPane(new PaintPanel());
-    paintFrame.setVisible(true);
   }
 }

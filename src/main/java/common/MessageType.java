@@ -131,5 +131,10 @@ public enum MessageType {
    */
   MODIFY_INFO,
 
+  /**
+   * 创建在线讨论
+   */
+  CREATE_DISCUSSION,
+
   // TODO: more operations...
 }
