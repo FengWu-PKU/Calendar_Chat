@@ -124,6 +124,9 @@ public class DiscussionFrame extends JFrame {
     getContentPane().add(sidebar, BorderLayout.EAST);
 
     if (info != null) {
+      for (UserDiscussion user : info.getUserList()) {
+        chatPane.getRecordPane().addName(user.getUid(), user.getUsername());
+      }
       userList.addAll(info.getUserList());
       paintPanel.updateDrawList(info.getDrawList());
       chatPane.updateHistoryMessages(info.getMessageList());

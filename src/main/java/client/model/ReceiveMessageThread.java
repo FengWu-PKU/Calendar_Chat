@@ -175,7 +175,8 @@ public class ReceiveMessageThread extends Thread {
         });
       } else if (message.getMessageType() == MessageType.DISCUSSION_INFO) { // 收到在线讨论信息
         DiscussionInfo info = (DiscussionInfo) message.getContent();
-        info.getUserList().remove((Object) Integer.valueOf(FrameManager.getMainFrame().getUid()));
+        int uid = FrameManager.getMainFrame().getUid();
+        info.getUserList().removeIf(o -> o.getUid() == uid);
         SwingUtilities.invokeLater(() -> {
           DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
           if (discussionFrame != null) {
