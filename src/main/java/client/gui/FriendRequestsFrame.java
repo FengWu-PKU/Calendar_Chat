@@ -36,7 +36,6 @@ public class FriendRequestsFrame extends JFrame {
     addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
-        super.windowClosing(e);
         FrameManager.removeFriendRequestsFrame();
       }
     });

@@ -38,7 +38,6 @@ public class AddFriendFrame extends JFrame implements ActionListener {
     addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
-        super.windowClosing(e);
         FrameManager.removeAddFriendFrame();
       }
     });

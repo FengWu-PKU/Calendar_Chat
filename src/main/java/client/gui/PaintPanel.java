@@ -1,6 +1,5 @@
 package client.gui;
 
-import client.SocialApp;
 import client.model.*;
 import common.*;
 

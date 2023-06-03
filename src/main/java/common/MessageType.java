@@ -79,6 +79,21 @@ public enum MessageType {
    */
   USER_INFO,
 
+  /**
+   * 在线讨论：画图 content: Draw = draw
+   */
+  SERVER_DRAW,
+
+  /**
+   * 在线讨论：清空画图 content = null
+   */
+  SERVER_CLEAR_PAINT,
+
+  /**
+   * 在线讨论：清空消息 content = null
+   */
+  SERVER_CLEAR_MESSAGE,
+
   // 以下为客户端到服务端的消息
 
   /**
@@ -132,9 +147,34 @@ public enum MessageType {
   MODIFY_INFO,
 
   /**
-   * 创建在线讨论
+   * 创建在线讨论 content = null
    */
   CREATE_DISCUSSION,
+
+  /**
+   * 退出在线讨论 content = null
+   */
+  EXIT_DISCUSSION,
+
+  /**
+   * 在线讨论：画图 content: Draw = draw
+   */
+  CLIENT_DRAW,
+
+  /**
+   * 在线讨论：清空画图 content = null
+   */
+  CLIENT_CLEAR_PAINT,
+
+  /**
+   * 在线讨论：清空消息 content = null
+   */
+  CLIENT_CLEAR_MESSAGE,
+
+  /**
+   * 加入在线讨论 content: Integer = uid
+   */
+  JOIN_DISCUSSION,
 
   // TODO: more operations...
 }
