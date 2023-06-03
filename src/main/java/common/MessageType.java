@@ -113,6 +113,12 @@ public enum MessageType {
    */
   DISCUSSION_INFO,
 
+  /**
+   * 邀请结果 content: Integer = inviteResult
+   * <p> -1 用户离线，0 用户正在进行在线讨论，1 邀请成功 </p>
+   */
+  INVITE_RESULT,
+
   // 以下为客户端到服务端的消息
 
   /**
