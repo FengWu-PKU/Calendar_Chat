@@ -247,6 +247,11 @@ public class ServerConClientThread {
         System.out.println("用户 "+account_id+" 加入了用户 "+id+" 所在的会议");
         ServerConClientThread sid = ManageClientThread.getClientThread(id);
         discussion = sid.discussion;
+        if (discussion == null) {
+            ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+            oos.writeObject(new Message(MessageType.DISCUSSION_INFO, null));
+            return;
+        }
         discussion.InsertUser(id);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
         oos.writeObject(new Message(MessageType.DISCUSSION_INFO, discussion.GetDiscussionInfo()));
