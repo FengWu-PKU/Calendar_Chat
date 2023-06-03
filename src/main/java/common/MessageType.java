@@ -119,6 +119,12 @@ public enum MessageType {
    */
   INVITE_RESULT,
 
+  /**
+   * 给被邀请的用户发送邀请 content: Integer = uid
+   */
+  SERVER_INVITE_FRIEND,
+  
+
   // 以下为客户端到服务端的消息
 
   /**
@@ -206,7 +212,7 @@ public enum MessageType {
   /**
    * 邀请好友加入讨论 content: Integer = uid
    */
-  INVITE_FRIEND,
+  CLIENT_INVITE_FRIEND,
 
   // TODO: more operations...
 }
