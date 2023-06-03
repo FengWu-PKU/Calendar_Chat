@@ -252,7 +252,7 @@ public class ServerConClientThread {
             oos.writeObject(new Message(MessageType.DISCUSSION_INFO, null));
             return;
         }
-        discussion.InsertUser(id);
+        discussion.InsertUser(account_id);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
         oos.writeObject(new Message(MessageType.DISCUSSION_INFO, discussion.GetDiscussionInfo()));
     }

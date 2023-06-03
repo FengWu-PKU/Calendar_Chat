@@ -44,6 +44,13 @@ public class Discussion {
     public void InsertUser(int id) throws IOException {
         lock.lock();
         users.add(id);
+        System.out.println("user list: ");
+        String dh = "";
+        for (Integer i : users) {
+            System.out.print(dh+i);
+            dh = ",";
+        }
+        System.out.print('\n');
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
