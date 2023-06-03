@@ -18,7 +18,7 @@ public class HistoryMessagesPane extends JTextArea {
   public HistoryMessagesPane() {
     setLineWrap(true);
     setEditable(false);
-    addName(FrameManager.getMainFrame().getUid(), "你");
+    addName(FrameManager.getMainFrame().getUid(), "你 (" + FrameManager.getMainFrame().getUsername() + ")");
   }
 
   public void addName(int uid, String name) {

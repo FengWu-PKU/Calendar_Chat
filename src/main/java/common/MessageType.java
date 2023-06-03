@@ -95,6 +95,18 @@ public enum MessageType {
    */
   SERVER_CLEAR_MESSAGE,
 
+  /**
+   * 在线讨论：通知其他用户新用户加入 content: UserDiscussion = (uid, username)
+   * <p> 不通知自己 </p>
+   */
+  SERVER_JOIN_DISCUSSION,
+
+  /**
+   * 加入讨论时返回的讨论信息 content: DiscussionInfo = userList + drawList + messageList
+   * <p> userList 不包括自己 </p>
+   */
+  DISCUSSION_INFO,
+
   // 以下为客户端到服务端的消息
 
   /**
@@ -177,7 +189,12 @@ public enum MessageType {
   /**
    * 加入在线讨论 content: Integer = uid
    */
-  JOIN_DISCUSSION,
+  CLIENT_JOIN_DISCUSSION,
+
+  /**
+   * 邀请好友加入讨论 content: Integer = uid
+   */
+  INVITE_FRIEND,
 
   // TODO: more operations...
 }

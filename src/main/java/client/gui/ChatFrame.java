@@ -15,7 +15,7 @@ public class ChatFrame extends JFrame {
   private ProfilePane profilePane;
 
   public ChatFrame(int uid, String name) {
-    chatPane = new ChatPane(uid, name);
+    chatPane = new ChatPane(this, uid, name);
     profilePane = new ProfilePane(name);
 
     // 窗口设置
@@ -46,6 +46,7 @@ public class ChatFrame extends JFrame {
     // 更新后的窗口布局
     getContentPane().removeAll();
     setLayout(new BorderLayout());
+    chatPane.setDividerLocation(400);
     getContentPane().add(chatPane, BorderLayout.CENTER);
     getContentPane().add(new JScrollPane(profilePane), BorderLayout.EAST);
 

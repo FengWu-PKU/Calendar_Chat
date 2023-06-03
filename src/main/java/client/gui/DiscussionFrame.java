@@ -6,21 +6,24 @@ import common.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /**
  * 在线讨论窗口
  */
 public class DiscussionFrame extends JFrame {
+  private ArrayList<UserDiscussion> userList = new ArrayList<>();
+
   private PaintPanel paintPanel = new PaintPanel();
   private JButton showButton = new JButton("用户列表");
   private JButton inviteButton = new JButton("邀请好友");
   private JButton clearButton = new JButton("清空消息");
-  private ChatPane chatPane = new ChatPane();
+  private ChatPane chatPane = new ChatPane(this);
 
   public DiscussionFrame() {
     // 窗口设置
     setTitle("在线讨论");
-    setSize(1000, 650);
+    setSize(1200, 850);
     setLocationRelativeTo(null);
     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -52,7 +55,10 @@ public class DiscussionFrame extends JFrame {
     setVisible(true);
   }
 
-  public void updateDiscussion() {
+  public void updateDiscussion(DiscussionInfo info) {
+    userList.clear();
+    userList.add(new UserDiscussion(FrameManager.getMainFrame().getUid(), FrameManager.getMainFrame().getUsername()));
+
     getContentPane().removeAll();
     setLayout(new BorderLayout());
 
@@ -65,8 +71,15 @@ public class DiscussionFrame extends JFrame {
     buttons.add(inviteButton);
     buttons.add(clearButton);
     sidebar.add(buttons, BorderLayout.NORTH);
+    chatPane.setDividerLocation(600);
     sidebar.add(chatPane, BorderLayout.CENTER);
     getContentPane().add(sidebar, BorderLayout.EAST);
+
+    if (info != null) {
+      userList.addAll(info.getUserList());
+      paintPanel.updateDrawList(info.getDrawList());
+      chatPane.updateHistoryMessages(info.getMessageList());
+    }
 
     revalidate();
     repaint();

@@ -124,7 +124,7 @@ public class FrameManager {
       });
     } else {
       discussionFrame = new DiscussionFrame();
-      discussionFrame.updateDiscussion();
+      discussionFrame.updateDiscussion(null);
       Connection.writeObject(new Message(MessageType.CREATE_DISCUSSION));
     }
   }

@@ -132,6 +132,12 @@ public class PaintPanel extends JPanel implements ActionListener {
     clearButton.addActionListener(this);
   }
 
+  public void updateDrawList(ArrayList<Draw> drawList) {
+    this.drawList.clear();
+    this.drawList.addAll(drawList);
+    drawPanel.repaint();
+  }
+
   public void receiveAdd(Draw d) {
     drawList.add(d);
     d.draw((Graphics2D) drawPanel.getGraphics());

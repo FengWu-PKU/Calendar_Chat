@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
     setTitle("社交日历");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(350, 800);
+    setResizable(false);
     setLocationRelativeTo(null);
 
     // 窗口布局
@@ -76,6 +77,14 @@ public class MainFrame extends JFrame {
       }
     }
     return null;
+  }
+
+  /**
+   * 用户名
+   * @return 用户名
+   */
+  public String getUsername() {
+    return findFriendItemByUid(uid).getUsername();
   }
 
   /**
