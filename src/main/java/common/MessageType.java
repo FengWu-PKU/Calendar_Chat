@@ -96,6 +96,12 @@ public enum MessageType {
   SERVER_CLEAR_MESSAGE,
 
   /**
+   * 在线讨论：通知其他用户有用户退出 content: Integer = uid
+   * <p> 不通知自己 </p>
+   */
+  SERVER_EXIT_DISCUSSION,
+
+  /**
    * 在线讨论：通知其他用户新用户加入 content: UserDiscussion = (uid, username)
    * <p> 不通知自己 </p>
    */
@@ -167,11 +173,6 @@ public enum MessageType {
   CREATE_DISCUSSION,
 
   /**
-   * 退出在线讨论 content = null
-   */
-  EXIT_DISCUSSION,
-
-  /**
    * 在线讨论：画图 content: Draw = draw
    */
   CLIENT_DRAW,
@@ -185,6 +186,11 @@ public enum MessageType {
    * 在线讨论：清空消息 content = null
    */
   CLIENT_CLEAR_MESSAGE,
+
+  /**
+   * 退出在线讨论 content = null
+   */
+  CLIENT_EXIT_DISCUSSION,
 
   /**
    * 加入在线讨论 content: Integer = uid

@@ -31,6 +31,12 @@ public class DiscussionFrame extends JFrame {
     getContentPane().add(new LoadingLabel());
 
     // 设置监听器
+    showButton.addActionListener((e) -> {
+      // TODO: 用户列表
+    });
+    inviteButton.addActionListener((e) -> {
+      // TODO: 邀请好友
+    });
     clearButton.addActionListener((e) -> {
       int option = JOptionPane.showConfirmDialog(DiscussionFrame.this, "确定要清空消息吗？", "警告",
           JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -44,7 +50,7 @@ public class DiscussionFrame extends JFrame {
         int option = JOptionPane.showConfirmDialog(DiscussionFrame.this, "确定要退出讨论吗？", "警告",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         if (option == JOptionPane.OK_OPTION) {
-          Connection.writeObject(new Message(MessageType.EXIT_DISCUSSION));
+          Connection.writeObject(new Message(MessageType.CLIENT_EXIT_DISCUSSION));
           FrameManager.removeDiscussionFrame();
           dispose();
         }

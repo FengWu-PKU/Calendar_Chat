@@ -46,7 +46,9 @@ public class ChatPane extends JSplitPane implements ActionListener, KeyListener 
   public ChatPane(Component father, int uid, String name) {
     this(father);
     this.uid = uid;
-    recordPane.addName(uid, name);
+    if (uid != FrameManager.getMainFrame().getUid()) {
+      recordPane.addName(uid, name);
+    }
   }
 
   /**
