@@ -44,6 +44,7 @@ public enum MessageType {
 
   /**
    * 发信息 content: UserMessage = message
+   * <p> recieverUid = 0 表示该消息为在线讨论的消息 </p>
    */
   SERVER_SEND_MESSAGE,
 
@@ -103,6 +104,7 @@ public enum MessageType {
 
   /**
    * 发信息 content: UserMessage = message
+   * <p> recieverUid = 0 表示该消息为在线讨论的消息 </p>
    */
   CLIENT_SEND_MESSAGE,
 
