@@ -143,14 +143,12 @@ public class DiscussionFrame extends JFrame {
 
   public void addUser(UserDiscussion user) {
     userList.add(user);
-    chatPane.getRecordPane().addName(user.getUid(), user.getUsername());
-    // TODO: 更新聊天框
+    chatPane.getRecordPane().addName(user.getUid(), user.getUsername(), true);
   }
 
   public void removeUser(int uid) {
     userList.removeIf(o -> o.getUid() == uid);
-    chatPane.getRecordPane().removeUid(uid);
-    // TODO: 更新聊天框
+    chatPane.getRecordPane().removeUid(uid, true);
   }
 
   public void showInviteResult(int result) {

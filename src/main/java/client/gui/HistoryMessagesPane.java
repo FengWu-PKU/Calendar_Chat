@@ -22,10 +22,26 @@ public class HistoryMessagesPane extends JTextArea {
   }
 
   public void addName(int uid, String name) {
+    addName(uid, name, false);
+  }
+
+  public void addName(int uid, String name, boolean show) {
+    if (show) {
+      append("\n");
+      append("用户 " + name + " 加入了在线讨论\n");
+    }
     nameMap.put(uid, name);
   }
 
   public void removeUid(int uid) {
+    removeUid(uid, false);
+  }
+
+  public void removeUid(int uid, boolean show) {
+    if (show) {
+      append("\n");
+      append("用户 " + nameMap.get(uid) + " 退出了在线讨论\n");
+    }
     nameMap.remove(uid);
   }
 

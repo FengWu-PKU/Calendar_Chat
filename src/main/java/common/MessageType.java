@@ -109,7 +109,6 @@ public enum MessageType {
 
   /**
    * 加入讨论时返回的讨论信息 content: DiscussionInfo = userList + drawList + messageList
-   * <p> userList 不包括自己 </p>
    */
   DISCUSSION_INFO,
 
