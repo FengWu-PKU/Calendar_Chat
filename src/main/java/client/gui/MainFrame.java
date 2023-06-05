@@ -5,6 +5,7 @@ import client.utils.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class MainFrame extends JFrame {
 
     // 窗口设置
     setTitle("社交日历");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     setSize(350, 800);
     setResizable(false);
     setLocationRelativeTo(null);
@@ -30,6 +31,18 @@ public class MainFrame extends JFrame {
     sidebar.add(new FasterScrollPane(friendListPanel), BorderLayout.CENTER);
     sidebar.add(buttonsPanel, BorderLayout.SOUTH);
     getContentPane().add(sidebar);
+
+    // 设置监听器
+    addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        int option = JOptionPane.showConfirmDialog(MainFrame.this, "所有聊天和讨论将关闭，确定要退出吗？", "警告",
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (option == JOptionPane.OK_OPTION) {
+          System.exit(0);
+        }
+      }
+    });
 
     // 显示界面
     setVisible(true);
