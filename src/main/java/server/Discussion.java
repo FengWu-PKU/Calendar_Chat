@@ -7,6 +7,7 @@ import server.utils.Account;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -36,8 +37,11 @@ public class Discussion {
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
-            ObjectOutputStream oos = new ObjectOutputStream((iThread.GetSocket()).getOutputStream());
-            oos.writeObject(new Message(MessageType.SERVER_EXIT_DISCUSSION, id));
+            Socket s = iThread.GetSocket();
+            synchronized (s.getOutputStream()) {
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.writeObject(new Message(MessageType.SERVER_EXIT_DISCUSSION, id));
+            }
         }
     }
 
@@ -56,8 +60,11 @@ public class Discussion {
         for (Integer i : users) if (!i.equals(id)) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
             UserDiscussion tmp = new UserDiscussion(id, Account.getUsernameByID(id));
-            ObjectOutputStream oos = new ObjectOutputStream((iThread.GetSocket()).getOutputStream());
-            oos.writeObject(new Message(MessageType.SERVER_JOIN_DISCUSSION, tmp));
+            Socket s = iThread.GetSocket();
+            synchronized (s.getOutputStream()) {
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.writeObject(new Message(MessageType.SERVER_JOIN_DISCUSSION, tmp));
+            }
         }
     }
 
@@ -67,8 +74,11 @@ public class Discussion {
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
-            ObjectOutputStream oos = new ObjectOutputStream((iThread.GetSocket()).getOutputStream());
-            oos.writeObject(new Message(MessageType.SERVER_DRAW, draw));
+            Socket s = iThread.GetSocket();
+            synchronized (s.getOutputStream()) {
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.writeObject(new Message(MessageType.SERVER_DRAW, draw));
+            }
         }
     }
 
@@ -78,8 +88,11 @@ public class Discussion {
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
-            ObjectOutputStream oos = new ObjectOutputStream((iThread.GetSocket()).getOutputStream());
-            oos.writeObject(new Message(MessageType.SERVER_SEND_MESSAGE, um));
+            Socket s = iThread.GetSocket();
+            synchronized (s.getOutputStream()) {
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.writeObject(new Message(MessageType.SERVER_SEND_MESSAGE, um));
+            }
         }
     }
 
@@ -89,8 +102,11 @@ public class Discussion {
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
-            ObjectOutputStream oos = new ObjectOutputStream((iThread.GetSocket()).getOutputStream());
-            oos.writeObject(new Message(MessageType.SERVER_CLEAR_PAINT, null));
+            Socket s = iThread.GetSocket();
+            synchronized (s.getOutputStream()) {
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.writeObject(new Message(MessageType.SERVER_CLEAR_PAINT, null));
+            }
         }
     }
 
@@ -100,8 +116,11 @@ public class Discussion {
         lock.unlock();
         for (Integer i : users) {
             ServerConClientThread iThread = ManageClientThread.getClientThread(i);
-            ObjectOutputStream oos = new ObjectOutputStream((iThread.GetSocket()).getOutputStream());
-            oos.writeObject(new Message(MessageType.SERVER_CLEAR_MESSAGE, null));
+            Socket s = iThread.GetSocket();
+            synchronized (s.getOutputStream()) {
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                oos.writeObject(new Message(MessageType.SERVER_CLEAR_MESSAGE, null));
+            }
         }
     }
 }
