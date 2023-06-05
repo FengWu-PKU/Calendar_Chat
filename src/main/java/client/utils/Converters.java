@@ -3,6 +3,9 @@ package client.utils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 将数据转换成前端显示的工具类
+ */
 public class Converters {
   // 私有方法，确保不被实例化
   private Converters() {}

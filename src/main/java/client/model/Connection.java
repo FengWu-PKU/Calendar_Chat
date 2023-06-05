@@ -3,6 +3,9 @@ package client.model;
 import java.net.*;
 import java.io.*;
 
+/**
+ * 网络连接，用于和服务器通信
+ */
 public class Connection {
   // 私有方法，确保不被实例化
   private Connection() {}
@@ -13,6 +16,10 @@ public class Connection {
     client = new Socket(serverAddress, serverPort);
   }
 
+  /**
+   * 接收服务器发送的消息
+   * @return 服务器发送的消息
+   */
   public static Object readObject() {
     if (client == null) {
       return null;
@@ -27,6 +34,10 @@ public class Connection {
     }
   }
 
+  /**
+   * 向服务器发送消息
+   * @param o 要发送的内容
+   */
   public static void writeObject(Object o) {
     System.out.println("WRITE " + o);
     if (client == null) {

@@ -10,6 +10,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+/**
+ * 主界面
+ */
 public class MainFrame extends JFrame {
   private int uid;
   private ArrayList<FriendItem> friendList = new ArrayList<>();
@@ -75,6 +78,10 @@ public class MainFrame extends JFrame {
     this.friendList = friendList;
   }
 
+  /**
+   * 获取 UserDiscussion 形式的好友列表
+   * @return UserDiscussion 形式的好友列表
+   */
   public ArrayList<UserDiscussion> getSimpleFriendList() {
     ArrayList<UserDiscussion> list = new ArrayList<>();
     for (FriendItem friend : friendList) {

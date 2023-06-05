@@ -6,6 +6,9 @@ import common.*;
 import javax.swing.*;
 import java.util.HashMap;
 
+/**
+ * 窗口管理器，保存所有打开着的窗口，用于窗口间的信息传递
+ */
 public class FrameManager {
   // 私有方法，确保不被实例化
   private FrameManager() {}

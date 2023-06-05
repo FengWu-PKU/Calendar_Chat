@@ -7,6 +7,9 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
+/**
+ * 一个线程，不断从服务器接收消息
+ */
 public class ReceiveMessageThread extends Thread {
   @Override
   @SuppressWarnings("unchecked")
