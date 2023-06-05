@@ -65,35 +65,35 @@ public class RegisterFrame extends JFrame implements ActionListener {
     if (e.getSource() == registerAndLoginButton) {
       String username = usernameField.getText();
       if (!Validators.isValidUsername(username)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidUsernameMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidUsernameMessage);
         return;
       }
 
       String password = new String(passwordField.getPassword());
       if (!Validators.isValidPassword(password)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidPasswordMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidPasswordMessage);
         return;
       }
       if (!password.equals(new String(confirmPasswordField.getPassword()))) {
-        JOptionPane.showMessageDialog(this, Validators.confirmPasswordFailedMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.confirmPasswordFailedMessage);
         return;
       }
 
       String name = InfoInputPanel.isEmptyTextField(nameField) ? null : nameField.getText();
       if (name != null && !Validators.isValidName(name)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidNameMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidNameMessage);
         return;
       }
 
       String phone = InfoInputPanel.isEmptyTextField(phoneField) ? null : phoneField.getText();
       if (phone != null && !Validators.isValidPhoneNumber(phone)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidPhoneNumberMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidPhoneNumberMessage);
         return;
       }
 
       String email = InfoInputPanel.isEmptyTextField(emailField) ? null : emailField.getText();
       if (email != null && !Validators.isValidEmail(email)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidEmailMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidEmailMessage);
         return;
       }
 
@@ -101,17 +101,17 @@ public class RegisterFrame extends JFrame implements ActionListener {
       try {
         birth = InfoInputPanel.isEmptyTextField(birthField) ? null : LocalDate.parse(birthField.getText());
       } catch (DateTimeParseException ex) {
-        JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidBirthMessage);
         return;
       }
       if (birth != null && !Validators.isValidBirth(birth)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidBirthMessage);
         return;
       }
 
       String intro = InfoInputPanel.isEmptyTextField(introField) ? null : introField.getText();
       if (intro != null && !Validators.isValidIntro(intro)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidIntroMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidIntroMessage);
         return;
       }
 
@@ -120,14 +120,14 @@ public class RegisterFrame extends JFrame implements ActionListener {
       Connection.writeObject(user);
       Message message = (Message) Connection.readObject();
       if (message == null) {
-        JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "服务异常");
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
         FrameManager.createMainFrame((Integer) message.getContent());
         dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
-        JOptionPane.showMessageDialog(this, "用户名已存在", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "用户名已存在");
       } else {
-        JOptionPane.showMessageDialog(this, "程序异常", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "程序异常");
       }
     } else if (e.getSource() == backButton) {
       new LoginFrame();

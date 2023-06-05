@@ -57,19 +57,19 @@ public class LoginFrame extends JFrame implements ActionListener {
         Connection.writeObject(user);
         Message message = (Message) Connection.readObject();
         if (message == null) {
-          JOptionPane.showMessageDialog(this, "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
+          Dialogs.errorMessage(this, "服务异常");
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {
           FrameManager.createMainFrame((Integer) message.getContent());
           dispose();
         } else if (message.getMessageType() == MessageType.LOGIN_FAILED) {
-          JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+          Dialogs.errorMessage(this, "用户名不存在或密码错误");
         } else if (message.getMessageType() == MessageType.ALREADY_LOGIN) {
-          JOptionPane.showMessageDialog(this, "该用户已登录", "错误", JOptionPane.ERROR_MESSAGE);
+          Dialogs.errorMessage(this, "该用户已登录");
         } else {
-          JOptionPane.showMessageDialog(this, "程序异常", "错误", JOptionPane.ERROR_MESSAGE);
+          Dialogs.errorMessage(this, "程序异常");
         }
       } else {
-        JOptionPane.showMessageDialog(this, "用户名不存在或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "用户名不存在或密码错误");
       }
     } else if (e.getSource() == registerButton) {
       new RegisterFrame();

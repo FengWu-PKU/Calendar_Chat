@@ -57,7 +57,7 @@ public class ModifyRemarkFrame extends JFrame implements ActionListener {
         FrameManager.getMainFrame().modifyRemark(uid, remark);
         dispose();
       } else {
-        JOptionPane.showMessageDialog(this, Validators.invalidRemarkMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidRemarkMessage);
       }
     }
   }

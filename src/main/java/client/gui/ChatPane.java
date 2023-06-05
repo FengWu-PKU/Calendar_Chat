@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * 聊天区
  */
 public class ChatPane extends JSplitPane implements ActionListener, KeyListener {
-  private Component father;
+  private JFrame father;
   private int uid;
   private HistoryMessagesPane recordPane = new HistoryMessagesPane();
   private JTextArea messageArea = new JTextArea();
@@ -24,7 +24,7 @@ public class ChatPane extends JSplitPane implements ActionListener, KeyListener 
     this(null);
   }
 
-  public ChatPane(Component father) {
+  public ChatPane(JFrame father) {
     this.father = father;
     uid = 0;
     messageArea.setLineWrap(true);
@@ -43,7 +43,7 @@ public class ChatPane extends JSplitPane implements ActionListener, KeyListener 
     setRightComponent(sendMessagePanel);
   }
 
-  public ChatPane(Component father, int uid, String name) {
+  public ChatPane(JFrame father, int uid, String name) {
     this(father);
     this.uid = uid;
     if (uid != FrameManager.getMainFrame().getUid()) {
@@ -74,11 +74,11 @@ public class ChatPane extends JSplitPane implements ActionListener, KeyListener 
   private void sendMessage() {
     String text = messageArea.getText();
     if (text.equals("")) {
-      JOptionPane.showMessageDialog(father, "消息不能为空", "错误", JOptionPane.ERROR_MESSAGE);
+      Dialogs.errorMessage(father, "消息不能为空");
       return;
     }
     if (!Validators.isValidMessage(text)) {
-      JOptionPane.showMessageDialog(father, Validators.invalidMessageMessage, "错误", JOptionPane.ERROR_MESSAGE);
+      Dialogs.errorMessage(father, Validators.invalidMessageMessage);
       return;
     }
     UserMessage message = new UserMessage(FrameManager.getMainFrame().getUid(), uid, LocalDateTime.now(), text);

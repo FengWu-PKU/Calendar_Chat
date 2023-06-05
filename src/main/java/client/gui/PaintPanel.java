@@ -50,9 +50,7 @@ public class PaintPanel extends JPanel implements ActionListener {
     }
 
     public void clear() {
-      int option = JOptionPane.showConfirmDialog(FrameManager.getDiscussionFrame(), "确定要清空吗？", "警告",
-          JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-      if (option == JOptionPane.OK_OPTION) {
+      if (Dialogs.warnConfirm(FrameManager.getDiscussionFrame(), "确定要清空吗？")) {
         Connection.writeObject(new Message(MessageType.CLIENT_CLEAR_PAINT));
       }
     }

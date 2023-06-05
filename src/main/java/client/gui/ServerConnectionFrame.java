@@ -52,9 +52,9 @@ public class ServerConnectionFrame extends JFrame implements ActionListener {
         new LoginFrame();
         dispose();
       } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "端口号必须为整数", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "端口号必须为整数");
       } catch (IOException ex) {
-        JOptionPane.showMessageDialog(this, "连接失败", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "连接失败");
       }
     }
   }

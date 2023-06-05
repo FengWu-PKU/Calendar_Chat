@@ -72,18 +72,14 @@ public class DiscussionFrame extends JFrame {
       }
     });
     clearButton.addActionListener((e) -> {
-      int option = JOptionPane.showConfirmDialog(DiscussionFrame.this, "确定要清空消息吗？", "警告",
-          JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-      if (option == JOptionPane.OK_OPTION) {
+      if (Dialogs.warnConfirm(DiscussionFrame.this, "确定要清空消息吗？")) {
         Connection.writeObject(new Message(MessageType.CLIENT_CLEAR_MESSAGE));
       }
     });
     addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
-        int option = JOptionPane.showConfirmDialog(DiscussionFrame.this, "确定要退出讨论吗？", "警告",
-            JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (option == JOptionPane.OK_OPTION) {
+        if (Dialogs.warnConfirm(DiscussionFrame.this, "确定要退出讨论吗？")) {
           if (userListFrame != null) {
             userListFrame.dispose();
             userListFrame = null;
@@ -155,16 +151,16 @@ public class DiscussionFrame extends JFrame {
   }
 
   public void showInviteResult(int result) {
-    Component father = inviteFriendsFrame;
+    JFrame father = inviteFriendsFrame;
     if (father == null) {
       father = this;
     }
     if (result == -1) {
-      JOptionPane.showMessageDialog(father, "该用户处于离线状态", "错误", JOptionPane.ERROR_MESSAGE);
+      Dialogs.errorMessage(father, "该用户处于离线状态");
     } else if (result == 0) {
-      JOptionPane.showMessageDialog(father, "该用户正在进行在线讨论", "错误", JOptionPane.ERROR_MESSAGE);
+      Dialogs.errorMessage(father, "该用户正在进行在线讨论");
     } else if (result == 1) {
-      JOptionPane.showMessageDialog(father, "邀请成功，请等待对方加入", "成功", JOptionPane.INFORMATION_MESSAGE);
+      Dialogs.successMessage(father, "邀请成功，请等待对方加入");
     }
   }
 }

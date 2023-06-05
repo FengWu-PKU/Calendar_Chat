@@ -14,7 +14,7 @@ public class ReceiveMessageThread extends Thread {
     while (true) {
       Message message = (Message) Connection.readObject();
       if (message == null) {
-        JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "服务异常", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(FrameManager.getMainFrame(), "服务异常");
         return;
       }
       if (message.getMessageType() == MessageType.MAIN_WINDOW_INFO) { // 收到主窗口信息
@@ -59,17 +59,16 @@ public class ReceiveMessageThread extends Thread {
         SwingUtilities.invokeLater(() -> {
           AddFriendFrame addFriendFrame = FrameManager.getAddFriendFrame();
           if (result == -1) {
-            JOptionPane.showMessageDialog(addFriendFrame, "用户名不存在", "错误", JOptionPane.ERROR_MESSAGE);
+            Dialogs.errorMessage(addFriendFrame, "用户名不存在");
           } else {
             if (result == 0) {
-              JOptionPane.showMessageDialog(addFriendFrame, "你已申请过该用户", "错误", JOptionPane.ERROR_MESSAGE);
+              Dialogs.errorMessage(addFriendFrame, "你已申请过该用户");
             } else if (result == 1) {
-              JOptionPane.showMessageDialog(addFriendFrame, "申请成功，请等待对方同意", "成功",
-                  JOptionPane.INFORMATION_MESSAGE);
+              Dialogs.successMessage(addFriendFrame, "申请成功，请等待对方同意");
             } else if (result == 2) {
-              JOptionPane.showMessageDialog(addFriendFrame, "该用户已经是你的好友", "错误", JOptionPane.ERROR_MESSAGE);
+              Dialogs.errorMessage(addFriendFrame, "该用户已经是你的好友");
             } else if (result == 3) {
-              JOptionPane.showMessageDialog(addFriendFrame, "该用户已经申请你为好友", "错误", JOptionPane.ERROR_MESSAGE);
+              Dialogs.errorMessage(addFriendFrame, "该用户已经申请你为好友");
             }
             if (addFriendFrame != null) {
               addFriendFrame.dispose();
@@ -108,7 +107,7 @@ public class ReceiveMessageThread extends Thread {
           if (chatFrame != null) { // 如果聊天窗口开着则关闭
             chatFrame.dispose();
             FrameManager.removeChatFrame(uid);
-            JOptionPane.showMessageDialog(FrameManager.getMainFrame(), "你被删了，小丑");
+            Dialogs.normalMessage(FrameManager.getMainFrame(), "你被删了，小丑");
           }
         });
       } else if (message.getMessageType() == MessageType.USER_INFO) { // 收到个人信息
@@ -166,9 +165,7 @@ public class ReceiveMessageThread extends Thread {
         SwingUtilities.invokeLater(() -> {
           String name = FrameManager.getMainFrame().getFriendName(uid);
           if (name != null) {
-            int option = JOptionPane.showConfirmDialog(null, name + " 邀请你加入在线讨论，是否加入？", "邀请",
-                JOptionPane.OK_CANCEL_OPTION);
-            if (option == JOptionPane.OK_OPTION) {
+            if (Dialogs.yesnoConfirm(null, name + " 邀请你加入在线讨论，是否加入？", "邀请")) {
               FrameManager.joinDiscussion(uid);
             }
           }

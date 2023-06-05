@@ -95,19 +95,19 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
     if (e.getSource() == modifyButton) {
       String name = InfoInputPanel.isEmptyTextField(nameField) ? null : nameField.getText();
       if (name != null && !Validators.isValidName(name)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidNameMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidNameMessage);
         return;
       }
 
       String phone = InfoInputPanel.isEmptyTextField(phoneField) ? null : phoneField.getText();
       if (phone != null && !Validators.isValidPhoneNumber(phone)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidPhoneNumberMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidPhoneNumberMessage);
         return;
       }
 
       String email = InfoInputPanel.isEmptyTextField(emailField) ? null : emailField.getText();
       if (email != null && !Validators.isValidEmail(email)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidEmailMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidEmailMessage);
         return;
       }
 
@@ -115,17 +115,17 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
       try {
         birth = InfoInputPanel.isEmptyTextField(birthField) ? null : LocalDate.parse(birthField.getText());
       } catch (DateTimeParseException ex) {
-        JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidBirthMessage);
         return;
       }
       if (birth != null && !Validators.isValidBirth(birth)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidBirthMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidBirthMessage);
         return;
       }
 
       String intro = InfoInputPanel.isEmptyTextField(introField) ? null : introField.getText();
       if (intro != null && !Validators.isValidIntro(intro)) {
-        JOptionPane.showMessageDialog(this, Validators.invalidIntroMessage, "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, Validators.invalidIntroMessage);
         return;
       }
 

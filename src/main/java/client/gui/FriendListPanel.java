@@ -95,10 +95,7 @@ public class FriendListPanel extends JPanel {
     }
 
     private void confirmDeleteFriend() {
-      String message = "确定要删除 " + nameLabel.getText() + " 吗？";
-      int option = JOptionPane.showConfirmDialog(FrameManager.getMainFrame(), message, "警告",
-          JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-      if (option == JOptionPane.OK_OPTION) {
+      if (Dialogs.warnConfirm(FrameManager.getMainFrame(), "确定要删除 " + nameLabel.getText() + " 吗？")) {
         Connection.writeObject(new Message(MessageType.CLIENT_DELETE_FRIEND, uid));
         FrameManager.getMainFrame().deleteFriend(uid);
         ChatFrame chatFrame = FrameManager.getChatFrame(uid);

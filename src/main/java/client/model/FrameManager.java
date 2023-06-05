@@ -120,7 +120,7 @@ public class FrameManager {
   public static void createDiscussionFrame() {
     if (discussionFrame != null) {
       SwingUtilities.invokeLater(() -> {
-        JOptionPane.showMessageDialog(mainFrame, "你正在参与在线讨论，无法创建新的在线讨论", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(mainFrame, "你正在参与在线讨论，无法创建新的在线讨论");
       });
     } else {
       discussionFrame = new DiscussionFrame();
@@ -132,7 +132,7 @@ public class FrameManager {
   public static void joinDiscussion(int uid) {
     if (discussionFrame != null) {
       SwingUtilities.invokeLater(() -> {
-        JOptionPane.showMessageDialog(mainFrame, "你正在参与在线讨论，无法加入其他在线讨论", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(mainFrame, "你正在参与在线讨论，无法加入其他在线讨论");
       });
     } else {
       discussionFrame = new DiscussionFrame();

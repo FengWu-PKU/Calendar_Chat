@@ -36,9 +36,7 @@ public class MainFrame extends JFrame {
     addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
-        int option = JOptionPane.showConfirmDialog(MainFrame.this, "所有聊天和讨论将关闭，确定要退出吗？", "警告",
-            JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (option == JOptionPane.OK_OPTION) {
+        if (Dialogs.warnConfirm(MainFrame.this, "所有聊天和讨论将关闭，确定要退出吗？")) {
           System.exit(0);
         }
       }

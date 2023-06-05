@@ -53,7 +53,7 @@ public class AddFriendFrame extends JFrame implements ActionListener {
       if (Validators.isValidUsername(username)) {
         Connection.writeObject(new Message(MessageType.ADD_FRIEND_REQUEST, username));
       } else {
-        JOptionPane.showMessageDialog(this, "用户名不存在", "错误", JOptionPane.ERROR_MESSAGE);
+        Dialogs.errorMessage(this, "用户名不存在");
       }
     }
   }
