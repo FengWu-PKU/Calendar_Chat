@@ -352,6 +352,13 @@ public class ServerConClientThread {
                 }
             } catch (Exception e){
                 e.printStackTrace();
+                if (discussion != null) {
+                    try {
+                        ExitDiscussion();
+                    } catch (Exception ee) {
+
+                    }
+                }
                 ManageClientThread.removeClientThread(account_id);
                 return;
             }
