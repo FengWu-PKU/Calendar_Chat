@@ -2,20 +2,20 @@ package common;
 
 import java.util.Date;
 
-public class TodoItem {
+public class TodoItem implements java.io.Serializable {
     Date deadline=new Date();
     String title=" ";
     String content=" ";
 
-    public Boolean getPriv() {
-        return priv;
+    public Boolean getPub() {
+        return pub;
     }
 
-    public void setPriv(Boolean priv) {
-        this.priv = priv;
+    public void setPub(Boolean pub) {
+        this.pub = pub;
     }
 
-    Boolean priv=Boolean.FALSE;
+    Boolean pub=Boolean.FALSE;
     public Date getDeadline() {
         return deadline;
     }

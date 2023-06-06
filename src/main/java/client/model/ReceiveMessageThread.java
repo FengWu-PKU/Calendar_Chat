@@ -187,6 +187,11 @@ public class ReceiveMessageThread extends Thread {
             discussionFrame.updateDiscussion(info);
           }
         });
+      }else if (message.getMessageType() == MessageType.CLIENT_REQUEST_ONEDAY) { // 收到某一天的todolist
+        OnedayInfo info = (OnedayInfo) message.getContent();
+        SwingUtilities.invokeLater(() -> {
+          FrameManager.getMainFrame().updateOneDay(info);
+        });
       }
     }
   }

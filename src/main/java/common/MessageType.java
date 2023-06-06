@@ -213,5 +213,21 @@ public enum MessageType {
    */
   CLIENT_INVITE_FRIEND,
 
+
+
+  /**
+   * 请求某天的信息，content: OnedayInfo, 只有show_uid, my_uid, Date
+   */
+  CLIENT_REQUEST_ONEDAY,
+
+
+
+  /**
+   * 更新某天的信息，content: OnedayInfo
+   */
+  CLIENT_UPDATE_ONEDAY,
+
+
+
   // TODO: more operations...
 }

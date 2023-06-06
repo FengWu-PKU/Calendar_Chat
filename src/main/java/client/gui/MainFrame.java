@@ -143,6 +143,7 @@ public class MainFrame extends JFrame {
     return findFriendItemByUid(uid).getUsername();
   }
 
+
   /**
    * 消息已读
    * @param friendUid 好友 uid
@@ -219,5 +220,10 @@ public class MainFrame extends JFrame {
    */
   public void increaseNumFriendRequests() {
     buttonsPanel.increaseNumFriendRequests();
+  }
+
+
+  public void updateOneDay(OnedayInfo info){
+    todoPanel.updateOneDay(info);
   }
 }

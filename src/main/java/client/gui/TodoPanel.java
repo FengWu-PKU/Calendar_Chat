@@ -1,5 +1,6 @@
 package client.gui;
 
+import common.OnedayInfo;
 import common.TodoItem;
 
 import java.awt.*;
@@ -64,6 +65,29 @@ public class TodoPanel extends JPanel  {
         }
         revalidate();
         repaint();
+    }
+
+    public void updateOneDay(OnedayInfo info){
+
+        Calendar cal2 = Calendar.getInstance();
+        Calendar cal1 = Calendar.getInstance();
+        ArrayList<TodoItem> todoList=info.getTodoList();
+        if(todoList.size()==0){
+            return;
+        }
+        cal1.setTime(todoList.get(0).getDeadline());
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 7; col++) {
+                cal2.setTime(gridLabels[row][col].date);
+                if(cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                        cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)){
+                    for(TodoItem tmp:todoList){
+                        gridLabels[row][col].addTodoItem(tmp);
+                    }
+                }
+            }
+        }
+
     }
 }
 

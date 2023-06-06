@@ -14,9 +14,17 @@ import java.util.Date;
 public class OneDayPanel extends JPanel {
     private ArrayList<TodoItem> TodoList;
     private JPanel contentPanel;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("M.dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("M.d");
+    public Date date;
+
+    private int show_uid;
+
+    private int my_uid;
 
     public OneDayPanel(Date date) {
+        this.date=date;
+        this.show_uid=show_uid;
+        this.my_uid=my_uid;
         setLayout(new BorderLayout());
         //setPreferredSize(new Dimension(100,150));
 
@@ -36,15 +44,28 @@ public class OneDayPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 点击文章标题时弹出编辑页面
-                addTodoItem(new TodoItem(date, "新建任务"));
+                TodoItem tmp=new TodoItem(date, "新建任务");
+                TodoList.add(tmp);
+                addTodoItem(tmp);
+
             }
         });
         contentPanel.add(dateButton);
+
+        for(TodoItem tmp:TodoList){
+            addTodoItem(tmp);
+        }
+
         contentPanel.revalidate();
         contentPanel.repaint();
 
         // 创建滚动面板，用于容纳内容面板
         JScrollPane scrollPane = new JScrollPane(contentPanel);
+        //System.out.println(scrollPane.getVerticalScrollBar().getPreferredSize());
+        //System.out.println(scrollPane.getHorizontalScrollBar().getPreferredSize());
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(3, Integer.MAX_VALUE));
+        scrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(Integer.MAX_VALUE, 3));
+
 
         // 将滚动面板添加到面板中
         add(scrollPane, BorderLayout.CENTER);
@@ -52,9 +73,6 @@ public class OneDayPanel extends JPanel {
 
 
     public void addTodoItem(TodoItem todoItem) {
-        // 创建文章对象
-        TodoList.add(todoItem);
-
         // 创建文章标题按钮
         JButton titleButton = new JButton(todoItem.getTitle());
         titleButton.setBorderPainted(false);
@@ -86,11 +104,23 @@ public class OneDayPanel extends JPanel {
 
         // 创建标题输入框
         JTextField titleField = new JTextField(todoItem.getTitle());
-        editorPanel.add(titleField, BorderLayout.NORTH);
+
+
+        // 创建类型选择框
+        JCheckBox checkBox = new JCheckBox("朋友可见");
+        checkBox.setSelected(todoItem.getPub());
+        add(checkBox);
+        JPanel titleArea = new JPanel();
+
+        titleArea.setLayout(new BoxLayout(titleArea,BoxLayout.Y_AXIS));
+        titleArea.add(titleField);
+        titleArea.add(checkBox);
+        editorPanel.add(titleArea, BorderLayout.NORTH);
 
         // 创建内容文本区域
         JTextArea contentArea = new JTextArea(todoItem.getContent());
         editorPanel.add(new JScrollPane(contentArea), BorderLayout.CENTER);
+
 
         // 创建提交按钮
         JButton submitButton = new JButton("提交");
@@ -98,18 +128,37 @@ public class OneDayPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 更新文章标题和内容
-                String newTitle = titleField.getText();
-                String newContent = contentArea.getText();
-                todoItem.setTitle(newTitle);
-                todoItem.setContent(newContent);
+                todoItem.setTitle(titleField.getText());
+                todoItem.setContent(contentArea.getText());
+                todoItem.setPub(checkBox.isSelected());
 
                 // 更新文章标题按钮
-                titleButton.setText(newTitle);
+                titleButton.setText(titleField.getText());
 
                 editorDialog.dispose();
             }
         });
-        editorPanel.add(submitButton, BorderLayout.SOUTH);
+
+        // 创建删除按钮
+        JButton deleteButton = new JButton("删除");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                contentPanel.remove(titleButton);
+                TodoList.remove(todoItem);
+
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+                editorDialog.dispose();
+            }
+        });
+
+        //按钮区域
+        JPanel buttonArea= new JPanel(new GridLayout(1,2));
+        buttonArea.add(submitButton);
+        buttonArea.add(deleteButton);
+        editorPanel.add(buttonArea, BorderLayout.SOUTH);
 
         // 将编辑面板添加到对话框
         editorDialog.add(editorPanel);
