@@ -8,11 +8,11 @@ import java.awt.event.*;
 /**
  * 抽象类，列表中单个用户条目的 UI
  */
-public abstract class AbstractUserItem extends JPanel implements ActionListener {
+public abstract class AbstractUserItemPanel extends JPanel implements ActionListener {
   private JLabel usernameLabel = new JLabel();
   private JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-  public AbstractUserItem() {
+  public AbstractUserItemPanel() {
     setMaximumSize(new Dimension(this.getMaximumSize().width, 60));
     setPreferredSize(new Dimension(this.getPreferredSize().width, 60));
     setMinimumSize(new Dimension(this.getMinimumSize().width, 60));

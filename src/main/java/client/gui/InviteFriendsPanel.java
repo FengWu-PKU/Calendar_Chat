@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class InviteFriendsPanel extends JPanel {
   // 单个条目
-  private class UserItem extends AbstractUserItem {
+  private class UserItemPanel extends AbstractUserItemPanel {
     private UserDiscussion user;
     private JButton inviteButton = new JButton("邀请加入");
 
-    public UserItem(UserDiscussion user) {
+    public UserItemPanel(UserDiscussion user) {
       this.user = user;
       setUsername(user.getUsername());
       addButton(inviteButton);
@@ -36,7 +36,7 @@ public class InviteFriendsPanel extends JPanel {
     if (userList.size() > 0) {
       setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
       for (UserDiscussion user : userList) {
-        UserItem userItemPanel = new UserItem(user);
+        UserItemPanel userItemPanel = new UserItemPanel(user);
         add(userItemPanel);
       }
     } else {
