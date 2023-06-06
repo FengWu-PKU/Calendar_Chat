@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
     // 窗口设置
     setTitle("社交日历");
     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    setSize(1250, 800);
+    setSize(1200, 800);
     setResizable(false);
     setLocationRelativeTo(null);
     con.setLayout(new BorderLayout());
@@ -44,9 +44,6 @@ public class MainFrame extends JFrame {
     middle_area.add(todoPanel,BorderLayout.CENTER);
     con.add(middle_area,BorderLayout.CENTER);
 
-    JPanel right_area=new JPanel(new BorderLayout());
-    right_area.add(newTodoItemPanel,BorderLayout.NORTH);
-    con.add(right_area,BorderLayout.EAST);
 
     // 设置监听器
     addWindowListener(new WindowAdapter() {

@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class TodoPanel extends JPanel {
-    private JScrollPane[][] gridLabels;
+    private OneDayPanel[][] gridLabels;
     private Date startdate;
 
     private Calendar calendar= Calendar.getInstance();
@@ -29,20 +29,14 @@ public class TodoPanel extends JPanel {
 
 
         // 创建日期标签
-        gridLabels = new JScrollPane[4][7];
+        gridLabels = new OneDayPanel[4][7];
 
 
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 7; col++) {
-                gridLabels[row][col] = new JScrollPane();
-                JPanel contentPanel = new JPanel();
-                contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
                 calendar.setTime(startdate);
                 calendar.add(Calendar.DAY_OF_WEEK,7*row+col);
-                String date = dateFormat.format(calendar.getTime());
-                contentPanel.add(new JLabel(date));
-                gridLabels[row][col].setViewportView(contentPanel);
-
+                gridLabels[row][col] = new OneDayPanel(calendar.getTime());
 
                 //gridLabels[row][col].setColumnHeader(date);
                 gridLabels[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -72,7 +66,7 @@ public class TodoPanel extends JPanel {
                         System.out.println(tmp_item.getTitle());
                     }
                 }
-                gridLabels[row][col].setViewportView(contentPanel);
+                //gridLabels[row][col].setViewportView(contentPanel);
 
             }
         }
