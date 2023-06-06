@@ -12,11 +12,11 @@ import java.util.ArrayList;
  */
 public class DiscussionUsersPanel extends JPanel {
   // 单个好友申请条目
-  private class UserItem extends AbstractUserItem {
+  private class UserItemPanel extends AbstractUserItemPanel {
     private UserDiscussion user;
     private JButton addFriendButton = new JButton("加为好友");
 
-    public UserItem(UserDiscussion user) {
+    public UserItemPanel(UserDiscussion user) {
       this.user = user;
       setUsername(user.getUsername());
       if (!FrameManager.getMainFrame().isFriend(user.getUid())) {
@@ -36,7 +36,7 @@ public class DiscussionUsersPanel extends JPanel {
   public DiscussionUsersPanel(ArrayList<UserDiscussion> userList) {
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     for (UserDiscussion user : userList) {
-      UserItem userItemPanel = new UserItem(user);
+      UserItemPanel userItemPanel = new UserItemPanel(user);
       add(userItemPanel);
     }
   }
