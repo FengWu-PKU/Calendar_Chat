@@ -145,16 +145,20 @@ public class ReceiveMessageThread extends Thread {
         });
       } else if (message.getMessageType() == MessageType.SERVER_EXIT_DISCUSSION) { // 有用户退出
         int uid = (Integer) message.getContent();
-        DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
-        if (discussionFrame != null) {
-          discussionFrame.removeUser(uid);
-        }
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.removeUser(uid);
+          }
+        });
       } else if (message.getMessageType() == MessageType.SERVER_JOIN_DISCUSSION) { // 有用户加入
         UserDiscussion user = (UserDiscussion) message.getContent();
-        DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
-        if (discussionFrame != null) {
-          discussionFrame.addUser(user);
-        }
+        SwingUtilities.invokeLater(() -> {
+          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+          if (discussionFrame != null) {
+            discussionFrame.addUser(user);
+          }
+      });
       } else if (message.getMessageType() == MessageType.INVITE_RESULT) { // 邀请结果
         int result = (Integer) message.getContent();
         SwingUtilities.invokeLater(() -> {

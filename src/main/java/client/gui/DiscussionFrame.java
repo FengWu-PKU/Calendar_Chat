@@ -38,14 +38,14 @@ public class DiscussionFrame extends JFrame {
         userListFrame = new JFrame("用户列表");
         userListFrame.setSize(300, 600);
         userListFrame.setLocationRelativeTo(DiscussionFrame.this);
-        userListFrame.setContentPane(new FasterScrollPane(new DiscussionUsersPanel(userList)));
-        userListFrame.setVisible(true);
+        updateUserListFrame();
         userListFrame.addWindowListener(new WindowAdapter() {
           @Override
           public void windowClosing(WindowEvent e) {
             userListFrame = null;
           }
         });
+        userListFrame.setVisible(true);
       } else {
         userListFrame.setState(JFrame.NORMAL);
         userListFrame.toFront();
@@ -53,19 +53,17 @@ public class DiscussionFrame extends JFrame {
     });
     inviteButton.addActionListener((e) -> {
       if (inviteFriendsFrame == null) {
-        ArrayList<UserDiscussion> inviteList = FrameManager.getMainFrame().getSimpleFriendList();
-        inviteList.removeIf(o -> chatPane.getRecordPane().getNameMap().containsKey(o.getUid()));
         inviteFriendsFrame = new JFrame("邀请好友");
         inviteFriendsFrame.setSize(300, 600);
         inviteFriendsFrame.setLocationRelativeTo(DiscussionFrame.this);
-        inviteFriendsFrame.setContentPane(new FasterScrollPane(new InviteFriendsPanel(inviteList)));
-        inviteFriendsFrame.setVisible(true);
+        updateInviteFriendsFrame();
         inviteFriendsFrame.addWindowListener(new WindowAdapter() {
           @Override
           public void windowClosing(WindowEvent e) {
             inviteFriendsFrame = null;
           }
         });
+        inviteFriendsFrame.setVisible(true);
       } else {
         inviteFriendsFrame.setState(JFrame.NORMAL);
         inviteFriendsFrame.toFront();
@@ -99,6 +97,10 @@ public class DiscussionFrame extends JFrame {
     setVisible(true);
   }
 
+  /**
+   * 更新窗口
+   * @param info 更新窗口需要的信息
+   */
   public void updateDiscussion(DiscussionInfo info) {
     userList.clear();
     userList.add(new UserDiscussion(FrameManager.getMainFrame().getUid(), FrameManager.getMainFrame().getUsername()));
@@ -132,24 +134,72 @@ public class DiscussionFrame extends JFrame {
     repaint();
   }
 
+  /**
+   * 画图面板
+   * @return 画图面板
+   */
   public PaintPanel getPaintPanel() {
     return paintPanel;
   }
 
+  /**
+   * 聊天区域
+   * @return 聊天区域
+   */
   public ChatPane getChatPane() {
     return chatPane;
   }
 
+  /**
+   * 更新用户列表窗口
+   */
+  public void updateUserListFrame() {
+    if (userListFrame != null) {
+      userListFrame.setContentPane(new FasterScrollPane(new DiscussionUsersPanel(userList)));
+      userListFrame.revalidate();
+      userListFrame.repaint();
+    }
+  }
+
+  /**
+   * 更新邀请好友窗口
+   */
+  public void updateInviteFriendsFrame() {
+    if (inviteFriendsFrame != null) {
+      ArrayList<UserDiscussion> inviteList = FrameManager.getMainFrame().getSimpleFriendList();
+      inviteList.removeIf(o -> chatPane.getRecordPane().getNameMap().containsKey(o.getUid()));
+      inviteFriendsFrame.setContentPane(new FasterScrollPane(new InviteFriendsPanel(inviteList)));
+      inviteFriendsFrame.revalidate();
+      inviteFriendsFrame.repaint();
+    }
+  }
+
+  /**
+   * 用户加入
+   * @param user 加入的用户
+   */
   public void addUser(UserDiscussion user) {
     userList.add(user);
     chatPane.getRecordPane().addName(user.getUid(), user.getUsername(), true);
+    updateUserListFrame();
+    updateInviteFriendsFrame();
   }
 
+  /**
+   * 用户退出
+   * @param uid 退出的用户 uid
+   */
   public void removeUser(int uid) {
     userList.removeIf(o -> o.getUid() == uid);
     chatPane.getRecordPane().removeUid(uid, true);
+    updateUserListFrame();
+    updateInviteFriendsFrame();
   }
 
+  /**
+   * 根据服务端返回的整数显示邀请结果
+   * @param result 结果
+   */
   public void showInviteResult(int result) {
     JFrame father = inviteFriendsFrame;
     if (father == null) {

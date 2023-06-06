@@ -190,5 +190,9 @@ public class FriendListPanel extends JPanel {
     }
     revalidate();
     repaint();
+    DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+    if (discussionFrame != null) {
+      discussionFrame.updateInviteFriendsFrame();
+    }
   }
 }
