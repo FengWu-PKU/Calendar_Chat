@@ -25,7 +25,7 @@ public class CalendarTitlePanel extends JPanel {
 
         for( int col =0; col<7;col++){
             title[col] = new JLabel("", SwingConstants.CENTER);
-            title[col].setFont(new Font("Arial", Font.BOLD, 14));
+            title[col].setFont(new Font("微软雅黑", Font.BOLD, 14));
 
             calendar.setTime(startdate);
             calendar.add(Calendar.DAY_OF_WEEK,col);
