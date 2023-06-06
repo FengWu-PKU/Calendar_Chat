@@ -37,6 +37,7 @@ public class DiscussionFrame extends JFrame {
       if (userListFrame == null) {
         userListFrame = new JFrame("用户列表");
         userListFrame.setSize(300, 600);
+        userListFrame.setResizable(false);
         userListFrame.setLocationRelativeTo(DiscussionFrame.this);
         updateUserListFrame();
         userListFrame.addWindowListener(new WindowAdapter() {
@@ -55,6 +56,7 @@ public class DiscussionFrame extends JFrame {
       if (inviteFriendsFrame == null) {
         inviteFriendsFrame = new JFrame("邀请好友");
         inviteFriendsFrame.setSize(300, 600);
+        inviteFriendsFrame.setResizable(false);
         inviteFriendsFrame.setLocationRelativeTo(DiscussionFrame.this);
         updateInviteFriendsFrame();
         inviteFriendsFrame.addWindowListener(new WindowAdapter() {

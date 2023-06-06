@@ -4,6 +4,8 @@ import client.model.*;
 import common.*;
 
 import javax.swing.*;
+
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -31,10 +33,15 @@ public class InviteFriendsPanel extends JPanel {
   }
 
   public InviteFriendsPanel(ArrayList<UserDiscussion> userList) {
-    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    for (UserDiscussion user : userList) {
-      UserItem userItemPanel = new UserItem(user);
-      add(userItemPanel);
+    if (userList.size() > 0) {
+      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+      for (UserDiscussion user : userList) {
+        UserItem userItemPanel = new UserItem(user);
+        add(userItemPanel);
+      }
+    } else {
+      setLayout(new GridLayout());
+      add(new JLabel("没有可以邀请的好友", SwingConstants.CENTER));
     }
   }
 }

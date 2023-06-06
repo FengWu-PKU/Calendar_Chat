@@ -20,6 +20,7 @@ public class FriendRequestsFrame extends JFrame {
     // 窗口设置
     setTitle("好友申请");
     setSize(300, 600);
+    setResizable(false);
     setLocationRelativeTo(FrameManager.getMainFrame());
 
     // 窗口布局
