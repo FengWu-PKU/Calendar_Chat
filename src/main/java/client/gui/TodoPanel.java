@@ -6,12 +6,10 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
-public class TodoPanel extends JPanel {
+public class TodoPanel extends JPanel  {
     private OneDayPanel[][] gridLabels;
     private Date startdate;
-
     private Calendar calendar= Calendar.getInstance();
     SimpleDateFormat dateFormat = new SimpleDateFormat("M.dd");
 
@@ -27,10 +25,8 @@ public class TodoPanel extends JPanel {
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         startdate = calendar.getTime();
 
-
         // 创建日期标签
         gridLabels = new OneDayPanel[4][7];
-
 
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 7; col++) {
@@ -46,31 +42,28 @@ public class TodoPanel extends JPanel {
         }
     }
 
-    public void update(ArrayList<TodoItem> todoList){
+    public void update_date(Date select_date){
+        calendar.setTime(select_date);
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        startdate = calendar.getTime();
+
+        removeAll();
+
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 7; col++) {
-                JPanel contentPanel = new JPanel();
-                contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
                 calendar.setTime(startdate);
-                calendar.add(Calendar.DAY_OF_WEEK, 7 * row + col);
-                String date = dateFormat.format(calendar.getTime());
-                contentPanel.add(new JLabel(date));
+                calendar.add(Calendar.DAY_OF_WEEK,7*row+col);
+                gridLabels[row][col] = new OneDayPanel(calendar.getTime());
 
-                Calendar cal2 = Calendar.getInstance();
-
-                for(TodoItem tmp_item:todoList){
-                    cal2.setTime(tmp_item.getDeadline());
-                    if(calendar.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
-                            calendar.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)) {
-                        contentPanel.add(new JLabel(tmp_item.getTitle()));
-                        System.out.println(tmp_item.getTitle());
-                    }
-                }
-                //gridLabels[row][col].setViewportView(contentPanel);
-
+                //gridLabels[row][col].setColumnHeader(date);
+                gridLabels[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                //gridLabels[row][col].setPreferredSize(new Dimension(150, 150));
+                add(gridLabels[row][col]);
             }
         }
-
+        revalidate();
+        repaint();
     }
 }
 

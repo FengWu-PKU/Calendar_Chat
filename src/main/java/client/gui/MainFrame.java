@@ -20,10 +20,12 @@ public class MainFrame extends JFrame {
   private ButtonsPanel buttonsPanel = new ButtonsPanel();
   private TodoPanel todoPanel=new TodoPanel();
   private Container con=getContentPane();
-  private NewTodoItemPanel newTodoItemPanel=new NewTodoItemPanel();
+  private ChooseDatePanel chooseDatePanel= new ChooseDatePanel();
 
   public MainFrame(int uid) {
     this.uid = uid;
+    chooseDatePanel.setTodoPanel(todoPanel);
+
 
     // 窗口设置
     setTitle("社交日历");
@@ -42,6 +44,7 @@ public class MainFrame extends JFrame {
     JPanel middle_area=new JPanel(new BorderLayout());
     middle_area.add(new CalendarTitlePanel(),BorderLayout.NORTH);
     middle_area.add(todoPanel,BorderLayout.CENTER);
+    middle_area.add(chooseDatePanel,BorderLayout.SOUTH);
     con.add(middle_area,BorderLayout.CENTER);
 
 
