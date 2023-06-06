@@ -6,6 +6,16 @@ public class TodoItem {
     Date deadline=new Date();
     String title=" ";
     String content=" ";
+
+    public Boolean getPriv() {
+        return priv;
+    }
+
+    public void setPriv(Boolean priv) {
+        this.priv = priv;
+    }
+
+    Boolean priv=Boolean.FALSE;
     public Date getDeadline() {
         return deadline;
     }
