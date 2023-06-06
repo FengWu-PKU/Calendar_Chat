@@ -1,6 +1,10 @@
 package client.gui;
 
 
+import client.model.Connection;
+import common.Message;
+import common.MessageType;
+import common.OnedayInfo;
 import common.TodoItem;
 
 import javax.swing.*;
@@ -12,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class OneDayPanel extends JPanel {
-    private ArrayList<TodoItem> TodoList;
+    private ArrayList<TodoItem> todoList;
     private JPanel contentPanel;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("M.d");
     public Date date;
@@ -21,15 +25,16 @@ public class OneDayPanel extends JPanel {
 
     private int my_uid;
 
-    public OneDayPanel(Date date) {
+    public OneDayPanel(Date date,int show_uid,int my_uid,ArrayList<TodoItem> todoList) {
         this.date=date;
         this.show_uid=show_uid;
         this.my_uid=my_uid;
+
         setLayout(new BorderLayout());
         //setPreferredSize(new Dimension(100,150));
 
         // 创建Todolist
-        TodoList = new ArrayList<>();
+        this.todoList = todoList;
 
         // 创建内容面板
         contentPanel = new JPanel();
@@ -45,14 +50,14 @@ public class OneDayPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // 点击文章标题时弹出编辑页面
                 TodoItem tmp=new TodoItem(date, "新建任务");
-                TodoList.add(tmp);
+                todoList.add(tmp);
                 addTodoItem(tmp);
 
             }
         });
         contentPanel.add(dateButton);
 
-        for(TodoItem tmp:TodoList){
+        for(TodoItem tmp:todoList){
             addTodoItem(tmp);
         }
 
@@ -135,6 +140,10 @@ public class OneDayPanel extends JPanel {
                 // 更新文章标题按钮
                 titleButton.setText(titleField.getText());
 
+                OnedayInfo tmp=new OnedayInfo(my_uid,show_uid,date);
+                tmp.setTodoList(todoList);
+                Connection.writeObject(new Message(MessageType.CLIENT_UPDATE_ONEDAY,tmp));
+
                 editorDialog.dispose();
             }
         });
@@ -145,10 +154,14 @@ public class OneDayPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPanel.remove(titleButton);
-                TodoList.remove(todoItem);
+                todoList.remove(todoItem);
 
                 contentPanel.revalidate();
                 contentPanel.repaint();
+
+                OnedayInfo tmp=new OnedayInfo(my_uid,show_uid,date);
+                tmp.setTodoList(todoList);
+                Connection.writeObject(new Message(MessageType.CLIENT_UPDATE_ONEDAY,tmp));
 
                 editorDialog.dispose();
             }

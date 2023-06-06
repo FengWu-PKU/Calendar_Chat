@@ -218,7 +218,7 @@ public enum MessageType {
   /**
    * 请求某天的信息，content: OnedayInfo, 只有show_uid, my_uid, Date
    */
-  CLIENT_REQUEST_ONEDAY,
+  CLIENT_REQUEST_ONEMONTH,
 
 
 

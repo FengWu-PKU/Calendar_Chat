@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * 好友列表
  */
 public class FriendListPanel extends JPanel {
+  private TodoPanel todoPanel;
   // 单个好友条目
   private class FriendItemPanel extends JPanel implements MouseListener {
     private int uid;
@@ -22,6 +23,9 @@ public class FriendListPanel extends JPanel {
     private JLabel lastMessageTimeLabel;
     private JLabel unreadMessagesLabel;
     private JPopupMenu popupMenu = new JPopupMenu();
+
+
+
 
     public FriendItemPanel(FriendItem friend) {
       uid = friend.getUid();
@@ -82,13 +86,16 @@ public class FriendListPanel extends JPanel {
       add(lastMessageLabel);
       add(unreadMessagesLabel);
 
-      // TODO: 右键菜单样式
       JMenuItem modifyRemarkItem = new JMenuItem("修改备注");
       JMenuItem deleteFriendItem = new JMenuItem("删除好友");
+      JMenuItem showCalenderItem = new JMenuItem("显示日历");
+
       popupMenu.add(modifyRemarkItem);
       popupMenu.add(deleteFriendItem);
+      popupMenu.add(showCalenderItem);
       modifyRemarkItem.addActionListener((e) -> new ModifyRemarkFrame(uid));
       deleteFriendItem.addActionListener((e) -> confirmDeleteFriend());
+      deleteFriendItem.addActionListener((e) -> todoPanel.update_show_uid(uid));
 
       // 设置监听器
       this.addMouseListener(this);
@@ -160,7 +167,7 @@ public class FriendListPanel extends JPanel {
     newItem.setBackground(new Color(224, 224, 224));
     mainFriendItemPanel = newItem;
     if (needUpdate) {
-      // TODO: 更新日历
+      todoPanel.update();
     }
   }
 
@@ -194,5 +201,8 @@ public class FriendListPanel extends JPanel {
     if (discussionFrame != null) {
       discussionFrame.updateInviteFriendsFrame();
     }
+  }
+  public void setTodoPanel(TodoPanel todoPanel) {
+    this.todoPanel = todoPanel;
   }
 }

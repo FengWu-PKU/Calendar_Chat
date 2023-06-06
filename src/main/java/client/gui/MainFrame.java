@@ -18,13 +18,15 @@ public class MainFrame extends JFrame {
   private ArrayList<FriendItem> friendList = new ArrayList<>();
   private FriendListPanel friendListPanel = new FriendListPanel();
   private ButtonsPanel buttonsPanel = new ButtonsPanel();
-  private TodoPanel todoPanel=new TodoPanel();
+  private TodoPanel todoPanel;
   private Container con=getContentPane();
   private ChooseDatePanel chooseDatePanel= new ChooseDatePanel();
 
   public MainFrame(int uid) {
     this.uid = uid;
+    todoPanel=new TodoPanel(uid);
     chooseDatePanel.setTodoPanel(todoPanel);
+    friendListPanel.setTodoPanel(todoPanel);
 
 
     // 窗口设置
@@ -223,7 +225,7 @@ public class MainFrame extends JFrame {
   }
 
 
-  public void updateOneDay(OnedayInfo info){
-    todoPanel.updateOneDay(info);
+  public void updateOneMonth(OneMonthInfo info){
+    todoPanel.updateOneMonth(info);
   }
 }

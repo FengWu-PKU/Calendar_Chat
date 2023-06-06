@@ -187,10 +187,10 @@ public class ReceiveMessageThread extends Thread {
             discussionFrame.updateDiscussion(info);
           }
         });
-      }else if (message.getMessageType() == MessageType.CLIENT_REQUEST_ONEDAY) { // 收到某一天的todolist
-        OnedayInfo info = (OnedayInfo) message.getContent();
+      }else if (message.getMessageType() == MessageType.CLIENT_REQUEST_ONEMONTH) { // 收到某一天的todolist
+        OneMonthInfo info = (OneMonthInfo) message.getContent();
         SwingUtilities.invokeLater(() -> {
-          FrameManager.getMainFrame().updateOneDay(info);
+          FrameManager.getMainFrame().updateOneMonth(info);
         });
       }
     }

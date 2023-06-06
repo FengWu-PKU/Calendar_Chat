@@ -1,7 +1,7 @@
 package client.gui;
 
-import common.OnedayInfo;
-import common.TodoItem;
+import client.model.Connection;
+import common.*;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
@@ -12,35 +12,29 @@ public class TodoPanel extends JPanel  {
     private OneDayPanel[][] gridLabels;
     private Date startdate;
     private Calendar calendar= Calendar.getInstance();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("M.dd");
+    private int show_uid,my_uid;
 
-    public TodoPanel() {
+
+    public TodoPanel(int my_uid) {
+        this.show_uid=my_uid;
+        this.my_uid=my_uid;
         setLayout(new GridLayout(4, 7));
-        //setMaximumSize(new Dimension(this.getMaximumSize().width, 60));
         setPreferredSize(new Dimension(100*7, 150*4));
-        //setMinimumSize(new Dimension(this.getMinimumSize().width, 60));
-        //setBorder(new EmptyBorder(5, 10, 5, 10));
 
         calendar.setTime(new Date());
         calendar.add(Calendar.WEEK_OF_YEAR, -1);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         startdate = calendar.getTime();
 
-        // 创建日期标签
-        gridLabels = new OneDayPanel[4][7];
+        add(new LoadingLabel());
+        Connection.writeObject(new Message(MessageType.CLIENT_REQUEST_ONEMONTH,new TodoInfoRequest(my_uid,show_uid,startdate)));
 
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 7; col++) {
-                calendar.setTime(startdate);
-                calendar.add(Calendar.DAY_OF_WEEK,7*row+col);
-                gridLabels[row][col] = new OneDayPanel(calendar.getTime());
+    }
 
-                //gridLabels[row][col].setColumnHeader(date);
-                gridLabels[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                //gridLabels[row][col].setPreferredSize(new Dimension(150, 150));
-                add(gridLabels[row][col]);
-            }
-        }
+    public void update(){
+        removeAll();
+        add(new LoadingLabel());
+        Connection.writeObject(new Message(MessageType.CLIENT_REQUEST_ONEMONTH,new TodoInfoRequest(my_uid,show_uid,startdate)));
     }
 
     public void update_date(Date select_date){
@@ -50,16 +44,30 @@ public class TodoPanel extends JPanel  {
         startdate = calendar.getTime();
 
         removeAll();
+        add(new LoadingLabel());
+        Connection.writeObject(new Message(MessageType.CLIENT_REQUEST_ONEMONTH,new TodoInfoRequest(my_uid,show_uid,startdate)));
+
+    }
+
+    public void update_show_uid(int show_uid){
+        this.show_uid=show_uid;
+        removeAll();
+        add(new LoadingLabel());
+        Connection.writeObject(new Message(MessageType.CLIENT_REQUEST_ONEMONTH,new TodoInfoRequest(my_uid,show_uid,startdate)));
+    }
+
+    public void updateOneMonth(OneMonthInfo info){
+        removeAll();
+
+        gridLabels = new OneDayPanel[4][7];
+        ArrayList<TodoItem>[][] todoList=info.getTodoLists();
 
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 7; col++) {
-                calendar.setTime(startdate);
+                calendar.setTime(info.getDate());
                 calendar.add(Calendar.DAY_OF_WEEK,7*row+col);
-                gridLabels[row][col] = new OneDayPanel(calendar.getTime());
-
-                //gridLabels[row][col].setColumnHeader(date);
+                gridLabels[row][col] = new OneDayPanel(calendar.getTime(),info.getShow_uid(),info.getMy_uid(),todoList[row][col]);
                 gridLabels[row][col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                //gridLabels[row][col].setPreferredSize(new Dimension(150, 150));
                 add(gridLabels[row][col]);
             }
         }
@@ -67,28 +75,7 @@ public class TodoPanel extends JPanel  {
         repaint();
     }
 
-    public void updateOneDay(OnedayInfo info){
 
-        Calendar cal2 = Calendar.getInstance();
-        Calendar cal1 = Calendar.getInstance();
-        ArrayList<TodoItem> todoList=info.getTodoList();
-        if(todoList.size()==0){
-            return;
-        }
-        cal1.setTime(todoList.get(0).getDeadline());
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 7; col++) {
-                cal2.setTime(gridLabels[row][col].date);
-                if(cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
-                        cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)){
-                    for(TodoItem tmp:todoList){
-                        gridLabels[row][col].addTodoItem(tmp);
-                    }
-                }
-            }
-        }
-
-    }
 }
 
 
