@@ -18,6 +18,9 @@ public class MainFrame extends JFrame {
   private ArrayList<FriendItem> friendList = new ArrayList<>();
   private FriendListPanel friendListPanel = new FriendListPanel();
   private ButtonsPanel buttonsPanel = new ButtonsPanel();
+  private TodoPanel todoPanel=new TodoPanel();
+  private Container con=getContentPane();
+  private NewTodoItemPanel newTodoItemPanel=new NewTodoItemPanel();
 
   public MainFrame(int uid) {
     this.uid = uid;
@@ -25,15 +28,25 @@ public class MainFrame extends JFrame {
     // 窗口设置
     setTitle("社交日历");
     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    setSize(350, 800);
+    setSize(1250, 800);
     setResizable(false);
     setLocationRelativeTo(null);
+    con.setLayout(new BorderLayout());
 
     // 窗口布局
     JPanel sidebar = new JPanel(new BorderLayout());
     sidebar.add(new FasterScrollPane(friendListPanel), BorderLayout.CENTER);
     sidebar.add(buttonsPanel, BorderLayout.SOUTH);
-    getContentPane().add(sidebar);
+    con.add(sidebar,BorderLayout.WEST);
+
+    JPanel middle_area=new JPanel(new BorderLayout());
+    middle_area.add(new CalendarTitlePanel(),BorderLayout.NORTH);
+    middle_area.add(todoPanel,BorderLayout.CENTER);
+    con.add(middle_area,BorderLayout.CENTER);
+
+    JPanel right_area=new JPanel(new BorderLayout());
+    right_area.add(newTodoItemPanel,BorderLayout.NORTH);
+    con.add(right_area,BorderLayout.EAST);
 
     // 设置监听器
     addWindowListener(new WindowAdapter() {
