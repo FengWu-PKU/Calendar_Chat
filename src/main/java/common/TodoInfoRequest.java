@@ -2,7 +2,7 @@ package common;
 
 import java.util.Date;
 
-public class TodoInfoRequest {
+public class TodoInfoRequest implements java.io.Serializable {
     public int my_uid;
     public int show_uid;
     public Date date;
