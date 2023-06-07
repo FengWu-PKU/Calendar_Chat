@@ -179,14 +179,25 @@ public class ReceiveMessageThread extends Thread {
         });
       } else if (message.getMessageType() == MessageType.DISCUSSION_INFO) { // 收到在线讨论信息
         DiscussionInfo info = (DiscussionInfo) message.getContent();
-        int uid = FrameManager.getMainFrame().getUid();
-        info.getUserList().removeIf(o -> o.getUid() == uid);
-        SwingUtilities.invokeLater(() -> {
-          DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
-          if (discussionFrame != null) {
-            discussionFrame.updateDiscussion(info);
-          }
-        });
+        if (info == null) { // 讨论已结束
+          SwingUtilities.invokeLater(() -> {
+            DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+            if (discussionFrame != null) {
+              Dialogs.errorMessage(null, "讨论已结束");
+              discussionFrame.dispose();
+              FrameManager.removeDiscussionFrame();
+            }
+          });
+        } else {
+          int uid = FrameManager.getMainFrame().getUid();
+          info.getUserList().removeIf(o -> o.getUid() == uid);
+          SwingUtilities.invokeLater(() -> {
+            DiscussionFrame discussionFrame = FrameManager.getDiscussionFrame();
+            if (discussionFrame != null) {
+              discussionFrame.updateDiscussion(info);
+            }
+          });
+        }
       }else if (message.getMessageType() == MessageType.CLIENT_REQUEST_ONEMONTH) { // 收到某一天的todolist
         OneMonthInfo info = (OneMonthInfo) message.getContent();
         SwingUtilities.invokeLater(() -> {
