@@ -38,6 +38,7 @@ class FasterScrollPane {
 }
 class FrameManager {
   + {static} createMainFrame(UserLogin, int): void
+  + {static} getMainFrame(): MainFrame
   ---
   + {static} createChatFrame(int, String): void
   + {static} removeChatFrame(int): void
@@ -46,15 +47,19 @@ class FrameManager {
   + {static} createDiscussionFrame(): void
   + {static} joinDiscussion(int): void
   + {static} removeDiscussionFrame(): void
+  + {static} getDiscussionFrame(): DiscussionFrame
   ---
   + {static} createAddFriendFrame(): void
   + {static} removeAddFriendFrame(): void
+  + {static} getAddFriendFrame(): AddFriendFrame
   ---
   + {static} createFriendRequestsFrame(): void
   + {static} removeFriendRequestsFrame(): void
+  + {static} getFriendRequestsFrame(): FriendRequestsFrame
   ---
   + {static} createModifyInfoFrame(): void
   + {static} removeModifyInfoFrame(): void
+  + {static} getModifyInfoFrame(): DiscussionFrame
 }
 class FriendRequestsFrame {
   + updateRequestList(ArrayList<FriendRequestItem>): void

@@ -63,12 +63,12 @@ class PaintPanel {
   + PaintPanel():
 }
 class PaintColorPanel {
-  - paintColor: Color
+  + getPaintColor(): Color
   + actionPerformed(ActionEvent): void
   + PaintColorPanel():
 }
 class PaintWidthPanel {
-  - paintWidth: int
+  + getPaintWidth(): int
   + PaintWidthPanel():
 }
 
