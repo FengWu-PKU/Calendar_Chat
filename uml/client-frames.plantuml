@@ -37,24 +37,24 @@ class FasterScrollPane {
   + FasterScrollPane(Component):
 }
 class FrameManager {
-  + createMainFrame(UserLogin, int): void
+  + {static} createMainFrame(UserLogin, int): void
   ---
-  + createChatFrame(int, String): void
-  + removeChatFrame(int): void
-  + getChatFrame(int): ChatFrame
+  + {static} createChatFrame(int, String): void
+  + {static} removeChatFrame(int): void
+  + {static} getChatFrame(int): ChatFrame
   ---
-  + createDiscussionFrame(): void
-  + joinDiscussion(int): void
-  + removeDiscussionFrame(): void
+  + {static} createDiscussionFrame(): void
+  + {static} joinDiscussion(int): void
+  + {static} removeDiscussionFrame(): void
   ---
-  + createAddFriendFrame(): void
-  + removeAddFriendFrame(): void
+  + {static} createAddFriendFrame(): void
+  + {static} removeAddFriendFrame(): void
   ---
-  + createFriendRequestsFrame(): void
-  + removeFriendRequestsFrame(): void
+  + {static} createFriendRequestsFrame(): void
+  + {static} removeFriendRequestsFrame(): void
   ---
-  + createModifyInfoFrame(): void
-  + removeModifyInfoFrame(): void
+  + {static} createModifyInfoFrame(): void
+  + {static} removeModifyInfoFrame(): void
 }
 class FriendRequestsFrame {
   + updateRequestList(ArrayList<FriendRequestItem>): void
@@ -67,22 +67,18 @@ class FriendRequestsPanel {
   + FriendRequestsPanel():
 }
 class HistoryMessagesPane {
-  + removeUid(int): void
-  + addMessage(UserMessage): void
-  + addName(int, String, boolean): void
   - addMessageWithoutRevalidate(UserMessage): void
-  + removeUid(int, boolean): void
+  + addMessage(UserMessage): void
   + updateHistoryMessages(ArrayList<UserMessage>): void
   + addName(int, String): void
+  + addName(int, String, boolean): void
+  + removeUid(int): void
+  + removeUid(int, boolean): void
   + HistoryMessagesPane():
 }
 class InfoInputPanel {
-  + addTextField(String, JTextField, String): void
-  + isEmptyTextField(JTextField): boolean
-  + addTextField(String, JTextField): void
-  + getText(JTextField): String?
-  + addComponent(Component): void
-  + InfoInputPanel():
+  ---
+  ...
 }
 class LoadingLabel {
   + LoadingLabel():
