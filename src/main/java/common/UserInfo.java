@@ -6,8 +6,9 @@ import java.time.LocalDate;
  * 个人资料
  */
 public class UserInfo implements java.io.Serializable {
-  private static final long serialVersionUID = 3L;
+  private static final long serialVersionUID = 5L;
 
+  private String encryptedPassword;
   private String name;
   private String phone;
   private String email;
@@ -20,6 +21,23 @@ public class UserInfo implements java.io.Serializable {
     this.email = email;
     this.birth = birth;
     this.intro = intro;
+  }
+
+  public UserInfo(String encryptedPassword, String name, String phone, String email, LocalDate birth, String intro) {
+    this.encryptedPassword = encryptedPassword;
+    this.name = name;
+    this.phone = phone;
+    this.email = email;
+    this.birth = birth;
+    this.intro = intro;
+  }
+
+  public String getEncryptedPassword() {
+    return encryptedPassword;
+  }
+
+  public void setEncryptedPassword(String encryptedPassword) {
+    this.encryptedPassword = encryptedPassword;
   }
 
   public String getName() {
