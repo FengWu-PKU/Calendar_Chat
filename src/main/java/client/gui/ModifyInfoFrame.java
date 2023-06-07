@@ -14,17 +14,20 @@ import java.time.format.DateTimeParseException;
  * 修改资料窗口
  */
 public class ModifyInfoFrame extends JFrame implements ActionListener {
+  private JPasswordField oldPasswordField = new JPasswordField();
+  private JPasswordField newPasswordField = new JPasswordField();
+  private JPasswordField confirmPasswordField = new JPasswordField();
   private JTextField nameField = new JTextField();
   private JTextField phoneField = new JTextField();
   private JTextField emailField = new JTextField();
   private JTextField birthField = new JTextField();
   private JTextField introField = new JTextField();
-  private JButton modifyButton = new JButton("修改资料");
+  private JButton modifyButton = new JButton("修改");
 
   public ModifyInfoFrame() {
     // 窗口设置
     setTitle("修改资料");
-    setSize(400, 280);
+    setSize(400, 380);
     setResizable(false);
     setLocationRelativeTo(FrameManager.getMainFrame());
 
@@ -58,6 +61,9 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
     buttonPanel.add(modifyButton);
     getRootPane().setDefaultButton(modifyButton);
 
+    contentPane.addTextField("原密码:", oldPasswordField, "修改信息请输入原密码");
+    contentPane.addTextField("新密码:", newPasswordField, "至少 8 位，不修改密码则留空");
+    contentPane.addTextField("确认密码:", confirmPasswordField, "请再次输入密码，不修改密码则留空");
     contentPane.addTextField("姓名:", nameField, "长度不超过 20");
     contentPane.addTextField("电话:", phoneField, "长度不超过 20");
     contentPane.addTextField("邮箱:", emailField, "长度不超过 50");
@@ -93,19 +99,40 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == modifyButton) {
-      String name = InfoInputPanel.isEmptyTextField(nameField) ? null : nameField.getText();
+      String oldPassword = InfoInputPanel.getText(oldPasswordField);
+      if (oldPassword == null || !FrameManager.getMainFrame().confirmPassword(oldPassword)) {
+        Dialogs.errorMessage(this, Validators.WrongOldPasswordMessage);
+        return;
+      }
+
+      String newPassword = InfoInputPanel.getText(newPasswordField);
+      if (newPassword != null && !Validators.isValidPassword(newPassword)) {
+        Dialogs.errorMessage(this, Validators.invalidPasswordMessage);
+        return;
+      }
+      String confirmPassword = InfoInputPanel.getText(confirmPasswordField);
+      if (newPassword != null && !newPassword.equals(confirmPassword)) {
+        Dialogs.errorMessage(this, Validators.confirmPasswordFailedMessage);
+        return;
+      }
+      if (newPassword == null && confirmPassword != null) {
+        Dialogs.errorMessage(this, Validators.confirmPasswordFailedMessage);
+        return;
+      }
+
+      String name = InfoInputPanel.getText(nameField);
       if (name != null && !Validators.isValidName(name)) {
         Dialogs.errorMessage(this, Validators.invalidNameMessage);
         return;
       }
 
-      String phone = InfoInputPanel.isEmptyTextField(phoneField) ? null : phoneField.getText();
+      String phone = InfoInputPanel.getText(phoneField);
       if (phone != null && !Validators.isValidPhoneNumber(phone)) {
         Dialogs.errorMessage(this, Validators.invalidPhoneNumberMessage);
         return;
       }
 
-      String email = InfoInputPanel.isEmptyTextField(emailField) ? null : emailField.getText();
+      String email = InfoInputPanel.getText(emailField);
       if (email != null && !Validators.isValidEmail(email)) {
         Dialogs.errorMessage(this, Validators.invalidEmailMessage);
         return;
@@ -123,13 +150,14 @@ public class ModifyInfoFrame extends JFrame implements ActionListener {
         return;
       }
 
-      String intro = InfoInputPanel.isEmptyTextField(introField) ? null : introField.getText();
+      String intro = InfoInputPanel.getText(introField);
       if (intro != null && !Validators.isValidIntro(intro)) {
         Dialogs.errorMessage(this, Validators.invalidIntroMessage);
         return;
       }
 
-      UserInfo info = new UserInfo(name, phone, email, birth, intro);
+      String encryptedPassword = PasswordEncryptor.encryptPassword(newPassword);
+      UserInfo info = new UserInfo(encryptedPassword, name, phone, email, birth, intro);
       Connection.writeObject(new Message(MessageType.MODIFY_INFO, info));
       dispose();
       FrameManager.removeModifyInfoFrame();

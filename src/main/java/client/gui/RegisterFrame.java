@@ -41,9 +41,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
     buttonPanel.add(registerAndLoginButton);
     buttonPanel.add(backButton);
 
-    contentPane.addTextField("用户名:", usernameField);
-    contentPane.addTextField("密码:", passwordField);
-    contentPane.addTextField("确认密码:", confirmPasswordField);
+    contentPane.addTextField("用户名:", usernameField, "至少 4 位");
+    contentPane.addTextField("密码:", passwordField, "至少 8 位");
+    contentPane.addTextField("确认密码:", confirmPasswordField, "请再次输入密码");
     contentPane.addTextField("姓名:", nameField, "选填，长度不超过 20");
     contentPane.addTextField("电话:", phoneField, "选填，长度不超过 20");
     contentPane.addTextField("邮箱:", emailField, "选填，长度不超过 50");
@@ -63,35 +63,35 @@ public class RegisterFrame extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == registerAndLoginButton) {
-      String username = usernameField.getText();
-      if (!Validators.isValidUsername(username)) {
+      String username = InfoInputPanel.getText(usernameField);
+      if (username == null || !Validators.isValidUsername(username)) {
         Dialogs.errorMessage(this, Validators.invalidUsernameMessage);
         return;
       }
 
-      String password = new String(passwordField.getPassword());
-      if (!Validators.isValidPassword(password)) {
+      String password = InfoInputPanel.getText(passwordField);
+      if (password == null || !Validators.isValidPassword(password)) {
         Dialogs.errorMessage(this, Validators.invalidPasswordMessage);
         return;
       }
-      if (!password.equals(new String(confirmPasswordField.getPassword()))) {
+      if (!password.equals(InfoInputPanel.getText(confirmPasswordField))) {
         Dialogs.errorMessage(this, Validators.confirmPasswordFailedMessage);
         return;
       }
 
-      String name = InfoInputPanel.isEmptyTextField(nameField) ? null : nameField.getText();
+      String name = InfoInputPanel.getText(nameField);
       if (name != null && !Validators.isValidName(name)) {
         Dialogs.errorMessage(this, Validators.invalidNameMessage);
         return;
       }
 
-      String phone = InfoInputPanel.isEmptyTextField(phoneField) ? null : phoneField.getText();
+      String phone = InfoInputPanel.getText(phoneField);
       if (phone != null && !Validators.isValidPhoneNumber(phone)) {
         Dialogs.errorMessage(this, Validators.invalidPhoneNumberMessage);
         return;
       }
 
-      String email = InfoInputPanel.isEmptyTextField(emailField) ? null : emailField.getText();
+      String email = InfoInputPanel.getText(emailField);
       if (email != null && !Validators.isValidEmail(email)) {
         Dialogs.errorMessage(this, Validators.invalidEmailMessage);
         return;
@@ -109,7 +109,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
         return;
       }
 
-      String intro = InfoInputPanel.isEmptyTextField(introField) ? null : introField.getText();
+      String intro = InfoInputPanel.getText(introField);
       if (intro != null && !Validators.isValidIntro(intro)) {
         Dialogs.errorMessage(this, Validators.invalidIntroMessage);
         return;
@@ -122,7 +122,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
       if (message == null) {
         Dialogs.errorMessage(this, "服务异常");
       } else if (message.getMessageType() == MessageType.REGISTER_SUCCEED) {
-        FrameManager.createMainFrame((Integer) message.getContent());
+        FrameManager.createMainFrame(user, (Integer) message.getContent());
         dispose();
       } else if (message.getMessageType() == MessageType.REGISTER_FAILED) {
         Dialogs.errorMessage(this, "用户名已存在");

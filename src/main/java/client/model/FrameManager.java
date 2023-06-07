@@ -16,8 +16,8 @@ public class FrameManager {
   // 主窗口
   private static MainFrame mainFrame;
 
-  public static void createMainFrame(int uid) {
-    mainFrame = new MainFrame(uid);
+  public static void createMainFrame(UserLogin user, int uid) {
+    mainFrame = new MainFrame(user, uid);
     new ReceiveMessageThread().start();
   }
 
