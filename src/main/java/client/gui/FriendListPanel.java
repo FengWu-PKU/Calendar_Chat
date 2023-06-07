@@ -120,8 +120,9 @@ public class FriendListPanel extends JPanel {
     @Override
     public void mouseClicked(MouseEvent e) {
       if (e.getButton() == MouseEvent.BUTTON1) {
-        changeMainItem(this, true);
-        if (e.getClickCount() == 2) { // 双击打开聊天框
+        if (e.getClickCount() == 1) { // 单击更新日历
+          changeMainItem(this, true);
+        } else if (e.getClickCount() == 2) { // 双击打开聊天框
           FrameManager.createChatFrame(uid, nameLabel.getText());
           FrameManager.getMainFrame().alreadyRead(uid);
         }
