@@ -103,4 +103,17 @@ public class Account {
             throw new RuntimeException(e);
         }
     }
+
+    static public void ModifyPassword(int id, String new_password) {
+        try (Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="UPDATE account SET password = ? WHERE account_id=?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, new_password);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -228,6 +228,9 @@ public class ServerConClientThread {
         QQUser tmp = new QQUser(account_id, newinfo.getName(), newinfo.getIntro(), newinfo.getPhone(), newinfo.getEmail(),
                 Account.getUsernameByID(account_id), bir);
         QQUser.ModifyUserInfo(tmp);
+        if (newinfo.getEncryptedPassword() != null) {
+            Account.ModifyPassword(account_id, newinfo.getEncryptedPassword());
+        }
         System.out.println("用户 "+account_id+" 修改了个人资料");
     }
 
