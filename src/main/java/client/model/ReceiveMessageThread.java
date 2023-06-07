@@ -108,9 +108,9 @@ public class ReceiveMessageThread extends Thread {
           FrameManager.getMainFrame().deleteFriend(uid);
           ChatFrame chatFrame = FrameManager.getChatFrame(uid);
           if (chatFrame != null) { // 如果聊天窗口开着则关闭
+            Dialogs.normalMessage(chatFrame, "你已被对方删除，窗口即将关闭");
             chatFrame.dispose();
             FrameManager.removeChatFrame(uid);
-            Dialogs.normalMessage(FrameManager.getMainFrame(), "你被删了，小丑");
           }
         });
       } else if (message.getMessageType() == MessageType.USER_INFO) { // 收到个人信息
