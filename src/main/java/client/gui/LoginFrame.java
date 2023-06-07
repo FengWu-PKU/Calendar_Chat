@@ -59,7 +59,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         if (message == null) {
           Dialogs.errorMessage(this, "服务异常");
         } else if (message.getMessageType() == MessageType.LOGIN_SUCCEED) {
-          FrameManager.createMainFrame((Integer) message.getContent());
+          FrameManager.createMainFrame(user, (Integer) message.getContent());
           dispose();
         } else if (message.getMessageType() == MessageType.LOGIN_FAILED) {
           Dialogs.errorMessage(this, "用户名不存在或密码错误");

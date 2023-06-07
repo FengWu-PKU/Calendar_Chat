@@ -18,6 +18,10 @@ public class PasswordEncryptor {
    */
   public static String encryptPassword(String password) {
     try {
+      if (password == null) {
+        return null;
+      }
+
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
       byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 

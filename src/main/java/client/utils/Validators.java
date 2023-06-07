@@ -98,6 +98,11 @@ public class Validators {
   }
 
   /**
+   * 验证原密码失败时显示的信息
+   */
+  public static final String WrongOldPasswordMessage = "原密码错误";
+
+  /**
    * 确认密码失败时显示的信息
    */
   public static final String confirmPasswordFailedMessage = "确认密码失败";

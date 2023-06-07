@@ -24,6 +24,17 @@ public class InfoInputPanel extends JPanel {
     return textField.getForeground() == Color.gray || textField.getText().equals("");
   }
 
+  public static String getText(JTextField textField) {
+    if (isEmptyTextField(textField)) {
+      return null;
+    }
+    if (textField instanceof JPasswordField) {
+      return new String(((JPasswordField) textField).getPassword());
+    } else {
+      return textField.getText();
+    }
+  }
+
   /**
    * 加入一栏，有标签和输入框，输入框有注释
    * @param labelText 标签文字
@@ -31,13 +42,19 @@ public class InfoInputPanel extends JPanel {
    * @param hint 注释
    */
   public void addTextField(String labelText, JTextField textField, String hint) {
-    textField.setText(hint);
     textField.setForeground(Color.gray);
+    textField.setText(hint);
+    if (textField instanceof JPasswordField) {
+      ((JPasswordField) textField).setEchoChar('\0');
+    }
     textField.addFocusListener(new FocusListener() {
       public void focusGained(FocusEvent e) {
         if (textField.getForeground() == Color.gray) {
-          textField.setText("");
           textField.setForeground(Color.black);
+          textField.setText("");
+          if (textField instanceof JPasswordField) {
+            ((JPasswordField) textField).setEchoChar((Character) UIManager.get("PasswordField.echoChar"));
+          }
         }
       }
 
@@ -45,6 +62,9 @@ public class InfoInputPanel extends JPanel {
         if (textField.getText().equals("")) {
           textField.setForeground(Color.gray);
           textField.setText(hint);
+          if (textField instanceof JPasswordField) {
+            ((JPasswordField) textField).setEchoChar('\0');
+          }
         }
       }
     });

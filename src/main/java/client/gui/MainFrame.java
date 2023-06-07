@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
  * 主界面
  */
 public class MainFrame extends JFrame {
+  private UserLogin user;
   private int uid;
   private ArrayList<FriendItem> friendList = new ArrayList<>();
   private FriendListPanel friendListPanel = new FriendListPanel();
@@ -22,12 +23,13 @@ public class MainFrame extends JFrame {
   private Container con=getContentPane();
   private ChooseDatePanel chooseDatePanel= new ChooseDatePanel();
 
-  public MainFrame(int uid) {
+  public MainFrame(UserLogin user, int uid) {
+    this.user = user;
     this.uid = uid;
+
     todoPanel=new TodoPanel(uid);
     chooseDatePanel.setTodoPanel(todoPanel);
     friendListPanel.setTodoPanel(todoPanel);
-
 
     // 窗口设置
     setTitle("社交日历");
@@ -70,6 +72,15 @@ public class MainFrame extends JFrame {
    */
   public int getUid() {
     return uid;
+  }
+
+  /**
+   * 验证密码
+   * @param password 要验证的密码
+   * @return 相同返回 true，否则返回 false
+   */
+  public boolean confirmPassword(String password) {
+    return user.getEncryptedPassword().equals(PasswordEncryptor.encryptPassword(password));
   }
 
   private void preprocessFriendItem(FriendItem friend) {
@@ -142,9 +153,8 @@ public class MainFrame extends JFrame {
    * @return 用户名
    */
   public String getUsername() {
-    return findFriendItemByUid(uid).getUsername();
+    return user.getUsername();
   }
-
 
   /**
    * 消息已读
