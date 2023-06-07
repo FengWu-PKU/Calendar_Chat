@@ -8,7 +8,7 @@
 
 | 姓名 | Gitee 账号                                   | Email                                           | 分工                                                    |
 |------|--------------------------------------------|-------------------------------------------------|-------------------------------------------------------|
-| 孟煜皓 | [AutumnKite](https://gitee.com/AutumnKite) | [1790397194@qq.com](mailto:1790397194@qq.com)   | 客户端的登录、注册、好友列表、聊天、修改信息、好友申请、在线讨论部分，及与之相关的公共类、工具类      |
+| 孟煜皓 | [AutumnKite](https://gitee.com/AutumnKite) | [autumnkite233@gmail.com](mailto:autumnkite233@gmail.com) | 客户端的登录、注册、好友列表、聊天、修改信息、好友申请、在线讨论部分，及与之相关的公共类、工具类      |
 | 朱羿恺 | [uyom](https://gitee.com/uyom)             | [hjeAKNOI@gmail.com](mailto:hjeAKNOI@gmail.com) | 服务器端的处理登录、注册、好友列表、聊天、修改信息、好友申请、在线讨论请求部分，及与之相关的公共类、工具类 | 
 | ... | ...                                        | ...                                             | ...                                                   |
 
@@ -90,6 +90,8 @@
 
 ![](img/Chat.png)
 
+![](img/ModifyInfo.png)
+
 ![](img/FriendRequest.png)
 
 ![](img/Discussion.png)
@@ -98,7 +100,11 @@
 
 ### 客户端
 
+...
+
 ### 服务端
+
+...
 
 ## 扩展
 
