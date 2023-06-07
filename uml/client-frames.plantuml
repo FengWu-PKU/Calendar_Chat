@@ -1,0 +1,134 @@
+@startuml client-frames
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractUserItemPanel {
+  + addButton(JButton): void
+  + AbstractUserItemPanel():
+}
+class AddFriendFrame {
+  + actionPerformed(ActionEvent): void
+  + AddFriendFrame():
+}
+class ChatFrame {
+  + addMessage(UserMessage): void
+  + updateInfo(ChatWindowInfo): void
+  + ChatFrame(int, String):
+}
+class ChatPane {
+  + addMessage(UserMessage): void
+  + updateHistoryMessages(ArrayList<UserMessage>): void
+  - sendMessage(): void
+  + actionPerformed(ActionEvent): void
+  + keyReleased(KeyEvent): void
+  + keyTyped(KeyEvent): void
+  + keyPressed(KeyEvent): void
+  + ChatPane():
+  + ChatPane(JFrame):
+  + ChatPane(JFrame, int, String):
+}
+class DiscussionFrame {
+  ---
+  ...
+}
+class FasterScrollPane {
+  + FasterScrollPane(Component):
+}
+class FrameManager {
+  + createMainFrame(UserLogin, int): void
+  ---
+  + createChatFrame(int, String): void
+  + removeChatFrame(int): void
+  + getChatFrame(int): ChatFrame
+  ---
+  + createDiscussionFrame(): void
+  + joinDiscussion(int): void
+  + removeDiscussionFrame(): void
+  ---
+  + createAddFriendFrame(): void
+  + removeAddFriendFrame(): void
+  ---
+  + createFriendRequestsFrame(): void
+  + removeFriendRequestsFrame(): void
+  ---
+  + createModifyInfoFrame(): void
+  + removeModifyInfoFrame(): void
+}
+class FriendRequestsFrame {
+  + updateRequestList(ArrayList<FriendRequestItem>): void
+  + addRequest(FriendRequestItem): void
+  + removeRequest(FriendRequestItem): void
+  + FriendRequestsFrame():
+}
+class FriendRequestsPanel {
+  + updateRequestList(ArrayList<FriendRequestItem>): void
+  + FriendRequestsPanel():
+}
+class HistoryMessagesPane {
+  + removeUid(int): void
+  + addMessage(UserMessage): void
+  + addName(int, String, boolean): void
+  - addMessageWithoutRevalidate(UserMessage): void
+  + removeUid(int, boolean): void
+  + updateHistoryMessages(ArrayList<UserMessage>): void
+  + addName(int, String): void
+  + HistoryMessagesPane():
+}
+class InfoInputPanel {
+  + addTextField(String, JTextField, String): void
+  + isEmptyTextField(JTextField): boolean
+  + addTextField(String, JTextField): void
+  + getText(JTextField): String?
+  + addComponent(Component): void
+  + InfoInputPanel():
+}
+class LoadingLabel {
+  + LoadingLabel():
+}
+class MainFrame {
+  ---
+  ...
+}
+class ModifyInfoFrame {
+  + updateInfo(UserInfo): void
+  + actionPerformed(ActionEvent): void
+  + ModifyInfoFrame():
+}
+class ProfilePane {
+  + updateProfile(UserInfo): void
+  + ProfilePane(String):
+}
+class ReceiveMessageThread {
+  + run(): void
+  + ReceiveMessageThread():
+}
+class RequestItemPanel {
+  + actionPerformed(ActionEvent): void
+  + RequestItemPanel(FriendRequestItem):
+}
+
+AddFriendFrame         -[#595959,dashed]->  InfoInputPanel        : "«use»"
+ModifyInfoFrame        -[#595959,dashed]->  InfoInputPanel        : "«use»"
+ChatFrame              -[#595959,dashed]->  LoadingLabel          : "«use»"
+FriendRequestsPanel    -[#595959,dashed]->  LoadingLabel          : "«use»"
+ModifyInfoFrame        -[#595959,dashed]->  LoadingLabel          : "«use»"
+ChatFrame              o-[#595959,plain]-> "1" ChatPane
+ChatFrame              o-[#595959,plain]-> "1" ProfilePane
+ChatPane               o-[#595959,plain]-> "1" HistoryMessagesPane
+FrameManager           o-[#595959,plain]-> "1" AddFriendFrame
+FrameManager           o-[#595959,plain]-> "*" ChatFrame
+FrameManager           o-[#595959,plain]-> "1" DiscussionFrame
+FrameManager           o-[#595959,plain]-> "1" FriendRequestsFrame
+FrameManager           o-[#595959,plain]-> "1" MainFrame
+FrameManager           o-[#595959,plain]-> "1" ModifyInfoFrame
+FrameManager           -[#595959,dashed]right->  ReceiveMessageThread  : "«create»"
+FriendRequestsFrame    -[#595959,dashed]->  FasterScrollPane      : "«use»"
+FriendRequestsFrame    *-[#595959,plain]-> "1" FriendRequestsPanel
+FriendRequestsPanel    *-[#595959,plain]-> "*" RequestItemPanel
+RequestItemPanel       -[#000082,plain]-^  AbstractUserItemPanel
+RequestItemPanel       +-[#820000,plain]-  FriendRequestsPanel
+AddFriendFrame -[hidden]right- FriendRequestsFrame
+AddFriendFrame -[hidden]left- ModifyInfoFrame
+@enduml

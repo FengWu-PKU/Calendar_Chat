@@ -98,9 +98,19 @@
 
 ## 代码结构
 
-### 客户端
+### 客户端类图
 
-...
+连接服务器、登录、注册：
+
+![](uml/client-start.svg)
+
+各个窗口及窗口管理器：
+
+![](uml/client-frames.svg)
+
+在线讨论：
+
+![](uml/client-discussion.svg)
 
 ### 服务端
 

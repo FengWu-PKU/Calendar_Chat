@@ -1,0 +1,93 @@
+@startuml client-discussion
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+set namespaceSeparator none
+
+abstract class AbstractUserItemPanel {
+  + addButton(JButton): void
+  + setUsername(String): void
+}
+class DiscussionFrame {
+  + removeUser(int): void
+  + updateUserListFrame(): void
+  + updateInviteFriendsFrame(): void
+  + showInviteResult(int): void
+  + updateDiscussion(DiscussionInfo): void
+  + addUser(UserDiscussion): void
+  + DiscussionFrame():
+}
+class ChatPane {
+  ---
+  ...
+}
+class DrawPanel {
+  + paintComponent(Graphics): void
+  + add(int, int): void
+  + clear(): void
+  + mouseDragged(MouseEvent): void
+  + mouseMoved(MouseEvent): void
+  + mouseReleased(MouseEvent): void
+  + mousePressed(MouseEvent): void
+  + mouseExited(MouseEvent): void
+  + mouseClicked(MouseEvent): void
+  + mouseEntered(MouseEvent): void
+  + DrawPanel():
+}
+class DiscussionUserItemPanel {
+  + actionPerformed(ActionEvent): void
+  + UserItemPanel(UserDiscussion):
+}
+class DiscussionUsersPanel {
+  + DiscussionUsersPanel(ArrayList<UserDiscussion>):
+}
+class InviteUserItemPanel {
+  + actionPerformed(ActionEvent): void
+  + UserItemPanel(UserDiscussion):
+}
+class InviteFriendsPanel {
+  + InviteFriendsPanel(ArrayList<UserDiscussion>):
+}
+class FasterScrollPane {
+  + FasterScrollPane(Component):
+}
+class LoadingLabel {
+  + LoadingLabel():
+}
+class PaintPanel {
+  + updateDrawList(ArrayList<Draw>): void
+  + actionPerformed(ActionEvent): void
+  + receiveClear(): void
+  + receiveAdd(Draw): void
+  + PaintPanel():
+}
+class PaintColorPanel {
+  - paintColor: Color
+  + actionPerformed(ActionEvent): void
+  + PaintColorPanel():
+}
+class PaintWidthPanel {
+  - paintWidth: int
+  + PaintWidthPanel():
+}
+
+DiscussionFrame        o-[#595959,plain]-> "1" ChatPane
+DiscussionFrame        o-[#595959,plain]-> "1" PaintPanel
+DiscussionFrame        -[#595959,dashed]->  DiscussionUsersPanel    : "«create»"
+DiscussionFrame        -[#595959,dashed]right->  FasterScrollPane        : "«use»"
+DiscussionFrame        -[#595959,dashed]->  InviteFriendsPanel      : "«create»"
+DiscussionFrame        -[#595959,dashed]right->  LoadingLabel            : "«use»"
+DiscussionUsersPanel   *-[#595959,dashed]-> "*" DiscussionUserItemPanel
+DrawPanel              +-[#820000,plain]-  PaintPanel
+InviteFriendsPanel     *-[#595959,dashed]-> "*" InviteUserItemPanel
+PaintPanel             *-[#595959,plain]-> "1" DrawPanel
+PaintPanel             *-[#595959,plain]-> "1" PaintColorPanel
+PaintPanel             *-[#595959,plain]right-> "1" PaintWidthPanel
+DiscussionUserItemPanel      -[#000082,plain]-^  AbstractUserItemPanel
+InviteUserItemPanel          -[#000082,plain]-^  AbstractUserItemPanel
+DiscussionUserItemPanel      +-[#820000,plain]-  DiscussionUsersPanel
+InviteUserItemPanel          +-[#820000,plain]-  InviteFriendsPanel
+DiscussionUsersPanel -[hidden]- InviteFriendsPanel
+ChatPane -[hidden]- PaintPanel
+@enduml

@@ -1,0 +1,40 @@
+@startuml client-start
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class InfoInputPanel {
+  + {static} isEmptyTextField(JTextField): boolean
+  + {static} getText(JTextField): String?
+  + addTextField(String, JTextField, String): void
+  + addTextField(String, JTextField): void
+  + addComponent(Component): void
+  + InfoInputPanel():
+}
+class LoginFrame {
+  + actionPerformed(ActionEvent): void
+  + LoginFrame():
+}
+class RegisterFrame {
+  + actionPerformed(ActionEvent): void
+  + RegisterFrame():
+}
+class ServerConnectionFrame {
+  + actionPerformed(ActionEvent): void
+  + ServerConnectionFrame():
+}
+class SocialApp {
+  + {static} setDefaultFont(): void
+  + {static} setDefaultColor(): void
+  + {static} main(String[]): void
+}
+
+SocialApp              -[#595959,dashed]->  ServerConnectionFrame : "«create»"
+ServerConnectionFrame  -[#595959,dashed]->  InfoInputPanel        : "«use»"
+ServerConnectionFrame  -[#595959,dashed]->  LoginFrame            : "«create»"
+LoginFrame             -[#595959,dashed]->  InfoInputPanel        : "«use»"
+LoginFrame             -[#595959,dashed]->  RegisterFrame         : "«create»"
+RegisterFrame          -[#595959,dashed]->  InfoInputPanel        : "«use»"
+RegisterFrame          -[#595959,dashed]->  LoginFrame            : "«create»"
+@enduml
