@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class ButtonsPanel extends JPanel {
   private int numFriendRequests;
-  private JButton modifyInfoButton = new JButton("修改资料");
+  private JButton modifyInfoButton = new JButton("修改信息");
   private JButton addFriendButton = new JButton("添加好友");
   private JButton friendRequestsButton = new JButton("好友申请");
   private JButton createDiscussionButton = new JButton("在线讨论");
