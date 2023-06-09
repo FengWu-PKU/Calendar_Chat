@@ -304,16 +304,19 @@ public class ServerConClientThread {
     }
 
     void GetOneMonthInfo(TodoInfoRequest q) throws IOException {
-        System.out.println("用户 "+account_id+" 获取了28天的日程");
+        System.out.println("用户 "+q.my_uid+" 获取了用户 "+q.show_uid+" "+q.date.getTime()+" 以来28天的日程");
+        Date zs=new Date(q.date.getTime());
+        OneMonthInfo ob=new OneMonthInfo(q.my_uid,q.show_uid,zs);
         ArrayList<TodoItem>[][] res=ToDoList.find28DaysEntry(q);
-        OneMonthInfo ob=new OneMonthInfo(q.my_uid,q.show_uid,q.date);
+        
         ob.setTodoList(res);
         ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        System.out.println("返回的时间是:"+ob.date.getTime()+" 当天返回了多少日程:"+ob.todoLists[0][0].size());
         oos.writeObject(new Message(MessageType.CLIENT_REQUEST_ONEMONTH, ob));
     }
 
     void UpdateOneDayInfo(OnedayInfo f){
-        System.out.println("用户 "+account_id+" 更新1天的日程");
+        System.out.println("用户 "+account_id+" 更新"+f.date.getTime()+ "当天的日程");
         if(f.my_uid!=f.show_uid)System.out.println("id不合法,没有权限更改");
         else {
             ToDoList.UpdateDateEntry(f);

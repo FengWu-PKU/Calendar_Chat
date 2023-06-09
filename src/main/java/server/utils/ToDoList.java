@@ -32,8 +32,9 @@ public class ToDoList {
 
     /*插入新的条目*/
     static void insertEntry(ToDoList toDoList) {
+        if(findNameEntry(toDoList.account_id,toDoList.entry_name))return;
         try(Connection connection=DriverManager.getConnection(url, username, password)) {
-            String sql="INSERT INTO todolist(entry_name, content, ddl, pub, account_id) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql="INSERT INTO todolist(entry_name, content, ddl, complete, account_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt=connection.prepareStatement(sql);
             stmt.setString(1, toDoList.entry_name);
             stmt.setString(2, toDoList.content);
@@ -76,14 +77,14 @@ public class ToDoList {
             ResultSet res= stmt.executeQuery();
             while(res.next()) {
                 String entry_name=res.getString("entry_name");
-                Date ddl=res.getDate("Date");
+                Date ddl=res.getDate("ddl");
                 Calendar c1=Calendar.getInstance(),c2=Calendar.getInstance();
                 c1.setTime(dates);
                 c2.setTime(ddl);
                 if(c1.get(Calendar.YEAR)!=c2.get(Calendar.YEAR)||c1.get(Calendar.DAY_OF_YEAR)!=c2.get(Calendar.DAY_OF_YEAR)) continue; // 只有在Dates当天才返回
-                boolean pub=res.getBoolean("pub");
+                boolean pub=res.getBoolean("complete");
                 if(q.show_uid!=q.my_uid&&pub==false)continue;
-                String content=res.getString("Content");
+                String content=res.getString("content");
                 TodoItem cur=new TodoItem(entry_name, content, ddl, pub);
                 ans.add(cur);
                 if(ans.size()>=MAXTODOLISTNUM) break;
@@ -110,8 +111,25 @@ public class ToDoList {
         for(TodoItem item:tmp){
             deleteEntry(q.my_uid,item.getTitle());
         }
+        System.out.println("删除当天的日程");
         for(TodoItem item:q.todoList){
             insertEntry(new ToDoList(q.my_uid,item.getTitle(),item.getContent(),item.getDeadline(),item.getPub()));
+        }
+        System.out.println("更新当天的日程");
+    }
+
+    static boolean findNameEntry(int account_id, String name) {
+        try(Connection connection=DriverManager.getConnection(url, username, password)) {
+            String sql="SELECT * FROM todolist WHERE account_id=? AND entry_name=?";
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setInt(1, account_id);
+            stmt.setString(2, name);
+            ResultSet res= stmt.executeQuery();
+            if(!res.next()) return false;  // 没有符合条件的条目
+
+            return true;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
