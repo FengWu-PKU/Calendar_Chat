@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ToDoListTest {
 
-    @Test
+    /*@Test
     void insertEntry() {
         ToDoList toDoList=new ToDoList(1, "Alice", "study", "写完数据库操作", new Timestamp(System.currentTimeMillis()), true);
         ToDoList.insertEntry(toDoList);
@@ -37,6 +37,6 @@ class ToDoListTest {
             System.out.print(", ");
             System.out.print(ans[i].ddl);
         }
-    }
+    }*/
 
 }

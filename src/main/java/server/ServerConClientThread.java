@@ -6,6 +6,7 @@ import server.utils.Account;
 import server.utils.Friend;
 import server.utils.NewFriend;
 import server.utils.QQUser;
+import server.utils.ToDoList;
 import server.Discussion;
 
 import javax.naming.ldap.SortKey;
@@ -302,6 +303,25 @@ public class ServerConClientThread {
         oos.writeObject(new Message(MessageType.SERVER_INVITE_FRIEND, account_id));
     }
 
+    void GetOneMonthInfo(TodoInfoRequest q) throws IOException {
+        System.out.println("用户 "+account_id+" 获取了28天的日程");
+        ArrayList<TodoItem>[][] res=ToDoList.find28DaysEntry(q);
+        OneMonthInfo ob=new OneMonthInfo(q.my_uid,q.show_uid,q.date);
+        ob.setTodoList(res);
+        ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+        oos.writeObject(new Message(MessageType.CLIENT_REQUEST_ONEMONTH, ob));
+    }
+
+    void UpdateOneDayInfo(OnedayInfo f){
+        System.out.println("用户 "+account_id+" 更新1天的日程");
+        if(f.my_uid!=f.show_uid)System.out.println("id不合法,没有权限更改");
+        else {
+            ToDoList.UpdateDateEntry(f);
+            System.out.println("更改成功");
+
+        }
+    }
+
     public void run() {
         try {
             GetMainWindowInfo();
@@ -352,7 +372,11 @@ public class ServerConClientThread {
                     DiscussionCLearMessage();
                 } else if (m.getMessageType() == MessageType.CLIENT_INVITE_FRIEND) {
                     DiscussionInviteFriend((Integer)m.getContent());
-                }
+                } else if (m.getMessageType() == MessageType.CLIENT_REQUEST_ONEMONTH) {
+                    GetOneMonthInfo((TodoInfoRequest)m.getContent());
+                } else if(m.getMessageType() == MessageType.CLIENT_UPDATE_ONEDAY){
+                    UpdateOneDayInfo((OnedayInfo)m.getContent());
+                } 
             } catch (Exception e){
                 e.printStackTrace();
                 if (discussion != null) {

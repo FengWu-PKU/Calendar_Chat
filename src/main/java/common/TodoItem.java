@@ -46,5 +46,11 @@ public class TodoItem implements java.io.Serializable {
         title = t;
         deadline = d;
     }
+    public TodoItem(String a,String b,Date d,boolean p){
+        title = a;
+        content = b;
+        deadline = d;
+        pub = p;
+    }
 
 }
