@@ -32,7 +32,7 @@ public class CalendarTitlePanel extends JPanel {
             String dayOfWeek = new SimpleDateFormat("E").format(calendar.getTime());
             title[col].setText(dayOfWeek);
 
-            title[col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            // title[col].setBorder(BorderFactory.createLineBorder(Color.BLACK));
             add(title[col]);
 
         }

@@ -168,7 +168,7 @@ public class OneDayPanel extends JPanel {
         });
 
         //按钮区域
-        JPanel buttonArea= new JPanel(new GridLayout(1,2));
+        JPanel buttonArea= new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
         buttonArea.add(submitButton);
         buttonArea.add(deleteButton);
         editorPanel.add(buttonArea, BorderLayout.SOUTH);

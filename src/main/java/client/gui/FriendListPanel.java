@@ -24,9 +24,6 @@ public class FriendListPanel extends JPanel {
     private JLabel unreadMessagesLabel;
     private JPopupMenu popupMenu = new JPopupMenu();
 
-
-
-
     public FriendItemPanel(FriendItem friend) {
       uid = friend.getUid();
 
@@ -89,13 +86,18 @@ public class FriendListPanel extends JPanel {
       JMenuItem modifyRemarkItem = new JMenuItem("修改备注");
       JMenuItem deleteFriendItem = new JMenuItem("删除好友");
       JMenuItem showCalenderItem = new JMenuItem("显示日历");
+      JMenuItem openChatItem = new JMenuItem("打开聊天");
 
-      popupMenu.add(modifyRemarkItem);
-      popupMenu.add(deleteFriendItem);
+      if (uid != FrameManager.getMainFrame().getUid()) {
+        popupMenu.add(modifyRemarkItem);
+        popupMenu.add(deleteFriendItem);
+      }
       popupMenu.add(showCalenderItem);
+      popupMenu.add(openChatItem);
       modifyRemarkItem.addActionListener((e) -> new ModifyRemarkFrame(uid));
       deleteFriendItem.addActionListener((e) -> confirmDeleteFriend());
-      showCalenderItem.addActionListener((e) -> todoPanel.update_show_uid(this.uid));
+      showCalenderItem.addActionListener((e) -> changeMainItem(this, true));
+      openChatItem.addActionListener((e) -> openChatWindow());
 
       // 设置监听器
       this.addMouseListener(this);
@@ -117,16 +119,20 @@ public class FriendListPanel extends JPanel {
       return uid;
     }
 
+    public void openChatWindow() {
+      FrameManager.createChatFrame(uid, nameLabel.getText());
+      FrameManager.getMainFrame().alreadyRead(uid);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
       if (e.getButton() == MouseEvent.BUTTON1) {
         if (e.getClickCount() == 1) { // 单击更新日历
           changeMainItem(this, true);
         } else if (e.getClickCount() == 2) { // 双击打开聊天框
-          FrameManager.createChatFrame(uid, nameLabel.getText());
-          FrameManager.getMainFrame().alreadyRead(uid);
+          openChatWindow();
         }
-      } else if (e.getButton() == MouseEvent.BUTTON3 && uid != FrameManager.getMainFrame().getUid()) {
+      } else if (e.getButton() == MouseEvent.BUTTON3) {
         popupMenu.show(e.getComponent(), e.getX(), e.getY());
       }
     }
@@ -203,6 +209,7 @@ public class FriendListPanel extends JPanel {
       discussionFrame.updateInviteFriendsFrame();
     }
   }
+
   public void setTodoPanel(TodoPanel todoPanel) {
     this.todoPanel = todoPanel;
   }

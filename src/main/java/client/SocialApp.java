@@ -28,6 +28,7 @@ public class SocialApp {
     UIManager.put("Slider.background", Color.white);
     UIManager.put("RadioButton.background", Color.white);
     UIManager.put("ComboBox.background", Color.white);
+    UIManager.put("CheckBox.background", Color.white);
   }
 
   public static void main(String[] args) {
