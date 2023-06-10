@@ -95,7 +95,7 @@ public class FriendListPanel extends JPanel {
       popupMenu.add(showCalenderItem);
       modifyRemarkItem.addActionListener((e) -> new ModifyRemarkFrame(uid));
       deleteFriendItem.addActionListener((e) -> confirmDeleteFriend());
-      deleteFriendItem.addActionListener((e) -> todoPanel.update_show_uid(uid));
+      showCalenderItem.addActionListener((e) -> todoPanel.update_show_uid(this.uid));
 
       // 设置监听器
       this.addMouseListener(this);
@@ -168,7 +168,7 @@ public class FriendListPanel extends JPanel {
     newItem.setBackground(new Color(224, 224, 224));
     mainFriendItemPanel = newItem;
     if (needUpdate) {
-      todoPanel.update();
+      todoPanel.update_show_uid(newItem.uid);
     }
   }
 
