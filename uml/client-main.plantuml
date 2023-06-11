@@ -1,0 +1,90 @@
+@startuml client-main
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class ButtonsPanel {
+  + updateNumFriendRequests(int): void
+  + increaseNumFriendRequests(): void
+  + ButtonsPanel():
+}
+class CalendarTitlePanel {
+  + CalendarTitlePanel():
+}
+class ChooseDatePanel {
+  + ChooseDatePanel():
+}
+class FasterScrollPane {
+  + FasterScrollPane(Component):
+}
+class FriendItemPanel {
+  - confirmDeleteFriend(): void
+  + openChatWindow(): void
+  + mouseEntered(MouseEvent): void
+  + mouseExited(MouseEvent): void
+  + mouseReleased(MouseEvent): void
+  + mousePressed(MouseEvent): void
+  + mouseClicked(MouseEvent): void
+  + FriendItemPanel(FriendItem):
+}
+class FriendListPanel {
+  - changeMainItem(FriendItemPanel, boolean): void
+  + updateFriendList(ArrayList<FriendItem>): void
+  + FriendListPanel():
+}
+class LoadingLabel {
+  + LoadingLabel():
+}
+class MainFrame {
+  + increaseNumFriendRequests(): void
+  + updateOneMonth(OneMonthInfo): void
+  + updateFriendList(ArrayList<FriendItem>): void
+  + confirmPassword(String): boolean
+  - findFriendItemByUid(int): FriendItem?
+  + deleteFriend(int): void
+  - preprocessFriendItem(FriendItem): void
+  + getRemark(int): String
+  + getFriendName(int): String
+  + getUid(): int
+  + getUsername(): String
+  + getSimpleFriendList(): ArrayList<UserDiscussion>
+  + alreadyRead(int): void
+  + updateNumFriendRequests(int): void
+  + isFriend(int): boolean
+  + modifyRemark(int, String): void
+  + addMessage(UserMessage, boolean): void
+  + MainFrame(UserLogin, int):
+}
+class ModifyRemarkFrame {
+  + actionPerformed(ActionEvent): void
+  + ModifyRemarkFrame(int): 
+}
+class OneDayPanel {
+  + addTodoItem(TodoItem): void
+  - showArticleEditor(TodoItem, JButton): void
+  + OneDayPanel(Date, int, int, ArrayList<TodoItem>):
+}
+class TodoPanel {
+  + update(): void
+  + update_show_uid(int): void
+  + update_date(Date): void
+  + updateOneMonth(OneMonthInfo): void
+  + TodoPanel(int):
+}
+
+FriendItemPanel          +-[#820000,plain]-  FriendListPanel
+FriendItemPanel          -[#595959,dashed]->  ModifyRemarkFrame       : "«create»"
+FriendListPanel          -[#595959,dashed]->  LoadingLabel            : "«use»"
+FriendListPanel          *-[#595959,plain]-> "*" FriendItemPanel
+FriendListPanel          *-[#595959,plain]-> "1" TodoPanel
+MainFrame                -[#595959,dashed]->  FasterScrollPane        : "«use»"
+MainFrame                *-[#595959,plain]-> "1" FriendListPanel
+MainFrame                *-[#595959,plain]-> "1" ButtonsPanel
+MainFrame                *-[#595959,plain]-> "1" TodoPanel
+MainFrame                *-[#595959,plain]-> "1" ChooseDatePanel
+MainFrame                *-[#595959,plain]-> "1" CalendarTitlePanel
+TodoPanel                -[#595959,dashed]->  LoadingLabel            : "«use»"
+TodoPanel                *-[#595959,plain]-> "*" OneDayPanel
+FriendListPanel -[hidden]- ButtonsPanel
+@enduml

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="919px" preserveAspectRatio="none" style="width:1424px;height:919px;background:#FFFFFF;" version="1.1" viewBox="0 0 1424 919" width="1424px" zoomAndPan="magnify"><defs/><g><!--MD5=[bc7fbb61b7884c5eee6436cb7a906320]
+class ButtonsPanel--><g id="elem_ButtonsPanel"><rect codeLine="6" fill="#FFFFFF" height="95.0439" id="ButtonsPanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="284" x="40" y="619.5"/><ellipse cx="131.75" cy="633.5" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M134.5156,635.0313 L136.9063,635.7813 Q136.3594,637.7656 135.0781,638.7344 Q133.8125,639.7031 131.8438,639.7031 Q129.4219,639.7031 127.8594,638.0469 Q126.3125,636.3906 126.3125,633.5156 Q126.3125,630.4844 127.875,628.8125 Q129.4375,627.125 132,627.125 Q134.2344,627.125 135.625,628.4375 Q136.4531,629.2188 136.875,630.6875 L134.4375,631.2656 Q134.2188,630.3125 133.5313,629.7656 Q132.8594,629.2188 131.875,629.2188 Q130.5156,629.2188 129.6719,630.2031 Q128.8438,631.1719 128.8438,633.3438 Q128.8438,635.6406 129.6719,636.625 Q130.5,637.6094 131.8281,637.6094 Q132.8125,637.6094 133.5156,636.9844 Q134.2188,636.3594 134.5156,635.0313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="93" x="149.25" y="639.0679">ButtonsPanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="41" x2="323" y1="647.5" y2="647.5"/><line style="stroke:#000000;stroke-width:1.0;" x1="41" x2="323" y1="655.5" y2="655.5"/><ellipse cx="51" cy="669.5073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="260" x="58" y="673.5752">updateNumFriendRequests(int): void</text><ellipse cx="51" cy="686.522" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="250" x="58" y="690.5898">increaseNumFriendRequests(): void</text><ellipse cx="51" cy="703.5366" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="111" x="58" y="707.6045">ButtonsPanel():</text></g><!--MD5=[2a6ae7a018d1f69e33260568c18c133d]
+class CalendarTitlePanel--><g id="elem_CalendarTitlePanel"><rect codeLine="11" fill="#FFFFFF" height="61.0146" id="CalendarTitlePanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="168" x="12" y="439"/><ellipse cx="31.3" cy="453" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M34.0656,454.5313 L36.4563,455.2813 Q35.9094,457.2656 34.6281,458.2344 Q33.3625,459.2031 31.3938,459.2031 Q28.9719,459.2031 27.4094,457.5469 Q25.8625,455.8906 25.8625,453.0156 Q25.8625,449.9844 27.425,448.3125 Q28.9875,446.625 31.55,446.625 Q33.7844,446.625 35.175,447.9375 Q36.0031,448.7188 36.425,450.1875 L33.9875,450.7656 Q33.7688,449.8125 33.0813,449.2656 Q32.4094,448.7188 31.425,448.7188 Q30.0656,448.7188 29.2219,449.7031 Q28.3938,450.6719 28.3938,452.8438 Q28.3938,455.1406 29.2219,456.125 Q30.05,457.1094 31.3781,457.1094 Q32.3625,457.1094 33.0656,456.4844 Q33.7688,455.8594 34.0656,454.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="126" x="44.7" y="458.5679">CalendarTitlePanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="179" y1="467" y2="467"/><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="179" y1="475" y2="475"/><ellipse cx="23" cy="489.0073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="144" x="30" y="493.0752">CalendarTitlePanel():</text></g><!--MD5=[d60af48b28b4c6712d2e6e830e22d56e]
+class ChooseDatePanel--><g id="elem_ChooseDatePanel"><rect codeLine="14" fill="#FFFFFF" height="61.0146" id="ChooseDatePanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="164" x="215" y="439"/><ellipse cx="234.3" cy="453" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M237.0656,454.5313 L239.4563,455.2813 Q238.9094,457.2656 237.6281,458.2344 Q236.3625,459.2031 234.3938,459.2031 Q231.9719,459.2031 230.4094,457.5469 Q228.8625,455.8906 228.8625,453.0156 Q228.8625,449.9844 230.425,448.3125 Q231.9875,446.625 234.55,446.625 Q236.7844,446.625 238.175,447.9375 Q239.0031,448.7188 239.425,450.1875 L236.9875,450.7656 Q236.7688,449.8125 236.0813,449.2656 Q235.4094,448.7188 234.425,448.7188 Q233.0656,448.7188 232.2219,449.7031 Q231.3938,450.6719 231.3938,452.8438 Q231.3938,455.1406 232.2219,456.125 Q233.05,457.1094 234.3781,457.1094 Q235.3625,457.1094 236.0656,456.4844 Q236.7688,455.8594 237.0656,454.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="122" x="247.7" y="458.5679">ChooseDatePanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="216" x2="378" y1="467" y2="467"/><line style="stroke:#000000;stroke-width:1.0;" x1="216" x2="378" y1="475" y2="475"/><ellipse cx="226" cy="489.0073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="140" x="233" y="493.0752">ChooseDatePanel():</text></g><!--MD5=[ebb6dbb8479d50d8133fd411e7d44305]
+class FasterScrollPane--><g id="elem_FasterScrollPane"><rect codeLine="17" fill="#FFFFFF" height="61.0146" id="FasterScrollPane" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="239" x="414.5" y="439"/><ellipse cx="472.75" cy="453" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M475.5156,454.5313 L477.9063,455.2813 Q477.3594,457.2656 476.0781,458.2344 Q474.8125,459.2031 472.8438,459.2031 Q470.4219,459.2031 468.8594,457.5469 Q467.3125,455.8906 467.3125,453.0156 Q467.3125,449.9844 468.875,448.3125 Q470.4375,446.625 473,446.625 Q475.2344,446.625 476.625,447.9375 Q477.4531,448.7188 477.875,450.1875 L475.4375,450.7656 Q475.2188,449.8125 474.5313,449.2656 Q473.8594,448.7188 472.875,448.7188 Q471.5156,448.7188 470.6719,449.7031 Q469.8438,450.6719 469.8438,452.8438 Q469.8438,455.1406 470.6719,456.125 Q471.5,457.1094 472.8281,457.1094 Q473.8125,457.1094 474.5156,456.4844 Q475.2188,455.8594 475.5156,454.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="115" x="490.25" y="458.5679">FasterScrollPane</text><line style="stroke:#000000;stroke-width:1.0;" x1="415.5" x2="652.5" y1="467" y2="467"/><line style="stroke:#000000;stroke-width:1.0;" x1="415.5" x2="652.5" y1="475" y2="475"/><ellipse cx="425.5" cy="489.0073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="215" x="432.5" y="493.0752">FasterScrollPane(Component):</text></g><!--MD5=[d273850e759089f769ad65d1fdf3ad54]
+class FriendItemPanel--><g id="elem_FriendItemPanel"><rect codeLine="20" fill="#FFFFFF" height="180.1172" id="FriendItemPanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="270" x="582" y="577"/><ellipse cx="657.75" cy="591" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M660.5156,592.5313 L662.9063,593.2813 Q662.3594,595.2656 661.0781,596.2344 Q659.8125,597.2031 657.8438,597.2031 Q655.4219,597.2031 653.8594,595.5469 Q652.3125,593.8906 652.3125,591.0156 Q652.3125,587.9844 653.875,586.3125 Q655.4375,584.625 658,584.625 Q660.2344,584.625 661.625,585.9375 Q662.4531,586.7188 662.875,588.1875 L660.4375,588.7656 Q660.2188,587.8125 659.5313,587.2656 Q658.8594,586.7188 657.875,586.7188 Q656.5156,586.7188 655.6719,587.7031 Q654.8438,588.6719 654.8438,590.8438 Q654.8438,593.1406 655.6719,594.125 Q656.5,595.1094 657.8281,595.1094 Q658.8125,595.1094 659.5156,594.4844 Q660.2188,593.8594 660.5156,592.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="111" x="675.25" y="596.5679">FriendItemPanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="583" x2="851" y1="605" y2="605"/><line style="stroke:#000000;stroke-width:1.0;" x1="583" x2="851" y1="613" y2="613"/><rect fill="#FFFFFF" height="6" style="stroke:#000000;stroke-width:1.0;" width="6" x="590" y="624.0073"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="191" x="600" y="631.0752">confirmDeleteFriend(): void</text><ellipse cx="593" cy="644.022" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="176" x="600" y="648.0898">openChatWindow(): void</text><ellipse cx="593" cy="661.0366" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="239" x="600" y="665.1045">mouseEntered(MouseEvent): void</text><ellipse cx="593" cy="678.0513" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="228" x="600" y="682.1191">mouseExited(MouseEvent): void</text><ellipse cx="593" cy="695.0659" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="246" x="600" y="699.1338">mouseReleased(MouseEvent): void</text><ellipse cx="593" cy="712.0806" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="239" x="600" y="716.1484">mousePressed(MouseEvent): void</text><ellipse cx="593" cy="729.0952" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="232" x="600" y="733.1631">mouseClicked(MouseEvent): void</text><ellipse cx="593" cy="746.1099" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="204" x="600" y="750.1777">FriendItemPanel(FriendItem):</text></g><!--MD5=[b2284ca5692b50d15e8f43cd32bccdb1]
+class FriendListPanel--><g id="elem_FriendListPanel"><rect codeLine="30" fill="#FFFFFF" height="95.0439" id="FriendListPanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="365" x="688.5" y="422"/><ellipse cx="815.25" cy="436" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M818.0156,437.5313 L820.4063,438.2813 Q819.8594,440.2656 818.5781,441.2344 Q817.3125,442.2031 815.3438,442.2031 Q812.9219,442.2031 811.3594,440.5469 Q809.8125,438.8906 809.8125,436.0156 Q809.8125,432.9844 811.375,431.3125 Q812.9375,429.625 815.5,429.625 Q817.7344,429.625 819.125,430.9375 Q819.9531,431.7188 820.375,433.1875 L817.9375,433.7656 Q817.7188,432.8125 817.0313,432.2656 Q816.3594,431.7188 815.375,431.7188 Q814.0156,431.7188 813.1719,432.7031 Q812.3438,433.6719 812.3438,435.8438 Q812.3438,438.1406 813.1719,439.125 Q814,440.1094 815.3281,440.1094 Q816.3125,440.1094 817.0156,439.4844 Q817.7188,438.8594 818.0156,437.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="104" x="832.75" y="441.5679">FriendListPanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="689.5" x2="1052.5" y1="450" y2="450"/><line style="stroke:#000000;stroke-width:1.0;" x1="689.5" x2="1052.5" y1="458" y2="458"/><rect fill="#FFFFFF" height="6" style="stroke:#000000;stroke-width:1.0;" width="6" x="696.5" y="469.0073"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="341" x="706.5" y="476.0752">changeMainItem(FriendItemPanel, boolean): void</text><ellipse cx="699.5" cy="489.022" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="329" x="706.5" y="493.0898">updateFriendList(ArrayList&lt;FriendItem&gt;): void</text><ellipse cx="699.5" cy="506.0366" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="122" x="706.5" y="510.1045">FriendListPanel():</text></g><!--MD5=[ac42f2da5dc4cbc3d756aeab26d9754a]
+class LoadingLabel--><g id="elem_LoadingLabel"><rect codeLine="35" fill="#FFFFFF" height="61.0146" id="LoadingLabel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="133" x="864.5" y="834"/><ellipse cx="883.8" cy="848" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M886.5656,849.5313 L888.9563,850.2813 Q888.4094,852.2656 887.1281,853.2344 Q885.8625,854.2031 883.8938,854.2031 Q881.4719,854.2031 879.9094,852.5469 Q878.3625,850.8906 878.3625,848.0156 Q878.3625,844.9844 879.925,843.3125 Q881.4875,841.625 884.05,841.625 Q886.2844,841.625 887.675,842.9375 Q888.5031,843.7188 888.925,845.1875 L886.4875,845.7656 Q886.2688,844.8125 885.5813,844.2656 Q884.9094,843.7188 883.925,843.7188 Q882.5656,843.7188 881.7219,844.7031 Q880.8938,845.6719 880.8938,847.8438 Q880.8938,850.1406 881.7219,851.125 Q882.55,852.1094 883.8781,852.1094 Q884.8625,852.1094 885.5656,851.4844 Q886.2688,850.8594 886.5656,849.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="91" x="897.2" y="853.5679">LoadingLabel</text><line style="stroke:#000000;stroke-width:1.0;" x1="865.5" x2="996.5" y1="862" y2="862"/><line style="stroke:#000000;stroke-width:1.0;" x1="865.5" x2="996.5" y1="870" y2="870"/><ellipse cx="875.5" cy="884.0073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="109" x="882.5" y="888.0752">LoadingLabel():</text></g><!--MD5=[fa327d93d991a7745479e347d99fa935]
+class MainFrame--><g id="elem_MainFrame"><rect codeLine="38" fill="#FFFFFF" height="350.2637" id="MainFrame" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="376" x="227" y="12"/><ellipse cx="374.25" cy="26" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M377.0156,27.5313 L379.4063,28.2813 Q378.8594,30.2656 377.5781,31.2344 Q376.3125,32.2031 374.3438,32.2031 Q371.9219,32.2031 370.3594,30.5469 Q368.8125,28.8906 368.8125,26.0156 Q368.8125,22.9844 370.375,21.3125 Q371.9375,19.625 374.5,19.625 Q376.7344,19.625 378.125,20.9375 Q378.9531,21.7188 379.375,23.1875 L376.9375,23.7656 Q376.7188,22.8125 376.0313,22.2656 Q375.3594,21.7188 374.375,21.7188 Q373.0156,21.7188 372.1719,22.7031 Q371.3438,23.6719 371.3438,25.8438 Q371.3438,28.1406 372.1719,29.125 Q373,30.1094 374.3281,30.1094 Q375.3125,30.1094 376.0156,29.4844 Q376.7188,28.8594 377.0156,27.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="74" x="391.75" y="31.5679">MainFrame</text><line style="stroke:#000000;stroke-width:1.0;" x1="228" x2="602" y1="40" y2="40"/><line style="stroke:#000000;stroke-width:1.0;" x1="228" x2="602" y1="48" y2="48"/><ellipse cx="238" cy="62.0073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="250" x="245" y="66.0752">increaseNumFriendRequests(): void</text><ellipse cx="238" cy="79.022" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="273" x="245" y="83.0898">updateOneMonth(OneMonthInfo): void</text><ellipse cx="238" cy="96.0366" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="329" x="245" y="100.1045">updateFriendList(ArrayList&lt;FriendItem&gt;): void</text><ellipse cx="238" cy="113.0513" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="240" x="245" y="117.1191">confirmPassword(String): boolean</text><rect fill="#FFFFFF" height="6" style="stroke:#000000;stroke-width:1.0;" width="6" x="235" y="127.0659"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="265" x="245" y="134.1338">findFriendItemByUid(int): FriendItem?</text><ellipse cx="238" cy="147.0806" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="155" x="245" y="151.1484">deleteFriend(int): void</text><rect fill="#FFFFFF" height="6" style="stroke:#000000;stroke-width:1.0;" width="6" x="235" y="161.0952"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="280" x="245" y="168.1631">preprocessFriendItem(FriendItem): void</text><ellipse cx="238" cy="181.1099" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="160" x="245" y="185.1777">getRemark(int): String</text><ellipse cx="238" cy="198.1245" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="189" x="245" y="202.1924">getFriendName(int): String</text><ellipse cx="238" cy="215.1392" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="86" x="245" y="219.207">getUid(): int</text><ellipse cx="238" cy="232.1538" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="159" x="245" y="236.2217">getUsername(): String</text><ellipse cx="238" cy="249.1685" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="352" x="245" y="253.2363">getSimpleFriendList(): ArrayList&lt;UserDiscussion&gt;</text><ellipse cx="238" cy="266.1831" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="155" x="245" y="270.251">alreadyRead(int): void</text><ellipse cx="238" cy="283.1978" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="260" x="245" y="287.2656">updateNumFriendRequests(int): void</text><ellipse cx="238" cy="300.2124" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="150" x="245" y="304.2803">isFriend(int): boolean</text><ellipse cx="238" cy="317.2271" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="223" x="245" y="321.2949">modifyRemark(int, String): void</text><ellipse cx="238" cy="334.2417" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="295" x="245" y="338.3096">addMessage(UserMessage, boolean): void</text><ellipse cx="238" cy="351.2563" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="190" x="245" y="355.3242">MainFrame(UserLogin, int):</text></g><!--MD5=[7bebe6990f494b28aff0fcd16ea81e2b]
+class ModifyRemarkFrame--><g id="elem_ModifyRemarkFrame"><rect codeLine="58" fill="#FFFFFF" height="78.0293" id="ModifyRemarkFrame" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="274" x="555" y="825.5"/><ellipse cx="617.75" cy="839.5" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M620.5156,841.0313 L622.9063,841.7813 Q622.3594,843.7656 621.0781,844.7344 Q619.8125,845.7031 617.8438,845.7031 Q615.4219,845.7031 613.8594,844.0469 Q612.3125,842.3906 612.3125,839.5156 Q612.3125,836.4844 613.875,834.8125 Q615.4375,833.125 618,833.125 Q620.2344,833.125 621.625,834.4375 Q622.4531,835.2188 622.875,836.6875 L620.4375,837.2656 Q620.2188,836.3125 619.5313,835.7656 Q618.8594,835.2188 617.875,835.2188 Q616.5156,835.2188 615.6719,836.2031 Q614.8438,837.1719 614.8438,839.3438 Q614.8438,841.6406 615.6719,842.625 Q616.5,843.6094 617.8281,843.6094 Q618.8125,843.6094 619.5156,842.9844 Q620.2188,842.3594 620.5156,841.0313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="141" x="635.25" y="845.0679">ModifyRemarkFrame</text><line style="stroke:#000000;stroke-width:1.0;" x1="556" x2="828" y1="853.5" y2="853.5"/><line style="stroke:#000000;stroke-width:1.0;" x1="556" x2="828" y1="861.5" y2="861.5"/><ellipse cx="566" cy="875.5073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="250" x="573" y="879.5752">actionPerformed(ActionEvent): void</text><ellipse cx="566" cy="892.522" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="177" x="573" y="896.5898">ModifyRemarkFrame(int):</text></g><!--MD5=[8be8e71d4608c6738403b2fd2d3058b9]
+class OneDayPanel--><g id="elem_OneDayPanel"><rect codeLine="62" fill="#FFFFFF" height="95.0439" id="OneDayPanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="385" x="1032.5" y="817"/><ellipse cx="1175.75" cy="831" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M1178.5156,832.5313 L1180.9063,833.2813 Q1180.3594,835.2656 1179.0781,836.2344 Q1177.8125,837.2031 1175.8438,837.2031 Q1173.4219,837.2031 1171.8594,835.5469 Q1170.3125,833.8906 1170.3125,831.0156 Q1170.3125,827.9844 1171.875,826.3125 Q1173.4375,824.625 1176,824.625 Q1178.2344,824.625 1179.625,825.9375 Q1180.4531,826.7188 1180.875,828.1875 L1178.4375,828.7656 Q1178.2188,827.8125 1177.5313,827.2656 Q1176.8594,826.7188 1175.875,826.7188 Q1174.5156,826.7188 1173.6719,827.7031 Q1172.8438,828.6719 1172.8438,830.8438 Q1172.8438,833.1406 1173.6719,834.125 Q1174.5,835.1094 1175.8281,835.1094 Q1176.8125,835.1094 1177.5156,834.4844 Q1178.2188,833.8594 1178.5156,832.5313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="91" x="1193.25" y="836.5679">OneDayPanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="1033.5" x2="1416.5" y1="845" y2="845"/><line style="stroke:#000000;stroke-width:1.0;" x1="1033.5" x2="1416.5" y1="853" y2="853"/><ellipse cx="1043.5" cy="867.0073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="214" x="1050.5" y="871.0752">addTodoItem(TodoItem): void</text><rect fill="#FFFFFF" height="6" style="stroke:#000000;stroke-width:1.0;" width="6" x="1040.5" y="881.022"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="307" x="1050.5" y="888.0898">showArticleEditor(TodoItem, JButton): void</text><ellipse cx="1043.5" cy="901.0366" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="361" x="1050.5" y="905.1045">OneDayPanel(Date, int, int, ArrayList&lt;TodoItem&gt;):</text></g><!--MD5=[5e3c080766a56034bd3b5cab9e1ea92e]
+class TodoPanel--><g id="elem_TodoPanel"><rect codeLine="67" fill="#FFFFFF" height="129.0732" id="TodoPanel" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="297" x="958.5" y="602.5"/><ellipse cx="1067.25" cy="616.5" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M1070.0156,618.0313 L1072.4063,618.7813 Q1071.8594,620.7656 1070.5781,621.7344 Q1069.3125,622.7031 1067.3438,622.7031 Q1064.9219,622.7031 1063.3594,621.0469 Q1061.8125,619.3906 1061.8125,616.5156 Q1061.8125,613.4844 1063.375,611.8125 Q1064.9375,610.125 1067.5,610.125 Q1069.7344,610.125 1071.125,611.4375 Q1071.9531,612.2188 1072.375,613.6875 L1069.9375,614.2656 Q1069.7188,613.3125 1069.0313,612.7656 Q1068.3594,612.2188 1067.375,612.2188 Q1066.0156,612.2188 1065.1719,613.2031 Q1064.3438,614.1719 1064.3438,616.3438 Q1064.3438,618.6406 1065.1719,619.625 Q1066,620.6094 1067.3281,620.6094 Q1068.3125,620.6094 1069.0156,619.9844 Q1069.7188,619.3594 1070.0156,618.0313 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="72" x="1084.75" y="622.0679">TodoPanel</text><line style="stroke:#000000;stroke-width:1.0;" x1="959.5" x2="1254.5" y1="630.5" y2="630.5"/><line style="stroke:#000000;stroke-width:1.0;" x1="959.5" x2="1254.5" y1="638.5" y2="638.5"/><ellipse cx="969.5" cy="652.5073" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="101" x="976.5" y="656.5752">update(): void</text><ellipse cx="969.5" cy="669.522" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="195" x="976.5" y="673.5898">update_show_uid(int): void</text><ellipse cx="969.5" cy="686.5366" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="174" x="976.5" y="690.6045">update_date(Date): void</text><ellipse cx="969.5" cy="703.5513" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="273" x="976.5" y="707.6191">updateOneMonth(OneMonthInfo): void</text><ellipse cx="969.5" cy="720.5659" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="108" x="976.5" y="724.6338">TodoPanel(int):</text></g><!--MD5=[3e1b36b16307b8fe7c03acab376e827e]
+reverse link FriendItemPanel to FriendListPanel--><g id="link_FriendItemPanel_FriendListPanel"><path codeLine="75" d="M743,561.92 C743,561.92 743,517.08 743,517.08 " fill="none" id="FriendItemPanel-backto-FriendListPanel" style="stroke:#820000;stroke-width:1.0;"/><ellipse cx="743" cy="568.92" fill="#FFFFFF" rx="8" ry="8" style="stroke:#820000;stroke-width:1.0;"/><line style="stroke:#820000;stroke-width:1.0;" x1="743" x2="743" y1="560.92" y2="576.92"/><line style="stroke:#820000;stroke-width:1.0;" x1="751" x2="735" y1="568.92" y2="568.92"/></g><!--MD5=[cb1f35fd3b7e4d8fded5036c2f8bf8d0]
+link FriendListPanel to FriendItemPanel--><g id="link_FriendListPanel_FriendItemPanel"><path codeLine="78" d="M797.5,529.06 C797.5,529.06 797.5,563.95 797.5,563.95 " fill="none" id="FriendListPanel-FriendItemPanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="797.5,576.95,801.5,567.95,797.5,571.95,793.5,567.95,797.5,576.95" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="797.5" x2="797.5" y1="571.95" y2="563.95"/><polygon fill="#595959" points="797.5,517.06,793.5,523.06,797.5,529.06,801.5,523.06,797.5,517.06" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="9" x="777.0438" y="538.2722">*</text></g><!--MD5=[5832c875fa96a355ceb6d1e54379c664]
+link FriendItemPanel to ModifyRemarkFrame--><g id="link_FriendItemPanel_ModifyRemarkFrame"><path codeLine="76" d="M705.5,757.08 C705.5,757.08 705.5,820.44 705.5,820.44 " fill="none" id="FriendItemPanel-to-ModifyRemarkFrame" style="stroke:#595959;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#595959" points="705.5,825.44,709.5,816.44,705.5,820.44,701.5,816.44,705.5,825.44" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="43" x="661.5" y="785.8298">create</text></g><!--MD5=[3c94fcb7f462d94298e9b02a724dbe17]
+link FriendListPanel to LoadingLabel--><g id="link_FriendListPanel_LoadingLabel"><path codeLine="77" d="M911.5,517.15 C911.5,517.15 911.5,828.95 911.5,828.95 " fill="none" id="FriendListPanel-to-LoadingLabel" style="stroke:#595959;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#595959" points="911.5,833.95,915.5,824.95,911.5,828.95,907.5,824.95,911.5,833.95" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="23" x="887.5" y="670.1198">use</text></g><!--MD5=[602768aaa66a20d78ade0c60787fc78b]
+link FriendListPanel to TodoPanel--><g id="link_FriendListPanel_TodoPanel"><path codeLine="79" d="M1006,529.06 C1006,529.06 1006,589.31 1006,589.31 " fill="none" id="FriendListPanel-TodoPanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="1006,602.31,1010,593.31,1006,597.31,1002,593.31,1006,602.31" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="1006" x2="1006" y1="597.31" y2="589.31"/><polygon fill="#595959" points="1006,517.06,1002,523.06,1006,529.06,1010,523.06,1006,517.06" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="8" x="1017.2406" y="538.2722">1</text></g><!--MD5=[1318da2248adc18126ff5afd38b9d417]
+link MainFrame to FasterScrollPane--><g id="link_MainFrame_FasterScrollPane"><path codeLine="80" d="M477.33,362.3 C477.33,362.3 477.33,433.87 477.33,433.87 " fill="none" id="MainFrame-to-FasterScrollPane" style="stroke:#595959;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#595959" points="477.33,438.87,481.33,429.87,477.33,433.87,473.33,429.87,477.33,438.87" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="23" x="453.33" y="395.1498">use</text></g><!--MD5=[26efd4c1f3fdd897310a11a7fc3e0511]
+link MainFrame to FriendListPanel--><g id="link_MainFrame_FriendListPanel"><path codeLine="81" d="M540.17,374.06 C540.17,374.06 540.17,431 540.17,431 C540.17,431 675.17,431 675.17,431 " fill="none" id="MainFrame-FriendListPanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="688.17,431,679.17,427,683.17,431,679.17,435,688.17,431" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="683.17" x2="675.17" y1="431" y2="431"/><polygon fill="#595959" points="540.17,362.06,536.17,368.06,540.17,374.06,544.17,368.06,540.17,362.06" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="8" x="672.2881" y="427.1451">1</text></g><!--MD5=[62263bb1a3d713afb2fd6371f91718fd]
+link MainFrame to ButtonsPanel--><g id="link_MainFrame_ButtonsPanel"><path codeLine="82" d="M396.75,374.33 C396.75,374.33 396.75,667 396.75,667 C396.75,667 337.05,667 337.05,667 " fill="none" id="MainFrame-ButtonsPanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="324.05,667,333.05,671,329.05,667,333.05,663,324.05,667" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="329.05" x2="337.05" y1="667" y2="667"/><polygon fill="#595959" points="396.75,362.33,392.75,368.33,396.75,374.33,400.75,368.33,396.75,362.33" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="8" x="332.0371" y="664.6803">1</text></g><!--MD5=[18cc2bd05c1c417fecd1ae686d702a66]
+link MainFrame to TodoPanel--><g id="link_MainFrame_TodoPanel"><path codeLine="83" d="M615.04,187 C615.04,187 1154.5,187 1154.5,187 C1154.5,187 1154.5,589.27 1154.5,589.27 " fill="none" id="MainFrame-TodoPanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="1154.5,602.27,1158.5,593.27,1154.5,597.27,1150.5,593.27,1154.5,602.27" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="1154.5" x2="1154.5" y1="597.27" y2="589.27"/><polygon fill="#595959" points="603.04,187,609.04,191,615.04,187,609.04,183,603.04,187" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="8" x="1151.8016" y="591.581">1</text></g><!--MD5=[b98fce27671fc9c9b80d597b940ad79d]
+link MainFrame to ChooseDatePanel--><g id="link_MainFrame_ChooseDatePanel"><path codeLine="84" d="M303,374.3 C303,374.3 303,425.87 303,425.87 " fill="none" id="MainFrame-ChooseDatePanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="303,438.87,307,429.87,303,433.87,299,429.87,303,438.87" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="303" x2="303" y1="433.87" y2="425.87"/><polygon fill="#595959" points="303,362.3,299,368.3,303,374.3,307,368.3,303,362.3" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="8" x="290.1063" y="383.093">1</text></g><!--MD5=[b79387b008d441e71bae3534a31dceed]
+link MainFrame to CalendarTitlePanel--><g id="link_MainFrame_CalendarTitlePanel"><path codeLine="85" d="M214.67,187 C214.67,187 96,187 96,187 C96,187 96,426 96,426 " fill="none" id="MainFrame-CalendarTitlePanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="96,439,100,430,96,434,92,430,96,439" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="96" x2="96" y1="434" y2="426"/><polygon fill="#595959" points="226.67,187,220.67,183,214.67,187,220.67,191,226.67,187" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="8" x="87.075" y="428.3731">1</text></g><!--MD5=[1c560343147a190b96bb32d59d9c9956]
+link TodoPanel to LoadingLabel--><g id="link_TodoPanel_LoadingLabel"><path codeLine="86" d="M978,731.67 C978,731.67 978,828.75 978,828.75 " fill="none" id="TodoPanel-to-LoadingLabel" style="stroke:#595959;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#595959" points="978,833.75,982,824.75,978,828.75,974,824.75,978,833.75" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="23" x="954" y="777.2798">use</text></g><!--MD5=[a253b056b64372e63688f77dc92f77c1]
+link TodoPanel to OneDayPanel--><g id="link_TodoPanel_OneDayPanel"><path codeLine="87" d="M1144,743.67 C1144,743.67 1144,803.91 1144,803.91 " fill="none" id="TodoPanel-OneDayPanel" style="stroke:#595959;stroke-width:1.0;"/><polygon fill="#595959" points="1144,816.91,1148,807.91,1144,811.91,1140,807.91,1144,816.91" style="stroke:#595959;stroke-width:1.0;"/><line style="stroke:#595959;stroke-width:1.0;" x1="1144" x2="1144" y1="811.91" y2="803.91"/><polygon fill="#595959" points="1144,731.67,1140,737.67,1144,743.67,1148,737.67,1144,731.67" style="stroke:#595959;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="9" x="1138.5547" y="752.6731">*</text></g><!--MD5=[1568a76219b22a4dd13b726cd46a8bda]
+link FriendListPanel to ButtonsPanel--><!--MD5=[f7b249f2704fa737504440fcece69f86]
+@startuml client-main
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class ButtonsPanel {
+  + updateNumFriendRequests(int): void
+  + increaseNumFriendRequests(): void
+  + ButtonsPanel():
+}
+class CalendarTitlePanel {
+  + CalendarTitlePanel():
+}
+class ChooseDatePanel {
+  + ChooseDatePanel():
+}
+class FasterScrollPane {
+  + FasterScrollPane(Component):
+}
+class FriendItemPanel {
+  - confirmDeleteFriend(): void
+  + openChatWindow(): void
+  + mouseEntered(MouseEvent): void
+  + mouseExited(MouseEvent): void
+  + mouseReleased(MouseEvent): void
+  + mousePressed(MouseEvent): void
+  + mouseClicked(MouseEvent): void
+  + FriendItemPanel(FriendItem):
+}
+class FriendListPanel {
+  - changeMainItem(FriendItemPanel, boolean): void
+  + updateFriendList(ArrayList<FriendItem>): void
+  + FriendListPanel():
+}
+class LoadingLabel {
+  + LoadingLabel():
+}
+class MainFrame {
+  + increaseNumFriendRequests(): void
+  + updateOneMonth(OneMonthInfo): void
+  + updateFriendList(ArrayList<FriendItem>): void
+  + confirmPassword(String): boolean
+  - findFriendItemByUid(int): FriendItem?
+  + deleteFriend(int): void
+  - preprocessFriendItem(FriendItem): void
+  + getRemark(int): String
+  + getFriendName(int): String
+  + getUid(): int
+  + getUsername(): String
+  + getSimpleFriendList(): ArrayList<UserDiscussion>
+  + alreadyRead(int): void
+  + updateNumFriendRequests(int): void
+  + isFriend(int): boolean
+  + modifyRemark(int, String): void
+  + addMessage(UserMessage, boolean): void
+  + MainFrame(UserLogin, int):
+}
+class ModifyRemarkFrame {
+  + actionPerformed(ActionEvent): void
+  + ModifyRemarkFrame(int): 
+}
+class OneDayPanel {
+  + addTodoItem(TodoItem): void
+  - showArticleEditor(TodoItem, JButton): void
+  + OneDayPanel(Date, int, int, ArrayList<TodoItem>):
+}
+class TodoPanel {
+  + update(): void
+  + update_show_uid(int): void
+  + update_date(Date): void
+  + updateOneMonth(OneMonthInfo): void
+  + TodoPanel(int):
+}
+
+FriendItemPanel          +-[#820000,plain]-  FriendListPanel
+FriendItemPanel          -[#595959,dashed]->  ModifyRemarkFrame       : "«create»"
+FriendListPanel          -[#595959,dashed]->  LoadingLabel            : "«use»"
+FriendListPanel          *-[#595959,plain]-> "*" FriendItemPanel
+FriendListPanel          *-[#595959,plain]-> "1" TodoPanel
+MainFrame                -[#595959,dashed]->  FasterScrollPane        : "«use»"
+MainFrame                *-[#595959,plain]-> "1" FriendListPanel
+MainFrame                *-[#595959,plain]-> "1" ButtonsPanel
+MainFrame                *-[#595959,plain]-> "1" TodoPanel
+MainFrame                *-[#595959,plain]-> "1" ChooseDatePanel
+MainFrame                *-[#595959,plain]-> "1" CalendarTitlePanel
+TodoPanel                -[#595959,dashed]->  LoadingLabel            : "«use»"
+TodoPanel                *-[#595959,plain]-> "*" OneDayPanel
+FriendListPanel -[hidden]- ButtonsPanel
+@enduml
+
+@startuml client-main
+
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+top to bottom direction
+skinparam linetype ortho
+
+class ButtonsPanel {
+  + updateNumFriendRequests(int): void
+  + increaseNumFriendRequests(): void
+  + ButtonsPanel():
+}
+class CalendarTitlePanel {
+  + CalendarTitlePanel():
+}
+class ChooseDatePanel {
+  + ChooseDatePanel():
+}
+class FasterScrollPane {
+  + FasterScrollPane(Component):
+}
+class FriendItemPanel {
+  - confirmDeleteFriend(): void
+  + openChatWindow(): void
+  + mouseEntered(MouseEvent): void
+  + mouseExited(MouseEvent): void
+  + mouseReleased(MouseEvent): void
+  + mousePressed(MouseEvent): void
+  + mouseClicked(MouseEvent): void
+  + FriendItemPanel(FriendItem):
+}
+class FriendListPanel {
+  - changeMainItem(FriendItemPanel, boolean): void
+  + updateFriendList(ArrayList<FriendItem>): void
+  + FriendListPanel():
+}
+class LoadingLabel {
+  + LoadingLabel():
+}
+class MainFrame {
+  + increaseNumFriendRequests(): void
+  + updateOneMonth(OneMonthInfo): void
+  + updateFriendList(ArrayList<FriendItem>): void
+  + confirmPassword(String): boolean
+  - findFriendItemByUid(int): FriendItem?
+  + deleteFriend(int): void
+  - preprocessFriendItem(FriendItem): void
+  + getRemark(int): String
+  + getFriendName(int): String
+  + getUid(): int
+  + getUsername(): String
+  + getSimpleFriendList(): ArrayList<UserDiscussion>
+  + alreadyRead(int): void
+  + updateNumFriendRequests(int): void
+  + isFriend(int): boolean
+  + modifyRemark(int, String): void
+  + addMessage(UserMessage, boolean): void
+  + MainFrame(UserLogin, int):
+}
+class ModifyRemarkFrame {
+  + actionPerformed(ActionEvent): void
+  + ModifyRemarkFrame(int): 
+}
+class OneDayPanel {
+  + addTodoItem(TodoItem): void
+  - showArticleEditor(TodoItem, JButton): void
+  + OneDayPanel(Date, int, int, ArrayList<TodoItem>):
+}
+class TodoPanel {
+  + update(): void
+  + update_show_uid(int): void
+  + update_date(Date): void
+  + updateOneMonth(OneMonthInfo): void
+  + TodoPanel(int):
+}
+
+FriendItemPanel          +-[#820000,plain]-  FriendListPanel
+FriendItemPanel          -[#595959,dashed]->  ModifyRemarkFrame       : "«create»"
+FriendListPanel          -[#595959,dashed]->  LoadingLabel            : "«use»"
+FriendListPanel          *-[#595959,plain]-> "*" FriendItemPanel
+FriendListPanel          *-[#595959,plain]-> "1" TodoPanel
+MainFrame                -[#595959,dashed]->  FasterScrollPane        : "«use»"
+MainFrame                *-[#595959,plain]-> "1" FriendListPanel
+MainFrame                *-[#595959,plain]-> "1" ButtonsPanel
+MainFrame                *-[#595959,plain]-> "1" TodoPanel
+MainFrame                *-[#595959,plain]-> "1" ChooseDatePanel
+MainFrame                *-[#595959,plain]-> "1" CalendarTitlePanel
+TodoPanel                -[#595959,dashed]->  LoadingLabel            : "«use»"
+TodoPanel                *-[#595959,plain]-> "*" OneDayPanel
+FriendListPanel -[hidden]- ButtonsPanel
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

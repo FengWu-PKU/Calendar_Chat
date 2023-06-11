@@ -121,9 +121,13 @@
 ![](img/Discussion.png)
 
 ## 代码结构
+
 - server
   - utils: 数据库的接口类
 - client
+  - utils: 工具类
+  - model: 网络、图形界面的管理
+  - gui: 图形界面
 
 ### 客户端类图
 
@@ -134,6 +138,10 @@
 各个窗口及窗口管理器：
 
 ![](uml/client-frames.svg)
+
+主界面：
+
+![](uml/client-main.svg)
 
 在线讨论：
 
