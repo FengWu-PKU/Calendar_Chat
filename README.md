@@ -12,6 +12,7 @@
 | 朱羿恺 | [uyom](https://gitee.com/uyom)                 | [hjeAKNOI@gmail.com](mailto:hjeAKNOI@gmail.com) | 服务器端的处理登录、注册、好友列表、聊天、修改信息、好友申请、在线讨论请求部分，及与之相关的公共类、工具类 | 
 | 张轩熙 | [Xuanxi Zhang](https://gitee.com/xuanxi-zhang) | [xuanxizhang2000@gmail.com](mailto:xuanxizhang2000@gmail.com) | 客户端日历相关功能的实现及GUI，及与之相关的公共类、工具类                                     |
 | 蒋敬 | [FengWu](https://gitee.com/FengWu-PKU) | 2000013727@stu.pku.edu.cn | 数据库的建表和接口函数 |
+| 王展鹏 | [ysghwzp](https://gitee.com/ysghwzp) | 2100013056@stu.pku.edu.cn | 服务器端日历相关接口并修改了部分数据库接口 |
 
 ## 特性
 
