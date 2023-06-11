@@ -8,6 +8,7 @@ import common.OnedayInfo;
 import common.TodoItem;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -127,51 +128,58 @@ public class OneDayPanel extends JPanel {
         editorPanel.add(new JScrollPane(contentArea), BorderLayout.CENTER);
 
 
-        // 创建提交按钮
-        JButton submitButton = new JButton("提交");
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 更新文章标题和内容
-                todoItem.setTitle(titleField.getText());
-                todoItem.setContent(contentArea.getText());
-                todoItem.setPub(checkBox.isSelected());
+        if (my_uid == show_uid) {
+            // 创建提交按钮
+            JButton submitButton = new JButton("提交");
+            submitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // 更新文章标题和内容
+                    todoItem.setTitle(titleField.getText());
+                    todoItem.setContent(contentArea.getText());
+                    todoItem.setPub(checkBox.isSelected());
 
-                // 更新文章标题按钮
-                titleButton.setText(titleField.getText());
+                    // 更新文章标题按钮
+                    titleButton.setText(titleField.getText());
 
-                OnedayInfo tmp=new OnedayInfo(my_uid,show_uid,date);
-                tmp.setTodoList(todoList);
-                Connection.writeObject(new Message(MessageType.CLIENT_UPDATE_ONEDAY,tmp));
+                    OnedayInfo tmp=new OnedayInfo(my_uid,show_uid,date);
+                    tmp.setTodoList(todoList);
+                    Connection.writeObject(new Message(MessageType.CLIENT_UPDATE_ONEDAY,tmp));
 
-                editorDialog.dispose();
-            }
-        });
+                    editorDialog.dispose();
+                }
+            });
 
-        // 创建删除按钮
-        JButton deleteButton = new JButton("删除");
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPanel.remove(titleButton);
-                todoList.remove(todoItem);
+            // 创建删除按钮
+            JButton deleteButton = new JButton("删除");
+            deleteButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    contentPanel.remove(titleButton);
+                    todoList.remove(todoItem);
 
-                contentPanel.revalidate();
-                contentPanel.repaint();
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
 
-                OnedayInfo tmp=new OnedayInfo(my_uid,show_uid,date);
-                tmp.setTodoList(todoList);
-                Connection.writeObject(new Message(MessageType.CLIENT_UPDATE_ONEDAY,tmp));
+                    OnedayInfo tmp=new OnedayInfo(my_uid,show_uid,date);
+                    tmp.setTodoList(todoList);
+                    Connection.writeObject(new Message(MessageType.CLIENT_UPDATE_ONEDAY,tmp));
 
-                editorDialog.dispose();
-            }
-        });
+                    editorDialog.dispose();
+                }
+            });
 
-        //按钮区域
-        JPanel buttonArea= new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
-        buttonArea.add(submitButton);
-        buttonArea.add(deleteButton);
-        editorPanel.add(buttonArea, BorderLayout.SOUTH);
+            //按钮区域
+            JPanel buttonArea= new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
+            buttonArea.add(submitButton);
+            buttonArea.add(deleteButton);
+            editorPanel.add(buttonArea, BorderLayout.SOUTH);
+        } else {
+            editorDialog.setTitle("查看");
+            titleField.setEditable(false);
+            checkBox.setEnabled(false);
+            contentArea.setEditable(false);
+        }
 
         // 将编辑面板添加到对话框
         editorDialog.add(editorPanel);
