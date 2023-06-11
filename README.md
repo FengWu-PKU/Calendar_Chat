@@ -95,7 +95,7 @@
 
 ## 运行
 
-...
+在服务器上运行 server/Server.java，客户端上运行 client/SocialApp.java。
 
 ## 界面展示
 
@@ -103,7 +103,9 @@
 
 ![](img/Register.png)
 
-...
+![](img/Main.png)
+
+![](img/EditTodo.png)
 
 ![](img/Chat.png)
 
@@ -129,7 +131,7 @@
 
 ![](uml/client-discussion.svg)
 
-### 服务端
+### 服务端类图
 
 ![](img/Server.png)
 
