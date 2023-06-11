@@ -2,6 +2,8 @@ package client.gui;
 
 import com.toedter.calendar.JDateChooser;
 
+import client.model.FrameManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -35,7 +37,11 @@ public class ChooseDatePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Date selectedDate = dateChooser.getDate();
-                todoPanel.update_date(selectedDate);
+                if (selectedDate != null) {
+                    todoPanel.update_date(selectedDate);
+                } else {
+                    Dialogs.errorMessage(FrameManager.getMainFrame(), "日期格式错误");
+                }
             }
         });
 
