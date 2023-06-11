@@ -24,7 +24,7 @@ public class ChooseDatePanel extends JPanel {
 
 
         // 创建日期选择器
-        dateChooser = new JDateChooser();
+        dateChooser = new JDateChooser(new Date());
         dateChooser.setPreferredSize(new Dimension(200,27));
 
         help=new JLabel("点击日期可以新建事项，点击事项可以编辑");
